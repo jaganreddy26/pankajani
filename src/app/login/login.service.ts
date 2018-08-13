@@ -16,8 +16,8 @@ export class LogiinInService {
   constructor(private http: HttpClient, private appService: AppService) { 
 
   }
-  login(data){
-  
+  login(UserName,Password){
+    var data = "grant_type=password&username="+ UserName + "&password=" + Password ;
     this.url = this.host+'/TOKEN';
     return this.http.post(this.url,data);
   }

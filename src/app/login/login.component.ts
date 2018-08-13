@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogiinInService } from './login.service';
+import { AppService } from '../shared/service/app.service';
+
 
 
 @Component({
@@ -9,7 +11,9 @@ import { LogiinInService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   business:any=[];
-  constructor(private logiinInService:LogiinInService) { 
+  username:string;
+  passwrod:string;
+  constructor(private logiinInService:LogiinInService,private appService:AppService) { 
     this.getBusines();
   }
 
@@ -25,9 +29,11 @@ getBusines(){
     console.log(data)
   })
 }
-login(data){
-  this.logiinInService.login(data).subscribe((data:any)=>{
+login(){
+  this.logiinInService.login(this.username,this.passwrod).subscribe((data:any)=>{
     console.log(data)
+    localStorage.setItem('access_token',data.access_token)
+    this.appService.navigate('/home',{})
   })
 }
 }

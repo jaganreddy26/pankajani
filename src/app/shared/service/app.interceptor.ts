@@ -45,40 +45,19 @@ export class AppInterceptor implements HttpInterceptor {
     //console.log(localStorage.getItem('token'))
     
 
-  if(request.url == this.host+'/MailTemplate/AddMailTemplate'){
+  if(request.url == this.host+'/TOKEN'){
     request = request.clone({
       setHeaders: { 
-        'Authorization':`Bearer ${localStorage.getItem('token')}`
+        'Content-Type':'application/x-www-form-urlencoded',
+        // 'Authorization':`Bearer ${localStorage.getItem('token')}`
       }
     });
-  }else if(request.url == this.host+'/MailTemplate/UpdateMailtemplateAsync'){
-    request = request.clone({
-      setHeaders: { 
-        'Authorization':`Bearer ${localStorage.getItem('token')}`
-      }
-    });
-   } else if(localStorage.getItem('token')){
-    request = request.clone({
-      setHeaders:{
-       'Content-Type':this.CONTENT_TYPE,
-      'Authorization':`Bearer ${localStorage.getItem('token')}`,
-      }
-
-    });
-
-    // request = request.clone({
-    //   setHeaders: {  
-    //     'Content-Type': this.CONTENT_TYPE,
-    //    'Authorization': `Bearer ${localStorage.getItem('token')}`
-    //   }
-    // });
-   // console.log(request);
   }
    else{    
     request = request.clone({
       setHeaders: {  //headers in http request
         'Content-Type': this.CONTENT_TYPE,
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
       }
     });
   
