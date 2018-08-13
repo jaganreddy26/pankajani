@@ -1,0 +1,48 @@
+
+<mat-toolbar *ngIf="router.url != '/' && router.url != '/login'">
+    <div class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> -->
+                    <a class="navbar-brand name"  routerLink="/displaydata">Home</a>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">UBT</button>
+                    <div class="dropdown-content">
+                        <a routerLink="/CreateUBT">Create UBT</a>
+                        <a routerLink="/ViewUBT">View UBT</a>
+                        <a routerLink="/AmendUBT">Amend UBT</a>
+                        <a routerLink="/ConfirmBidding">Confirm Bidding</a>
+                        <a routerLink="/CloseUBT">Close UBT</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">PROPOSAL</button>
+                    <div class="dropdown-content">
+                        <a routerLink="/SeekProposal">Seek Proposal</a>
+                        <a routerLink="/ViewProposal">View Proposal</a>
+                        <a routerLink="/AmendProposal">Amend Proposal</a>
+                        <a routerLink="/ApproveProposal">Approve Proposal</a>
+                        <a routerLink="/ConfirmProposal">Confirm Proposal</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">PO</button>
+                    <div class="dropdown-content">
+                        <a routerLink="/SeekPO">Seek PO</a>
+                        <a routerLink="/ViewPO">View PO</a>
+                        <!--<a routerLink="/AmendPO">Amend PO</a>
+                        <a routerLink="/ApprovePO">Approve PO</a>
+                        <a routerLink="/ConfirmPO">Confirm PO</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</mat-toolbar>
+    <router-outlet></router-outlet>
+ 

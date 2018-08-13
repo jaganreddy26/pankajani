@@ -1,0 +1,205 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body{
+    padding: 0px !important;
+    margin: 0px !important;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    /* font-family: 'sans-serif'; */
+}
+ body {
+    width: 100%;
+    min-height: 100%;
+}
+/* * {
+    padding: 0px !important;
+    margin: 0px !important;
+} */
+
+.modal-content {
+    box-shadow: none;
+    border: none;
+    border-radius: 0px;
+    background-color: #000000;
+    position: relative;
+    top: 10%;
+    right: 30%;
+    min-width: 800px;
+}
+.modal-header{
+    border-bottom: none !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #000000 !important; 
+    background-color: #ffffff;
+    border-radius: 0px;
+    height: 36px;
+  
+}
+.nav-item{
+  width: 26%;
+    text-align:center;
+}
+.close{
+    text-shadow: none !important;
+    color: #fff !important;
+}
+.nav-link{
+    color:#ccc !important;
+}
+.tab-content>.tab-pane{
+    color: #fff !important;
+    margin-top: 16px !important;
+    margin-left: -178px;
+}
+.modal{
+    position: fixed;
+    top: 6%;
+    right: 0;
+    bottom: 6%;
+    left: 0;
+    /* margin: 0 200px; */
+    height: 100vh;
+    
+}
+.modal-dialog {
+    width: 700px;
+    margin: 30px auto;
+}
+@media (min-width:768px){
+    .modal-dialog {
+        width: 600px;
+        margin: 30px auto;
+    }
+}
+.tab-content{
+    width: 482px;
+}
+.main-content{
+    margin-top: 86px;
+}
+.ng-select-dropdown-outer.bottom{
+    z-index: 99999!important;
+    position: absolute!important;
+}
+.ng-select{
+    /* border: 1px solid black; */
+    border-radius:4px !important;
+    }
+    .ng-select-dropdown-outer .ng-select-dropdown .ng-option.marked{
+        background-color: #f5faff;
+        color: #000!important;
+    }
+    .ng-select-dropdown-outer .ng-select-dropdown .ng-option.marked {
+        background-color: #ebf5ff;
+        color: #000!important;
+    }
+    .ng-select-dropdown-outer .ng-select-dropdown .ng-option{
+        color: #000;
+        font-size: 18px;
+    }
+    .ng-select-dropdown-outer .ng-select-dropdown .ng-option.disabled {
+        color: #6C7174;
+        cursor: default;
+        font-size: 14px;
+    }
+    .ng-select.focused:not(.opened) > .ng-control{
+        border-color: none!important;
+        box-shadow: none!important;
+    }
+    .label-static-wf {
+        font-size: 14px;
+        left: 0px;
+        color: #6C7174;
+        font-weight: 300;
+        padding-left: 3px;
+        margin-bottom: 0px;
+    }
+    .ng-select .ng-control{
+        background-color: #F2F3F6!important;
+        font-size: 18px;
+        z-index: 999;
+        font-weight: 300;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        color: #000!important;
+        cursor: default;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border-spacing: 0;
+        border-collapse: separate;
+        min-height: 36px;
+        outline: none;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    input[type="text"] {
+        font-size:12px;
+    }
+    mat-step-header .mat-step-label {
+        overflow: visible;
+    }
+    
+    .mat-step-header .mat-step-icon {
+        border: 2px solid #71d379;
+        color: #71d379;
+        background: #fff;
+    }
+    .mat-step-label-selected{
+        background-color: #71d379;
+        color: #fff !important;
+        padding: 6px;
+        font-weight: 400 !important;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        
+    }
+    .mat-step-icon-not-touched {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #d5dce1;
+    }
+    .mat-vertical-stepper-header{
+        max-height: 20px !important;
+    }
+    .mat-vertical-content{
+        padding: 0px;
+    }
+
+    #particles-js {
+        position: relative;
+        min-width: 100%;
+        min-height: 100%;
+        height: 100vh;
+        object-fit: cover;
+        background-color: #3b4759;
+        /* background-image: url('../assets/banner.png'); */
+        /* z-index: 999; */
+        /* background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%; */
+      }
+      .mat-tab-labels{
+        justify-content: center;
+      }
+      .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+        background-color: #269dd8 !important;
+      }
+      .padding{
+          padding:16px;
+      }
+      .padding-left{
+        padding-left:16px;
+      }
+      .mat-input-placeholder {
+        color: #697b8c;
+        font-weight: 300;
+        font-size: 14px;
+    }
