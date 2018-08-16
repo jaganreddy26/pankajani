@@ -27,6 +27,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -54,6 +55,7 @@ import {MatListModule} from '@angular/material/list';
         PaginationModule,
         CollapseModule.forRoot(),
         NgSelectModule,
+        MatDatepickerModule,
         BsDatepickerModule.forRoot(),
         ButtonsModule.forRoot(),
         BrowserAnimationsModule,
@@ -78,7 +80,7 @@ import {MatListModule} from '@angular/material/list';
     exports: [
         FilterPipe, KeyValuesPipe, DecodeURIPipe, DatePipe, DateTimePipe, FlagPipe, CurrencyPipe,
         CommonModule, FormsModule, ReactiveFormsModule, ModalModule, PaginationModule, FormMessagesComponent, CollapseModule, ButtonsModule,
-        CollapseModule, NgSelectModule, AlertComponent,
+        CollapseModule, NgSelectModule,MatDatepickerModule, AlertComponent,
         BrowserAnimationsModule, AngularFontAwesomeModule, SidebarModule
         , TooltipModule, TimepickerModule, TypeaheadModule, BsDatepickerModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule,
          FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule

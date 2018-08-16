@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { HttpReq, ErrorMessage } from './../common/interfaces';
+import { HttpReq, ErrorMessage } from '../common/interfaces';
 import { Util } from "../utils/util";
 import { Storage } from "../utils/storage";
 import { ApexService } from "./apex.service";

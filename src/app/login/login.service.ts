@@ -51,9 +51,10 @@ export class LogiinInService {
 
  getBusinessName(){
      console.log('hii')
-     this.url = 'http://192.168.0.8:85/api/DefaultApi/GetBusinessName';
+     this.url = this.host+'/api/DefaultApi/GetBusinessName';
      return this.http.get(this.url)
  }
+
 
 
 

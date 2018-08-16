@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   passwrod:string;
   constructor(private logiinInService:LogiinInService,private appService:AppService) { 
     this.getBusines();
+  
   }
 
   ngOnInit() {
@@ -29,6 +30,8 @@ getBusines(){
     console.log(data)
   })
 }
+
+
 login(){
   this.logiinInService.login(this.username,this.passwrod).subscribe((data:any)=>{
     console.log(data)

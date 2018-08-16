@@ -8,6 +8,7 @@ import { AmendubtComponent } from './amendubt/amendubt.component';
 import { ConformbiddingComponent } from './conformbidding/conformbidding.component';
 import { CloseubtComponent } from './closeubt/closeubt.component';
 
+import {UbtService} from '../ubt/ubt.service'
 
 
 
@@ -42,7 +43,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules ,useHash:true }),
    SharedModule.forRoot()
    ],
-  providers: [],
+  providers: [UbtService],
   declarations: [CreateubtComponent, ViewubtComponent, AmendubtComponent, ConformbiddingComponent, CloseubtComponent],
   exports: [RouterModule],
 })
