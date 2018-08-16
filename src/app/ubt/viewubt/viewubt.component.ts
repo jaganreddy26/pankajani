@@ -14,6 +14,9 @@ export class ViewubtComponent implements OnInit {
   customerId:any;
   ids:any=[];
   utbid:any;
+  value:any;
+  fromDateChanged:boolean = false;
+  toDateChanged:boolean = false;
   constructor(private ubtService:UbtService ) {
     this.getCustomer();
    }
@@ -27,18 +30,20 @@ export class ViewubtComponent implements OnInit {
     })
   }
   search(){
-    this.businessId=this.ubtService.BusinessId,
-    this.customerId=this.Id,
+    this.businessId=this.ubtService.BusinessId;
+    this.customerId=this.Id;
     //console.log(this.customerId);
-    this.FromDate.toLocaleDateString();
-    var fromdate = this.FromDate.getFullYear() + '-' + (this.FromDate.getMonth() + 1) + '-' + this.FromDate.getDate();
-    //console.log(fromdate)
-    this.FromDate = fromdate;
+    if(this.fromDateChanged == false){
+      this.FromDate.toLocaleDateString();
+      var fromdate = this.FromDate.getFullYear() + '-' + (this.FromDate.getMonth() + 1) + '-' + this.FromDate.getDate();
+      this.FromDate = fromdate;
+    }
+    if(this.toDateChanged == false){
+      this.ToDate.toLocaleDateString();
+      var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
+      this.ToDate = todate;
+    }
 
-    this.ToDate.toLocaleDateString();
-    var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
-   // console.log(todate)
-    this.ToDate = todate;
 
     let object = {
       'BusinessId':this.businessId,
@@ -62,7 +67,18 @@ export class ViewubtComponent implements OnInit {
   onchange($event){
     this.Id=$event
     }
-
+    fromDateChange(){
+this.fromDateChanged = true;
+this.FromDate.toLocaleDateString();
+var fromdate = this.FromDate.getFullYear() + '-' + (this.FromDate.getMonth() + 1) + '-' + this.FromDate.getDate();
+this.FromDate = fromdate;
+    }
+    toDateChange(){
+      this.toDateChanged = true;
+      this.ToDate.toLocaleDateString();
+      var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
+      this.ToDate = todate;
+    }
     edit(item){
     var id=item.UbtId
     console.log(id)

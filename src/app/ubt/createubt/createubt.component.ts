@@ -10,7 +10,7 @@ export class CreateubtComponent implements OnInit {
   agency:any=[];
   goodsType:any=[];
   CategoryNameList:any=[];
-
+  value:any;
   customerId:any;
     Id:any;
     agencyId:any;

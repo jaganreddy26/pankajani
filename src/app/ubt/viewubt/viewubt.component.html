@@ -1,46 +1,82 @@
-<div fxLayout="row" fxLayoutAlign="left">
-    <mat-form-field fxFlex="20">
-      <mat-select placeholder="Customer" [(ngModel)]="value" (ngModelChange)="onchange($event)" >
-          <mat-option *ngFor="let item of customer" value="{{item.CustomerId}}"  >
-              {{item.CustomerName}}
-          </mat-option>
-      </mat-select>
+<div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly center" 
+>
+
+    <mat-form-field fxFlex="20" >
+        <mat-select
+            placeholder="Customer"
+            [(ngModel)]="value"
+            (ngModelChange)="onchange($event)"
+        >
+            <mat-option
+                *ngFor="let item of customer"
+                value="{{item.CustomerId}}"
+            >
+                {{item.CustomerName}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
-    <div class="col-xs-12 col-12 col-md-4 form-group">
-            <input class="form-control" placeholder="DateOfJoin" bsDatepicker #dp="bsDatepicker" [(ngModel)]="FromDate"
-            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"   >
-          </div>
-          <div class="col-xs-12 col-12 col-md-4 form-group">
-                <input class="form-control" placeholder="DateOfJoin" bsDatepicker #dp="bsDatepicker" [(ngModel)]="ToDate"
-            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"   >
-              </div>
-  </div>
-  <div class="col-xs-12 col-12 col-sm-4 col-md-12 col-lg-4 form-group">
-        <button class="btn btn-success" (click)="search()">Search</button>
-      </div>
+        <input
+        fxFlex="20"
+            class="form-control"
+            placeholder="DateOfJoin"
+            bsDatepicker
+            #dp="bsDatepicker"
+            [(ngModel)]="FromDate"
+            (ngModelChange)="fromDateChange()"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+        >
+        <input
+        fxFlex="20"
+            class="form-control"
+            placeholder="DateOfJoin"
+            bsDatepicker
+            #dp="bsDatepicker"
+            [(ngModel)]="ToDate"
+            (ngModelChange)="toDateChange()"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+        >
+        <button
+        fxFlex="16"
+        class="btn btn-success"
+        (click)="search()"
+    >
+        Search
+    </button>
+   
+</div>
+<!-- <div class="col-xs-12 col-12 col-sm-4 col-md-12 col-lg-4 form-group">
+  
+</div> -->
 
-
-
-         
-          
-         
-          <div class="container" *ngIf='ids.length !=0'>
-              <table class="table">
-                  <thead>
-                    <tr>
-                        <td scope="col">S.No</td>
-                        <th scope="col">UbtId</th>
-                        <th scope="col">Action</th>
-                        <!-- <th scope="col">Port</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let item of ids;let i = index;">
-                          <td>{{i+1}}</td>
-                          <td> {{ item.UbtId }}</td>
-                          <td>  <button class="btn btn" style="cursor: pointer;background-color: darkgoldenrod" (click)="edit(item)"><i class="fa fa-edit"></i></button></td>
-                      </tr>
-                    </tbody>
-                </table>
-          </div>
-        
+<div
+    class="container"
+    *ngIf="ids.length !=0"
+>
+    <table class="table">
+        <thead>
+            <tr>
+                <td scope="col">S.No</td>
+                <th scope="col">UbtId</th>
+                <th scope="col">Action</th>
+                <!-- <th scope="col">Port</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of ids;let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{ item.UbtId }}</td>
+                <td>
+                    <button
+                        class="btn btn"
+                        style="cursor: pointer;background-color: darkgoldenrod"
+                        (click)="edit(item)"
+                    >
+                        <i class="fa fa-edit"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
