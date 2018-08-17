@@ -101,16 +101,16 @@ this.ubtService.postCreateUbt(newobject).subscribe((data:any)=>{
   add(){
     console.log('hii');
 
-    let object={
-       'Goodstype':this.selectedGoodstype,
-       'CategoryName':this.selectedCategoryId,
-       'Quality':this.Quantity,
-       'BasePrice':this.BasePrice,
-       'maxPrice':this.BasePrice
-    }
+    // let object={
+    //    'Goodstype':this.selectedGoodstype,
+    //    'CategoryName':this.selectedCategoryId,
+    //    'Quality':this.Quantity,
+    //    'BasePrice':this.BasePrice,
+    //    'maxPrice':this.BasePrice
+    // }
 
-    this.addedUbtDetails.push(object);
-    console.log(this.addedUbtDetails);
+    // this.addedUbtDetails.push(object);
+    // console.log(this.addedUbtDetails);
 
   }
   delete(items){
