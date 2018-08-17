@@ -48,4 +48,12 @@ export class UbtService {
     this.url=this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data);
   }
+  GetIndividualUbtDetails(data){
+    this.url =this.host+'/api/UbtAPI/GetIndividualUbtDetails';
+    return this.http.post(this.url,data);
+  }
+  GetStatus(data){
+    this.url =this.host+'/api/UbtApi/GetStatus';
+    return this.http.post(this.url,data);
+  }
 }

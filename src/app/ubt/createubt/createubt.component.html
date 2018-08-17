@@ -1,14 +1,14 @@
+<mat-toolbar>
+        <span>Create Unique Business Transaction</span>
+      </mat-toolbar>
 <div
-    fxLayout="row"
+    fxLayout="row wrap"
     fxLayoutAlign="center center"
 >
-    <mat-form-field
-        fxFlex="25"
-        class="padding-left"
-    >
+    <mat-form-field fxFlex="30" class="padding-left">
         <mat-select
             placeholder="Customer Name"
-            [(ngModel)]="value"
+            [(ngModel)]="customerIdSelected"
             (ngModelChange)="onchange($event)"
         >
             <mat-option
@@ -19,13 +19,10 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field
-        fxFlex="25"
-        class="padding-left"
-    >
+    <mat-form-field fxFlex="30" class="padding-left">
         <mat-select
             placeholder="Agency Name"
-            [(ngModel)]="value"
+            [(ngModel)]="agencyIdSelected"
             (ngModelChange)="onchangeAgency($event)"
         >
             <mat-option
@@ -38,40 +35,28 @@
     </mat-form-field>
 </div>
 
-<div
-    fxFlex="row"
-    fxLayoutAlign="end center"
->
 
-    <button
-        type="button"
-        class="btn btn-sm btn-primary btn-create"
-        (click)="add()"
-    >
-        Create New
-    </button>
-</div>
 <div class="panel-body">
     <table class="table table-striped table-bordered table-list">
-        <thead style="color: rgba(30, 233, 81, 0.911)">
-            <tr style="color: white;background-color:turquoise">
-
-                <th>GoodsType Name</th>
+        <thead>
+            <tr style="color:#6f6f6f;background-color:#f0f0f0">
+                <th>S.No</th>
+                <th>GoodsType </th>
+                <th>Category Name</th>
                 <th>Quantity</th>
                 <th>Base Price</th>
-                <th>Max Margin</th>
-                <th>Category Name</th>
+                <th>Max Marigin</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-
+                <td></td>
                 <td>
                     <mat-form-field>
                         <mat-select
                             placeholder="Goods Type"
-                            [(ngModel)]="value"
+                            [(ngModel)]="goodsTypeSelected"
                             (ngModelChange)="onchangeGoodsType($event)"
                         >
                             <mat-option
@@ -86,8 +71,8 @@
                 <td>
                     <mat-form-field>
                         <mat-select
-                            placeholder="Goods Type"
-                            [(ngModel)]="value"
+                            placeholder="Category"
+                            [(ngModel)]="categoryIdSelected"
                             (ngModelChange)="onchangeCategoryName($event)"
                         >
                             <mat-option
@@ -127,58 +112,40 @@
                 <td>
                     <button
                         class="btn btn"
-                        style="cursor: pointer;background-color: darkgoldenrod"
-                        (click)="createUbt()"
+                        style="cursor: pointer;background-color: #3e54af;color:#fff"
+                        (click)="add()"
                     >
                         <i class="fa fa-plus"></i>
                     </button>
                 </td>
             </tr>
+            <tr
+            *ngFor="let items of addedUbtDetails; let i = index"
+            [attr.data-index]="i"
+        >
+            <td>{{i + 1}}</td>
+            <td>{{items.Goodstype}}</td>
+            <td>{{items.CategoryName}}</td>
+            <td>{{items.Quality}}</td>
+            <td>{{items.BasePrice}}</td>
+            <td>{{items.maxPrice}}</td>
+            <td>
+                <button
+                    class="btn btn"
+                    style="cursor: pointer;background-color: #D50000;color:#fff"
+                    (click)="delete(items)"
+                >
+                    <i
+                        class="fa fa-trash"
+                        aria-hidden="true"
+                    ></i>
+                </button>
+            </td>
+
+        </tr>
         </tbody>
     </table>
 </div>
-
-<div
-    class="container"
-    *ngIf="addedUbtDetails.length !=0"
->
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">GoodsType Name</th>
-                <th scope="col">Category Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Base Price</th>
-                <th scope="col">Max Margin</th>
-                <th scope="col">Action</th>
-            </tr>
-
-        </thead>
-        <tbody>
-            <tr
-                *ngFor="let items of addedUbtDetails; let i = index"
-                [attr.data-index]="i"
-            >
-                <!-- <td>{{i + 1}}</td> -->
-                <td>{{items.Goodstype}}</td>
-                <td>{{items.CategoryName}}</td>
-                <td>{{items.Quality}}</td>
-                <td>{{items.BasePrice}}</td>
-                <td>{{items.maxPrice}}</td>
-                <td>
-                    <button
-                        class="btn btn"
-                        style="cursor: pointer;background-color: darkgoldenrod"
-                        (click)="delete(items)"
-                    >
-                        <i
-                            class="fa fa-trash"
-                            aria-hidden="true"
-                        ></i>
-                    </button>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
+<div align="right">
+        <button mat-raised-button (click)="createUbt()" color="primary">Save</button>
 </div>

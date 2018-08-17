@@ -22,6 +22,11 @@ addedUbtDetails:any=[];
   Quantity:any;
   BasePrice:any;
   MaxMargin:any;
+  customerIdSelected:any;
+  agencyIdSelected:any;
+  goodsTypeSelected:any;
+  categoryIdSelected:any;
+  concatenateCategory:any;
   constructor(private ubtService:UbtService) {
     this.getCustomer();
    }
@@ -82,35 +87,45 @@ addedUbtDetails:any=[];
       this.agencyId=-1;
     }
     else{
-      this.agencyId=this.Id;
+      this.agencyId=this.agencyIdSelected;
     }
-
-let newobject={
-  BusinessId:this.ubtService.BusinessId,
-  CustomerId:this.customerId,
-  CategoryId:this.selectedGoodstype+':'+this.selectedCategoryId+':'+this.Quantity+':'+this.BasePrice+':'+this.MaxMargin,
-  agency:this.agencyId,
+    for (let ubt of this.addedUbtDetails) {
+      console.log(ubt)
+        this.concatenateCategory = ubt.GoodsType+':'+ubt.CategoryName+':'+ubt.Quantity+':'+ubt.BasePrice+':'+ubt.MaxMargin;
+    }
+    var data ={UbtId:null,BusinessId:this.ubtService.BusinessId,CategoryId:this.concatenateCategory,CustomerId:this.customerIdSelected,AgencyId:this.agencyIdSelected};
+// let newobject={
+//   BusinessId:this.ubtService.BusinessId,
+//   CustomerId:this.customerId,
+//   CategoryId:this.selectedGoodstype+':'+this.selectedCategoryId+':'+this.Quantity+':'+this.BasePrice+':'+this.MaxMargin,
+//   agency:this.agencyId,
   
-}
-this.ubtService.postCreateUbt(newobject).subscribe((data:any)=>{
-  console.log(data);
+// }
+console.log(data);
+// this.ubtService.postCreateUbt(data).subscribe((data:any)=>{
+//   console.log(data);
   
-})
+// })
  }
 
   add(){
-    console.log('hii');
 
-    // let object={
-    //    'Goodstype':this.selectedGoodstype,
-    //    'CategoryName':this.selectedCategoryId,
-    //    'Quality':this.Quantity,
-    //    'BasePrice':this.BasePrice,
-    //    'maxPrice':this.BasePrice
-    // }
+    let object={
+       'Goodstype':this.goodsTypeSelected,
+       'CategoryName':this.categoryIdSelected,
+       'Quality':this.Quantity,
+       'BasePrice':this.BasePrice,
+       'maxPrice':this.MaxMargin
+    }
 
-    // this.addedUbtDetails.push(object);
-    // console.log(this.addedUbtDetails);
+    this.addedUbtDetails.push(object);
+    this.goodsTypeSelected ="";
+    this.categoryIdSelected ="";
+    this.Quantity ="";
+    this.BasePrice ="";
+    this.MaxMargin ="";
+
+     console.log(this.addedUbtDetails);
 
   }
   delete(items){

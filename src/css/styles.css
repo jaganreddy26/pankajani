@@ -203,3 +203,12 @@ body{
         font-weight: 300;
         font-size: 14px;
     }
+    .tbody{
+        background-color: #fafafa !important;
+    }
+    .table-striped{
+        background-color: #fafafa !important;
+    }
+    td{
+        background-color: #fafafa !important;
+    }
