@@ -55,8 +55,133 @@ fxLayoutAlign="space-evenly center"
 <div fxFlex="15">
 <tree-root [nodes]="nodes" [options]="options" (activate)="onActivate($event)"></tree-root>
 </div>
-<div fxFlex="85">
-    Table
+<div fxFlex="75" *ngIf="seekProposalsDetails">
+  <table class="table table-striped table-bordered table-list">
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+          <th>S.No</th>
+            <th>Transporter</th>
+            <th>Transporter Rate </th>
+            <th>Loading Contractor</th>
+            <th>Loading Rate</th>
+            <th>Unloading Contractor</th>
+            <th>Unloading Rate</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td></td>
+            <td> <mat-form-field>
+              <mat-select
+                  placeholder="Transporter"
+                  [(ngModel)]="selectedTransporter"
+                  (ngModelChange)="onchangeTransporter($event)"
+              >
+                  <mat-option
+                      *ngFor="let item of transporter"
+                      [value]="item.VendorName"
+                  >
+                      {{item.VendorName}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field></td>
+            <td>
+              <mat-form-field>
+                <input placeholder="Transporter Rate"
+                    matInput
+                    [(ngModel)]="transporterRate"
+                >
+            </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
+                    <mat-select
+                        placeholder="Loading Contractor"
+                        [(ngModel)]="selectedLoadingContractor"
+                  (ngModelChange)="onchangeLoadingContractor($event)"
+                        
+                    >
+                        <mat-option
+                            *ngFor="let item of loadingContractor"
+                            [value]="item.VendorName"
+                        >
+                            {{item.VendorName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
+                    <input placeholder="Loading Rate"
+                        matInput
+                        [(ngModel)]="loadingRate"
+                    >
+                </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <mat-select
+                    placeholder="Unloading Contractor"
+                    [(ngModel)]="selectedUnLoadingContractor"
+                    (ngModelChange)="onchangeUnLoadingContractor($event)"
+                   
+                >
+                    <mat-option
+                        *ngFor="let item of unloadingContractor"
+                        [value]="item.VendorName"
+                    >
+                        {{item.VendorName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
+                    <input placeholder="Unloading Rate"
+                        matInput
+                        [(ngModel)]="unloadingRate"
+                    >
+                </mat-form-field>
+            </td>
+
+            <td>
+                <button
+                    class="btn btn"
+                    style="cursor: pointer;background-color: #3e54af;color:#fff"
+                    (click)="add()"
+                >
+                    <i class="fa fa-plus"></i>
+                </button>
+            </td>
+        </tr>
+        <tr
+        *ngFor="let items of addedSeekProposalDetails; let i = index"
+        [attr.data-index]="i"
+    >
+        <td>{{i + 1}}</td>
+        <td>{{items.Transporter}}</td>
+        <td>{{items.TransporterRate}}</td>
+        <td>{{items.LoadingContractor}}</td>
+        <td>{{items.LoadingRate}}</td>
+        <td>{{items.UnloadingContractor}}</td>
+        <td>{{items.UnloadingRate}}</td>
+        <td>
+            <button
+                class="btn btn"
+                style="cursor: pointer;background-color: #D50000;color:#fff"
+                (click)="delete(items)"
+            >
+                <i
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                ></i>
+            </button>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
 </div>
 
 </div>

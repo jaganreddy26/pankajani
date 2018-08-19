@@ -23,4 +23,12 @@ export class ProposalServiceService {
     this.url = this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data)
   }
+  getSeekProposals(data){
+    this.url=this.host+'/api/UbtApi/GetSeekProposals';
+    return this.http.post(this.url,data)
+  }
+  getVendor(data){
+    this.url =this.host+'/api/UbtApi/GetVendor';
+    return this.http.post(this.url,data);
+  }
 }

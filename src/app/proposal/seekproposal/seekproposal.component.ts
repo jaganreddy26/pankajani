@@ -16,15 +16,34 @@ export class SeekproposalComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
-  nodes:any=[];
+//step 2 for Tree struture
+   nodes:any=[];
+//details about seek from tree structure
+  seekProposalsDetails:any;
+  transporter:any=[];
+  loadingContractor:any=[];
+  unloadingContractor:any[];
+ //adding the seekProposal details;
+ selectedTransporter:any;
+ transporterRate:any;
+ selectedLoadingContractor:any;
+ loadingRate:any;
+ selectedUnLoadingContractor:any;
+ unloadingRate:any;
+ addedSeekProposalDetails:any=[];
  
   options = {};
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
+   
    }
 
+ 
   ngOnInit() {
   }
+
+ 
+
   getCustomer() {
     this.proposalService.getCustomerName().subscribe((data: any) => {
       /// console.log(data);
@@ -59,6 +78,8 @@ export class SeekproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+
+       //step 3 for Tree struture
       let all:any=[]
       this.ids.forEach(element => {
         element.TCategory.forEach(element2 => {
@@ -68,17 +89,7 @@ export class SeekproposalComponent implements OnInit {
         });        
       
       });
-    
-      // this.nodes = [
-      //   {
-      //     id: 1,
-      //     name: 'root1',
-      //     children: [
-      //       { id: 2, name: 'child1' },
-      //       { id: 3, name: 'child2' }
-      //     ]
-      //   }
-      // ];
+    //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = all;
 
     })
@@ -100,10 +111,13 @@ export class SeekproposalComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
+  
+  //step 5 when we click any perticular item in tree events
   onActivate($event){   
     if($event.node.data.children){
 
-    }else{
+    }
+    else{
       let obj = {
         'CategoryId': $event.node.data.id,
         'GoodsType':$event.node.data.GoodsTypes,
@@ -111,7 +125,76 @@ export class SeekproposalComponent implements OnInit {
         UbtId:$event.node.data.UbtId,
 
       }
-      console.log(obj)
+     // console.log(obj);
+     this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
+      //  console.log(data);
+       this.seekProposalsDetails=data[0];
+      // console.log(this.seekProposalsDetails)
+     });
+    // objectTypeTransport type Input Object
+     let objectTypeTransport = {
+      ObjectType: 'Transport' 
+    };
+  // objectTypeLoading type Input Object
+    let objectTypeLoading = {
+      ObjectType: 'Loading' 
+    };
+  // objectTypeUnloading type Input Object
+   let objectTypeUnloading = {
+      ObjectType: 'Unloading' 
+    };
+
+     this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
+      // console.log(data);
+       this.transporter=data;
+     });
+
+     this.proposalService.getVendor(objectTypeLoading).subscribe((data:any)=>{
+     // console.log(data);
+      this.loadingContractor=data;
+    });
+
+    this.proposalService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
+     // console.log(data);
+     this.unloadingContractor=data;
+    });
+
     }
+  }
+
+  onchangeTransporter($event){
+    this.selectedTransporter=$event;
+   // console.log(this.selectedTransporter)
+  }
+  onchangeLoadingContractor($event){
+    this.selectedLoadingContractor=$event;
+    //console.log(this.selectedLoadingContractor)
+  }
+  onchangeUnLoadingContractor($event){
+    this.selectedUnLoadingContractor=$event;
+    //console.log(this.unLoadingContractor)
+  }
+
+  add(){
+    let object={
+      'Transporter':this.selectedTransporter,
+      'TransporterRate':this.transporterRate,
+      'LoadingContractor':this.selectedLoadingContractor,
+      'LoadingRate':this.loadingRate,
+      'UnloadingContractor':this.selectedUnLoadingContractor,
+      'UnloadingRate':this.unloadingRate,
+   }
+ //console.log(object);
+ this.addedSeekProposalDetails.push(object);
+ this.selectedTransporter="";
+ this.transporterRate="";
+ this.selectedLoadingContractor="";
+ this.loadingRate="";
+ this.selectedUnLoadingContractor="";
+ this.unloadingRate="";
+  }
+  delete(items){
+    let index = this.addedSeekProposalDetails.indexOf(items);
+    this.addedSeekProposalDetails.splice(index,1);
   }
 }
