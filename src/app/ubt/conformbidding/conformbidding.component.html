@@ -3,65 +3,74 @@
   <span>Conform Bidding</span>
 </mat-toolbar>
 <div
-fxLayout="row wrap"
-fxLayoutAlign="space-evenly center"
+    class="padding"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly end"
 >
 
-<mat-form-field fxFlex="16">
-    <mat-select
-        placeholder="Customer"
-        [(ngModel)]="value"
-        (ngModelChange)="onchange($event)"
-    >
-        <mat-option
-            *ngFor="let item of customer"
-            value="{{item.CustomerId}}"
+    <mat-form-field fxFlex="20">
+        <mat-select
+            placeholder="Customer"
+            [(ngModel)]="value"
+            (ngModelChange)="onchange($event)"
         >
-            {{item.CustomerName}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-<input
-    fxFlex="16"
-    class="form-control"
-    placeholder="DateOfJoin"
-    bsDatepicker
-    #dp="bsDatepicker"
-    [(ngModel)]="FromDate"
-    (ngModelChange)="fromDateChange()"
-    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
->
-<input
-    fxFlex="16"
-    class="form-control"
-    placeholder="DateOfJoin"
-    bsDatepicker
-    #dp="bsDatepicker"
-    [(ngModel)]="ToDate"
-    (ngModelChange)="toDateChange()"
-    [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
->
-<mat-form-field fxFlex="16">
-  <mat-select
-      placeholder="Status"
-      [(ngModel)]="StatusName"
-  >
-      <mat-option
-          *ngFor="let item of status"
-          value="{{item.StatusName}}"
-      >
-          {{item.StatusName}}
-      </mat-option>
-  </mat-select>
-</mat-form-field>
-<button
-    mat-raised-button
-    fxFlex="16"
-    (click)="search()"
-    color="primary"
->
-    Search
-</button>
+            <mat-option
+                *ngFor="let item of customer"
+                value="{{item.CustomerId}}"
+            >
+                {{item.CustomerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div fxFlex="20">
+        <span>From Date</span>
+        <input
+            class="form-control"
+            placeholder="DateOfJoin"
+            bsDatepicker
+            #dp="bsDatepicker"
+            [(ngModel)]="FromDate"
+            (ngModelChange)="fromDateChange()"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+        >
+    </div>
+
+    <div fxFlex="20">
+        <span>To Date</span>
+        <input
+            class="form-control"
+            placeholder="DateOfJoin"
+            bsDatepicker
+            #dp="bsDatepicker"
+            [(ngModel)]="ToDate"
+            (ngModelChange)="toDateChange()"
+            [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+        >
+    </div>
+    <!-- <div fxFlex="20"> -->
+            
+    <mat-form-field fxFlex="10">
+            <mat-select
+                placeholder="Status"
+                [(ngModel)]="StatusName"
+            >
+                <mat-option
+                    *ngFor="let item of status"
+                    value="{{item.StatusName}}"
+                >
+                    {{item.StatusName}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+    <!-- </div> -->
+    <button
+        mat-raised-button
+        fxFlex="16"
+        (click)="search()"
+        color="primary"
+    >
+        Search
+    </button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start start" >

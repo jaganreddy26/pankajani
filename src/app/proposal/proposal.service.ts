@@ -10,7 +10,10 @@ export class ProposalServiceService {
   private url: string = '';
   constructor(private http:HttpClient) { }
 
-
+  GetStatus(data){
+    this.url =this.host+'/api/UbtApi/GetStatus';
+    return this.http.post(this.url,data);
+  }
   getCustomerName()
   {
     var data = {BusinessId:this.BusinessId } ;

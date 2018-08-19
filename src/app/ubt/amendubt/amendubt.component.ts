@@ -6,6 +6,8 @@ import { UbtService } from '../ubt.service'
   styleUrls: ['./amendubt.component.css']
 })
 export class AmendubtComponent implements OnInit {
+  status:any=[];
+  StatusName:any;
   customer: any = []
   FromDate: any = new Date();
   ToDate: any = new Date();
@@ -35,6 +37,12 @@ export class AmendubtComponent implements OnInit {
   }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.ubtService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {

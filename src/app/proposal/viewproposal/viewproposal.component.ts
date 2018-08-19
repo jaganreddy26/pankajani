@@ -15,11 +15,19 @@ export class ViewproposalComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  status:any=[];
+  StatusName:any;
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
    }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.proposalService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.proposalService.getCustomerName().subscribe((data: any) => {
