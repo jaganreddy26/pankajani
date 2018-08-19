@@ -42,6 +42,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
+import { TreeModule } from 'angular-tree-component';
+
 
 
 
@@ -71,7 +73,7 @@ import {MatTreeModule} from '@angular/material/tree';
         FormsModule, MatButtonModule, MatCheckboxModule, MatStepperModule,
          MatIconModule, FlexLayoutModule, MatExpansionModule, MatTabsModule, 
          MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule
-         ,MatChipsModule,MatToolbarModule,MatTreeModule
+         ,MatChipsModule,MatToolbarModule,MatTreeModule,TreeModule.forRoot()
 
 
         //
@@ -89,7 +91,8 @@ import {MatTreeModule} from '@angular/material/tree';
         CollapseModule, NgSelectModule,MatDatepickerModule, AlertComponent,
         BrowserAnimationsModule, AngularFontAwesomeModule, SidebarModule
         , TooltipModule, TimepickerModule, TypeaheadModule, BsDatepickerModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule,
-         FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule,MatToolbarModule,MatTreeModule
+         FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule
+         ,MatToolbarModule,MatTreeModule,TreeModule
 
     ],
     // to declare the services in providers

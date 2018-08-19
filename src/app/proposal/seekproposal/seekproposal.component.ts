@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
+import { element } from 'protractor';
+
 @Component({
   selector: 'app-seekproposal',
   templateUrl: './seekproposal.component.html',
@@ -15,6 +17,9 @@ export class SeekproposalComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  nodes:any=[];
+ 
+  options = {};
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
    }
@@ -55,6 +60,27 @@ export class SeekproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      let all:any=[]
+      this.ids.forEach(element => {
+        element.TCategory.forEach(element2 => {
+          let children:any=[];
+          children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
+          all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
+        });        
+      
+      });
+    
+      // this.nodes = [
+      //   {
+      //     id: 1,
+      //     name: 'root1',
+      //     children: [
+      //       { id: 2, name: 'child1' },
+      //       { id: 3, name: 'child2' }
+      //     ]
+      //   }
+      // ];
+      this.nodes = all;
 
     })
 
@@ -74,5 +100,23 @@ export class SeekproposalComponent implements OnInit {
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+  onActivate($event){
+    // console.log($event)
+   
+    if($event.node.data.children){
+
+    }else{
+      // console.log($event.node.data)
+      let obj = {
+        'CategoryId': $event.node.data.id,
+        'GoodsType':$event.node.data.GoodsTypes,
+        'Status': 'Open',
+        UbtId:$event.node.data.UbtId,
+
+      }
+      console.log(obj)
+    }
+    // $event.node
   }
 }
