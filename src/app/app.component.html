@@ -1,5 +1,5 @@
 
-<mat-toolbar class="header"*ngIf="router.url != '/' && router.url != '/login'" style="background-color:#5e42b0">
+<mat-toolbar class="header"*ngIf="router.url != '/' && router.url != '/login'" style="background-color:#673ab7">
     <div class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
@@ -11,7 +11,7 @@
                     <a class="navbar-brand name"  routerLink="/displaydata">Home</a>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">UBT</button>
+                    <a class="dropbtn">UBT</a>
                     <div class="dropdown-content">
                         <a routerLink="/CreateUBT">Create UBT</a>
                         <a routerLink="/ViewUBT">View UBT</a>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">PROPOSAL</button>
+                    <a class="dropbtn">PROPOSAL</a>
                     <div class="dropdown-content">
                         <a routerLink="/SeekProposal">Seek Proposal</a>
                         <a routerLink="/ViewProposal">View Proposal</a>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">PO</button>
+                    <a class="dropbtn">PO</a>
                     <div class="dropdown-content">
                         <a routerLink="/SeekPO">Seek PO</a>
                         <a routerLink="/ViewPO">View PO</a>

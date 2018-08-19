@@ -4,6 +4,7 @@
 <div
     fxLayout="row wrap"
     fxLayoutAlign="center center"
+    class="padding"
 >
     <mat-form-field fxFlex="30" class="padding-left">
         <mat-select
@@ -36,7 +37,8 @@
 </div>
 
 
-<div class="panel-body">
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
     <table class="table table-striped table-bordered table-list">
         <thead>
             <tr style="color:#6f6f6f;background-color:#f0f0f0">
@@ -146,6 +148,6 @@
         </tbody>
     </table>
 </div>
-<div align="right">
+<div align="right" class="padding-right">
         <button mat-raised-button (click)="createUbt()" color="primary">Save</button>
 </div>

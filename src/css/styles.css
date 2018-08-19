@@ -2,16 +2,20 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~angular-tree-component/dist/angular-tree-component.css';
+
+
 body{
     padding: 0px !important;
     margin: 0px !important;
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
+    font-weight: 300 !important;
+    font-size: 14px;
     /* font-family: 'sans-serif'; */
 }
  body {
     width: 100%;
     min-height: 100%;
+    font-weight: 300 !important;
 }
 /* * {
     padding: 0px !important;
@@ -199,6 +203,9 @@ body{
       .padding-left{
         padding-left:16px;
       }
+      .padding-right{
+        padding-right:16px;
+      }
       .mat-input-placeholder {
         color: #697b8c;
         font-weight: 300;
@@ -212,4 +219,40 @@ body{
     }
     td{
         background-color: #fafafa !important;
+        font-size: 12px;
+    }
+    .mat-form-field-infix{
+        width: 146px  !important;
+    }
+    .card{
+        background-color: #f2f2f2;
+        padding: 12px;
+    }
+    .theme-green .bs-datepicker-body table td span.selected{
+        background-color: #673ab7 !important;
+    }
+    .theme-green .bs-datepicker-head {
+        background-color: #673ab7 !important;
+    }
+    .theme-green .bs-datepicker-body table td.week span {
+        color: #673ab7 !important;
+    }
+    button {
+        background-color: #673ab7 !important;
+        font-weight: 300 !important;
+    }
+    .table td, .table th {
+        padding: 9px !important;
+        vertical-align: middle !important;
+        border-top: 1px solid #dee2e6;
+        font-weight: 400;
+    }
+    .node-content-wrapper-active, .node-content-wrapper.node-content-wrapper-active:hover, .node-content-wrapper-active.node-content-wrapper-focused {
+        background: #fff !important;
+    }
+    .form-control {
+        font-weight: 300 !important;
+    }
+    .mat-select-value {
+        font-weight: 300 !important;
     }

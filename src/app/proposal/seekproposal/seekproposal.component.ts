@@ -78,6 +78,7 @@ export class SeekproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      console.log(this.ids)
 
        //step 3 for Tree struture
       let all:any=[]
