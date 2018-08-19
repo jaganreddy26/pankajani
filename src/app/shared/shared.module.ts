@@ -41,6 +41,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTreeModule} from '@angular/material/tree';
 
 
 
@@ -67,7 +68,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         TypeaheadModule,
         RouterModule,
         SidebarModule.forRoot(),
-        FormsModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule, FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule,MatToolbarModule
+        FormsModule, MatButtonModule, MatCheckboxModule, MatStepperModule,
+         MatIconModule, FlexLayoutModule, MatExpansionModule, MatTabsModule, 
+         MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule
+         ,MatChipsModule,MatToolbarModule,MatTreeModule
 
 
         //
@@ -85,7 +89,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         CollapseModule, NgSelectModule,MatDatepickerModule, AlertComponent,
         BrowserAnimationsModule, AngularFontAwesomeModule, SidebarModule
         , TooltipModule, TimepickerModule, TypeaheadModule, BsDatepickerModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule,
-         FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule,MatToolbarModule
+         FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule,MatToolbarModule,MatTreeModule
 
     ],
     // to declare the services in providers

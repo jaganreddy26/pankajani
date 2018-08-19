@@ -7,7 +7,7 @@ import { ViewproposalComponent } from './viewproposal/viewproposal.component';
 import { AmendproposalComponent } from './amendproposal/amendproposal.component';
 import { ApproveproposalComponent } from './approveproposal/approveproposal.component';
 import { ConformproposalComponent } from './conformproposal/conformproposal.component';
-
+import {ProposalServiceService} from './proposal.service';
 
 
 
@@ -43,7 +43,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules ,useHash:true }),
    SharedModule.forRoot()
    ],
-  providers: [],
+  providers: [ProposalServiceService],
   declarations: [SeekproposalComponent, ViewproposalComponent, AmendproposalComponent, ApproveproposalComponent, ConformproposalComponent],
   exports: [RouterModule],
 })

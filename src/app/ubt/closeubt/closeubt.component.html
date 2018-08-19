@@ -1,3 +1,61 @@
 <mat-toolbar>
     <span>Close Unique Business Transaction</span>
   </mat-toolbar>
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly center"
+>
+
+    <mat-form-field fxFlex="20">
+        <mat-select
+            placeholder="Customer"
+            [(ngModel)]="value"
+            (ngModelChange)="onchange($event)"
+        >
+            <mat-option
+                *ngFor="let item of customer"
+                value="{{item.CustomerId}}"
+            >
+                {{item.CustomerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <input
+        fxFlex="20"
+        class="form-control"
+        placeholder="DateOfJoin"
+        bsDatepicker
+        #dp="bsDatepicker"
+        [(ngModel)]="FromDate"
+        (ngModelChange)="fromDateChange()"
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+    >
+    <input
+        fxFlex="20"
+        class="form-control"
+        placeholder="DateOfJoin"
+        bsDatepicker
+        #dp="bsDatepicker"
+        [(ngModel)]="ToDate"
+        (ngModelChange)="toDateChange()"
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+    >
+    <button
+        mat-raised-button
+        fxFlex="16"
+        (click)="search()"
+        color="primary"
+    >
+        Search
+    </button>
+</div>
+<div fxLayout="row" fxLayoutAlign="start start" >
+  <div fxFlex="20">
+    <mat-chip-list *ngFor="let item of ids;let i = index;" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <mat-chip fxFlex="100" color="primary" selected  (click)="edit(item)">{{i +1}}.  {{ item.UbtId }}.{{ids.CategoryName}}</mat-chip>
+            <mat-divider ></mat-divider>
+          </mat-chip-list>
+        
+      
+</div>
+</div>
