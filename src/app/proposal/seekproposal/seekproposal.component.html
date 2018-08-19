@@ -49,4 +49,14 @@ fxLayoutAlign="space-evenly center"
   Search
 </button>
 </div>
+<div fxLayout="row" fxLayoutAlign="start start" >
+  
+     
+<div fxFlex="15">
 <tree-root [nodes]="nodes" [options]="options" (activate)="onActivate($event)"></tree-root>
+</div>
+<div fxFlex="85">
+    Table
+</div>
+
+</div>
