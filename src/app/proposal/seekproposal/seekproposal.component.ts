@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-seekproposal',
@@ -101,13 +100,10 @@ export class SeekproposalComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
-  onActivate($event){
-    // console.log($event)
-   
+  onActivate($event){   
     if($event.node.data.children){
 
     }else{
-      // console.log($event.node.data)
       let obj = {
         'CategoryId': $event.node.data.id,
         'GoodsType':$event.node.data.GoodsTypes,
@@ -117,6 +113,5 @@ export class SeekproposalComponent implements OnInit {
       }
       console.log(obj)
     }
-    // $event.node
   }
 }
