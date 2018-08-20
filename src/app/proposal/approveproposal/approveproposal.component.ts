@@ -17,6 +17,8 @@ export class ApproveproposalComponent implements OnInit {
   ids: any = [];
   status:any=[];
   StatusName:any;
+    //step 2 for Tree struture
+    nodes:any=[];
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
    }
@@ -63,10 +65,25 @@ export class ApproveproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+       //step 3 for Tree struture
+       let all:any=[]
+       this.ids.forEach(element => {
+         element.TCategory.forEach(element2 => {
+           let children:any=[];
+           children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
+           all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
+         });        
+       
+       });
+     //step 4 for Tree struture here the tree struture we form in the HTML
+       this.nodes = all;
 
     })
 
   }
+  onActivate($event){
+    console.log("hi")
+      }
   onchange($event) {
     this.Id = $event
   }

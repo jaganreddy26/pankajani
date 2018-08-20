@@ -71,3 +71,20 @@
         Search
     </button>
 </div>
+<div
+    fxLayout="row"
+    fxLayoutAlign="start start"
+    class="padding"
+>
+<div
+        fxFlex="20"
+        class="card"
+        *ngIf="nodes.length != 0"
+    >
+        <tree-root
+            [nodes]="nodes"
+            [options]="options"
+            (activate)="onActivate($event)"
+        ></tree-root>
+    </div>
+</div>

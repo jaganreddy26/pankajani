@@ -72,6 +72,9 @@
         Search
     </button>
 </div>
+<!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
+ 
+
 
   <div fxLayout="row" fxLayoutAlign="start start" >
         
@@ -232,6 +235,14 @@
                             aria-hidden="true"
                         ></i>
                     </button>
+                    <button
+                   
+                    class="btn btn"
+                    style="cursor: pointer;background-color: #D50000;color:#fff"
+                  (click)="openModal(items,template)"
+                >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
                 </td>
     
             </tr>
@@ -243,4 +254,109 @@
     </div>
     </div>
     </div>
+
+    <ng-template #template style="width:1308px;">
+        <div class="modal-header " style="background-color:#fff">
+          <h4 class="modal-title pull-left">Modal</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color:#fff">
+          {{moduleGoodsType}}
+          <mat-form-field>
+            <mat-select
+                placeholder="Goods Type"
+                [(ngModel)]="goodsTypeSelected"
+                (ngModelChange)="onchangeGoodsType($event)"
+            >
+                <mat-option
+                    *ngFor="let item of getGoodsTypeList1"
+                    [value]="item.GoodsTypeName"
+                >
+                    {{item.GoodsTypeName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+          <!-- <div class="panel-body">
+              <table class="table table-striped table-bordered table-list">
+                  <thead style="color: #3e54af">
+                      <tr style="color: white;background-color:#3e54af">
+                          <th>S.No</th>
+                          <th>GoodsType </th>
+                          <th>Category Name</th>
+                          <th>Quantity</th>
+                          <th>Base Price</th>
+                          <th>Max Marigin</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td></td>
+                          <td>
+                              <mat-form-field>
+                                  <mat-select
+                                      placeholder="Goods Type"
+                                      [(ngModel)]="goodsTypeSelected"
+                                      (ngModelChange)="onchangeGoodsType($event)"
+                                  >
+                                      <mat-option
+                                          *ngFor="let item of getGoodsTypeList1"
+                                          [value]="item.GoodsTypeName"
+                                      >
+                                          {{item.GoodsTypeName}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </td>
+                          <td>
+                              <mat-form-field>
+                                  <mat-select
+                                      placeholder="Category"
+                                      [(ngModel)]="categoryIdSelected"
+                                      (ngModelChange)="onchangeCategoryName($event)"
+                                  >
+                                      <mat-option
+                                          *ngFor="let item of CategoryNameList"
+                                          [value]="item.CategoryId"
+                                      >
+                                          {{item.CategoryName}}
+                                      </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </td>
+                          <td>
+                              <mat-form-field>
+                                  <input
+                                      matInput
+                                      [(ngModel)]="Quantity"
+                                  >
+                              </mat-form-field>
+                          </td>
+                          <td>
+                              <mat-form-field>
+                                  <input
+                                      matInput
+                                      [(ngModel)]="BasePrice"
+                                  >
+                              </mat-form-field>
+                          </td>
+                          <td>
+                              <mat-form-field>
+                                  <input
+                                      matInput
+                                      [(ngModel)]="MaxMargin"
+                                  >
+                              </mat-form-field>
+                          </td>
+          
+                          
+                      </tr>
+                     
+                  </tbody>
+              </table>
+          </div>-->
+        </div> 
+      </ng-template>
     

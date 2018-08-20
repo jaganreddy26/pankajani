@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UbtService } from '../ubt.service'
+import { Component, OnInit,TemplateRef } from '@angular/core';
+import { UbtService } from '../ubt.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-amendubt',
   templateUrl: './amendubt.component.html',
@@ -32,9 +34,27 @@ export class AmendubtComponent implements OnInit {
   Quantity:any;
   BasePrice:any;
   MaxMargin:any;
-  constructor(private ubtService: UbtService) {
+  modalRef: BsModalRef;
+  moduleGoodsType:any;
+  getGoodsTypeList1:any=[];
+  constructor(private ubtService: UbtService,private modalService: BsModalService) {
+
     this.getCustomer();
   }
+  openModal(items,template: TemplateRef<any>) {
+this.moduleGoodsType=items.CategoryId,
+
+
+this.ubtService.getGoodsType(this.moduleGoodsType).subscribe((data: any) => {
+// console.log(data)
+this.getGoodsTypeList1=data;
+console.log(this.getGoodsTypeList1);
+})
+    this.modalRef = this.modalService.show(template);
+    
+  }
+
+
 
   ngOnInit() {
     let object = {
@@ -157,7 +177,8 @@ export class AmendubtComponent implements OnInit {
 
   }
   delete(items){
-
+    let index = this.udtData.indexOf(items);
+    this.udtData.splice(index,1);
   }
   updateUbt(){
 
