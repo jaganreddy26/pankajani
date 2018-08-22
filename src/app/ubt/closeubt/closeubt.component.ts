@@ -6,6 +6,8 @@ import { UbtService } from '../ubt.service';
   styleUrls: ['./closeubt.component.css']
 })
 export class CloseubtComponent implements OnInit {
+  status:any=[];
+  StatusName:any;
   customer: any = [];
   FromDate: any = new Date();
   ToDate: any = new Date();
@@ -20,6 +22,12 @@ export class CloseubtComponent implements OnInit {
    }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.ubtService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {

@@ -46,6 +46,22 @@
             [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
         >
     </div>
+    <!-- <div fxFlex="20"> -->
+            
+    <mat-form-field fxFlex="10">
+            <mat-select
+                placeholder="Status"
+                [(ngModel)]="StatusName"
+            >
+                <mat-option
+                    *ngFor="let item of status"
+                    value="{{item.StatusName}}"
+                >
+                    {{item.StatusName}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+    <!-- </div> -->
     <button
         mat-raised-button
         fxFlex="16"
@@ -95,6 +111,26 @@
                 <div class="padding-left">
                     <span style="font-weight:400">Agency : </span>
                     <span>{{seekProposalsDetails.AgencyName}}</span>
+                </div>
+            </div>
+            <hr>
+            <div
+                fxLayout="row"
+                fxLayoutAlign="space-between center" 
+               
+            >
+                <div class="padding-left">
+                    <span style="font-weight:400">Goods Type : </span>
+                    <span>{{seekProposalsDetails.GoodsType}}</span>
+                </div>
+
+                <div class="padding-left">
+                    <span style="font-weight:400">Category Name : </span>
+                    <span>{{seekProposalsDetails.CategoryName}}</span>
+                </div>
+                <div class="padding-left">
+                    <span style="font-weight:400">Quantity : </span>
+                    <span>{{seekProposalsDetails.Quantity}}</span>
                 </div>
             </div>
 

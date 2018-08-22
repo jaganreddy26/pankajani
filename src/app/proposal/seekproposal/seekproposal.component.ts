@@ -16,6 +16,8 @@ export class SeekproposalComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  status:any=[];
+  StatusName:any;
 //step 2 for Tree struture
    nodes:any=[];
 //details about seek from tree structure
@@ -40,6 +42,12 @@ export class SeekproposalComponent implements OnInit {
 
  
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.proposalService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
 
  

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  API_END_POINT: 'http://192.168.0.6:85'
+  API_END_POINT: 'http://192.168.9.102:85'
 };

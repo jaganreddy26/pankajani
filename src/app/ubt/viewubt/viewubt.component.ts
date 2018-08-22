@@ -9,6 +9,8 @@ import { UbtService } from '../ubt.service';
   styleUrls: ['./viewubt.component.css']
 })
 export class ViewubtComponent implements OnInit {
+  status:any=[];
+  StatusName:any;
   customer: any = []
   Id: any;
   FromDate: any = new Date();
@@ -27,6 +29,12 @@ export class ViewubtComponent implements OnInit {
   }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.ubtService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {
