@@ -85,10 +85,10 @@ addedUbtDetails:any=[];
   save(){
 //console.log(this.addedUbtDetails);
 // var data1=this.addedUbtDetails;
-var body = JSON.stringify(this.addedUbtDetails);
 
 
-this.ubtService.CreateUbt(body).subscribe((data:any)=>{
+
+this.ubtService.CreateUbt(this.addedUbtDetails).subscribe((data:any)=>{
 console.log(data);
 });
 
