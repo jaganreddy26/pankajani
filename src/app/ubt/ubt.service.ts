@@ -32,8 +32,8 @@ export class UbtService {
     this.url =this.host+'/api/UbtApi/GetCategory';
     return this.http.post(this.url,data);
   }
-  postCreateUbt(data:any){
-     this.url=this.host+'/api/UbtApi/CreateUBT';
+  CreateUbt(data){
+     this.url=this.host+'/api/UbtAPI/CreateUBT';
      return this.http.post(this.url,data);
   }
   getViewUbtDetails(data){
