@@ -6,6 +6,7 @@ import {UbtService} from '../ubt.service'
   styleUrls: ['./createubt.component.css']
 })
 export class CreateubtComponent implements OnInit {
+  p: number = 1;
   customer:any=[];
   agency:any=[];
   goodsType:any=[];
@@ -81,41 +82,36 @@ addedUbtDetails:any=[];
    // console.log(this.Id);
   }
 
-  createUbt(){
+  save(){
+//console.log(this.addedUbtDetails);
+// var data1=this.addedUbtDetails;
+var body = JSON.stringify(this.addedUbtDetails);
 
+
+this.ubtService.CreateUbt(body).subscribe((data:any)=>{
+console.log(data);
+});
+
+ }
+
+  add(){
     if(this.customerId==2){
       this.agencyId=-1;
     }
     else{
+
       this.agencyId=this.agencyIdSelected;
     }
-    for (let ubt of this.addedUbtDetails) {
-      console.log(ubt)
-        this.concatenateCategory = ubt.GoodsType+':'+ubt.CategoryName+':'+ubt.Quantity+':'+ubt.BasePrice+':'+ubt.MaxMargin;
-    }
-    var data ={UbtId:null,BusinessId:this.ubtService.BusinessId,CategoryId:this.concatenateCategory,CustomerId:this.customerIdSelected,AgencyId:this.agencyIdSelected};
-// let newobject={
-//   BusinessId:this.ubtService.BusinessId,
-//   CustomerId:this.customerId,
-//   CategoryId:this.selectedGoodstype+':'+this.selectedCategoryId+':'+this.Quantity+':'+this.BasePrice+':'+this.MaxMargin,
-//   agency:this.agencyId,
-  
-// }
-console.log(data);
-// this.ubtService.postCreateUbt(data).subscribe((data:any)=>{
-//   console.log(data);
-  
-// })
- }
-
-  add(){
 
     let object={
-       'Goodstype':this.goodsTypeSelected,
-       'CategoryName':this.categoryIdSelected,
-       'Quality':this.Quantity,
+      'BusinessId':this.ubtService.BusinessId,
+       'GoodsType':this.selectedGoodstype,
+       'CustomerId':this.customerIdSelected,
+       "AgencyId":this.agencyId,
+       'Quantity':this.Quantity,
        'BasePrice':this.BasePrice,
-       'maxPrice':this.MaxMargin
+       'MaxMargin':this.MaxMargin,
+       'CategoryId':this.selectedCategoryId
     }
 
     this.addedUbtDetails.push(object);
@@ -124,8 +120,10 @@ console.log(data);
     this.Quantity ="";
     this.BasePrice ="";
     this.MaxMargin ="";
+    this.agencyIdSelected="";
+    this.selectedCategoryId="";
 
-     console.log(this.addedUbtDetails);
+ 
 
   }
   delete(items){

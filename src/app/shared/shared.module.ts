@@ -43,7 +43,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
 import { TreeModule } from 'angular-tree-component';
-
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 
@@ -73,7 +73,7 @@ import { TreeModule } from 'angular-tree-component';
         FormsModule, MatButtonModule, MatCheckboxModule, MatStepperModule,
          MatIconModule, FlexLayoutModule, MatExpansionModule, MatTabsModule, 
          MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule
-         ,MatChipsModule,MatToolbarModule,MatTreeModule,TreeModule.forRoot()
+         ,MatChipsModule,MatToolbarModule,MatTreeModule,TreeModule.forRoot(),NgxPaginationModule
 
 
         //
@@ -92,7 +92,7 @@ import { TreeModule } from 'angular-tree-component';
         BrowserAnimationsModule, AngularFontAwesomeModule, SidebarModule
         , TooltipModule, TimepickerModule, TypeaheadModule, BsDatepickerModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule,
          FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule
-         ,MatToolbarModule,MatTreeModule,TreeModule
+         ,MatToolbarModule,MatTreeModule,TreeModule,NgxPaginationModule
 
     ],
     // to declare the services in providers

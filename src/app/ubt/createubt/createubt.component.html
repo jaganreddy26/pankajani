@@ -41,7 +41,7 @@
     fxLayoutAlign="center center">
     <table class="table table-striped table-bordered table-list">
         <thead>
-            <tr style="color:#6f6f6f;background-color:#f0f0f0">
+            <tr style="color:#6f6f6f;background-color:#f0f0f0" >
                 <th>S.No</th>
                 <th>GoodsType </th>
                 <th>Category Name</th>
@@ -122,15 +122,15 @@
                 </td>
             </tr>
             <tr
-            *ngFor="let items of addedUbtDetails; let i = index"
-            [attr.data-index]="i"
+            *ngFor='let items of addedUbtDetails | paginate: { itemsPerPage: 5, currentPage: p }; let i = index'
+            [attr.data-index]="i" 
         >
             <td>{{i + 1}}</td>
-            <td>{{items.Goodstype}}</td>
-            <td>{{items.CategoryName}}</td>
-            <td>{{items.Quality}}</td>
+            <td>{{items.GoodsType}}</td>
+            <td>{{items.CategoryId}}</td>
+            <td>{{items.Quantity}}</td>
             <td>{{items.BasePrice}}</td>
-            <td>{{items.maxPrice}}</td>
+            <td>{{items.MaxMargin}}</td>
             <td>
                 <button
                     class="btn btn"
@@ -143,11 +143,16 @@
                     ></i>
                 </button>
             </td>
-
+            
         </tr>
+       
         </tbody>
     </table>
+    <div align="center">
+        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+        <button mat-raised-button (click)="save()" color="primary">Save</button>
+      </div>
 </div>
-<div align="right" class="padding-right">
+<!-- <div align="right" class="padding-right">
         <button mat-raised-button (click)="createUbt()" color="primary">Save</button>
-</div>
+</div> -->
