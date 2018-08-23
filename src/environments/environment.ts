@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-API_END_POINT: 'http://192.168.0.10:85'
+API_END_POINT: 'http://192.168.0.11:85'
 // API_END_POINT: 'http://localhost:62123'
 };

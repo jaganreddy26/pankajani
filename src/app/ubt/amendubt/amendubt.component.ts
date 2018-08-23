@@ -35,21 +35,24 @@ export class AmendubtComponent implements OnInit {
   BasePrice:any;
   MaxMargin:any;
   modalRef: BsModalRef;
-  moduleGoodsType:any;
-  getGoodsTypeList1:any=[];
+
+  individualUbtDetailsInput:any;
+
+  ubtidInput:any;
+  inputs:any;
+  goodsTypeinput:any;
+  categoryNameinput:any;
+  categoryIdinput:any;
   constructor(private ubtService: UbtService,private modalService: BsModalService) {
 
     this.getCustomer();
   }
   openModal(items,template: TemplateRef<any>) {
-this.moduleGoodsType=items.CategoryId,
 
-
-this.ubtService.getGoodsType(this.moduleGoodsType).subscribe((data: any) => {
-// console.log(data)
-this.getGoodsTypeList1=data;
-console.log(this.getGoodsTypeList1);
-})
+this.inputs=this.ubtidInput,
+this.goodsTypeinput=items.GoodsType,
+this.categoryNameinput=items.CategoryName,
+this.categoryIdinput=items.CategoryId,
     this.modalRef = this.modalService.show(template);
     
   }
@@ -102,7 +105,10 @@ console.log(this.getGoodsTypeList1);
   }
 
   edit(item) {
-    console.log(item)
+    this.ubtidInput=item.UbtId
+    // console.log(item)
+    this.individualUbtDetailsInput=item;
+    console.log(this.individualUbtDetailsInput);
     this.editDetails = true;
     this.udtData = [];
 
@@ -115,6 +121,8 @@ console.log(this.getGoodsTypeList1);
         this.confirmBiddingStatus = element.ConfirmBidding;
       }); 
     })
+
+    console.log("Method called");
   }
   onchange($event) {
     this.Id = $event;
@@ -180,7 +188,12 @@ console.log(this.getGoodsTypeList1);
     let index = this.udtData.indexOf(items);
     this.udtData.splice(index,1);
   }
-  updateUbt(){
+  updateRecord(){
+console.log("hi ubt" );
+//console.log(this.individualUbtDetailsInput);
+//Here we will the method to get the upadted details after updating the record details
+this.edit(this.individualUbtDetailsInput);
 
+this.modalRef.hide()
   }
 }

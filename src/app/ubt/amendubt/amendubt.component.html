@@ -137,6 +137,7 @@
                 <tr style="color: white;background-color:#3e54af">
                     <th>S.No</th>
                     <th>GoodsType </th>
+                    <!-- <th>Category Id</th> -->
                     <th>Category Name</th>
                     <th>Quantity</th>
                     <th>Base Price</th>
@@ -220,6 +221,7 @@
             >
                 <td>{{i + 1}}</td>
                 <td>{{items.GoodsType}}</td>
+                <!-- <td>{{items.CategoryId}}</td> -->
                 <td>{{items.CategoryName}}</td>
                 <td>{{items.Quantity}}</td>
                 <td>{{items.BasePrice}}</td>
@@ -256,107 +258,56 @@
     </div>
 
     <ng-template #template style="width:1308px;">
-        <div class="modal-header " style="background-color:#fff">
+        <div class="modal-header " style="background-color:#fff;width: 900px;">
           <h4 class="modal-title pull-left">Modal</h4>
-          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <!-- <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()"> -->
+            <!-- <span aria-hidden="true">&times;</span> -->
+          <!-- </button> -->
         </div>
-        <div class="modal-body" style="background-color:#fff">
-          {{moduleGoodsType}}
-          <mat-form-field>
-            <mat-select
-                placeholder="Goods Type"
-                [(ngModel)]="goodsTypeSelected"
-                (ngModelChange)="onchangeGoodsType($event)"
+        <div class="modal-body" style="background-color:#fff;width: 900px;">
+            <div class="card">
+                <div
+                fxLayout="row"
+                fxLayoutAlign="space-between center" 
+               
             >
-                <mat-option
-                    *ngFor="let item of getGoodsTypeList1"
-                    [value]="item.GoodsTypeName"
-                >
-                    {{item.GoodsTypeName}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-          <!-- <div class="panel-body">
-              <table class="table table-striped table-bordered table-list">
-                  <thead style="color: #3e54af">
-                      <tr style="color: white;background-color:#3e54af">
-                          <th>S.No</th>
-                          <th>GoodsType </th>
-                          <th>Category Name</th>
-                          <th>Quantity</th>
-                          <th>Base Price</th>
-                          <th>Max Marigin</th>
-                          <th>Action</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td></td>
-                          <td>
-                              <mat-form-field>
-                                  <mat-select
-                                      placeholder="Goods Type"
-                                      [(ngModel)]="goodsTypeSelected"
-                                      (ngModelChange)="onchangeGoodsType($event)"
-                                  >
-                                      <mat-option
-                                          *ngFor="let item of getGoodsTypeList1"
-                                          [value]="item.GoodsTypeName"
-                                      >
-                                          {{item.GoodsTypeName}}
-                                      </mat-option>
-                                  </mat-select>
-                              </mat-form-field>
-                          </td>
-                          <td>
-                              <mat-form-field>
-                                  <mat-select
-                                      placeholder="Category"
-                                      [(ngModel)]="categoryIdSelected"
-                                      (ngModelChange)="onchangeCategoryName($event)"
-                                  >
-                                      <mat-option
-                                          *ngFor="let item of CategoryNameList"
-                                          [value]="item.CategoryId"
-                                      >
-                                          {{item.CategoryName}}
-                                      </mat-option>
-                                  </mat-select>
-                              </mat-form-field>
-                          </td>
-                          <td>
-                              <mat-form-field>
-                                  <input
-                                      matInput
-                                      [(ngModel)]="Quantity"
-                                  >
-                              </mat-form-field>
-                          </td>
-                          <td>
-                              <mat-form-field>
-                                  <input
-                                      matInput
-                                      [(ngModel)]="BasePrice"
-                                  >
-                              </mat-form-field>
-                          </td>
-                          <td>
-                              <mat-form-field>
-                                  <input
-                                      matInput
-                                      [(ngModel)]="MaxMargin"
-                                  >
-                              </mat-form-field>
-                          </td>
+                <div class="padding-left">
+                    <span style="font-weight:400">Customer Name : </span>
+                    <span style="background-color: bisque">{{categoryNameinput}}</span>
+                </div>
+
+                <div class="padding-left">
+                    <span style="font-weight:400">UBT Id : </span>
+                    <span style="background-color: bisque">{{inputs}}</span>
+                </div>
+                <div class="padding-left">
+                    <span style="font-weight:400">GoodsType : </span>
+                    <span style="background-color: bisque">{{goodsTypeinput}}</span>
+                </div>
+            </div>
+            </div>
+          <!-- {{inputs}}
+          {{goodsTypeinput}}
+          {{categoryNameinput}}
+          {{categoryIdinput}} -->
+          <div class="example-container">
+                
+            <mat-form-field fxFlex="30" class="padding-left">
+              <input matInput placeholder="Quantity">
+            </mat-form-field>
+               
+            <mat-form-field fxFlex="30" class="padding-left">
+              <input matInput placeholder="Base Price">
+             </mat-form-field>
+             <mat-form-field fxFlex="30" class="padding-left">
+               <input matInput placeholder="Max Marigin">
+              </mat-form-field>
           
-                          
-                      </tr>
-                     
-                  </tbody>
-              </table>
-          </div>-->
+             
+          </div>
+          <div align="right">
+          <button mat-button style="Backgroundcolor:red" (click)="updateRecord()">Update</button>
+        </div>
         </div> 
       </ng-template>
     
