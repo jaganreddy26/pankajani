@@ -99,7 +99,7 @@ if(data){
     this.alertService.alert(AlertType.Error,"Something went wrong");
   }
 });
-
+this.addedUbtDetails=[];
  }
 
   add(){
