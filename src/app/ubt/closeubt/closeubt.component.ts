@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UbtService } from '../ubt.service';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+
 @Component({
   selector: 'app-closeubt',
   templateUrl: './closeubt.component.html',
@@ -17,6 +19,15 @@ export class CloseubtComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  nodes:any=[];
+  editDetails: boolean = false;
+  options: ITreeOptions = {
+    displayField: 'CategoryName',
+    isExpandedField: 'expanded',
+    idField: 'CategoryId',
+    hasChildrenField: 'nodes',
+    
+  }
   constructor(private ubtService: UbtService) {
     this.getCustomer();
    }
@@ -59,8 +70,21 @@ export class CloseubtComponent implements OnInit {
       'ToDate': this.ToDate,
 
     }
-    this.ubtService.getCloseUbtDetails(object).subscribe((data: any) => {
+    this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+      console.log(this.ids)
+      this.ids.forEach(element => {
+        parent.push({'CategoryId':element.UbtId,'CategoryName':element.UbtId,'children':element.TCategory})
+      });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
+
+      // this.nodes.prototy
+      console.log(this.nodes)
 
     })
 
@@ -81,5 +105,18 @@ export class CloseubtComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
+  onActivate($event){   
+    if($event.node.data.children){
 
+    }
+    else{
+      this.editDetails = true;
+      let ubtId = { 'UbtId': $event.node.data.UbtId }
+          this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
+          //  this.udtData = data;
+          //  console.log(this.udtData)
+          })
+
+        }
+}
 }

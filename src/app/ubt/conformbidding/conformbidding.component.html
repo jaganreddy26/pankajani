@@ -73,10 +73,26 @@
     </button>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="start start" >
+<div
+    fxLayout="row"
+    fLayoutAlign="start start"
+    class="padding"
+>
+
+<div
+    fxFlex="20"
+    class="card"
+*ngIf="nodes.length != 0"
+>
+<tree-root
+[nodes]="nodes"
+[options]="options"
+(activate)="onActivate($event)"
+></tree-root>
+</div>
   
      
-<div fxFlex="15">
+<!-- <div fxFlex="15"> -->
       <!-- <mat-list *ngFor="let item of ids;let i = index;" fxLayout="row wrap" fxLayoutAlign="space-around center">
               <mat-list-item fxFlex="100"  (click)="edit(item)" style="cursor:pointer;background-color:#ccc" >
                   <span>
@@ -86,14 +102,14 @@
               </mat-list-item>
               <mat-divider></mat-divider>
             </mat-list> -->
-      <mat-chip-list *ngFor="let item of ids;let i = index;" fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <!-- <mat-chip-list *ngFor="let item of ids;let i = index;" fxLayout="row wrap" fxLayoutAlign="space-around center">
               <mat-chip fxFlex="100" color="primary" selected  (click)="edit(item)">{{i +1}}.  {{ item.UbtId }}</mat-chip>
               <mat-divider></mat-divider>
             </mat-chip-list>
 
-</div>
+</div> -->
 <div
-  fxFlex="85"
+  fxFlex="80"
   class="container"
   *ngIf="editDetails"
 >

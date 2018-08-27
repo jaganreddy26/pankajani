@@ -59,3 +59,12 @@ footer{
     color: rgba(0,0,0,.87);
     font-weight: 400 !important;
 }
+alert{
+    position: fixed;
+    top: auto;
+    right: 38%;
+    bottom: 19px;
+    left: 33%;
+    width: 40%;
+    text-align: center;
+}

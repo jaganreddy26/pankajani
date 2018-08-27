@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UbtService} from '../ubt.service'
+import {UbtService} from '../ubt.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
+
 @Component({
   selector: 'app-createubt',
   templateUrl: './createubt.component.html',
@@ -28,7 +31,7 @@ addedUbtDetails:any=[];
   goodsTypeSelected:any;
   categoryIdSelected:any;
   concatenateCategory:any;
-  constructor(private ubtService:UbtService) {
+  constructor(private ubtService:UbtService,private alertService :AlertService) {
     this.getCustomer();
    }
 
@@ -90,6 +93,11 @@ addedUbtDetails:any=[];
 
 this.ubtService.CreateUbt(this.addedUbtDetails).subscribe((data:any)=>{
 console.log(data);
+if(data){
+  this.alertService.alert(AlertType.Success,"UBT Created Successfuly with id :"+ data)
+  }else{
+    this.alertService.alert(AlertType.Error,"Something went wrong");
+  }
 });
 
  }
