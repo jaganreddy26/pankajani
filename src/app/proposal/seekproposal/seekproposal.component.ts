@@ -138,7 +138,7 @@ export class SeekproposalComponent implements OnInit {
         UbtId:$event.node.data.UbtId,
 
       }
-     // console.log(obj);
+   //  console.log(obj);
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
        this.seekProposalsDetails=data[0];
