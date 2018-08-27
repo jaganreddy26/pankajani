@@ -26,6 +26,9 @@ export class SeekproposalComponent implements OnInit {
   loadingContractor:any=[];
   unloadingContractor:any[];
  //adding the seekProposal details;
+ ubtidInput:any;
+ categoryidInput:any;
+ goodstypeInput:any;
  selectedTransporter:any;
  transporterRate:any;
  selectedLoadingContractor:any;
@@ -34,6 +37,7 @@ export class SeekproposalComponent implements OnInit {
  unloadingRate:any;
  addedSeekProposalDetails:any=[];
  
+ allSeekProposalDetails:any=[]
   options = {};
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
@@ -93,7 +97,7 @@ export class SeekproposalComponent implements OnInit {
       this.ids.forEach(element => {
         element.TCategory.forEach(element2 => {
           let children:any=[];
-          children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
+          children.push({'id':element2.Id,'name':element2.Name,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
           all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
         });        
       
@@ -138,7 +142,10 @@ export class SeekproposalComponent implements OnInit {
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
        this.seekProposalsDetails=data[0];
-      // console.log(this.seekProposalsDetails)
+     //console.log(this.seekProposalsDetails)
+     this.ubtidInput=this.seekProposalsDetails.UbtId;
+     this.categoryidInput=this.seekProposalsDetails.CategoryId;
+     this.goodstypeInput=this.seekProposalsDetails.GoodsType;
      });
     // objectTypeTransport type Input Object
      let objectTypeTransport = {
@@ -154,17 +161,17 @@ export class SeekproposalComponent implements OnInit {
     };
 
      this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
-      // console.log(data);
+     //console.log(data);
        this.transporter=data;
      });
 
      this.proposalService.getVendor(objectTypeLoading).subscribe((data:any)=>{
-     // console.log(data);
+   //console.log(data);
       this.loadingContractor=data;
     });
 
     this.proposalService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
-     // console.log(data);
+    //console.log(data);
      this.unloadingContractor=data;
     });
 
@@ -185,22 +192,35 @@ export class SeekproposalComponent implements OnInit {
   }
 
   add(){
+ 
     let object={
-      'Transporter':this.selectedTransporter,
-      'TransporterRate':this.transporterRate,
-      'LoadingContractor':this.selectedLoadingContractor,
-      'LoadingRate':this.loadingRate,
-      'UnloadingContractor':this.selectedUnLoadingContractor,
-      'UnloadingRate':this.unloadingRate,
+      'UbtId':this.ubtidInput,
+      "CategoryId":this.categoryidInput,
+      "GoodsType":this.goodstypeInput,
+      'TransporterId':this.selectedTransporter,
+      'TranAmount':this.transporterRate,
+      'LoadContId':this.selectedLoadingContractor,
+      'LoadContAmount':this.loadingRate,
+      'UnloadContId':this.selectedUnLoadingContractor,
+      'UnloadContAmount':this.unloadingRate,
    }
- //console.log(object);
+ console.log(object);
  this.addedSeekProposalDetails.push(object);
+ this.allSeekProposalDetails.push(object);
+//  console.log(this.allSeekProposalDetails);
  this.selectedTransporter="";
  this.transporterRate="";
  this.selectedLoadingContractor="";
  this.loadingRate="";
  this.selectedUnLoadingContractor="";
  this.unloadingRate="";
+  }
+  saveProposal(){
+    //console.log(this.allSeekProposalDetails);
+    this.proposalService.addProposal(this.allSeekProposalDetails).subscribe((data:any)=>{
+      console.log(data);
+    })
+    this.allSeekProposalDetails = [];
   }
   delete(items){
     let index = this.addedSeekProposalDetails.indexOf(items);

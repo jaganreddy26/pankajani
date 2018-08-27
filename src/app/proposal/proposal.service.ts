@@ -34,4 +34,8 @@ export class ProposalServiceService {
     this.url =this.host+'/api/UbtApi/GetVendor';
     return this.http.post(this.url,data);
   }
+  addProposal(data){
+    this.url=this.host+'/api/UbtApi/AddInfoToAnOpenCategory';
+    return this.http.post(this.url,data);
+  }
 }

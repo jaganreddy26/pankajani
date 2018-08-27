@@ -89,7 +89,7 @@ export class ViewubtComponent implements OnInit {
       this.nodes = parent;
 
       // this.nodes.prototy
-      console.log(this.nodes)
+      //console.log(this.nodes)
 
     })
 

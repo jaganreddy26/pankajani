@@ -60,4 +60,12 @@ export class UbtService {
     this.url=this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data);
   }
+  getIndividualUbtCategory(data){
+    this.url=this.host+'/api/UbtApi/GetIndividualUbtCategory';
+    return this.http.post(this.url,data);
+  }
+  updateIndividualUbtCategory(data){
+    this.url=this.host+'/api/UbtApi/EditIndividualUBTCategory';
+    return this.http.post(this.url,data);
+  }
 }
