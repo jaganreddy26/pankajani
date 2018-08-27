@@ -230,4 +230,7 @@ this.edit(this.individualUbtDetailsInput);
 
 this.modalRef.hide()
   }
+  saveRecords(){
+    
+  }
 }

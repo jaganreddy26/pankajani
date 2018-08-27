@@ -137,8 +137,8 @@
 </div>
 <div class="panel-body" >
         <table class="table table-striped table-bordered table-list">
-            <thead style="color: #3e54af">
-                <tr style="color: white;background-color:#3e54af">
+            <thead>
+                <tr style="color:#6f6f6f;background-color:#f0f0f0">
                     <th>S.No</th>
                     <th>GoodsType </th>
                     <!-- <th>Category Id</th> -->
@@ -250,8 +250,8 @@
             <button mat-raised-button (click)="saveRecords()" *ngIf='addedNewUbts.length !=0' color="primary">Save</button>
     </div>
     <table class="table table-striped table-bordered table-list">
-        <thead style="color: #3e54af">
-            <tr style="color: white;background-color:#3e54af">
+        <thead>
+            <tr style="color:#6f6f6f;background-color:#f0f0f0">
                 <th>S.No</th>
                 <th>GoodsType </th>
                 <th>Category Name</th>
@@ -273,9 +273,16 @@
                 <td>{{items.BasePrice}}</td>
                 <td>{{items.MaxMargin}}</td>
                 <td>
+                        <button
+                         class="btn btn padding-left"
+                         style="cursor: pointer;color:#fff"
+                       (click)="openModal(items,template)"
+                     >
+                     <i class="fa fa-pencil" aria-hidden="true"></i>
+                     </button>
                     <button
                         class="btn btn"
-                        style="cursor: pointer;background-color: #D50000;color:#fff"
+                        style="cursor: pointer;background-color: #D50000 !important;color:#fff;margin-left:8px"
                         (click)="delete(items)"
                     >
                         <i
@@ -283,14 +290,7 @@
                             aria-hidden="true"
                         ></i>
                     </button>
-                    <button
-                   
-                    class="btn btn"
-                    style="cursor: pointer;background-color: #D50000;color:#fff"
-                  (click)="openModal(items,template)"
-                >
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
+                 
                 </td>
     
             </tr>

@@ -27,9 +27,9 @@ export class ViewubtComponent implements OnInit {
   udtData:any = [];
   nodes:any=[];
   options: ITreeOptions = {
-    displayField: 'CategoryName',
+    displayField: 'Name',
     isExpandedField: 'expanded',
-    idField: 'CategoryId',
+    idField: 'Id',
     hasChildrenField: 'nodes',
     
   }
@@ -82,7 +82,7 @@ export class ViewubtComponent implements OnInit {
       let children:any=[];
       console.log(this.ids)
       this.ids.forEach(element => {
-        parent.push({'CategoryId':element.UbtId,'CategoryName':element.UbtId,'children':element.TCategory})
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
       });
     
     //step 4 for Tree struture here the tree struture we form in the HTML

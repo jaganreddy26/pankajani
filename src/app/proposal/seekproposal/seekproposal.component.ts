@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 
 @Component({
   selector: 'app-seekproposal',
@@ -38,7 +39,14 @@ export class SeekproposalComponent implements OnInit {
  addedSeekProposalDetails:any=[];
  
  allSeekProposalDetails:any=[]
-  options = {};
+ //STEP2
+ options: ITreeOptions = {
+  displayField: 'Name',
+  isExpandedField: 'expanded',
+  idField: 'Id',
+  hasChildrenField: 'nodes',
+  
+}
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
    
@@ -91,19 +99,16 @@ export class SeekproposalComponent implements OnInit {
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
       console.log(this.ids)
-
-       //step 3 for Tree struture
       let all:any=[]
-      this.ids.forEach(element => {
-        element.TCategory.forEach(element2 => {
-          let children:any=[];
-          children.push({'id':element2.Id,'name':element2.Name,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
-          all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
-        });        
-      
+      let parent:any=[]
+      let children:any=[];
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
       });
+    
     //step 4 for Tree struture here the tree struture we form in the HTML
-      this.nodes = all;
+      this.nodes = parent;
 
     })
 
@@ -132,7 +137,7 @@ export class SeekproposalComponent implements OnInit {
     }
     else{
       let obj = {
-        'CategoryId': $event.node.data.id,
+        'CategoryId': $event.node.data.Id,
         'GoodsType':$event.node.data.GoodsTypes,
         'Status': 'Open',
         UbtId:$event.node.data.UbtId,
@@ -226,4 +231,5 @@ export class SeekproposalComponent implements OnInit {
     let index = this.addedSeekProposalDetails.indexOf(items);
     this.addedSeekProposalDetails.splice(index,1);
   }
+
 }
