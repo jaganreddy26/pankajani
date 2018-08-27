@@ -154,5 +154,5 @@
       </div> -->
 </div>
 <div align="right" class="padding-right">
-        <button mat-raised-button (click)="save()" color="primary">Save</button>
+        <button mat-raised-button (click)="save()" *ngIf='addedUbtDetails.length !=0' color="primary">Save</button>
 </div>

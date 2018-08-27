@@ -72,7 +72,7 @@ export class ViewproposalComponent implements OnInit {
       this.ids.forEach(element => {
         element.TCategory.forEach(element2 => {
           let children:any=[];
-          children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
+          children.push({'id':element2.Id,'name':element2.Name,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
           all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
         });        
       

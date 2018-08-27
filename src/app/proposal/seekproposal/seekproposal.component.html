@@ -160,7 +160,7 @@
                             >
                                 <mat-option
                                     *ngFor="let item of transporter"
-                                    [value]="item.VendorName"
+                                    [value]="item.VendorId"
                                 >
                                     {{item.VendorName}}
                                 </mat-option>
@@ -185,7 +185,7 @@
                             >
                                 <mat-option
                                     *ngFor="let item of loadingContractor"
-                                    [value]="item.VendorName"
+                                    [value]="item.VendorId"
                                 >
                                     {{item.VendorName}}
                                 </mat-option>
@@ -210,7 +210,7 @@
                             >
                                 <mat-option
                                     *ngFor="let item of unloadingContractor"
-                                    [value]="item.VendorName"
+                                    [value]="item.VendorId"
                                 >
                                     {{item.VendorName}}
                                 </mat-option>
@@ -233,7 +233,7 @@
                             style="cursor: pointer;background-color: #3e54af;color:#fff"
                             (click)="add()"
                         >
-                            <i class="fa fa-plus"></i>
+                        <i class="fa fa-plus"></i>
                         </button>
                     </td>
                 </tr>
@@ -242,12 +242,12 @@
                     [attr.data-index]="i"
                 >
                     <td>{{i + 1}}</td>
-                    <td>{{items.Transporter}}</td>
-                    <td>{{items.TransporterRate}}</td>
-                    <td>{{items.LoadingContractor}}</td>
-                    <td>{{items.LoadingRate}}</td>
-                    <td>{{items.UnloadingContractor}}</td>
-                    <td>{{items.UnloadingRate}}</td>
+                    <td>{{items.TransporterId}}</td>
+                    <td>{{items.TranAmount}}</td>
+                    <td>{{items.LoadContId}}</td>
+                    <td>{{items.LoadContAmount}}</td>
+                    <td>{{items.UnloadContId}}</td>
+                    <td>{{items.UnloadContAmount}}</td>
                     <td>
                         <button
                             class="btn btn"
@@ -264,6 +264,10 @@
                 </tr>
             </tbody>
         </table>
+        <div align="right" class="padding-right">
+            <button mat-raised-button (click)="saveProposal()" *ngIf='addedSeekProposalDetails.length !=0' color="primary">Save</button>
     </div>
+    </div>
+   
 
 </div>

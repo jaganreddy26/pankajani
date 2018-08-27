@@ -12,7 +12,7 @@
             placeholder="Customer"
             [(ngModel)]="value"
             (ngModelChange)="onchange($event)"
-        >
+         readonly >
             <mat-option
                 *ngFor="let item of customer"
                 value="{{item.CustomerId}}"
