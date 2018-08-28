@@ -188,13 +188,14 @@ this.getedit();
   }
   add(){
     let object={
+      'CustomerId':this.customerIdSelected,
       'GoodsType':this.goodsTypeSelected,
       'CategoryName':this.categoryIdSelected,
       'Quantity':this.Quantity,
       'BasePrice':this.BasePrice,
       'MaxMargin':this.MaxMargin
    }
-
+console.log(object);
    this.addedNewUbts.push(object);
    this.goodsTypeSelected ="";
    this.categoryIdSelected ="";
