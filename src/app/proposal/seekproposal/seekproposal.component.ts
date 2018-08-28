@@ -226,6 +226,7 @@ export class SeekproposalComponent implements OnInit {
       console.log(data);
     })
     this.allSeekProposalDetails = [];
+    this.addedSeekProposalDetails=[];
   }
   delete(items){
     let index = this.addedSeekProposalDetails.indexOf(items);
