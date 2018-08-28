@@ -14,6 +14,7 @@ export class CloseubtComponent implements OnInit {
   FromDate: any = new Date();
   ToDate: any = new Date();
   Id: any;
+  value:any;
   businessId: any;
   customerId: any;
   fromDateChanged: boolean = false;

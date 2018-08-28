@@ -17,6 +17,7 @@ export class ViewproposalComponent implements OnInit {
   ids: any = [];
   status:any=[];
   StatusName:any;
+  value:any;
 
   //step 2 for Tree struture
   nodes:any=[];

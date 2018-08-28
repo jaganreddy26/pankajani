@@ -15,6 +15,7 @@ export class ViewpoComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  value:any;
   constructor(private poService:PoService) {
     this.getCustomer();
    }

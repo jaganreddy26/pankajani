@@ -18,6 +18,7 @@ export class AmendproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
    //step 2 for Tree struture
+   value:any;
    nodes:any=[];
   constructor(private proposalService: ProposalServiceService) { 
     this.getCustomer();
