@@ -72,4 +72,8 @@ export class UbtService {
     this.url=this.host+'/api/UbtApi/EditIndividualUBTCategory';
     return this.http.post(this.url,data);
   }
+  addNewCategoryToUbtId(data){
+    this.url=this.host+'/api/UbtApi/AmendUbt';
+    return this.http.post(this.url,data);
+  }
 }

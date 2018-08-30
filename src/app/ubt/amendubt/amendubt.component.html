@@ -108,32 +108,52 @@
     fxLayout="row wrap"
     fxLayoutAlign="center center"
 >
-    <mat-form-field fxFlex="30" class="padding-left">
+    <!-- <mat-form-field fxFlex="30" class="padding-left">
         <mat-select
             placeholder="Customer Name"
             [(ngModel)]="customerIdSelected"
+            (ngModelChange)="addnewcustomerId($event)"
         >
             <mat-option
                 *ngFor="let item of customer"
-                value="{{item.CustomerName}}"
+                value="{{item.CustomerId}}"
             >
                 {{item.CustomerName}}
             </mat-option>
         </mat-select>
-    </mat-form-field>
-    <mat-form-field fxFlex="30" class="padding-left">
+    </mat-form-field> -->
+    <div class="card">
+        <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center" 
+       
+    >
+        <div class="padding-left">
+            <span style="font-weight:400">CustomerID : </span>
+            <span style="background-color: bisque"> {{customerIDStatic}}</span>
+        </div>
+
+        <div class="padding-left">
+            <span style="font-weight:400">AgencyId : </span>
+            <span style="background-color: bisque">{{AgencyIdStatic}}</span>
+        </div>
+      
+    </div>
+    </div>
+
+    <!-- <mat-form-field fxFlex="30" class="padding-left">
         <mat-select
             placeholder="Agency Name"
             [(ngModel)]="agencyIdSelected"
         >
             <mat-option
-                *ngFor="let item of agency"
-                [value]="item.AgencyName"
+                *ngFor="let item of agencynew"
+                [value]="item.AgencyId"
             >
                 {{item.AgencyName}}
             </mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 </div>
 <div class="panel-body" >
         <table class="table table-striped table-bordered table-list">
@@ -160,7 +180,7 @@
                                 (ngModelChange)="onchangeGoodsType($event)"
                             >
                                 <mat-option
-                                    *ngFor="let item of goodsType"
+                                    *ngFor="let item of goodsTypenew"
                                     [value]="item.GoodsTypeName"
                                 >
                                     {{item.GoodsTypeName}}
@@ -172,11 +192,11 @@
                         <mat-form-field>
                             <mat-select
                                 placeholder="Category"
-                                [(ngModel)]="categoryIdSelected"
+                                [(ngModel)]="selectedCategoryId"
                                 (ngModelChange)="onchangeCategoryName($event)"
                             >
                                 <mat-option
-                                    *ngFor="let item of CategoryNameList"
+                                    *ngFor="let item of CategoryNameListnew"
                                     [value]="item.CategoryId"
                                 >
                                     {{item.CategoryName}}
@@ -220,13 +240,13 @@
                     </td>
                 </tr>
                 <tr
-                *ngFor="let items of addedNewUbts; let i = index"
+                *ngFor="let items of addedNewCategoryToUbtId; let i = index"
                 [attr.data-index]="i"
                  >
                 <td>{{i + 1}}</td>
                 <td>{{items.GoodsType}}</td>
               
-                <td>{{items.CategoryName}}</td>
+                <td>{{items.CategoryId}}</td>
                 <td>{{items.Quantity}}</td>
                 <td>{{items.BasePrice}}</td>
                 <td>{{items.MaxMargin}}</td>
@@ -247,12 +267,13 @@
         </table>
     </div>
     <div align="right" >
-            <button mat-raised-button (click)="saveRecords()" *ngIf='addedNewUbts.length !=0' color="primary">Save</button>
+            <button mat-raised-button (click)="saveRecords()" *ngIf='addedNewCategoryToUbtId.length !=0' color="primary">Save</button>
     </div>
     <table class="table table-striped table-bordered table-list">
         <thead>
             <tr style="color:#6f6f6f;background-color:#f0f0f0">
                 <th>S.No</th>
+             
                 <th>GoodsType </th>
                 <th>Category Name</th>
                 <th>Quantity</th>
@@ -267,6 +288,7 @@
                 [attr.data-index]="i"
                  >
                 <td>{{i + 1}}</td>
+             
                 <td>{{items.GoodsType}}</td>
                 <td>{{items.CategoryName}}</td>
                 <td>{{items.Quantity}}</td>

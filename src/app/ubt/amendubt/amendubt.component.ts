@@ -2,6 +2,8 @@ import { Component, OnInit,TemplateRef } from '@angular/core';
 import { UbtService } from '../ubt.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-amendubt',
   templateUrl: './amendubt.component.html',
@@ -22,12 +24,13 @@ export class AmendubtComponent implements OnInit {
   value: any;
   editDetails: boolean = false;
   udtData: any = [];
-  addedNewUbts:any=[];
+  addedNewCategoryToUbtId:any=[];
   ids: any = [];
   goodsTypeSelected: any;
   goodsType: any = [];
   CategoryNameList: any = [];
   agency:any=[];
+ 
   agencyIdSelected:any;
   customerIdSelected:any;
   confirmBiddingStatus: string;
@@ -37,9 +40,14 @@ export class AmendubtComponent implements OnInit {
   MaxMargin:any;
   modalRef: BsModalRef;
 
+  selectedCategoryId
   individualUbtDetailsInput:any;
-
+  goodsTypenew:any=[];
+  CategoryNameListnew:any=[];
+  agencynew:any=[];
   ubtidInput:any;
+  customerIDStatic:any;
+  AgencyIdStatic:any;
   //below are variables are to send send the input details in object formate(to get "getIndividualUbtCategory")
   ubtidinput:any;
   goodsTypeinput:any;
@@ -47,9 +55,10 @@ export class AmendubtComponent implements OnInit {
   categoryIdinput:any;
   ///
 
-  individualUbtCategory:any=[];
+  individualUbtCategory:any= {};
   ///upto here 
-  constructor(private ubtService: UbtService,private modalService: BsModalService) {
+  constructor(private ubtService: UbtService,private modalService: BsModalService
+  ,private alertService :AlertService) {
 
     this.getCustomer();
   }
@@ -70,6 +79,7 @@ this.getedit();
     "GoodsType":this.goodsTypeinput,
     "CategoryId":this.categoryIdinput
   }
+  console.log(object);
   this.ubtService.getIndividualUbtCategory(object).subscribe((data:any)=>{
     console.log(data);
     this.individualUbtCategory=data[0];
@@ -129,26 +139,63 @@ this.getedit();
     console.log(this.individualUbtDetailsInput);
     this.editDetails = true;
     this.udtData = [];
-
+    
     this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
 
       data.forEach(element => {
-        this.udtData.push({ 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+        this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
         this.agencyIdSelected = element.AgencyId;
         this.customerIdSelected = element.CustomerName;
         this.confirmBiddingStatus = element.ConfirmBidding;
+       this.customerIDStatic=element.CustomerId;
+       this.AgencyIdStatic=element.AgencyId;
+       console.log(this.customerIDStatic);
+      
        
       }); 
-     
+    
+      this.getGoodsTypeListForNew(this.customerIDStatic);
+    this.getCategoryNameListForNew(this.customerIDStatic);
     })
- 
+    
+    
   }
-  onchange($event) {
+  getGoodsTypeListForNew(id) {
+    this.ubtService.getGoodsType(this.customerIDStatic).subscribe((data: any) => {
+     console.log(data);
+      this.goodsTypenew = data;
+    })
+  }
+  getCategoryNameListForNew(id) {
+    this.ubtService.getCategoryName(this.customerIDStatic).subscribe((data: any) => {
+     console.log(data);
+      this.CategoryNameListnew = data;
+    })
+  }
+   onchange($event) {
     this.Id = $event;
     this.getAgencyName($event);
     this.getGoodsTypeList($event);
     this.getCategoryNameList($event);
-  }
+ }
+ getGoodsTypeList(id) {
+  this.ubtService.getGoodsType(id).subscribe((data: any) => {
+   console.log(data);
+    this.goodsType = data;
+  })
+}
+getCategoryNameList(id) {
+  this.ubtService.getCategoryName(id).subscribe((data: any) => {
+   console.log(data);
+    this.CategoryNameList = data;
+  })
+}
+getAgencyName(id){
+  this.ubtService.getAgency(id).subscribe((data:any)=>{
+console.log(data);
+   this.agency=data;
+  })
+}
   fromDateChange() {
     this.fromDateChanged = true;
     this.FromDate.toLocaleDateString();
@@ -162,51 +209,53 @@ this.getedit();
     this.ToDate = todate;
   }
 
-  onchangeGoodsType($event) {
-
-  }
-  getGoodsTypeList(id) {
-    this.ubtService.getGoodsType(id).subscribe((data: any) => {
-      // console.log(data);
-      this.goodsType = data;
-    })
-  }
-  getCategoryNameList(id) {
-    this.ubtService.getCategoryName(id).subscribe((data: any) => {
-      // console.log(data);
-      this.CategoryNameList = data;
-    })
-  }
-  getAgencyName(id){
-    this.ubtService.getAgency(id).subscribe((data:any)=>{
- //console.log(data);
-     this.agency=data;
-    })
-  }
+ 
+  
   onchangeCategoryName($event){
+    this.selectedCategoryId=$event
+    console.log(this.selectedCategoryId);
+  }
+  onchangeGoodsType($event){
 
   }
+  //--(Adding new category to the existing UBT_ID request data)--//
   add(){
     let object={
-      'CustomerId':this.customerIdSelected,
+      'UBTId':this.ubtidInput,
+      'BusinessId':this.ubtService.BusinessId,
+      'AgencyId':this.AgencyIdStatic,
+      'CustomerId':this.customerIDStatic,
       'GoodsType':this.goodsTypeSelected,
-      'CategoryName':this.categoryIdSelected,
+      'CategoryId':this.selectedCategoryId,
       'Quantity':this.Quantity,
       'BasePrice':this.BasePrice,
       'MaxMargin':this.MaxMargin
    }
-console.log(object);
-   this.addedNewUbts.push(object);
+//console.log(object);
+   this.addedNewCategoryToUbtId.push(object);
    this.goodsTypeSelected ="";
-   this.categoryIdSelected ="";
+   this.selectedCategoryId ="";
    this.Quantity ="";
    this.BasePrice ="";
    this.MaxMargin ="";
 
   }
+   //--(ENDED)--//
+
+   saveRecords(){
+    this.ubtService.addNewCategoryToUbtId(this.addedNewCategoryToUbtId).subscribe((data:any)=>{
+      console.log(data);
+      if(data=='Success'){
+        this.alertService.alert(AlertType.Success,"New GoodsType is Added for this UbtID :"+ this.ubtidInput)
+        }else{
+          this.alertService.alert(AlertType.Error,"Something went wrong");
+        }
+    })
+    this.addedNewCategoryToUbtId=[];
+  }
   delete(items){
-    let index = this.addedNewUbts.indexOf(items);
-    this.addedNewUbts.splice(index,1);
+    let index = this.addedNewCategoryToUbtId.indexOf(items);
+    this.addedNewCategoryToUbtId.splice(index,1);
   }
   updateRecord(){
 //console.log("hi ubt" );
@@ -225,13 +274,16 @@ console.log(object);
 this.ubtService.updateIndividualUbtCategory(object).subscribe((data:any)=>{
 
   console.log(data);
+  if(data=='Success'){
+    this.alertService.alert(AlertType.Success,"Successfuly Upadted The Record For This "+ this.goodsTypeinput+"and categoryId is"+this.categoryIdinput)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
 })
 //Here we will the method to get the upadted details after updating the record details
 this.edit(this.individualUbtDetailsInput);
 
 this.modalRef.hide()
   }
-  saveRecords(){
-    
-  }
+ 
 }
