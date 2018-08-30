@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
-
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-seekproposal',
   templateUrl: './seekproposal.component.html',
@@ -48,7 +49,7 @@ export class SeekproposalComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
-  constructor(private proposalService: ProposalServiceService) {
+  constructor(private proposalService: ProposalServiceService,private alertService :AlertService) {
     this.getCustomer();
    
    }
@@ -225,6 +226,12 @@ export class SeekproposalComponent implements OnInit {
     //console.log(this.allSeekProposalDetails);
     this.proposalService.addProposal(this.allSeekProposalDetails).subscribe((data:any)=>{
       console.log(data);
+      if(data !== 'null'){
+
+        this.alertService.alert(AlertType.Success,"ProposalID Created Successfuly with id :"+ data)
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
     })
     this.allSeekProposalDetails = [];
     this.addedSeekProposalDetails=[];

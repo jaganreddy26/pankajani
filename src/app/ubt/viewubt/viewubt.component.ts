@@ -73,7 +73,7 @@ export class ViewubtComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
     }
     this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
@@ -99,6 +99,9 @@ export class ViewubtComponent implements OnInit {
 
   onchange($event) {
     this.Id = $event
+  }
+  onchangeStatus($event){
+    this.StatusName=$event;
   }
   fromDateChange() {
     this.fromDateChanged = true;
