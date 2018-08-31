@@ -77,6 +77,7 @@ export class ViewubtComponent implements OnInit {
     }
     this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
+      console.log(data);
       let all:any=[]
       let parent:any=[]
       let children:any=[];

@@ -20,7 +20,7 @@ export class ProposalServiceService {
     this.url = this.host+'/api/UbtApi/GetCustomers';
     return this.http.post(this.url,data)
   }
-  getUbtIds(data:any)
+  getUbtIds(data)
   {
     // var data = {BusinessId:this.BusinessId } ;
     this.url = this.host+'/api/UbtApi/GetUBT';
@@ -36,6 +36,10 @@ export class ProposalServiceService {
   }
   addProposal(data){
     this.url=this.host+'/api/UbtApi/AddInfoToAnOpenCategory';
+    return this.http.post(this.url,data);
+  }
+  getProposalsDetailsByProposalId(data){
+    this.url=this.host+'/api/UbtApi/GetProposalsDetails';
     return this.http.post(this.url,data);
   }
 }
