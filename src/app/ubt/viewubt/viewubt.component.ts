@@ -82,14 +82,22 @@ export class ViewubtComponent implements OnInit {
       let children:any=[];
       console.log(this.ids)
       this.ids.forEach(element => {
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
+        element.TCategory.forEach(element1 => {
+        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+        })
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
       });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-
+    // this.nodes.forEach(element => {
+    //   element.children.forEach(element1 => {
+    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
+    //   });
+    // });
+    // console.log(children)
       // this.nodes.prototy
-      //console.log(this.nodes)
+      console.log(this.nodes)
 
     })
 
@@ -100,9 +108,7 @@ export class ViewubtComponent implements OnInit {
   onchange($event) {
     this.Id = $event
   }
-  onchangeStatus($event){
-    this.StatusName=$event;
-  }
+
   fromDateChange() {
     this.fromDateChanged = true;
     this.FromDate.toLocaleDateString();
@@ -128,23 +134,58 @@ export class ViewubtComponent implements OnInit {
   //   })
   // }
   onActivate($event){   
-    if($event.node.data.children){
-
+    console.log($event.node.data)
+    let obj ={
+      'UbtId': $event.node.data.Id,
     }
-    else{
-      this.editDetails = true;
+    this.ubtService.getIndividualUbt(obj).subscribe((data:any)=>{
+      if(data.length != 0){
+        this.editDetails = true;
+        this.udtData = data;
+        console.log(this.udtData)
+      }
+      // else{
+      //   this.editDetails = false;
+      // }
+    }
+  )
+
+            
       let object = { 
         'UbtId': $event.node.data.UbtId,
         'CustomerId':this.customerId,
-        "GoodsType":$event.node.data.GoodsTypes,
+        "GoodsType":$event.node.data.GoodsType,
         "CategoryId":$event.node.data.Id
        }
        console.log(object);
           this.ubtService.getIndividualUBTCategoryDetails(object).subscribe((data: any) => {
-           this.udtData = data;
-           console.log(this.udtData)
+            if(data.length != 0){
+              this.editDetails = true;
+              this.udtData = data;
+              console.log(this.udtData)
+            }
+            // else{
+            //   this.editDetails = false;
+            // }
+          
           })
+//     if($event.node.data.children){
 
-        }
+//     }
+//     else{
+//       this.editDetails = true;
+//       let object = { 
+//         'UbtId': $event.node.data.parent.UbtId,
+//         'CustomerId':this.customerId,
+//         "GoodsType":$event.node.parent.data.GoodsTypes,
+//         "CategoryId":$event.node.parent.data.Id
+//        }
+//        console.log(object);
+//           this.ubtService.getIndividualUBTCategoryDetails(object).subscribe((data: any) => {
+//            this.udtData = data;
+//            console.log(this.udtData)
+//           })
+
+//         }
 }
 }
