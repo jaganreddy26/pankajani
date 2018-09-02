@@ -76,4 +76,9 @@ export class UbtService {
     this.url=this.host+'/api/UbtApi/AmendUbt';
     return this.http.post(this.url,data);
   }
+  //*****Delete operation in Amend Ubt component*****//
+  deleteCategoryId(data){
+    this.url=this.host+'/api/UbtAPI/DeleteIndividualUBTCategory';
+    return this.http.post(this.url,data);
+  }
 }

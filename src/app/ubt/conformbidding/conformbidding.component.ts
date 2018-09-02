@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UbtService } from '../ubt.service';
-import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+
 
 @Component({
   selector: 'app-conformbidding',
@@ -35,14 +35,7 @@ export class ConformbiddingComponent implements OnInit {
   MaxMargin:any;
   status:any=[];
   StatusName:any;
-  nodes:any=[];
-  options: ITreeOptions = {
-    displayField: 'CategoryName',
-    isExpandedField: 'expanded',
-    idField: 'CategoryId',
-    hasChildrenField: 'nodes',
-    
-  }
+ 
   constructor(private ubtService: UbtService) {
     this.getCustomer();
   }
@@ -86,22 +79,7 @@ export class ConformbiddingComponent implements OnInit {
     }
     this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
-      let all:any=[]
-      let parent:any=[]
-      let children:any=[];
-      console.log(this.ids)
-      this.ids.forEach(element => {
-        parent.push({'CategoryId':element.UbtId,'CategoryName':element.UbtId,'children':element.TCategory})
-      });
-    
-    //step 4 for Tree struture here the tree struture we form in the HTML
-      this.nodes = parent;
-
-      // this.nodes.prototy
-      console.log(this.nodes)
-
     })
-
   }
 
   edit(item) {
@@ -121,9 +99,9 @@ export class ConformbiddingComponent implements OnInit {
   }
   onchange($event) {
     this.Id = $event;
-    this.getAgencyName($event);
-    this.getGoodsTypeList($event);
-    this.getCategoryNameList($event);
+    // this.getAgencyName($event);
+    // this.getGoodsTypeList($event);
+    // this.getCategoryNameList($event);
   }
   fromDateChange() {
     this.fromDateChanged = true;
@@ -141,62 +119,28 @@ export class ConformbiddingComponent implements OnInit {
   onchangeGoodsType($event) {
 
   }
-  getGoodsTypeList(id) {
-    this.ubtService.getGoodsType(id).subscribe((data: any) => {
-      // console.log(data);
-      this.goodsType = data;
-    })
-  }
-  getCategoryNameList(id) {
-    this.ubtService.getCategoryName(id).subscribe((data: any) => {
-      // console.log(data);
-      this.CategoryNameList = data;
-    })
-  }
-  getAgencyName(id){
-    this.ubtService.getAgency(id).subscribe((data:any)=>{
- //console.log(data);
-     this.agency=data;
-    })
-  }
-  onchangeCategoryName($event){
+//   getGoodsTypeList(id) {
+//     this.ubtService.getGoodsType(id).subscribe((data: any) => {
+//       // console.log(data);
+//       this.goodsType = data;
+//     })
+//   }
+//   getCategoryNameList(id) {
+//     this.ubtService.getCategoryName(id).subscribe((data: any) => {
+//       // console.log(data);
+//       this.CategoryNameList = data;
+//     })
+//   }
+//   getAgencyName(id){
+//     this.ubtService.getAgency(id).subscribe((data:any)=>{
+//  //console.log(data);
+//      this.agency=data;
+//     })
+//   }
+  // onchangeCategoryName($event){
 
-  }
-  add(){
-    let object={
-      'GoodsType':this.goodsTypeSelected,
-      'CategoryName':this.categoryIdSelected,
-      'Quantity':this.Quantity,
-      'BasePrice':this.BasePrice,
-      'MaxMargin':this.MaxMargin
-   }
-
-   this.udtData.push(object);
-   this.goodsTypeSelected ="";
-   this.categoryIdSelected ="";
-   this.Quantity ="";
-   this.BasePrice ="";
-   this.MaxMargin ="";
-
-  }
-  delete(items){
-
-  }
-  updateUbt(){
-
-  }
-  onActivate($event){   
-    if($event.node.data.children){
-
-    }
-    else{
-      this.editDetails = true;
-      let ubtId = { 'UbtId': $event.node.data.UbtId }
-          this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
-           this.udtData = data;
-           console.log(this.udtData)
-          })
-
-        }
-}
+  // }
+ 
+  
+ 
 }

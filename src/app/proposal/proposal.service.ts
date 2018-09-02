@@ -42,4 +42,16 @@ export class ProposalServiceService {
     this.url=this.host+'/api/UbtApi/GetProposalsDetails';
     return this.http.post(this.url,data);
   }
+  addProposalByProposalId(data){
+    this.url=this.host+'/api/UbtApi/AmendProposal';
+    return this.http.post(this.url,data);
+  }
+  getProposalDetailsForEdit(data){
+  this.url=this.host+'/api/UbtApi/GetIndividualProposalTransporter';
+  return this.http.post(this.url,data);
+  }
+  updateIndividualProposalDetails(data){
+    this.url=this.host+'/api/UbtApi/EditIndividualProposalTransporter';
+    return this.http.post(this.url,data);
+  }
 }

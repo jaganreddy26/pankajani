@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-amendproposal',
   templateUrl: './amendproposal.component.html',
@@ -17,10 +22,36 @@ export class AmendproposalComponent implements OnInit {
   ids: any = [];
   status:any=[];
   StatusName:any;
+  ProposalsDetailsByID:any=[];
+  ProposalIdStatic:any;
+///Adding new Proposal to proposalID
+transporter:any=[];
+loadingContractor:any=[];
+unloadingContractor:any[];
+selectedTransporter:any;
+ transporterRate:any;
+ selectedLoadingContractor:any;
+ loadingRate:any;
+ selectedUnLoadingContractor:any;
+ unloadingRate:any;
+ addedNewProposalsToProposalId:any=[];
+//To edit the proposal details for Input parameters
+transporterId:any
+loadContId:any;
+unloadContId:any
+editProposalDetails:any= {};
    //step 2 for Tree struture
-   value:any;
-   nodes:any=[];
-  constructor(private proposalService: ProposalServiceService) { 
+  nodes:any=[];
+  options: ITreeOptions = {
+    displayField: 'Name',
+    isExpandedField: 'expanded',
+    idField: 'Id',
+    hasChildrenField: 'nodes',
+    
+  }
+  modalRef: BsModalRef;
+  constructor(private proposalService: ProposalServiceService,
+    private alertService :AlertService,private modalService: BsModalService) { 
     this.getCustomer();
   }
 
@@ -62,30 +93,181 @@ export class AmendproposalComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
+      'Status':this.StatusName
 
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
 
-       //step 3 for Tree struture
-       let all:any=[]
-       this.ids.forEach(element => {
-         element.TCategory.forEach(element2 => {
-           let children:any=[];
-           children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
-           all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
-         });        
-       
-       });
-     //step 4 for Tree struture here the tree struture we form in the HTML
-       this.nodes = all;
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+      console.log(this.ids)
+      this.ids.forEach(element => {
+        element.TCategory.forEach(element1 => {
+        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+        })
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
+      });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
+    // this.nodes.forEach(element => {
+    //   element.children.forEach(element1 => {
+    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
+    //   });
+    // });
+    // console.log(children)
+      // this.nodes.prototy
+      console.log(this.nodes)
 
     })
 
   }
   onActivate($event){
-    console.log("hi")
+  
+    // objectTypeTransport type Input Object
+    let objectTypeTransport = {
+      ObjectType: 'Transport' 
+    };
+  // objectTypeLoading type Input Object
+    let objectTypeLoading = {
+      ObjectType: 'Loading' 
+    };
+  // objectTypeUnloading type Input Object
+   let objectTypeUnloading = {
+      ObjectType: 'Unloading' 
+    };
+
+     this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
+       this.transporter=data;
+     });
+
+     this.proposalService.getVendor(objectTypeLoading).subscribe((data:any)=>{
+      this.loadingContractor=data;
+    });
+
+    this.proposalService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
+     this.unloadingContractor=data;
+    });
+  
+this.ProposalIdStatic=$event.node.data.Id;
+//here Getting the created seek proposal Details based On ProposalId
+let obj ={
+  'ProposalId': $event.node.data.Id,
+}
+this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+  this.ProposalsDetailsByID=data;
+
+  })
+}
+add(){
+  let object={
+    "ProposalId":this.ProposalIdStatic,
+    'TransporterId':this.selectedTransporter,
+    'TranAmount':this.transporterRate,
+    'LoadContId':this.selectedLoadingContractor,
+    'LoadContAmount':this.loadingRate,
+    'UnloadContId':this.selectedUnLoadingContractor,
+    'UnloadContAmount':this.unloadingRate,
+  }
+  console.log(object);
+  this.addedNewProposalsToProposalId.push(object);
+  this.selectedTransporter="";
+ this.transporterRate="";
+ this.selectedLoadingContractor="";
+ this.loadingRate="";
+ this.selectedUnLoadingContractor="";
+ this.unloadingRate="";
+}
+delete(items){
+  let index = this.addedNewProposalsToProposalId.indexOf(items);
+  this.addedNewProposalsToProposalId.splice(index,1);
+}
+saveNewProposal(){
+this.proposalService.addProposalByProposalId(this.addedNewProposalsToProposalId).subscribe((data:any)=>{
+  console.log(data);
+  if(data=='Success'){
+    this.alertService.alert(AlertType.Success,"New Proposal is Added for this ProposalId :"+" "+this.ProposalIdStatic )
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
+})
+this.addedNewProposalsToProposalId=[];
+}
+openModal(items,template1: TemplateRef<any>){
+
+  this.transporterId=items.TransporterId;
+this.loadContId=items.LoadingContId;
+ this.unloadContId=items.UnloadingContId;
+ this.modalRef = this.modalService.show(template1);
+
+ this.getDetailsForEdit();
+}
+getDetailsForEdit(){
+  let object={
+    "ProposalId":this.ProposalIdStatic,
+    "TransporterId":this.transporterId,
+    "LoadContId":this.loadContId,
+    "UnloadContId":this.unloadContId,
+    
+   }
+
+
+   this.proposalService.getProposalDetailsForEdit(object).subscribe((data:any)=>{
+     console.log(data);
+this.editProposalDetails=data[0];
+   })
+}
+
+updateRecord(){
+  let obj={
+    "ProposalId": this.ProposalIdStatic,
+"TransporterId":this.editProposalDetails.TransporterId,
+"TranAmount": this.editProposalDetails.TranAmount,
+"LoadContId": this.editProposalDetails.LoadContId,
+"LoadContAmount": this.editProposalDetails.LoadContAmount,
+"UnloadContId": this.editProposalDetails.UnloadContId,
+"UnloadContAmount": this.editProposalDetails.UnloadContAmount
+  }
+  console.log(obj);
+  this.proposalService.updateIndividualProposalDetails(obj).subscribe((data:any)=>{
+    console.log(data);
+    if(data=='Success'){
+      this.alertService.alert(AlertType.Success,"Successfuly Updated the Record Details ")
+      }else{
+        this.alertService.alert(AlertType.Error,"Failed the Updated Record Details ");
       }
+  })
+  // this.editProposalDetails="";
+
+  let objId ={
+    'ProposalId': this.ProposalIdStatic
+  }
+  this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
+    this.ProposalsDetailsByID=data;
+  
+    })
+    this.modalRef.hide();
+}
+deleteProposal(items,template2){
+  this.modalRef = this.modalService.show(template2);
+  let obj={
+  
+"ProposalId":this.ProposalIdStatic,
+"TransporterId":items.TransporterId,
+"LoadContId":items.LoadingContId,
+"UnloadContId":items.UnloadingContId,
+
+
+  }
+  console.log(obj)
+
+}
+confirm(){
+    
+}
+
   onchange($event) {
     this.Id = $event
   }
@@ -101,5 +283,18 @@ export class AmendproposalComponent implements OnInit {
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+
+  onchangeTransporter($event){
+    this.selectedTransporter=$event;
+   // console.log(this.selectedTransporter)
+  }
+  onchangeLoadingContractor($event){
+    this.selectedLoadingContractor=$event;
+    //console.log(this.selectedLoadingContractor)
+  }
+  onchangeUnLoadingContractor($event){
+    this.selectedUnLoadingContractor=$event;
+    //console.log(this.unLoadingContractor)
   }
 }

@@ -280,10 +280,30 @@ this.ubtService.updateIndividualUbtCategory(object).subscribe((data:any)=>{
       this.alertService.alert(AlertType.Error,"Something went wrong");
     }
 })
-//Here we will the method to get the upadted details after updating the record details
-this.edit(this.individualUbtDetailsInput);
+
 
 this.modalRef.hide()
+//Here we will the method to get the upadted details after updating the record details
+this.edit(this.individualUbtDetailsInput);
+  }
+  deleteCategory(items){
+   let obj={
+    "UbtId":this.ubtidInput,
+    "CategoryId":items.CategoryId,
+    "GoodsType":items.GoodsType,
+    "CustomerId":this.customerIDStatic
+   }
+ console.log(obj);
+   this.ubtService.deleteCategoryId(obj).subscribe((data:any)=>{
+     console.log(data);
+
+     if(data=='Success'){
+      this.alertService.alert(AlertType.Success,"Successfuly deleted this "+ items.GoodsType +" and"+items.CategoryName);
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
+   })
+  
   }
  
 }
