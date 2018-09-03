@@ -97,17 +97,46 @@ class="container" *ngIf='ProposalsDetailsByID.length !=0'>
    
 >
     <div class="padding-left">
-        <span style="font-weight:400">CategoryId : </span>
-        <span style="background-color: bisque">343</span>
+        <span style="font-weight:400">UbtId : </span>
+        <span style="background-color: bisque">{{UbtId}}</span>
     </div>
 
     <div class="padding-left">
-        <span style="font-weight:400">UBT Id : </span>
-        <span style="background-color: bisque">3424</span>
+        <span style="font-weight:400">CategoryId : </span>
+        <span style="background-color: bisque">{{CategoryId}}</span>
+    </div>
+    <div class="padding-left">
+        <span style="font-weight:400">CategoryName : </span>
+        <span style="background-color: bisque">{{CategoryName}}</span>
     </div>
     <div class="padding-left">
         <span style="font-weight:400">AgencyName : </span>
-        <span style="background-color: bisque">{{ProposalsDetailsByID.AgencyName}}</span>
+        <span style="background-color: bisque">{{AgencyName}}</span>
+    </div>
+    </div>
+</div>
+<div class="card">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center" 
+   
+>
+    <div class="padding-left">
+        <span style="font-weight:400">CustomerName : </span>
+        <span style="background-color: bisque">{{CustomerName}}</span>
+    </div>
+
+    <div class="padding-left">
+        <span style="font-weight:400">Quantity : </span>
+        <span style="background-color: bisque">{{Quantity}}</span>
+    </div>
+    <div class="padding-left">
+        <span style="font-weight:400">GoodsType : </span>
+        <span style="background-color: bisque">{{GoodsType}}</span>
+    </div>
+    <div class="padding-left">
+        <span style="font-weight:400">ProposalId : </span>
+        <span style="background-color: bisque">{{ProposalId}}</span>
     </div>
 </div>
 </div>

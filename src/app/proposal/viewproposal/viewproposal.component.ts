@@ -21,7 +21,14 @@ export class ViewproposalComponent implements OnInit {
   value:any;
 
   ProposalsDetailsByID:any=[]
-
+  UbtId:any;
+  CategoryId:any;
+  CategoryName:any;
+  CustomerName:any;
+  Quantity:any;
+  GoodsType:any;
+  AgencyName:any;
+  ProposalId:any;
   //step 2 for Tree struture
   nodes:any=[];
   options: ITreeOptions = {
@@ -111,6 +118,14 @@ let obj ={
 this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
   //console.log(data);
   this.ProposalsDetailsByID=data;
+  this.UbtId=data[0].UbtId,
+  this.CategoryId=data[0].CategoryId,
+  this.CategoryName=data[0].CategoryName,
+  this.CustomerName=data[0].CustomerName,
+  this.Quantity=data[0].Quantity,
+  this.GoodsType=data[0].GoodsType,
+  this.AgencyName=data[0].AgencyName,
+  this.ProposalId=data[0].ProposalId
 })
   }
   onchange($event) {

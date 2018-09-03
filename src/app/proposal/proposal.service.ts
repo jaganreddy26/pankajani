@@ -54,4 +54,12 @@ export class ProposalServiceService {
     this.url=this.host+'/api/UbtApi/EditIndividualProposalTransporter';
     return this.http.post(this.url,data);
   }
+  discaredProposal(data){
+    this.url=this.host+'/api/UbtApi/ChangeProposalStatus';
+    return this.http.post(this.url,data);
+  }
+  approveAndSendProposal(data){
+    this.url=this.host+'/api/UbtApi/ChangeProposalStatus';
+    return this.http.post(this.url,data);
+  } 
 }

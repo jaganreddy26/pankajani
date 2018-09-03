@@ -87,4 +87,68 @@
             (activate)="onActivate($event)"
         ></tree-root>
     </div>
+    <div  fxFlex="85"
+    class="container" *ngIf='ProposalsDetailsByID.length !=0'>
+    <div class="card">
+        <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center" 
+           
+        >
+            <div class="padding-left">
+                <span style="font-weight:400">UbtId : </span>
+                <span>{{UbtId}}</span>
+            </div>
+
+            <div class="padding-left">
+                <span style="font-weight:400">CustomerName : </span>
+                <span>{{CustomerName}}</span>
+            </div>
+            <div class="padding-left">
+                <span style="font-weight:400">GoodsType : </span>
+                <span>{{GoodsType}}</span>
+            </div>
+            <div class="padding-left">
+                <span style="font-weight:400">ProposalId : </span>
+                <span>{{ProposalId}}</span>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered table-list">
+        <thead>
+            <tr style="color:#6f6f6f;background-color:#f0f0f0">
+                <th>S.No</th>
+                <th>TransporterName</th>
+                <th>TransporterAmount</th>
+                <th>LoadingContName</th>
+                <th>LoadingContAmount</th>
+                <th>UnloadingContName</th> 
+                <th>UnloadingContAmount</th> 
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+            *ngFor="let items of ProposalsDetailsByID; let i = index"
+            [attr.data-index]="i"
+             >
+            <td>{{i + 1}}</td>
+            <td>{{items.TransporterName}}</td>
+            <td>{{items.TransporterAmount}}</td>
+            <td>{{items.LoadingContName}}</td>
+            <td>{{items.LoadingContAmount}}</td>
+            <td>{{items.UnloadingContName}}</td>
+            <td>{{items.UnloadingContAmount}}</td>
+          
+        </tr>
+        </tbody>
+    </table>
+    <div align="right" class="padding"
+
+    >
+        <button  mat-raised-button (click)="discard()"  color="primary">DISCARD</button>
+        <button  mat-raised-button (click)="approveAndSend()"  color="primary">APPROVE & SEND</button>
+    </div>
+
+</div>
 </div>

@@ -23,6 +23,9 @@ export class AmendproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
   ProposalsDetailsByID:any=[];
+  UbtId:any;
+  CategoryId:any;
+  CategoryName
   ProposalIdStatic:any;
 ///Adding new Proposal to proposalID
 transporter:any=[];
@@ -158,7 +161,9 @@ let obj ={
 }
 this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
   this.ProposalsDetailsByID=data;
-
+  this.UbtId=data[0].UbtId,
+  this.CategoryId=data[0].CategoryId,
+  this.CategoryName=data[0].CategoryName
   })
 }
 add(){
@@ -240,15 +245,15 @@ updateRecord(){
       }
   })
   // this.editProposalDetails="";
-
+  this.modalRef.hide();
   let objId ={
     'ProposalId': this.ProposalIdStatic
   }
   this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
     this.ProposalsDetailsByID=data;
-  
+  console.log('method called');
     })
-    this.modalRef.hide();
+  
 }
 deleteProposal(items,template2){
   this.modalRef = this.modalService.show(template2);

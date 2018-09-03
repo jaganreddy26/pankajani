@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 @Component({
   selector: 'app-approveproposal',
   templateUrl: './approveproposal.component.html',
@@ -18,8 +19,20 @@ export class ApproveproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
+  ProposalsDetailsByID:any=[];
+  UbtId:any;
+  CustomerName:any;
+  GoodsType:any;
+  ProposalId:any;
     //step 2 for Tree struture
     nodes:any=[];
+    options: ITreeOptions = {
+      displayField: 'Name',
+      isExpandedField: 'expanded',
+      idField: 'Id',
+      hasChildrenField: 'nodes',
+      
+    }
   constructor(private proposalService: ProposalServiceService) {
     this.getCustomer();
    }
@@ -62,28 +75,59 @@ export class ApproveproposalComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
-       //step 3 for Tree struture
-       let all:any=[]
-       this.ids.forEach(element => {
-         element.TCategory.forEach(element2 => {
-           let children:any=[];
-           children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
-           all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
-         });        
-       
-       });
-     //step 4 for Tree struture here the tree struture we form in the HTML
-       this.nodes = all;
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+      console.log(this.ids)
+      this.ids.forEach(element => {
+        element.TCategory.forEach(element1 => {
+        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+        })
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
+      });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
+      console.log(this.nodes)
 
     })
 
   }
   onActivate($event){
-    console.log("hi")
+    let obj ={
+      'ProposalId': $event.node.data.Id,
+    }
+    this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+     this.ProposalsDetailsByID=data;
+    this.UbtId=data[0].UbtId;
+    this.CustomerName=data[0].CustomerName;
+    this.GoodsType=data[0].GoodsType;
+    this.ProposalId=data[0].ProposalId;
+      })
+      }
+      discard(){
+        let obj={
+          "ObjectType":'PROPOSAL',
+          "Id":this.ProposalId,
+          "Status":'Discarded'
+        }
+        this.proposalService.discaredProposal(obj).subscribe((data:any)=>{
+          console.log(data);
+        })
+      }
+      approveAndSend(){
+        let obj={
+          "ObjectType":'PROPOSAL',
+          "Id":this.ProposalId,
+          "Status":'Sent'
+        }
+        this.proposalService.approveAndSendProposal(obj).subscribe((data:any)=>{
+          console.log(data);
+        })
       }
   onchange($event) {
     this.Id = $event
