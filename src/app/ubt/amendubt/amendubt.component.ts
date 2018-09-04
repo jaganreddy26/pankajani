@@ -246,12 +246,31 @@ console.log(data);
     this.ubtService.addNewCategoryToUbtId(this.addedNewCategoryToUbtId).subscribe((data:any)=>{
       console.log(data);
       if(data=='Success'){
-        this.alertService.alert(AlertType.Success,"New GoodsType is Added for this UbtID :"+ this.ubtidInput)
+        this.alertService.alert(AlertType.Success,"New GoodsType is Added for this UbtID :"+ this.ubtidInput);
+           
+    this.ubtService.GetIndividualUbtDetails(this.individualUbtDetailsInput).subscribe((data: any) => {
+      this.udtData =[];
+            data.forEach(element => {
+              this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+              this.agencyIdSelected = element.AgencyId;
+              this.customerIdSelected = element.CustomerName;
+              this.confirmBiddingStatus = element.ConfirmBidding;
+             this.customerIDStatic=element.CustomerId;
+             this.AgencyIdStatic=element.AgencyId;
+             console.log(this.customerIDStatic);
+            
+             
+            }); 
+          
+            this.getGoodsTypeListForNew(this.customerIDStatic);
+          this.getCategoryNameListForNew(this.customerIDStatic);
+          })
         }else{
           this.alertService.alert(AlertType.Error,"Something went wrong");
         }
     })
     this.addedNewCategoryToUbtId=[];
+
   }
   delete(items){
     let index = this.addedNewCategoryToUbtId.indexOf(items);
@@ -299,6 +318,23 @@ this.edit(this.individualUbtDetailsInput);
 
      if(data=='Success'){
       this.alertService.alert(AlertType.Success,"Successfuly deleted this "+ items.GoodsType +" and"+items.CategoryName);
+      this.ubtService.GetIndividualUbtDetails(this.individualUbtDetailsInput).subscribe((data: any) => {
+        this.udtData =[];
+              data.forEach(element => {
+                this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+                this.agencyIdSelected = element.AgencyId;
+                this.customerIdSelected = element.CustomerName;
+                this.confirmBiddingStatus = element.ConfirmBidding;
+               this.customerIDStatic=element.CustomerId;
+               this.AgencyIdStatic=element.AgencyId;
+               console.log(this.customerIDStatic);
+              
+               
+              }); 
+            
+              this.getGoodsTypeListForNew(this.customerIDStatic);
+            this.getCategoryNameListForNew(this.customerIDStatic);
+            })
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
       }
