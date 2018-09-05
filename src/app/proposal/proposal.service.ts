@@ -30,6 +30,10 @@ export class ProposalServiceService {
     this.url=this.host+'/api/UbtApi/GetSeekProposals';
     return this.http.post(this.url,data)
   }
+  getIndividualUbtDetails(data){
+    this.url=this.host+'/api/UbtApi/GetIndividualUBT';
+    return this.http.post(this.url,data)
+  }
   getVendor(data){
     this.url =this.host+'/api/UbtApi/GetVendor';
     return this.http.post(this.url,data);
@@ -52,6 +56,10 @@ export class ProposalServiceService {
   }
   updateIndividualProposalDetails(data){
     this.url=this.host+'/api/UbtApi/EditIndividualProposalTransporter';
+    return this.http.post(this.url,data);
+  }
+  deleteIndividualProposal(data){
+    this.url=this.host+'/api/UbtAPI/DeleteIndividualProposalTransporter';
     return this.http.post(this.url,data);
   }
   discaredProposal(data){

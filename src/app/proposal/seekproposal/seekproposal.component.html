@@ -89,9 +89,40 @@
         ></tree-root>
     </div>
     <div
+        fxFlex="80"
+        class="container"
+        *ngIf="ubtDetails"
+    >
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Goods Type</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Propsal Id</th>
+                    <th scope="col">Propsal Name</th>
+                    <th scope="col">Po Id</th>
+                    <th scope="col">Permisson Id</th>
+                    <th scope="col">Wo Id</th>
+                    <!-- <th scope="col">Port</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of udtData">
+                    <td>{{item.GoodsType}}</td>
+                    <td>{{item.CategoryName}}</td>
+                    <td>{{item.ProposalId}}</td>
+                    <td>{{item.ProposalName}}</td>
+                    <td>{{item.POId}}</td>
+                    <td>{{item.PermissionId}}</td>
+                    <td>{{item.WorkOrderId}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div
         class="padding-left"
         fxFlex="80"
-        *ngIf="seekProposalsDetails"
+        *ngIf="seekProposalsDetails && hideSeekproposal"
     >
         <div class="card">
             <div

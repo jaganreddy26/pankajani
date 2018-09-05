@@ -82,25 +82,28 @@ export class ViewubtComponent implements OnInit {
       let parent:any=[]
       let children:any=[];
       console.log(this.ids)
-      this.ids.forEach(element => {
-        element.TCategory.forEach(element1 => {
-        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
-        })
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
-      });
-    
-    //step 4 for Tree struture here the tree struture we form in the HTML
-      this.nodes = parent;
-    // this.nodes.forEach(element => {
-    //   element.children.forEach(element1 => {
-    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
+    //   this.ids.forEach(element => {
+    //     element.TCategory.forEach(element1 => {
+    //     children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+    //     })
+    //     parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
     //   });
-    // });
-    // console.log(children)
-      // this.nodes.prototy
-      console.log(this.nodes)
+    
+    // //step 4 for Tree struture here the tree struture we form in the HTML
+    //   this.nodes = parent;
+    
+    //   console.log(this.nodes)
 
-    })
+    // })
+     //step 3 for Tree struture
+     this.ids.forEach(element => {
+      parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
+    });
+  
+  //step 4 for Tree struture here the tree struture we form in the HTML
+    this.nodes = parent;
+
+  })
 
   }
 
@@ -139,6 +142,7 @@ export class ViewubtComponent implements OnInit {
     let obj ={
       'UbtId': $event.node.data.Id,
     }
+    console.log(obj);
     this.ubtService.getIndividualUbt(obj).subscribe((data:any)=>{
       if(data.length != 0){
         this.editDetails = true;
@@ -155,7 +159,7 @@ export class ViewubtComponent implements OnInit {
       let object = { 
         'UbtId': $event.node.data.UbtId,
         'CustomerId':this.customerId,
-        "GoodsType":$event.node.data.GoodsType,
+        "GoodsType":$event.node.data.GoodsTypes,
         "CategoryId":$event.node.data.Id
        }
        console.log(object);
