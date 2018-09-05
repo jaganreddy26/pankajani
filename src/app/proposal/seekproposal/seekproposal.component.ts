@@ -29,6 +29,7 @@ export class SeekproposalComponent implements OnInit {
   loadingContractor:any=[];
   unloadingContractor:any[];
  //adding the seekProposal details;
+ checkingProposalId:any;
  ubtidInput:any;
  categoryidInput:any;
  goodstypeInput:any;
@@ -149,6 +150,8 @@ export class SeekproposalComponent implements OnInit {
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
        this.seekProposalsDetails=data[0];
+       this.checkingProposalId=data[0].ProposalId;
+       console.log(this.checkingProposalId);
      //console.log(this.seekProposalsDetails)
      this.ubtidInput=this.seekProposalsDetails.UbtId;
      this.categoryidInput=this.seekProposalsDetails.CategoryId;

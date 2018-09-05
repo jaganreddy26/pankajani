@@ -132,10 +132,14 @@
                     <span style="font-weight:400">Quantity : </span>
                     <span>{{seekProposalsDetails.Quantity}}</span>
                 </div>
+                <div class="padding-left">
+                    <span style="font-weight:400">ProposalId : </span>
+                    <span>{{checkingProposalId}}</span>
+                </div>
             </div>
 
         </div>
-        <table class="table table-striped table-bordered table-list">
+        <table class="table table-striped table-bordered table-list" *ngIf='checkingProposalId==null'>
             <thead>
                 <tr style="color:#6f6f6f;background-color:#f0f0f0">
                     <th>S.No</th>
