@@ -139,10 +139,12 @@ class="card"
       </tbody>
   </table>
 </div>
-<div align="right" class="padding-right">
-    <button type="file" mat-raised-button (click)="openInput()">
-        Select File to Upload
-    </button>
+<div align="left" class="padding-right" *ngIf='udtData.length !=0'>
+    <input type="file" (change)="changeListener($event)"/>
+
+</div>
+<div align="right" *ngIf='udtData.length !=0'>
+    <button mat-raised-button (click)="send()"  color="primary">Save</button>
 </div>
 </div>
 </div>
