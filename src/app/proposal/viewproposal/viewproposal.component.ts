@@ -87,12 +87,19 @@ export class ViewproposalComponent implements OnInit {
       let all:any=[]
       let parent:any=[]
       let children:any=[];
-      console.log(this.ids)
+      let childrenchild:any=[];
+      // console.log(this.ids)
       this.ids.forEach(element => {
+ 
         element.TCategory.forEach(element1 => {
-        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+        element1.TProposal.forEach(element1=>{
+          childrenchild.push({'Id':element1.Id,'Name':element1.Name})
+
+          children.push({'Id':element1.Id,'Name':element1.Name,'childrenchild':element1.TProposal})
         })
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
+      })
+
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
       });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
