@@ -91,21 +91,8 @@ export class ViewproposalComponent implements OnInit {
       let childrenchild:any=[];
       // console.log(this.ids)
       this.ids.forEach(element => {
-<<<<<<< HEAD
       element.TCategory.forEach(element => {
         parent.push(element)
-=======
- 
-        element.TCategory.forEach(element1 => {
-        element1.TProposal.forEach(element1=>{
-          childrenchild.push({'Id':element1.Id,'Name':element1.Name})
-
-          children.push({'Id':element1.Id,'Name':element1.Name,'childrenchild':element1.TProposal})
-        })
-      })
-
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
->>>>>>> 33f61854e439ab6b130f64d7788e5da0e4c08679
       });
       });
     console.log(this.nodes)
