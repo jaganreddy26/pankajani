@@ -91,28 +91,6 @@ export class ViewubtComponent implements OnInit {
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-      // parent.forEach(element => {
-      //   element.children.forEach(element1 => {
-      //   this.nodes.push(element1)
-      //   });
-      // });
-    // this.nodes.forEach(element => {
-    //   element.children.forEach(element1 => {
-    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
-    //   });
-    // });
-    // console.log(children)
-      // this.nodes.prototy
-      // console.log(this.nodes)
-
-    // })
-     //step 3 for Tree struture
-     this.ids.forEach(element => {
-      parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
-    });
-  
-  //step 4 for Tree struture here the tree struture we form in the HTML
-    this.nodes = parent;
 
   })
 
