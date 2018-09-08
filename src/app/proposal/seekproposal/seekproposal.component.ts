@@ -106,8 +106,10 @@ export class SeekproposalComponent implements OnInit {
       let children:any=[];
        //step 3 for Tree struture
        this.ids.forEach(element => {
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
-      });
+        element.TCategory.forEach(element => {
+          parent.push(element)
+        });
+        });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;

@@ -66,19 +66,17 @@ export class ConformproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
-
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
         //step 3 for Tree struture
-        let all:any=[]
         this.ids.forEach(element => {
-          element.TCategory.forEach(element2 => {
-            let children:any=[];
-            children.push({'id':element2.CategoryId,'name':element2.CategoryName,'GoodsTypes':element2.GoodsTypes,'UbtId':element2.UbtId})
-            all.push({'id':element.UbtId,'name':element.UbtId,'children':children})
-          });        
-        
-        });
+          element.TCategory.forEach(element => {
+            parent.push(element)
+          });
+          });
       //step 4 for Tree struture here the tree struture we form in the HTML
-        this.nodes = all;
+        this.nodes = parent;
 
     })
 

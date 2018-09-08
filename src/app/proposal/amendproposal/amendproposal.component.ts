@@ -107,11 +107,10 @@ editProposalDetails:any= {};
       let children:any=[];
       console.log(this.ids)
       this.ids.forEach(element => {
-        element.TCategory.forEach(element1 => {
-        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
-        })
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
-      });
+        element.TCategory.forEach(element => {
+          parent.push(element)
+        });
+        });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;

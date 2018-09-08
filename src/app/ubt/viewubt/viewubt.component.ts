@@ -83,14 +83,19 @@ export class ViewubtComponent implements OnInit {
       let children:any=[];
       console.log(this.ids)
       this.ids.forEach(element => {
-        element.TCategory.forEach(element1 => {
-        children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
-        })
-        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':children})
+        // element.TCategory.forEach(element1 => {
+        // children.push({'Id':element1.Id,'Name':element1.Name,'GoodsType':element1.GoodsTypes,'UbtId':element1.UbtId,'children':element1.TProposal})
+        // })
+        parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
       });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
+      // parent.forEach(element => {
+      //   element.children.forEach(element1 => {
+      //   this.nodes.push(element1)
+      //   });
+      // });
     // this.nodes.forEach(element => {
     //   element.children.forEach(element1 => {
     //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
@@ -98,7 +103,7 @@ export class ViewubtComponent implements OnInit {
     // });
     // console.log(children)
       // this.nodes.prototy
-      console.log(this.nodes)
+      // console.log(this.nodes)
 
     })
 
