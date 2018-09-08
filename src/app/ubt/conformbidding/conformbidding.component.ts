@@ -35,7 +35,10 @@ export class ConformbiddingComponent implements OnInit {
   MaxMargin:any;
   status:any=[];
   StatusName:any;
- 
+////==========base64formatedata Varibles=========////
+file:any;
+filedata:any;
+base64data:any
   constructor(private ubtService: UbtService) {
     this.getCustomer();
   }
@@ -47,6 +50,21 @@ export class ConformbiddingComponent implements OnInit {
     this.ubtService.GetStatus(object).subscribe((data:any )=>{
       this.status = data;
     })
+  }
+  changeListener($event) : void {
+    this.readThis($event.target);
+    console.log($event);
+  }
+  readThis(inputValue: any): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.filedata = myReader.result;
+     this.base64data=this.filedata
+     // console.log(this.base64data);
+    }
+    myReader.readAsDataURL(file);
   }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {
@@ -116,8 +134,8 @@ export class ConformbiddingComponent implements OnInit {
     this.ToDate = todate;
   }
 
-  onchangeGoodsType($event) {
-
+  send(){
+    console.log(this.base64data);
   }
 //   getGoodsTypeList(id) {
 //     this.ubtService.getGoodsType(id).subscribe((data: any) => {

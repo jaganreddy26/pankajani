@@ -43,6 +43,8 @@ transporterId:any
 loadContId:any;
 unloadContId:any
 editProposalDetails:any= {};
+//delete the indvidule proposal Objct
+deletInputObj:any={};
    //step 2 for Tree struture
   nodes:any=[];
   options: ITreeOptions = {
@@ -160,6 +162,7 @@ let obj ={
 }
 this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
   this.ProposalsDetailsByID=data;
+  //below recods are for displaying as satatic data
   this.UbtId=data[0].UbtId,
   this.CategoryId=data[0].CategoryId,
   this.CategoryName=data[0].CategoryName
@@ -208,6 +211,7 @@ this.loadContId=items.LoadingContId;
 
  this.getDetailsForEdit();
 }
+
 getDetailsForEdit(){
   let object={
     "ProposalId":this.ProposalIdStatic,
@@ -266,10 +270,31 @@ deleteProposal(items,template2){
 
   }
   console.log(obj)
-
+this.deletInputObj=obj;
 }
 confirm(){
-    
+ // console.log(this.deletInputObj);
+    this.proposalService.deleteIndividualProposal(this.deletInputObj).subscribe((data:any)=>{
+      console.log(data);
+    })
+   
+    this.deletInputObj="";
+   // console.log(this.deletInputObj);
+   let obj ={
+    'ProposalId': this.ProposalIdStatic,
+  }
+  this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+    this.ProposalsDetailsByID=data;
+    //below recods are for displaying as satatic data
+    // this.UbtId=data[0].UbtId,
+    // this.CategoryId=data[0].CategoryId,
+    // this.CategoryName=data[0].CategoryName
+    })
+
+    this.modalRef.hide();
+}
+decline(){
+  this.modalRef.hide();
 }
 
   onchange($event) {
@@ -301,4 +326,5 @@ confirm(){
     this.selectedUnLoadingContractor=$event;
     //console.log(this.unLoadingContractor)
   }
+  
 }

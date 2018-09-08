@@ -21,6 +21,9 @@ export class SeekproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
+  //IndividualUbtDetails array;
+  udtData:any = [];
+  ubtDetails:boolean = false;
 //step 2 for Tree struture
    nodes:any=[];
 //details about seek from tree structure
@@ -29,6 +32,8 @@ export class SeekproposalComponent implements OnInit {
   loadingContractor:any=[];
   unloadingContractor:any[];
  //adding the seekProposal details;
+ hideSeekproposal:boolean=false
+ checkingProposalId:any;
  ubtidInput:any;
  categoryidInput:any;
  goodstypeInput:any;
@@ -75,7 +80,7 @@ export class SeekproposalComponent implements OnInit {
 
   
   search() {
-
+    this.ubtDetails = false;
     this.businessId = this.proposalService.BusinessId;
     this.customerId = this.Id;
     //console.log(this.customerId);
@@ -136,6 +141,17 @@ export class SeekproposalComponent implements OnInit {
   
   //step 5 when we click any perticular item in tree events
   onActivate($event){   
+    // when click on  ubtId this method will come
+    let obj1 ={
+      'UbtId': $event.node.data.Id,
+    }
+   // console.log(obj1);
+    this.proposalService.getIndividualUbtDetails(obj1).subscribe((data:any)=>{
+    //  console.log(data);
+     this.udtData=data; 
+     this.ubtDetails = true;
+     this.hideSeekproposal=false;
+    })
     if($event.node.data.children){
 
     }
@@ -150,7 +166,13 @@ export class SeekproposalComponent implements OnInit {
    //  console.log(obj);
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
+      this.udtData="";
        this.seekProposalsDetails=data[0];
+     
+       this.hideSeekproposal=true;
+       this.ubtDetails = false;
+       this.checkingProposalId=data[0].ProposalId;
+       console.log(this.checkingProposalId);
      //console.log(this.seekProposalsDetails)
      this.ubtidInput=this.seekProposalsDetails.UbtId;
      this.categoryidInput=this.seekProposalsDetails.CategoryId;
