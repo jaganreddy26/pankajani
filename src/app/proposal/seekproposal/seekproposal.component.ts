@@ -101,7 +101,8 @@ export class SeekproposalComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
+      
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
@@ -142,28 +143,28 @@ export class SeekproposalComponent implements OnInit {
   //step 5 when we click any perticular item in tree events
   onActivate($event){   
     // when click on  ubtId this method will come
-    let obj1 ={
-      'UbtId': $event.node.data.Id,
-    }
-   // console.log(obj1);
-    this.proposalService.getIndividualUbtDetails(obj1).subscribe((data:any)=>{
-    //  console.log(data);
-     this.udtData=data; 
-     this.ubtDetails = true;
-     this.hideSeekproposal=false;
-    })
-    if($event.node.data.children){
+//     let obj1 ={
+//       'UbtId': $event.node.data.Id,
+//     }
+//  console.log(obj1);
+//     this.proposalService.getIndividualUbtDetails(obj1).subscribe((data:any)=>{
+//   console.log(data);
+//      this.udtData=data; 
+//      this.ubtDetails = true;
+//      this.hideSeekproposal=false;
+//     })
+    // if($event.node.data.children){
 
-    }
-    else{
+    // }
+  //  else{
       let obj = {
         'CategoryId': $event.node.data.Id,
         'GoodsType':$event.node.data.GoodsTypes,
         'Status': 'Open',
         UbtId:$event.node.data.UbtId,
 
-      }
-   //  console.log(obj);
+     }
+  console.log(obj);
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
       this.udtData="";
@@ -206,7 +207,7 @@ export class SeekproposalComponent implements OnInit {
      this.unloadingContractor=data;
     });
 
-    }
+   // }
   }
 
   onchangeTransporter($event){

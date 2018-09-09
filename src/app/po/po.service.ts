@@ -23,4 +23,8 @@ export class PoService {
     this.url = this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data)
   }
+  GetStatus(data){
+    this.url =this.host+'/api/UbtApi/GetStatus';
+    return this.http.post(this.url,data);
+  }
 }

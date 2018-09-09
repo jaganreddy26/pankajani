@@ -16,11 +16,19 @@ export class SeekpoComponent implements OnInit {
   toDateChanged: boolean = false;
   ids: any = [];
   value:any;
+  StatusName:any;
+  status:any=[];
   constructor(private poService:PoService) { 
     this.getCustomer();
   }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.poService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.poService.getCustomerName().subscribe((data: any) => {
@@ -52,7 +60,7 @@ export class SeekpoComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
     }
     this.poService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
