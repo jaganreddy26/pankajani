@@ -128,174 +128,13 @@ deletInputObj:any={};
     })
 
   }
-  onActivate($event){
-  
-    // objectTypeTransport type Input Object
-    let objectTypeTransport = {
-      ObjectType: 'Transport' 
-    };
-  // objectTypeLoading type Input Object
-    let objectTypeLoading = {
-      ObjectType: 'Loading' 
-    };
-  // objectTypeUnloading type Input Object
-   let objectTypeUnloading = {
-      ObjectType: 'Unloading' 
-    };
-
-     this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
-       this.transporter=data;
-     });
-
-     this.proposalService.getVendor(objectTypeLoading).subscribe((data:any)=>{
-      this.loadingContractor=data;
-    });
-
-    this.proposalService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
-     this.unloadingContractor=data;
-    });
-  
-this.ProposalIdStatic=$event.node.data.Id;
-//here Getting the created seek proposal Details based On ProposalId
-let obj ={
-  'ProposalId': $event.node.data.Id,
-}
-this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
-  this.ProposalsDetailsByID=data;
-  //below recods are for displaying as satatic data
-  this.UbtId=data[0].UbtId,
-  this.CategoryId=data[0].CategoryId,
-  this.CategoryName=data[0].CategoryName
-  })
-}
-add(){
-  let object={
-    "ProposalId":this.ProposalIdStatic,
-    'TransporterId':this.selectedTransporter,
-    'TranAmount':this.transporterRate,
-    'LoadContId':this.selectedLoadingContractor,
-    'LoadContAmount':this.loadingRate,
-    'UnloadContId':this.selectedUnLoadingContractor,
-    'UnloadContAmount':this.unloadingRate,
-  }
-  console.log(object);
-  this.addedNewProposalsToProposalId.push(object);
-  this.selectedTransporter="";
- this.transporterRate="";
- this.selectedLoadingContractor="";
- this.loadingRate="";
- this.selectedUnLoadingContractor="";
- this.unloadingRate="";
-}
-delete(items){
-  let index = this.addedNewProposalsToProposalId.indexOf(items);
-  this.addedNewProposalsToProposalId.splice(index,1);
-}
-saveNewProposal(){
-this.proposalService.addProposalByProposalId(this.addedNewProposalsToProposalId).subscribe((data:any)=>{
-  console.log(data);
-  if(data=='Success'){
-    this.alertService.alert(AlertType.Success,"New Proposal is Added for this ProposalId :"+" "+this.ProposalIdStatic )
-    }else{
-      this.alertService.alert(AlertType.Error,"Something went wrong");
-    }
-})
-this.addedNewProposalsToProposalId=[];
-}
-openModal(items,template1: TemplateRef<any>){
-
-  this.transporterId=items.TransporterId;
-this.loadContId=items.LoadingContId;
- this.unloadContId=items.UnloadingContId;
- this.modalRef = this.modalService.show(template1);
-
- this.getDetailsForEdit();
-}
-
-getDetailsForEdit(){
-  let object={
-    "ProposalId":this.ProposalIdStatic,
-    "TransporterId":this.transporterId,
-    "LoadContId":this.loadContId,
-    "UnloadContId":this.unloadContId,
-    
-   }
 
 
-   this.proposalService.getProposalDetailsForEdit(object).subscribe((data:any)=>{
-     console.log(data);
-this.editProposalDetails=data[0];
-   })
-}
-
-updateRecord(){
-  let obj={
-    "ProposalId": this.ProposalIdStatic,
-"TransporterId":this.editProposalDetails.TransporterId,
-"TranAmount": this.editProposalDetails.TranAmount,
-"LoadContId": this.editProposalDetails.LoadContId,
-"LoadContAmount": this.editProposalDetails.LoadContAmount,
-"UnloadContId": this.editProposalDetails.UnloadContId,
-"UnloadContAmount": this.editProposalDetails.UnloadContAmount
-  }
-  console.log(obj);
-  this.proposalService.updateIndividualProposalDetails(obj).subscribe((data:any)=>{
-    console.log(data);
-    if(data=='Success'){
-      this.alertService.alert(AlertType.Success,"Successfuly Updated the Record Details ")
-      }else{
-        this.alertService.alert(AlertType.Error,"Failed the Updated Record Details ");
-      }
-  })
-  // this.editProposalDetails="";
-  this.modalRef.hide();
-  let objId ={
-    'ProposalId': this.ProposalIdStatic
-  }
-  this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
-    this.ProposalsDetailsByID=data;
-  console.log('method called');
-    })
-  
-}
-deleteProposal(items,template2){
-  this.modalRef = this.modalService.show(template2);
-  let obj={
-  
-"ProposalId":this.ProposalIdStatic,
-"TransporterId":items.TransporterId,
-"LoadContId":items.LoadingContId,
-"UnloadContId":items.UnloadingContId,
 
 
-  }
-  console.log(obj)
-this.deletInputObj=obj;
-}
-confirm(){
- // console.log(this.deletInputObj);
-    this.proposalService.deleteIndividualProposal(this.deletInputObj).subscribe((data:any)=>{
-      console.log(data);
-    })
-   
-    this.deletInputObj="";
-   // console.log(this.deletInputObj);
-   let obj ={
-    'ProposalId': this.ProposalIdStatic,
-  }
-  this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
-    this.ProposalsDetailsByID=data;
-    //below recods are for displaying as satatic data
-    // this.UbtId=data[0].UbtId,
-    // this.CategoryId=data[0].CategoryId,
-    // this.CategoryName=data[0].CategoryName
-    })
 
-    this.modalRef.hide();
-}
-decline(){
-  this.modalRef.hide();
-}
+
+
 
   onchange($event) {
     this.Id = $event
@@ -314,17 +153,5 @@ decline(){
     this.ToDate = todate;
   }
 
-  onchangeTransporter($event){
-    this.selectedTransporter=$event;
-   // console.log(this.selectedTransporter)
-  }
-  onchangeLoadingContractor($event){
-    this.selectedLoadingContractor=$event;
-    //console.log(this.selectedLoadingContractor)
-  }
-  onchangeUnLoadingContractor($event){
-    this.selectedUnLoadingContractor=$event;
-    //console.log(this.unLoadingContractor)
-  }
   
 }

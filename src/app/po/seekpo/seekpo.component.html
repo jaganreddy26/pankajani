@@ -167,14 +167,14 @@ class="card"
         <td> <mat-form-field>
             <input placeholder="SuppliedQty"
                 matInput
-                [(ngModel)]="seekPOdetailsData.SuppliedQty"
+                [(ngModel)]="items.SuppliedQty"
                 (ngModelChange)="onchangeSuppliedQty($event)"
             >
         </mat-form-field></td>
         <td> <mat-form-field>
             <input placeholder="SuppliedPrice"
                 matInput
-                [(ngModel)]="seekPOdetailsData.SuppliedPrice"
+                [(ngModel)]="items.SuppliedPrice"
                 (ngModelChange)="onchangeSuppliedPrice($event)"
             >
         </mat-form-field></td>
@@ -182,7 +182,7 @@ class="card"
       </tr>
       </tbody>
   </table>
-  <div align="right" class="padding-right">
+  <div align="left" class="padding-right">
   <button mat-raised-button fxFlex="16" (click)="save()" color="primary">SAVE</button>
 
 </div>

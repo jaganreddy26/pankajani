@@ -147,24 +147,15 @@ onchangeSuppliedPrice($event){
 }
   
 save(){
-  let obj={
-    'ProposalId':this.ubtData.ProposalId,
-    'TransporterId':this.seekPOdetailsData.TransporterId,
-    'TransporterAmount':this.seekPOdetailsData.TransporterAmount,
-    'LoadingContId':this.seekPOdetailsData.LoadingContId,
-    'LoadingContAmount':this.seekPOdetailsData.LoadingContAmount,
-    'UnloadingContId':this.seekPOdetailsData.UnloadingContId,
-    'UnloadingContAmount':this.seekPOdetailsData.UnloadingContAmount,
-    'SuppliedQty':this.suppliedQtyValue,
-    'SuppliedPrice':this.suppliedPriceValue
-    
-  }
- // console.log(obj);
-  this.saveSeekPOData.push(obj);
-  this.poService.saveSeekPOSelection(this.saveSeekPOData).subscribe((data:any)=>{
+
+
+  // this.seekPOdetails="";
+  console.log(this.seekPOdetails);
+  this.poService.saveSeekPOSelection(this.seekPOdetails).subscribe((data:any)=>{
     console.log(data);
+    
   })
-  this.saveSeekPOData="";
+ 
 }
 
 
