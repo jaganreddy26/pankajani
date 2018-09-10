@@ -26,48 +26,12 @@ export class PoService {
     this.url = this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data)
   }
-  getSeekProposals(data){
-    this.url=this.host+'/api/UbtApi/GetSeekProposals';
+  getSeekPOSelection(data){
+    this.url=this.host+'/api/UbtApi/GetSeekPOSelection';
     return this.http.post(this.url,data)
   }
-  getIndividualUbtDetails(data){
-    this.url=this.host+'/api/UbtApi/GetIndividualUBT';
-    return this.http.post(this.url,data)
-  }
-  getVendor(data){
-    this.url =this.host+'/api/UbtApi/GetVendor';
+  saveSeekPOSelection(data){
+    this.url=this.host+'/api/UbtApi/PostCreatePurchaseOrder';
     return this.http.post(this.url,data);
   }
-  addProposal(data){
-    this.url=this.host+'/api/UbtApi/AddInfoToAnOpenCategory';
-    return this.http.post(this.url,data);
-  }
-  getProposalsDetailsByProposalId(data){
-    this.url=this.host+'/api/UbtApi/GetProposalsDetails';
-    return this.http.post(this.url,data);
-  }
-  addProposalByProposalId(data){
-    this.url=this.host+'/api/UbtApi/AmendProposal';
-    return this.http.post(this.url,data);
-  }
-  getProposalDetailsForEdit(data){
-  this.url=this.host+'/api/UbtApi/GetIndividualProposalTransporter';
-  return this.http.post(this.url,data);
-  }
-  updateIndividualProposalDetails(data){
-    this.url=this.host+'/api/UbtApi/EditIndividualProposalTransporter';
-    return this.http.post(this.url,data);
-  }
-  deleteIndividualProposal(data){
-    this.url=this.host+'/api/UbtAPI/DeleteIndividualProposalTransporter';
-    return this.http.post(this.url,data);
-  }
-  discaredProposal(data){
-    this.url=this.host+'/api/UbtApi/ChangeProposalStatus';
-    return this.http.post(this.url,data);
-  }
-  approveAndSendProposal(data){
-    this.url=this.host+'/api/UbtApi/ChangeProposalStatus';
-    return this.http.post(this.url,data);
-  } 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import {PoService} from '../po.service';
 @Component({
   selector: 'app-seekpo',
@@ -18,8 +19,26 @@ export class SeekpoComponent implements OnInit {
   value:any;
   StatusName:any;
   status:any=[];
+  //step 2 for Tree struture
+  nodes:any=[];
+   //STEP2
+ options: ITreeOptions = {
+  displayField: 'Name',
+  isExpandedField: 'expanded',
+  idField: 'Id',
+  hasChildrenField: 'nodes',
+  
+}
+// GetSeekPOSelection
+seekPOdetails:any=[];
+ubtData:any={};
+seekPOdetailsData:any={};
+suppliedQtyValue:any;
+suppliedPriceValue:any;
+saveSeekPOData:any=[];
   constructor(private poService:PoService) { 
     this.getCustomer();
+   
   }
 
   ngOnInit() {
@@ -64,6 +83,22 @@ export class SeekpoComponent implements OnInit {
     }
     this.poService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      console.log(this.ids)
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
+        element.TCategory.forEach(element => {
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+         })
+        });
+        });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
 
     })
 
@@ -84,5 +119,55 @@ export class SeekpoComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
+
+  onActivate($event){
+  // console.log($event.node.data.Id);
+  let obj={
+    "ProposalId":$event.node.data.Id
+  }
+  this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
+    //console.log(data);
+    this.seekPOdetails=data.proposaldata;
+    console.log(this.seekPOdetails);
+    this.seekPOdetailsData=data.proposaldata[0];
+//     console.log(this.seekPOdetailsData);
+    this.ubtData=data.ubt;
+
+
+// this.SuppliedQty1=this.seekPOdetailsData.SuppliedQty;
+// console.log(this.SuppliedQty1)
+
+  })
+  }
+  onchangeSuppliedQty($event){
+ this.suppliedQtyValue=this.seekPOdetailsData.SuppliedQty;
+}
+onchangeSuppliedPrice($event){
+  this.suppliedPriceValue=this.seekPOdetailsData.SuppliedPrice;
+}
+  
+save(){
+  let obj={
+    'ProposalId':this.ubtData.ProposalId,
+    'TransporterId':this.seekPOdetailsData.TransporterId,
+    'TransporterAmount':this.seekPOdetailsData.TransporterAmount,
+    'LoadingContId':this.seekPOdetailsData.LoadingContId,
+    'LoadingContAmount':this.seekPOdetailsData.LoadingContAmount,
+    'UnloadingContId':this.seekPOdetailsData.UnloadingContId,
+    'UnloadingContAmount':this.seekPOdetailsData.UnloadingContAmount,
+    'SuppliedQty':this.suppliedQtyValue,
+    'SuppliedPrice':this.suppliedPriceValue
+    
+  }
+ // console.log(obj);
+  this.saveSeekPOData.push(obj);
+  this.poService.saveSeekPOSelection(this.saveSeekPOData).subscribe((data:any)=>{
+    console.log(data);
+  })
+  this.saveSeekPOData="";
+}
+
+
+
 
 }
