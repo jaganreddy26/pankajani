@@ -40,6 +40,19 @@ fxLayoutAlign="space-evenly center"
   (ngModelChange)="toDateChange()"
   [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
 >
+<mat-form-field fxFlex="10">
+    <mat-select
+        placeholder="Status"
+        [(ngModel)]="StatusName"
+    >
+        <mat-option
+            *ngFor="let item of status"
+            value="{{item.StatusName}}"
+        >
+            {{item.StatusName}}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
 <button
   mat-raised-button
   fxFlex="16"
@@ -67,16 +80,9 @@ class="card"
 ></tree-root>
 </div>
 
-<!-- <button
-mat-raised-button
-fxFlex="16"
-(click)="getDetailsbyPoId()"
-color="primary"
->
-Search
-</button> -->
 
-<!-- <div
+
+<div
   fxFlex="80"
   class="container"
    *ngIf='viewPoDetails.length !=0'
@@ -176,5 +182,5 @@ Search
       </tbody>
   </table>
 </div>
-</div> -->
+</div>
 </div>

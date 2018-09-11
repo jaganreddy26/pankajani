@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import {PoService} from '../po.service';
 @Component({
   selector: 'app-viewpo',
@@ -16,14 +17,33 @@ export class ViewpoComponent implements OnInit {
   toDateChanged: boolean = false;
   ids: any = [];
   value:any;
+  StatusName:any;
+  status:any=[];
   //ViewPo details
   viewPoDetails:any=[];
   ubtdetailsByPoId:any={};
+
+    //step 2 for Tree struture
+    nodes:any=[];
+    //STEP2
+  options: ITreeOptions = {
+   displayField: 'Name',
+   isExpandedField: 'expanded',
+   idField: 'Id',
+   hasChildrenField: 'nodes',
+   
+ }
   constructor(private poService:PoService) {
     this.getCustomer();
    }
 
   ngOnInit() {
+    let object = {
+      ObjectType: 'UBT' 
+    };
+    this.poService.GetStatus(object).subscribe((data:any )=>{
+      this.status = data;
+    })
   }
   getCustomer() {
     this.poService.getCustomerName().subscribe((data: any) => {
@@ -55,20 +75,49 @@ export class ViewpoComponent implements OnInit {
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
     }
     this.poService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      console.log(this.ids)
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
+        element.TCategory.forEach(element => {
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+           element.children.forEach(element=>{
+           // parent.push(element)
+           })
+         })
+        });
+        });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
+console.log(this.nodes);
 
     })
 
   }
   onActivate($event){
+    //console.log($event.node.data.Id);
+      let object={
+      "POId":$event.node.data.Id
+    }
+    this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
    
+      this.viewPoDetails=data.POData;
+      this.ubtdetailsByPoId=data.ubt;
+     
+    })
   }
   // getDetailsbyPoId(){
   //   let object={
-  //     "POId":6
+  //     "POId":$event.node.data.Id
   //   }
   //   this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
    
