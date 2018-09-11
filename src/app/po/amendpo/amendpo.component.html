@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>Amend Po</span>
+    <span>Amend Po</span>
 </mat-toolbar>
 <div
     class="padding"
@@ -12,7 +12,8 @@
             placeholder="Customer"
             [(ngModel)]="value"
             (ngModelChange)="onchange($event)"
-         readonly >
+            readonly
+        >
             <mat-option
                 *ngFor="let item of customer"
                 value="{{item.CustomerId}}"
@@ -47,20 +48,20 @@
         >
     </div>
     <!-- <div fxFlex="20"> -->
-            
+
     <mat-form-field fxFlex="10">
-            <mat-select
-                placeholder="Status"
-                [(ngModel)]="StatusName"
+        <mat-select
+            placeholder="Status"
+            [(ngModel)]="StatusName"
+        >
+            <mat-option
+                *ngFor="let item of status"
+                value="{{item.StatusName}}"
             >
-                <mat-option
-                    *ngFor="let item of status"
-                    value="{{item.StatusName}}"
-                >
-                    {{item.StatusName}}
-                </mat-option>
-            </mat-select>
-          </mat-form-field>
+                {{item.StatusName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <!-- </div> -->
     <button
         mat-raised-button

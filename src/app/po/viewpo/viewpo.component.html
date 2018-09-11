@@ -1,11 +1,12 @@
 <mat-toolbar>
-  <span>ViewPo</span>
+    <span>ViewPo</span>
 </mat-toolbar>
 <div
-fxLayout="row wrap"
-fxLayoutAlign="space-evenly center"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-evenly center"
 >
 
+<<<<<<< HEAD
 <mat-form-field fxFlex="20">
   <mat-select
       placeholder="Customer"
@@ -61,6 +62,50 @@ fxLayoutAlign="space-evenly center"
 >
   Search
 </button>
+=======
+    <mat-form-field fxFlex="20">
+        <mat-select
+            placeholder="Customer"
+            [(ngModel)]="value"
+            (ngModelChange)="onchange($event)"
+        >
+            <mat-option
+                *ngFor="let item of customer"
+                value="{{item.CustomerId}}"
+            >
+                {{item.CustomerName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <input
+        fxFlex="20"
+        class="form-control"
+        placeholder="DateOfJoin"
+        bsDatepicker
+        #dp="bsDatepicker"
+        [(ngModel)]="FromDate"
+        (ngModelChange)="fromDateChange()"
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+    >
+    <input
+        fxFlex="20"
+        class="form-control"
+        placeholder="DateOfJoin"
+        bsDatepicker
+        #dp="bsDatepicker"
+        [(ngModel)]="ToDate"
+        (ngModelChange)="toDateChange()"
+        [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+    >
+    <button
+        mat-raised-button
+        fxFlex="16"
+        (click)="search()"
+        color="primary"
+    >
+        Search
+    </button>
+>>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
 </div>
 <div
     fxLayout="row"
@@ -68,21 +113,34 @@ fxLayoutAlign="space-evenly center"
     class="padding"
 >
 
+    <div
+        fxFlex="20"
+        class="card"
+        *ngIf="nodes.length != 0"
+    >
+        <tree-root
+            [nodes]="nodes"
+            [options]="options"
+            (activate)="onActivate($event)"
+        ></tree-root>
+    </div>
+
+<<<<<<< HEAD
+
+
 <div
-fxFlex="20"
-class="card"
-*ngIf="nodes.length != 0"
+=======
+    <!-- <button
+mat-raised-button
+fxFlex="16"
+(click)="getDetailsbyPoId()"
+color="primary"
 >
-<tree-root
-    [nodes]="nodes"
-    [options]="options"
-    (activate)="onActivate($event)"
-></tree-root>
-</div>
+Search
+</button> -->
 
-
-
-<div
+    <!-- <div
+>>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
   fxFlex="80"
   class="container"
    *ngIf='viewPoDetails.length !=0'
@@ -182,5 +240,10 @@ class="card"
       </tbody>
   </table>
 </div>
+<<<<<<< HEAD
 </div>
 </div>
+=======
+</div> -->
+</div>
+>>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
