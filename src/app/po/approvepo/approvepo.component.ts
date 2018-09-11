@@ -99,13 +99,13 @@ export class ApprovepoComponent implements OnInit {
     let obj ={
       'ProposalId': $event.node.data.Id,
     }
-    this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
-     this.ProposalsDetailsByID=data;
-    this.UbtId=data[0].UbtId;
-    this.CustomerName=data[0].CustomerName;
-    this.GoodsType=data[0].GoodsType;
-    this.ProposalId=data[0].ProposalId;
-      })
+    // this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+    //  this.ProposalsDetailsByID=data;
+    // this.UbtId=data[0].UbtId;
+    // this.CustomerName=data[0].CustomerName;
+    // this.GoodsType=data[0].GoodsType;
+    // this.ProposalId=data[0].ProposalId;
+    //   })
       }
       discard(){
         let obj={
@@ -113,9 +113,9 @@ export class ApprovepoComponent implements OnInit {
           "Id":this.ProposalId,
           "Status":'Discarded'
         }
-        this.proposalService.discaredProposal(obj).subscribe((data:any)=>{
-          console.log(data);
-        })
+        // this.proposalService.discaredProposal(obj).subscribe((data:any)=>{
+        //   console.log(data);
+        // })
       }
       approveAndSend(){
         let obj={
@@ -123,9 +123,9 @@ export class ApprovepoComponent implements OnInit {
           "Id":this.ProposalId,
           "Status":'Sent'
         }
-        this.proposalService.approveAndSendProposal(obj).subscribe((data:any)=>{
-          console.log(data);
-        })
+        // this.proposalService.approveAndSendProposal(obj).subscribe((data:any)=>{
+        //   console.log(data);
+        // })
       }
   onchange($event) {
     this.Id = $event

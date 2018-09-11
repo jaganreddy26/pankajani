@@ -16,6 +16,9 @@ export class ViewpoComponent implements OnInit {
   toDateChanged: boolean = false;
   ids: any = [];
   value:any;
+  //ViewPo details
+  viewPoDetails:any=[];
+  ubtdetailsByPoId:any={};
   constructor(private poService:PoService) {
     this.getCustomer();
    }
@@ -60,6 +63,21 @@ export class ViewpoComponent implements OnInit {
     })
 
   }
+  onActivate($event){
+   
+  }
+  // getDetailsbyPoId(){
+  //   let object={
+  //     "POId":6
+  //   }
+  //   this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
+   
+  //     this.viewPoDetails=data.POData;
+  //     this.ubtdetailsByPoId=data.ubt;
+     
+  //   })
+
+  // }
   onchange($event) {
     this.Id = $event
   }

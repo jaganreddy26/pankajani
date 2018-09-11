@@ -99,7 +99,7 @@ saveSeekPOData:any=[];
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-
+console.log(this.nodes);
     })
 
   }

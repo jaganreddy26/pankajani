@@ -34,4 +34,9 @@ export class PoService {
     this.url=this.host+'/api/UbtApi/PostCreatePurchaseOrder';
     return this.http.post(this.url,data);
   }
+  // View individual PO
+  getPoDetailsByPoId(data){
+    this.url=this.host+'/api/UbtApi/GetPODetails';
+    return this.http.post(this.url,data);
+  }
 }
