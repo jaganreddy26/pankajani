@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PoService} from '../po.service';
+import { PoService } from '../po.service';
 @Component({
   selector: 'app-viewpo',
   templateUrl: './viewpo.component.html',
@@ -15,13 +15,13 @@ export class ViewpoComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
-  value:any;
+  value: any;
   //ViewPo details
-  viewPoDetails:any=[];
-  ubtdetailsByPoId:any={};
-  constructor(private poService:PoService) {
+  viewPoDetails: any = [];
+  ubtdetailsByPoId: any = {};
+  constructor(private poService: PoService) {
     this.getCustomer();
-   }
+  }
 
   ngOnInit() {
   }
@@ -32,7 +32,7 @@ export class ViewpoComponent implements OnInit {
     })
   }
 
-  
+
   search() {
 
     this.businessId = this.poService.BusinessId;
@@ -48,7 +48,7 @@ export class ViewpoComponent implements OnInit {
       this.ToDate.toLocaleDateString();
       var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
       this.ToDate = todate;
-      this.toDateChanged =true;
+      this.toDateChanged = true;
     }
     let object = {
       'BusinessId': this.businessId,
@@ -63,18 +63,18 @@ export class ViewpoComponent implements OnInit {
     })
 
   }
-  onActivate($event){
-   
+  onActivate($event) {
+
   }
   // getDetailsbyPoId(){
   //   let object={
   //     "POId":6
   //   }
   //   this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
-   
+
   //     this.viewPoDetails=data.POData;
   //     this.ubtdetailsByPoId=data.ubt;
-     
+
   //   })
 
   // }
