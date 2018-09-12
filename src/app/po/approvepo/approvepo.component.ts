@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PoService} from '../po.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-approvepo',
   templateUrl: './approvepo.component.html',
@@ -19,10 +21,13 @@ export class ApprovepoComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
-  ProposalsDetailsByID:any=[];
-  UbtId:any;
-  CustomerName:any;
-  GoodsType:any;
+ ///
+ currentPoId:any;
+ currentPOStatus:any;
+ approvePodetails:any=[];
+ ubtdetailsByPoId:any={};
+
+
   ProposalId:any;
     //step 2 for Tree struture
     nodes:any=[];
@@ -33,7 +38,7 @@ export class ApprovepoComponent implements OnInit {
       hasChildrenField: 'nodes',
       
     }
-  constructor(private proposalService: PoService) {
+  constructor(private poservice: PoService,private alertService :AlertService) {
     this.getCustomer();
    }
 
@@ -41,12 +46,13 @@ export class ApprovepoComponent implements OnInit {
     let object = {
       ObjectType: 'UBT' 
     };
-    this.proposalService.GetStatus(object).subscribe((data:any )=>{
+    this.poservice.GetStatus(object).subscribe((data:any )=>{
       this.status = data;
     })
+
   }
   getCustomer() {
-    this.proposalService.getCustomerName().subscribe((data: any) => {
+    this.poservice.getCustomerName().subscribe((data: any) => {
       /// console.log(data);
       this.customer = data;
     })
@@ -55,7 +61,7 @@ export class ApprovepoComponent implements OnInit {
   
   search() {
 
-    this.businessId = this.proposalService.BusinessId;
+    this.businessId = this.poservice.BusinessId;
     this.customerId = this.Id;
     //console.log(this.customerId);
     if (this.fromDateChanged == false) {
@@ -77,55 +83,64 @@ export class ApprovepoComponent implements OnInit {
       'ToDate': this.ToDate,
       'Status':this.StatusName
     }
-    this.proposalService.getUbtIds(object).subscribe((data: any) => {
+    this.poservice.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      console.log(this.ids)
       let all:any=[]
       let parent:any=[]
       let children:any=[];
-      console.log(this.ids)
-      this.ids.forEach(element => {
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
         element.TCategory.forEach(element => {
-          parent.push(element)
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+           element.children.forEach(element=>{
+           // parent.push(element)
+           })
+         })
         });
         });
+    
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-      console.log(this.nodes)
+console.log(this.nodes);
 
     })
 
   }
   onActivate($event){
     let obj ={
-      'ProposalId': $event.node.data.Id,
+      'POId': $event.node.data.Id,
     }
-    // this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
-    //  this.ProposalsDetailsByID=data;
-    // this.UbtId=data[0].UbtId;
-    // this.CustomerName=data[0].CustomerName;
-    // this.GoodsType=data[0].GoodsType;
-    // this.ProposalId=data[0].ProposalId;
-    //   })
+    console.log(obj);
+    this.poservice.getApprovePoDeatils(obj).subscribe((data:any)=>{
+     // console.log(data);
+     this.currentPoId=data.POData[0].POId;
+     this.currentPOStatus=data.POData[0].POStatus;
+     console.log(this.currentPOStatus);
+     console.log(this.currentPoId);
+      this.approvePodetails=data.POData;
+      this.ubtdetailsByPoId=data.ubt;
+    })
+    
       }
-      discard(){
-        let obj={
-          "ObjectType":'PROPOSAL',
-          "Id":this.ProposalId,
-          "Status":'Discarded'
-        }
-        // this.proposalService.discaredProposal(obj).subscribe((data:any)=>{
-        //   console.log(data);
-        // })
-      }
+    
       approveAndSend(){
-        let obj={
-          "ObjectType":'PROPOSAL',
-          "Id":this.ProposalId,
-          "Status":'Sent'
-        }
-        // this.proposalService.approveAndSendProposal(obj).subscribe((data:any)=>{
-        //   console.log(data);
-        // })
+        let obj={"ObjectType":'PO',
+        "Id":this.currentPoId,
+        "Status":'Approved'
+      }
+      //console.log(obj);
+        this.poservice.approveAndSendDetails(obj).subscribe((data:any)=>{
+          console.log(data);
+          if(data !== 'null'){
+
+            this.alertService.alert(AlertType.Success,"Approve Successfuly with POID as :"+ this.currentPoId)
+          }else{
+            this.alertService.alert(AlertType.Error,"Something went wrong");
+          }
+        })
       }
   onchange($event) {
     this.Id = $event
