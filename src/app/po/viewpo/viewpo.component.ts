@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
+
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import {PoService} from '../po.service';
-=======
-import { PoService } from '../po.service';
->>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
+
+
 @Component({
   selector: 'app-viewpo',
   templateUrl: './viewpo.component.html',
@@ -20,7 +19,7 @@ export class ViewpoComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
-<<<<<<< HEAD
+
   value:any;
   StatusName:any;
   status:any=[];
@@ -38,14 +37,11 @@ export class ViewpoComponent implements OnInit {
    hasChildrenField: 'nodes',
    
  }
-  constructor(private poService:PoService) {
-=======
-  value: any;
-  //ViewPo details
-  viewPoDetails: any = [];
-  ubtdetailsByPoId: any = {};
+ 
+
+
   constructor(private poService: PoService) {
->>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
+
     this.getCustomer();
   }
 
@@ -115,7 +111,7 @@ console.log(this.nodes);
     })
 
   }
-<<<<<<< HEAD
+
   onActivate($event){
     //console.log($event.node.data.Id);
       let object={
@@ -127,23 +123,8 @@ console.log(this.nodes);
       this.ubtdetailsByPoId=data.ubt;
      
     })
-=======
-  onActivate($event) {
-
->>>>>>> 13dbdfead8bf9422ee7fa8e4c078486b9ae42c4f
   }
-  // getDetailsbyPoId(){
-  //   let object={
-  //     "POId":$event.node.data.Id
-  //   }
-  //   this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
-
-  //     this.viewPoDetails=data.POData;
-  //     this.ubtdetailsByPoId=data.ubt;
-
-  //   })
-
-  // }
+ 
   onchange($event) {
     this.Id = $event
   }
