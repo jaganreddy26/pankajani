@@ -30,11 +30,6 @@ export class AmendpoComponent implements OnInit {
   checkingPoId:any;
   amendPodetails:any=[];
   ubtdetailsByPoId:any={};
-
-
-
-
-  
     //step 2 for Tree struture
     nodes:any=[];
     //STEP2
@@ -121,24 +116,35 @@ console.log(this.nodes);
   }
 
   onActivate($event){
-    //console.log($event.node.data.Id);
+  console.log($event.node.data.Id);
+
       let object={
       "POId":$event.node.data.Id
     }
     this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
-    //  console.log(data);
+      console.log(data);
+       console.log(data);
     this.checkingPoId=data.POData[0].POId;
-   // console.log(this.checkingPoId);
+   console.log(this.checkingPoId);
     this.amendPodetails=data.POData;
     this.ubtdetailsByPoId=data.ubt;
+    
     })
+    // this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
+    
+    // })
   }
 
   save(){
     //console.log(this.amendPodetails);
-  
-
-    this.poservice.updateandSaveamendPoDetails(this.amendPodetails).subscribe((data:any)=>{
+      let array:any=[];
+      this.amendPodetails.forEach(element => {
+        array.push({'ProposalId':this.ubtdetailsByPoId.ProposalId,'TransporterId':element.TransporterId,'TransporterAmount':element.TransporterAmount,'LoadingContId':element.LoadingContId,
+      'LoadingContAmount':element.LoadingContAmount,'UnloadingContId':element.UnloadingContId,'UnloadingContAmount':element.UnloadingContAmount,'SuppliedQty':element.SuppliedQty,
+    'SuppliedPrice':element.SuppliedPrice,'POId':element.POId})
+      });
+      console.log(array)
+    this.poservice.updateandSaveamendPoDetails(array).subscribe((data:any)=>{
       console.log(data);
     })
   }

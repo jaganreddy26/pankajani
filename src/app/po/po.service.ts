@@ -41,7 +41,7 @@ export class PoService {
   }
   //AmendPo
   getAmendPoDetails(data){
-    this.url=this.host+'/api/UbtApi/GetAmendPO';
+    this.url =  this.host+'/api/UbtApi/GetAmendPO';
     return this.http.post(this.url,data);
   }
   //AmendPoSave
