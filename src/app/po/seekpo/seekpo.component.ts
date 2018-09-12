@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import {PoService} from '../po.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-seekpo',
   templateUrl: './seekpo.component.html',
@@ -36,7 +38,7 @@ seekPOdetailsData:any={};
 suppliedQtyValue:any;
 suppliedPriceValue:any;
 saveSeekPOData:any=[];
-  constructor(private poService:PoService) { 
+  constructor(private poService:PoService,private alertService :AlertService) { 
     this.getCustomer();
    
   }
@@ -150,11 +152,18 @@ save(){
 
 
   // this.seekPOdetails="";
-  console.log(this.seekPOdetails);
+  // console.log(this.seekPOdetails);
   this.poService.saveSeekPOSelection(this.seekPOdetails).subscribe((data:any)=>{
-    console.log(data);
+    //console.log(data);
+    if(data !== 'null'){
+
+      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ data)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
     
   })
+
  
 }
 

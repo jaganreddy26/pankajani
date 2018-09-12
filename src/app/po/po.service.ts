@@ -39,4 +39,14 @@ export class PoService {
     this.url=this.host+'/api/UbtApi/GetPODetails';
     return this.http.post(this.url,data);
   }
+  //AmendPo
+  getAmendPoDetails(data){
+    this.url=this.host+'/api/UbtApi/GetAmendPO';
+    return this.http.post(this.url,data);
+  }
+  //AmendPoSave
+  updateandSaveamendPoDetails(data){
+    this.url=this.host+'/api/UbtApi/PostAmendPurchaseOrder';
+    return this.http.post(this.url,data);
+  }
 }

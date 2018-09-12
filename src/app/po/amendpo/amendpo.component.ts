@@ -26,36 +26,27 @@ export class AmendpoComponent implements OnInit {
   UbtId:any;
   CategoryId:any;
   CategoryName
-  ProposalIdStatic:any;
-///Adding new Proposal to proposalID
-transporter:any=[];
-loadingContractor:any=[];
-unloadingContractor:any[];
-selectedTransporter:any;
- transporterRate:any;
- selectedLoadingContractor:any;
- loadingRate:any;
- selectedUnLoadingContractor:any;
- unloadingRate:any;
- addedNewProposalsToProposalId:any=[];
-//To edit the proposal details for Input parameters
-transporterId:any
-loadContId:any;
-unloadContId:any
-editProposalDetails:any= {};
-//delete the indvidule proposal Objct
-deletInputObj:any={};
-   //step 2 for Tree struture
-  nodes:any=[];
+  // Amend details
+  checkingPoId:any;
+  amendPodetails:any=[];
+  ubtdetailsByPoId:any={};
+
+
+
+
+  
+    //step 2 for Tree struture
+    nodes:any=[];
+    //STEP2
   options: ITreeOptions = {
-    displayField: 'Name',
-    isExpandedField: 'expanded',
-    idField: 'Id',
-    hasChildrenField: 'nodes',
-    
-  }
+   displayField: 'Name',
+   isExpandedField: 'expanded',
+   idField: 'Id',
+   hasChildrenField: 'nodes',
+   
+ }
   modalRef: BsModalRef;
-  constructor(private proposalService: PoService,
+  constructor(private poservice: PoService,
     private alertService :AlertService,private modalService: BsModalService) { 
     this.getCustomer();
   }
@@ -64,12 +55,12 @@ deletInputObj:any={};
     let object = {
       ObjectType: 'UBT' 
     };
-    this.proposalService.GetStatus(object).subscribe((data:any )=>{
+    this.poservice.GetStatus(object).subscribe((data:any )=>{
       this.status = data;
     })
   }
   getCustomer() {
-    this.proposalService.getCustomerName().subscribe((data: any) => {
+    this.poservice.getCustomerName().subscribe((data: any) => {
       /// console.log(data);
       this.customer = data;
     })
@@ -78,7 +69,7 @@ deletInputObj:any={};
   
   search() {
 
-    this.businessId = this.proposalService.BusinessId;
+    this.businessId = this.poservice.BusinessId;
     this.customerId = this.Id;
     //console.log(this.customerId);
     if (this.fromDateChanged == false) {
@@ -101,40 +92,56 @@ deletInputObj:any={};
       'Status':this.StatusName
 
     }
-    this.proposalService.getUbtIds(object).subscribe((data: any) => {
+    this.poservice.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
 
+      console.log(this.ids)
       let all:any=[]
       let parent:any=[]
       let children:any=[];
-      console.log(this.ids)
-      this.ids.forEach(element => {
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
         element.TCategory.forEach(element => {
-          parent.push(element)
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+           element.children.forEach(element=>{
+           // parent.push(element)
+           })
+         })
         });
         });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-    // this.nodes.forEach(element => {
-    //   element.children.forEach(element1 => {
-    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
-    //   });
-    // });
-    // console.log(children)
-      // this.nodes.prototy
-      console.log(this.nodes)
+console.log(this.nodes);
 
     })
 
   }
 
+  onActivate($event){
+    //console.log($event.node.data.Id);
+      let object={
+      "POId":$event.node.data.Id
+    }
+    this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
+    //  console.log(data);
+    this.checkingPoId=data.POData[0].POId;
+   // console.log(this.checkingPoId);
+    this.amendPodetails=data.POData;
+    this.ubtdetailsByPoId=data.ubt;
+    })
+  }
 
+  save(){
+    //console.log(this.amendPodetails);
+  
 
-
-
-
-
+    this.poservice.updateandSaveamendPoDetails(this.amendPodetails).subscribe((data:any)=>{
+      console.log(data);
+    })
+  }
 
   onchange($event) {
     this.Id = $event
