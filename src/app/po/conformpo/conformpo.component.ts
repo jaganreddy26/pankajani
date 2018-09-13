@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { PoService } from "../po.service";
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 import {
   TREE_ACTIONS,
   KEYS,
@@ -24,6 +26,15 @@ export class ConformpoComponent implements OnInit {
   status: any = [];
   StatusName: any;
   value: any;
+  InputpoId:any;
+   ///
+ currentPoId:any;
+ currentPOStatus:any;
+ currentPoType:any;
+ conformPodetails:any=[];
+ ubtdetailsByPoId:any={};
+ conformPoStatus:any = ["Dummy", "Real"];
+ type:any;
   //step 2 for Tree struture
   nodes: any = [];
   options: ITreeOptions = {
@@ -32,7 +43,7 @@ export class ConformpoComponent implements OnInit {
     idField: "Id",
     hasChildrenField: "nodes"
   };
-  constructor(private poservice: PoService) {
+  constructor(private poservice: PoService,private alertService :AlertService) {
     this.getCustomer();
   }
 
@@ -108,7 +119,60 @@ export class ConformpoComponent implements OnInit {
     });
   }
   onActivate($event) {
-    console.log("hi");
+   // console.log("hi");
+    let obj ={
+      'POId': $event.node.data.Id,
+    }
+    console.log(obj);
+    this.InputpoId=$event.node.data.Id;
+    this.poservice.getconformPoDetails(obj).subscribe((data:any)=>{
+     // console.log(data);
+     this.currentPoId=data.POData[0].POId;
+     this.currentPOStatus=data.POData[0].POStatus;
+     this.currentPoType=data.POData[0].POType;
+    //  console.log(this.currentPOStatus);
+    //  console.log(this.currentPoId);
+     console.log(this.currentPoType);
+      this.conformPodetails=data.POData;
+      this.ubtdetailsByPoId=data.ubt;
+    })
+  }
+  
+
+  conforPo(){
+    let obj={
+      "POId":this.currentPoId,
+      "Type":this.type
+    }
+    //console.log(obj);
+    this.poservice.confirmPurchaseOrder(obj).subscribe((data:any)=>{
+      console.log(data);
+      if(data !== 'null'){
+
+        this.alertService.alert(AlertType.Success,"Confirmed the PurchaseOrder to this POId :"+ this.currentPoId)
+         /// ToRefershing the data
+        let obj ={
+          'POId':  this.InputpoId
+        }
+        console.log(obj);
+        this.poservice.getconformPoDetails(obj).subscribe((data:any)=>{
+         // console.log(data);
+         this.currentPoId=data.POData[0].POId;
+         this.currentPOStatus=data.POData[0].POStatus;
+         this.currentPoType=data.POData[0].POType;
+        
+         console.log(this.currentPoType);
+          this.conformPodetails=data.POData;
+          this.ubtdetailsByPoId=data.ubt;
+        })
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
+    })
+  }
+  conformType($event){
+    //console.log($event);
+    this.type=$event;
   }
   onchange($event) {
     this.Id = $event;

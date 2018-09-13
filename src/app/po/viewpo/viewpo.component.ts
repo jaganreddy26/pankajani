@@ -26,7 +26,8 @@ export class ViewpoComponent implements OnInit {
   //ViewPo details
   viewPoDetails:any=[];
   ubtdetailsByPoId:any={};
-
+  currentPoId:any;
+  currentPOStatus:any;
     //step 2 for Tree struture
     nodes:any=[];
     //STEP2
@@ -118,7 +119,11 @@ console.log(this.nodes);
       "POId":$event.node.data.Id
     }
     this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
-   
+
+      this.currentPoId=data.POData[0].POId;
+     this.currentPOStatus=data.POData[0].POStatus;
+     console.log(this.currentPOStatus);
+     console.log(this.currentPoId);
       this.viewPoDetails=data.POData;
       this.ubtdetailsByPoId=data.ubt;
      

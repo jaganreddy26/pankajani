@@ -60,4 +60,15 @@ export class PoService {
     this.url =this.host+'/api/UbtApi/ChangePOStatus';
     return this.http.post(this.url,data);
   }
+  //conform individual PO
+  getconformPoDetails(data){
+    this.url=this.host+'/api/UbtApi/GetPODetails';
+    return this.http.post(this.url,data);
+  }
+
+  // SAVE (ConfirmPurchaseOrder)
+  confirmPurchaseOrder(data){
+    this.url=this.host+'/api/UbtApi/PostConfirmPurchaseOrder';
+    return this.http.post(this.url,data);
+  }
 }

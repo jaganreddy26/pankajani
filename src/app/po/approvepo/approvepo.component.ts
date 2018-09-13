@@ -21,6 +21,7 @@ export class ApprovepoComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
+  inputPoId:any;
  ///
  currentPoId:any;
  currentPOStatus:any;
@@ -112,8 +113,10 @@ console.log(this.nodes);
   onActivate($event){
     let obj ={
       'POId': $event.node.data.Id,
+      
     }
     console.log(obj);
+    this.inputPoId=$event.node.data.Id
     this.poservice.getApprovePoDeatils(obj).subscribe((data:any)=>{
      // console.log(data);
      this.currentPoId=data.POData[0].POId;
@@ -137,7 +140,25 @@ console.log(this.nodes);
           if(data !== 'null'){
 
             this.alertService.alert(AlertType.Success,"Approve Successfuly with POID as :"+ this.currentPoId)
-          }else{
+          /// ToRefershing the data
+            let obj ={
+              'POId':this.inputPoId,
+              
+            }
+            console.log(obj);
+         
+            this.poservice.getApprovePoDeatils(obj).subscribe((data:any)=>{
+             // console.log(data);
+             this.currentPoId=data.POData[0].POId;
+             this.currentPOStatus=data.POData[0].POStatus;
+             console.log(this.currentPOStatus);
+             console.log(this.currentPoId);
+              this.approvePodetails=data.POData;
+              this.ubtdetailsByPoId=data.ubt;
+            })
+          ////Ended refreshing the data
+          }
+          else{
             this.alertService.alert(AlertType.Error,"Something went wrong");
           }
         })

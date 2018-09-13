@@ -145,7 +145,13 @@ console.log(this.nodes);
       });
       console.log(array)
     this.poservice.updateandSaveamendPoDetails(array).subscribe((data:any)=>{
-      console.log(data);
+     // console.log(data);
+     if(data !== 'null'){
+
+      this.alertService.alert(AlertType.Success,"Updated Successfully ")
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
     })
   }
 
