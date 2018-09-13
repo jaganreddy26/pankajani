@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-conformproposal',
   templateUrl: './conformproposal.component.html',
@@ -18,9 +21,22 @@ export class ConformproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
+  //
+  ProposalsDetailsByID:any=[];
+  UbtId:any;
+  CustomerName:any;
+  GoodsType:any;
+  ProposalId:any;
    //step 2 for Tree struture
    nodes:any=[];
-  constructor(private proposalService: ProposalServiceService) { 
+   options: ITreeOptions = {
+    displayField: 'Name',
+    isExpandedField: 'expanded',
+    idField: 'Id',
+    hasChildrenField: 'nodes',
+    
+  }
+  constructor(private proposalService: ProposalServiceService,private alertService :AlertService) { 
     this.getCustomer();
   }
 
@@ -66,23 +82,62 @@ export class ConformproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+     
       let all:any=[]
       let parent:any=[]
       let children:any=[];
-        //step 3 for Tree struture
-        this.ids.forEach(element => {
-          element.TCategory.forEach(element => {
-            parent.push(element)
-          });
-          });
-      //step 4 for Tree struture here the tree struture we form in the HTML
-        this.nodes = parent;
+      console.log(this.ids)
+      this.ids.forEach(element => {
+        element.TCategory.forEach(element => {
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+         })
+        });
+        });
+    
+    //step 4 for Tree struture here the tree struture we form in the HTML
+      this.nodes = parent;
+    // this.nodes.forEach(element => {
+    //   element.children.forEach(element1 => {
+    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
+    //   });
+    // });
+    // console.log(children)
+      // this.nodes.prototy
+      console.log(this.nodes)
 
     })
 
   }
   onActivate($event){
-    console.log("hi")
+    let obj ={
+      'ProposalId': $event.node.data.Id,
+    }
+    this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+     this.ProposalsDetailsByID=data;
+    this.UbtId=data[0].UbtId;
+    this.CustomerName=data[0].CustomerName;
+    this.GoodsType=data[0].GoodsType;
+    this.ProposalId=data[0].ProposalId;
+      })
+      }
+
+      saveDocumentPath(){
+       let obj={
+        ProposalId:this.ProposalId,
+        FilePath:'/ConfirmProposal/JR ACCOUNTANT.pdf'
+       }
+       this.proposalService.conformProposal(obj).subscribe((data:any)=>{
+   console.log(data);
+         if(data == 'Success'){
+
+          this.alertService.alert(AlertType.Success,"Saved the filePath Successfuly")
+        }else(data == 'Failure')
+        {
+          this.alertService.alert(AlertType.Error,"Filepath Is Not Saved");
+        }
+       })
       }
   onchange($event) {
     this.Id = $event

@@ -91,10 +91,13 @@ export class ViewproposalComponent implements OnInit {
       let childrenchild:any=[];
       // console.log(this.ids)
       this.ids.forEach(element => {
-      element.TCategory.forEach(element => {
-        parent.push(element)
-      });
-      });
+        element.TCategory.forEach(element => {
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+         })
+        });
+        });
     console.log(this.nodes)
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;

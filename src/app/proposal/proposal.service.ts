@@ -70,4 +70,9 @@ export class ProposalServiceService {
     this.url=this.host+'/api/UbtApi/ChangeProposalStatus';
     return this.http.post(this.url,data);
   } 
+
+  conformProposal(data){
+    this.url=this.host+'/api/UbtApi/ConfirmProposal';
+    return this.http.post(this.url,data);
+  }
 }

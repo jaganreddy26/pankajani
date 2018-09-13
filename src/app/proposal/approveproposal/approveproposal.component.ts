@@ -79,17 +79,29 @@ export class ApproveproposalComponent implements OnInit {
     }
     this.proposalService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
+      
       let all:any=[]
       let parent:any=[]
       let children:any=[];
       console.log(this.ids)
       this.ids.forEach(element => {
         element.TCategory.forEach(element => {
-          parent.push(element)
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+         })
         });
         });
+    
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
+    // this.nodes.forEach(element => {
+    //   element.children.forEach(element1 => {
+    //     element.children.push({'Id':element.Id,'Name':element.Name,'children':element.TProposal})
+    //   });
+    // });
+    // console.log(children)
+      // this.nodes.prototy
       console.log(this.nodes)
 
     })

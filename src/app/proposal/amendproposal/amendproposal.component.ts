@@ -110,7 +110,10 @@ deletInputObj:any={};
       console.log(this.ids)
       this.ids.forEach(element => {
         element.TCategory.forEach(element => {
-          parent.push(element)
+         // parent.push(element)
+         element.children.forEach(element =>{
+           parent.push(element)
+         })
         });
         });
     

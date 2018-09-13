@@ -112,9 +112,9 @@ export class SeekproposalComponent implements OnInit {
       let children:any=[];
        //step 3 for Tree struture
        this.ids.forEach(element => {
-        element.TCategory.forEach(element => {
-          parent.push(element)
-        });
+        //  element.TCategory.forEach(element => {
+          parent.push({'Id':element.UbtId,'Name':element.UbtId,'children':element.TCategory})
+      //  });
         });
     
     //step 4 for Tree struture here the tree struture we form in the HTML
@@ -248,7 +248,7 @@ export class SeekproposalComponent implements OnInit {
  this.unloadingRate="";
   }
   saveProposal(){
-    //console.log(this.allSeekProposalDetails);
+    console.log(this.allSeekProposalDetails);
     this.proposalService.addProposal(this.allSeekProposalDetails).subscribe((data:any)=>{
       console.log(data);
       if(data !== 'null'){
