@@ -135,18 +135,18 @@
 
         </div>
         <div class="panel-body">
-            <table class="table table-striped table-bordered table-list">
-                <thead style="color: #3e54af">
-                    <tr style="color: white;background-color:#3e54af">
-                        <th>S.No</th>
-                        <th>TransporterId</th>
-                        <th>TransporterAmount</th>
-                        <th>LoadingContId</th>
-                        <th>LoadingContAmount</th>
-                        <th>UnloadingContId</th>
-                        <th>UnloadingContAmount</th>
-                        <th>SuppliedQty</th>
-                        <th>SuppliedPrice</th>
+            <table class="table padding">
+                <thead >
+                    <tr>
+                        <th scope="col">S.No</th>
+                        <th scope="col">TransporterId</th>
+                        <th scope="col">TransporterAmount</th>
+                        <th scope="col"> LoadingContId</th>
+                        <th scope="col">LoadingContAmount</th>
+                        <th scope="col">UnloadingContId</th>
+                        <th scope="col">UnloadingContAmount</th>
+                        <th scope="col">SuppliedQty</th>
+                        <th scope="col">SuppliedPrice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -163,7 +163,7 @@
                         <td>{{items.UnloadingContId}}</td>
                         <td>{{items.UnloadingContAmount}}</td>
                         <td>
-                            <mat-form-field>
+                            <mat-form-field style="width:50%">
                                 <input
                                     placeholder="SuppliedQty"
                                     matInput
@@ -173,7 +173,7 @@
                             </mat-form-field>
                         </td>
                         <td>
-                            <mat-form-field>
+                            <mat-form-field style="width:50%">
                                 <input
                                     placeholder="SuppliedPrice"
                                     matInput
