@@ -198,19 +198,11 @@
             </table>
 
         </div>
-        <div
-            align="right"
-            class="padding"
-            *ngIf="currentPOStatus=="Open      ""
-        >
+        <div align="right" class="padding" *ngIf='currentPOStatus=="Open      "'>
             <!-- <button mat-raised-button (click)="discard()" color="primary">
                 DISCARD
             </button> -->
-            <button
-                mat-raised-button
-                (click)="approveAndSend()"
-                color="primary"
-            >
+            <button mat-raised-button (click)="approveAndSend()" color="primary">
                 APPROVE & SEND
             </button>
         </div>

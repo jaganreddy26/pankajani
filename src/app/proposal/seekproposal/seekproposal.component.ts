@@ -46,6 +46,8 @@ export class SeekproposalComponent implements OnInit {
  addedSeekProposalDetails:any=[];
  
  allSeekProposalDetails:any=[]
+
+ RefreshInput:any;
  //STEP2
  options: ITreeOptions = {
   displayField: 'Name',
@@ -164,7 +166,9 @@ export class SeekproposalComponent implements OnInit {
         UbtId:$event.node.data.UbtId,
 
      }
-  console.log(obj);
+  //console.log(obj);
+  this.RefreshInput=obj;
+ // console.log(this.RefreshInput);
      this.proposalService.getSeekProposals(obj).subscribe((data:any)=>{
       //  console.log(data);
       this.udtData="";
@@ -260,6 +264,24 @@ export class SeekproposalComponent implements OnInit {
     })
     this.allSeekProposalDetails = [];
     this.addedSeekProposalDetails=[];
+
+    //To Refreshing the the data
+   // console.log(this.RefreshInput);
+    this.proposalService.getSeekProposals(this.RefreshInput).subscribe((data:any)=>{
+      //  console.log(data);
+      this.udtData="";
+       this.seekProposalsDetails=data[0];
+     
+       this.hideSeekproposal=true;
+       this.ubtDetails = false;
+       this.checkingProposalId=data[0].ProposalId;
+       console.log(this.checkingProposalId);
+     //console.log(this.seekProposalsDetails)
+     this.ubtidInput=this.seekProposalsDetails.UbtId;
+     this.categoryidInput=this.seekProposalsDetails.CategoryId;
+     this.goodstypeInput=this.seekProposalsDetails.GoodsType;
+     });
+
   }
   delete(items){
     let index = this.addedSeekProposalDetails.indexOf(items);
