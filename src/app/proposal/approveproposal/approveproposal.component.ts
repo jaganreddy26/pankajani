@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ProposalServiceService} from '../proposal.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
+import { BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-approveproposal',
   templateUrl: './approveproposal.component.html',
@@ -24,6 +27,7 @@ export class ApproveproposalComponent implements OnInit {
   CustomerName:any;
   GoodsType:any;
   ProposalId:any;
+  ProposalIdStatus:any;
     //step 2 for Tree struture
     nodes:any=[];
     options: ITreeOptions = {
@@ -33,7 +37,7 @@ export class ApproveproposalComponent implements OnInit {
       hasChildrenField: 'nodes',
       
     }
-  constructor(private proposalService: ProposalServiceService) {
+  constructor(private proposalService: ProposalServiceService,private alertService :AlertService) {
     this.getCustomer();
    }
 
@@ -117,6 +121,7 @@ export class ApproveproposalComponent implements OnInit {
     this.CustomerName=data[0].CustomerName;
     this.GoodsType=data[0].GoodsType;
     this.ProposalId=data[0].ProposalId;
+    this.ProposalIdStatus=data[0].Status;
       })
       }
       discard(){
@@ -127,6 +132,11 @@ export class ApproveproposalComponent implements OnInit {
         }
         this.proposalService.discaredProposal(obj).subscribe((data:any)=>{
           console.log(data);
+          if(data=='Success'){
+            this.alertService.alert(AlertType.Success,"SuccesFully Discarded" )
+            }else{
+              this.alertService.alert(AlertType.Error,"Something went wrong");
+            }
         })
       }
       approveAndSend(){
@@ -137,6 +147,11 @@ export class ApproveproposalComponent implements OnInit {
         }
         this.proposalService.approveAndSendProposal(obj).subscribe((data:any)=>{
           console.log(data);
+          if(data=='Success'){
+            this.alertService.alert(AlertType.Success,"SuccesFully Approved" )
+            }else{
+              this.alertService.alert(AlertType.Error,"Something went wrong");
+            }
         })
       }
   onchange($event) {
