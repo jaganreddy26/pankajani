@@ -48,6 +48,8 @@ export class AmendubtComponent implements OnInit {
   ubtidInput:any;
   customerIDStatic:any;
   AgencyIdStatic:any;
+  customerNameStatic:any;
+  AgencyName:any;
   //below are variables are to send send the input details in object formate(to get "getIndividualUbtCategory")
   ubtidinput:any;
   goodsTypeinput:any;
@@ -61,6 +63,8 @@ export class AmendubtComponent implements OnInit {
   ,private alertService :AlertService) {
 
     this.getCustomer();
+//The below line to null the addedNewCategoryToUbtId bfore loading this component
+    //this.addedNewCategoryToUbtId=[];
   }
   openModal(items,template: TemplateRef<any>) {
 
@@ -149,6 +153,8 @@ this.getedit();
         this.confirmBiddingStatus = element.ConfirmBidding;
        this.customerIDStatic=element.CustomerId;
        this.AgencyIdStatic=element.AgencyId;
+       this.customerNameStatic=element.CustomerName;
+       this.AgencyName=element.AgencyName;
        console.log(this.customerIDStatic);
       
        
@@ -243,6 +249,7 @@ console.log(data);
    //--(ENDED)--//
 
    saveRecords(){
+     //console.log(this.addedNewCategoryToUbtId);
     this.ubtService.addNewCategoryToUbtId(this.addedNewCategoryToUbtId).subscribe((data:any)=>{
       console.log(data);
       if(data=='Success'){

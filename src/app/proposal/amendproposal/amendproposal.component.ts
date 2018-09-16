@@ -39,6 +39,7 @@ selectedTransporter:any;
  selectedUnLoadingContractor:any;
  unloadingRate:any;
  addedNewProposalsToProposalId:any=[];
+ inputProposalId:any;
 //To edit the proposal details for Input parameters
 transporterId:any
 loadContId:any;
@@ -184,6 +185,7 @@ this.ProposalIdStatic=$event.node.data.Id;
 let obj ={
   'ProposalId': $event.node.data.Id,
 }
+this.inputProposalId=$event.node.data.Id
 this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
   this.ProposalsDetailsByID=data;
   //below recods are for displaying as satatic data
@@ -224,6 +226,17 @@ this.proposalService.addProposalByProposalId(this.addedNewProposalsToProposalId)
       this.alertService.alert(AlertType.Error,"Something went wrong");
     }
 })
+let obj ={
+  'ProposalId': this.inputProposalId
+}
+
+this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+  this.ProposalsDetailsByID=data;
+  //below recods are for displaying as satatic data
+  this.UbtId=data[0].UbtId,
+  this.CategoryId=data[0].CategoryId,
+  this.CategoryName=data[0].CategoryName
+  })
 this.addedNewProposalsToProposalId=[];
 }
 openModal(items,template1: TemplateRef<any>){
