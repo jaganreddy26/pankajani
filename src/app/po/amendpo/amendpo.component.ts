@@ -13,6 +13,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class AmendpoComponent implements OnInit {
   customer: any = []
   Id: any;
+  value:any;
   FromDate: any = new Date();
   ToDate: any = new Date();
   businessId: any;
