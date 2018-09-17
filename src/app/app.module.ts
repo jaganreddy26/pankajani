@@ -12,7 +12,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { UbtModule } from './ubt/ubt.module';
 import { PoModule } from './po/po.module';
 import { ProposalModule } from './proposal/proposal.module';
-
+import {PermissionModule} from './permission/permission.module';
 
 
 
@@ -38,7 +38,8 @@ import { ProposalModule } from './proposal/proposal.module';
     MatToolbarModule,
     UbtModule,
     PoModule,
-    ProposalModule
+    ProposalModule,
+    PermissionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
