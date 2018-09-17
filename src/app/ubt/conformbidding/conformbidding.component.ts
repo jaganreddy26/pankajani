@@ -35,6 +35,8 @@ export class ConformbiddingComponent implements OnInit {
   MaxMargin:any;
   status:any=[];
   StatusName:any;
+
+  InputUbtId:any;
 ////==========base64formatedata Varibles=========////
 file:any;
 filedata:any;
@@ -101,14 +103,25 @@ base64data:any
   }
 
   edit(item) {
-    console.log(item)
+   // console.log(item)
+    //console.log(item.UbtId);
+    this.InputUbtId=item.UbtId;
     this.editDetails = true;
     this.udtData = [];
 
     this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
       // this.udtData = data;
       data.forEach(element => {
-        this.udtData.push({ 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+        this.udtData.push({ "UBTId":this.InputUbtId,
+                            'GoodsType': element.GoodsType,
+                            'CategoryId': element.CategoryId,
+                            'CategoryName': element.CategoryName,
+                            'Quantity': element.Quantity, 
+                            'BasePrice':element.BasePrice,
+                            'MaxMargin':element.MaxMargin,
+                            'BiddingQty':element.BiddingQty,
+                            'BiddingPrice':element.BiddingPrice
+                          });
         this.agencyIdSelected = element.AgencyId;
         this.customerIdSelected = element.CustomerName;
         this.confirmBiddingStatus = element.ConfirmBidding;
@@ -135,30 +148,18 @@ base64data:any
   }
 
   send(){
-    console.log(this.base64data);
+    //console.log(this.base64data);
+    //console.log(this.udtData);
+    let object={
+      "FilePath":'File/rasmi.pdf',
+      "ConfirmBiddingUbt":this.udtData
+    }
+   // console.log(object);
+   this.ubtService.confirmBidding(object).subscribe((data:any)=>{
+     console.log(data);
+   })
   }
-//   getGoodsTypeList(id) {
-//     this.ubtService.getGoodsType(id).subscribe((data: any) => {
-//       // console.log(data);
-//       this.goodsType = data;
-//     })
-//   }
-//   getCategoryNameList(id) {
-//     this.ubtService.getCategoryName(id).subscribe((data: any) => {
-//       // console.log(data);
-//       this.CategoryNameList = data;
-//     })
-//   }
-//   getAgencyName(id){
-//     this.ubtService.getAgency(id).subscribe((data:any)=>{
-//  //console.log(data);
-//      this.agency=data;
-//     })
-//   }
-  // onchangeCategoryName($event){
 
-  // }
- 
   
  
 }
