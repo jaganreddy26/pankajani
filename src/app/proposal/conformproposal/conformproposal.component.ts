@@ -133,7 +133,7 @@ export class ConformproposalComponent implements OnInit {
          if(data == 'Success'){
 
           this.alertService.alert(AlertType.Success,"Saved the filePath Successfuly")
-        }else(data == 'Failure')
+        }else
         {
           this.alertService.alert(AlertType.Error,"Filepath Is Not Saved");
         }

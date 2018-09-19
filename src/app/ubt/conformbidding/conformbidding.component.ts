@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UbtService } from '../ubt.service';
 
-
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-conformbidding',
   templateUrl: './conformbidding.component.html',
@@ -37,11 +38,12 @@ export class ConformbiddingComponent implements OnInit {
   StatusName:any;
 
   InputUbtId:any;
+  
 ////==========base64formatedata Varibles=========////
 file:any;
 filedata:any;
 base64data:any
-  constructor(private ubtService: UbtService) {
+  constructor(private ubtService: UbtService,private alertService :AlertService) {
     this.getCustomer();
   }
 
@@ -102,30 +104,37 @@ base64data:any
     })
   }
 
-  edit(item) {
+  save(item) {
    // console.log(item)
     //console.log(item.UbtId);
+    let obj={
+      "UBTId":item.UbtId
+    }
     this.InputUbtId=item.UbtId;
     this.editDetails = true;
-    this.udtData = [];
+   // this.udtData = [];
 
-    this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
-      // this.udtData = data;
-      data.forEach(element => {
-        this.udtData.push({ "UBTId":this.InputUbtId,
-                            'GoodsType': element.GoodsType,
-                            'CategoryId': element.CategoryId,
-                            'CategoryName': element.CategoryName,
-                            'Quantity': element.Quantity, 
-                            'BasePrice':element.BasePrice,
-                            'MaxMargin':element.MaxMargin,
-                            'BiddingQty':element.BiddingQty,
-                            'BiddingPrice':element.BiddingPrice
-                          });
-        this.agencyIdSelected = element.AgencyId;
-        this.customerIdSelected = element.CustomerName;
-        this.confirmBiddingStatus = element.ConfirmBidding;
-      }); 
+    // this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
+    //   // this.udtData = data;
+    //   data.forEach(element => {
+    //     this.udtData.push({ "UBTId":this.InputUbtId,
+    //                         'GoodsType': element.GoodsType,
+    //                         'CategoryId': element.CategoryId,
+    //                         'CategoryName': element.CategoryName,
+    //                         'Quantity': element.Quantity, 
+    //                         'BasePrice':element.BasePrice,
+    //                         'MaxMargin':element.MaxMargin,
+    //                         'BiddingQty':element.BiddingQty,
+    //                         'BiddingPrice':element.BiddingPrice
+    //                       });
+    //     this.agencyIdSelected = element.AgencyId;
+    //     this.customerIdSelected = element.CustomerName;
+    //     this.confirmBiddingStatus = element.ConfirmBidding;
+    //   }); 
+    // })
+    this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
+      console.log(data);
+     this.udtData=data;
     })
   }
   onchange($event) {
@@ -157,6 +166,11 @@ base64data:any
    // console.log(object);
    this.ubtService.confirmBidding(object).subscribe((data:any)=>{
      console.log(data);
+     if(data=='Success'){
+      this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
    })
   }
 
