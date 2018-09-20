@@ -150,7 +150,6 @@ onchangeSuppliedPrice($event){
   
 save(){
 
-
   // this.seekPOdetails="";
   // console.log(this.seekPOdetails);
   this.poService.saveSeekPOSelection(this.seekPOdetails).subscribe((data:any)=>{

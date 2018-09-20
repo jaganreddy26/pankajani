@@ -3,6 +3,7 @@ import { PermissionService } from '../permission.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from 'protractor';
 @Component({
   selector: 'app-amendpermission',
   templateUrl: './amendpermission.component.html',
@@ -21,6 +22,20 @@ export class AmendpermissionComponent implements OnInit {
   value:any;
   StatusName:any;
   status:any=[];
+  ///
+     //step 2 for Tree struture
+     nodes:any=[];
+     //STEP2
+   options: ITreeOptions = {
+    displayField: 'Name',
+    isExpandedField: 'expanded',
+    idField: 'Id',
+    hasChildrenField: 'nodes',
+    
+  }
+    ////////////
+    ubtDetails:any={}
+    PermissionDetails:any=[];
   constructor(private permissionService:PermissionService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -64,27 +79,60 @@ export class AmendpermissionComponent implements OnInit {
     }
     this.permissionService.getUbtIds(object).subscribe((data: any) => {
       this.ids = data;
-    //   console.log(this.ids)
-    //   let all:any=[]
-    //   let parent:any=[]
-    //   let children:any=[];
-    //    //step 3 for Tree struture
-    //    this.ids.forEach(element => {
-    //     element.TCategory.forEach(element => {
-    //      // parent.push(element)
-    //      element.children.forEach(element =>{
-    //       // parent.push(element)
-    //        element.children.forEach(element=>{
-    //        parent.push(element)
-    //        })
-    //      })
-    //     });
-    //     });
-    
-    // //step 4 for Tree struture here the tree struture we form in the HTML
-    //   this.nodes = parent;
+      console.log(this.ids)
+      let all:any=[]
+      let parent:any=[]
+      let children:any=[];
+       //step 3 for Tree struture
+       this.ids.forEach(element => {
+        element.TCategory.forEach(element => {
+         // parent.push(element)
+         element.children.forEach(element =>{
+          // parent.push(element)
+           element.children.forEach(element=>{
+           parent.push(element)
+          //  element.children.forEach(element=>{
+          //    parent.push(element)
+          //  })
+           })
+         })
+        });
+        });
+        this.nodes = parent;
     })
   }
+  onActivate($event){
+    // console.log('hi');
+   // console.log($event.node.data.Id);
+    let obj={
+     'PermissionId':$event.node.data.Id
+    }
+
+    this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+      console.log(data);
+      this.ubtDetails=data.ubt;
+      this.PermissionDetails=data.PermissionData;
+    })
+   }
+   update(){
+     let array:any=[];
+     this.PermissionDetails.forEach(element=>{
+       array.push({
+        "PermissionId":element.PermissionId,
+        "TransporterId":element.TransporterId,
+        "TransporterAmount":element.TransporterAmount,
+        "LoadingContId":element.LoadingContId,
+        "LoadingContAmount":element.LoadingContAmount,
+        "UnloadingContId":element.UnloadingContId,
+        "UnloadingContAmount":element.UnloadingContAmount,
+        "SuppliedQty":element.SuppliedQty,
+        "SuppliedPrice":element.SuppliedPrice,
+        "POId":element.POId
+        
+       })
+     })
+     console.log(array);
+   }
   onchange($event) {
     this.Id = $event
   }

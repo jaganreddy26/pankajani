@@ -125,10 +125,10 @@ console.log(this.nodes);
     this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
       console.log(data);
 
-  //   this.checkingPoId=data.POData[0].POId;
-  //  console.log(this.checkingPoId);
-  //   this.amendPodetails=data.POData;
-  //   this.ubtdetailsByPoId=data.ubt;
+    this.checkingPoId=data.POData[0].POId;
+   console.log(this.checkingPoId);
+    this.amendPodetails=data.POData;
+    this.ubtdetailsByPoId=data.ubt;
     
     })
     // this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{

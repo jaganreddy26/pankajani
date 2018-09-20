@@ -3,6 +3,7 @@ import { PermissionService } from '../permission.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-seekpermission',
   templateUrl: './seekpermission.component.html',
@@ -90,6 +91,9 @@ podata:any=[];
           // parent.push(element)
            element.children.forEach(element=>{
            parent.push(element)
+          //  element.children.forEach(element=>{
+          //    parent.push(element)
+          //  })
            })
          })
         });
@@ -106,10 +110,32 @@ podata:any=[];
     }
   //  console.log(object);
   this.permissionService.getSeekPermissionDetailsByPoId(object).subscribe((data:any)=>{
-   // console.log(data);
+  console.log(data);
    this.ubtDetails=data.Ubt;
    this.podata=data.POData;
   })
+  }
+  save(){
+    let array:any=[];
+    this.podata.forEach(element=>{
+      array.push({
+        'TransporterId':element.TransporterId,
+        'TransporterAmount':element.TransporterAmount,
+        'LoadingContId':element.LoadingContId,
+        'LoadingContAmount':element.LoadingContAmount,
+        'UnloadingContId':element.UnloadingContId,
+        'UnloadingContAmount':element.UnloadingContAmount,
+        'SuppliedQty':element.SuppliedQty,
+        'SuppliedPrice':element.SuppliedPrice,
+        'POId':element.POId
+
+
+      })
+    })
+  console.log(array);
+   this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
+     console.log(data);
+   })
   }
   onchange($event) {
     this.Id = $event
