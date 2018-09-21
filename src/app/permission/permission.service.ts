@@ -34,8 +34,25 @@ export class PermissionService {
     this.url=this.host+'/api/UbtApi/PostCreatePermission';
     return this.http.post(this.url,data);
   }
+  getVendor(data){
+    this.url =this.host+'/api/UbtApi/GetVendor';
+    return this.http.post(this.url,data);
+  }
   getPermissionDetailsByPermissionId(data){
     this.url= this.host+'/api/UbtApi/GetPermissionDetails';
+    return this.http.post(this.url,data)
+  }
+  addNewTransporterDetailsToPermissionId(data){
+    this.url= this.host+'/api/UbtApi/AmendPermission';
+    return this.http.post(this.url,data)
+  }
+  // SINGLE PERMISSION SELECTION FOR EDIT
+  editPermissionSelectionOfIndividual(data){
+    this.url= this.host+'/api/UbtApi/GetIndividualPermissionTransporter';
+    return this.http.post(this.url,data)
+  } 
+  deleteIndividualRecords(data){
+    this.url =this.host+'/api/UbtApi/DeleteIndividualPermissionTransporter';
     return this.http.post(this.url,data)
   }
 }

@@ -8,6 +8,7 @@ import { ViewpermissionComponent } from './viewpermission/viewpermission.compone
 import { AmendpermissionComponent } from './amendpermission/amendpermission.component';
 import { ApprovepermissionComponent } from './approvepermission/approvepermission.component';
 import { ConfirmpermissionComponent } from './confirmpermission/confirmpermission.component';
+import { EditamendpermissionComponent } from './editamendpermission/editamendpermission.component';
 
 //routing pathes 
 
@@ -28,7 +29,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [PermissionService],
-    declarations: [SeekpermissionComponent, ViewpermissionComponent, AmendpermissionComponent, ApprovepermissionComponent, ConfirmpermissionComponent],
+    declarations: [SeekpermissionComponent, ViewpermissionComponent, AmendpermissionComponent, ApprovepermissionComponent, ConfirmpermissionComponent, EditamendpermissionComponent],
     exports: [RouterModule],
   })
   export class PermissionModule { }

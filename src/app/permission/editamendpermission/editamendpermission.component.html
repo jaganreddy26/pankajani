@@ -1,0 +1,42 @@
+<div class="card">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center" 
+   
+>
+    <div class="padding-left">
+        <span style="font-weight:400">TransporterId : </span>
+        <span style="background-color: bisque">{{EditPermissionDetails.TransporterName}}</span>
+    </div>
+
+    <div class="padding-left">
+        <span style="font-weight:400">LoadContId : </span>
+        <span style="background-color: bisque">{{EditPermissionDetails.LoadingContractorName}}</span>
+    </div>
+    <div class="padding-left">
+        <span style="font-weight:400">UnloadContId : </span>
+        <span style="background-color: bisque">{{EditPermissionDetails.UnLoadingContractorAmount}}</span>
+    </div>
+    <div class="padding-left">
+        <span style="font-weight:400">ProposalId : </span>
+        <span style="background-color: bisque">{{editProposalDetails.PermissionId}}</span>
+    </div>
+</div>
+</div>
+
+<div class="example-container">
+    
+<mat-form-field fxFlex="30" class="padding-left">
+  <input matInput placeholder="TransporterAmount"  [(ngModel)]="editProposalDetails.TransporterAmount" >
+</mat-form-field>
+   
+<mat-form-field fxFlex="30" class="padding-left">
+  <input matInput placeholder="LoadingContractorAmount" [(ngModel)]="editProposalDetails.LoadingContractorAmount">
+ </mat-form-field>
+ <mat-form-field fxFlex="30" class="padding-left">
+   <input matInput placeholder="UnLoadingContractorAmount" [(ngModel)]="editProposalDetails.UnLoadingContractorAmount">
+  </mat-form-field>
+  
+
+ 
+</div>

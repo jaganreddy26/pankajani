@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { PermissionService } from '../permission.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import { element } from 'protractor';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-amendpermission',
   templateUrl: './amendpermission.component.html',
@@ -36,7 +38,34 @@ export class AmendpermissionComponent implements OnInit {
     ////////////
     ubtDetails:any={}
     PermissionDetails:any=[];
-  constructor(private permissionService:PermissionService,private alertService :AlertService) {
+    PoId:any;
+    Permissionid:any;
+    ///Adding new Proposal to proposalID
+transporter:any=[];
+loadingContractor:any=[];
+unloadingContractor:any[];
+selectedTransporter:any;
+ transporterRate:any;
+ selectedLoadingContractor:any;
+ loadingRate:any;
+ selectedUnLoadingContractor:any;
+ unloadingRate:any;
+ SuppliedQty:any;
+ SuppliedPrice:any;
+ newTransporterDetails:any=[];
+ /////
+ modalRef: BsModalRef;
+
+ permissionId:any
+ transporterId:any
+ loadingconId:any;
+ unloadingcontId:any
+
+ InputDetails:any;
+ //delete the indvidule Records Objct
+deletInputObj:any={};
+  constructor(private permissionService:PermissionService,
+    private alertService :AlertService,private modalService: BsModalService) {
     this.getCustomer();
    }
 
@@ -102,36 +131,158 @@ export class AmendpermissionComponent implements OnInit {
     })
   }
   onActivate($event){
+
+      // objectTypeTransport type Input Object
+      let objectTypeTransport = {
+        ObjectType: 'Transport' 
+      };
+    // objectTypeLoading type Input Object
+      let objectTypeLoading = {
+        ObjectType: 'Loading' 
+      };
+    // objectTypeUnloading type Input Object
+     let objectTypeUnloading = {
+        ObjectType: 'Unloading' 
+      };
+  
+       this.permissionService.getVendor(objectTypeTransport).subscribe((data:any)=>{
+         this.transporter=data;
+       });
+  
+       this.permissionService.getVendor(objectTypeLoading).subscribe((data:any)=>{
+        this.loadingContractor=data;
+      });
+   
+  
+      this.permissionService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
+       this.unloadingContractor=data;
+      });
     // console.log('hi');
    // console.log($event.node.data.Id);
+
     let obj={
      'PermissionId':$event.node.data.Id
     }
+    this.Permissionid=$event.node.data.Id;
 
     this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
       console.log(data);
       this.ubtDetails=data.ubt;
       this.PermissionDetails=data.PermissionData;
+      this.PoId=data.PermissionData[0].POId;
+      console.log(this.PoId);
     })
+
    }
-   update(){
-     let array:any=[];
-     this.PermissionDetails.forEach(element=>{
-       array.push({
-        "PermissionId":element.PermissionId,
-        "TransporterId":element.TransporterId,
-        "TransporterAmount":element.TransporterAmount,
-        "LoadingContId":element.LoadingContId,
-        "LoadingContAmount":element.LoadingContAmount,
-        "UnloadingContId":element.UnloadingContId,
-        "UnloadingContAmount":element.UnloadingContAmount,
-        "SuppliedQty":element.SuppliedQty,
-        "SuppliedPrice":element.SuppliedPrice,
-        "POId":element.POId
-        
-       })
+   add(){
+    let object={
+      'PermissionId':this.Permissionid,
+      'TransporterId':this.selectedTransporter,
+      'TransporterAmount':this.transporterRate,
+      'LoadingContId':this.selectedLoadingContractor,
+      'LoadingContAmount':this.loadingRate,
+      'UnloadingContId':this.selectedUnLoadingContractor,
+      'UnloadingContAmount':this.unloadingRate,
+      'SuppliedQty':this.SuppliedQty,
+      'SuppliedPrice':this.SuppliedPrice,
+      'POId':this.PoId,
+
+    }
+    console.log(object);
+    this.newTransporterDetails.push(object);
+    this.selectedTransporter="";
+    this.transporterRate="";
+    this.selectedLoadingContractor="";
+    this.loadingRate="";
+    this.selectedUnLoadingContractor="";
+    this.unloadingRate="";
+    this.SuppliedQty="";
+    this.SuppliedPrice="";
+     console.log(this.newTransporterDetails);
+   }
+   delete(items){
+    let index = this.newTransporterDetails.indexOf(items);
+    this.newTransporterDetails.splice(index,1);
+   }
+   saveNewRecords(){
+     console.log(this.newTransporterDetails);
+    // this.newTransporterDetails="";
+
+    this.permissionService.addNewTransporterDetailsToPermissionId(this.newTransporterDetails).subscribe((data:any)=>{
+      console.log(data);
+      if(data=='Success'){
+        this.alertService.alert(AlertType.Success,"New Transporter Details is Added for this PermissionId :"+" "+ this.Permissionid )
+        }else{
+          this.alertService.alert(AlertType.Error,"Something went wrong");
+        }
+    })
+    this.newTransporterDetails=[];
+    ///Refresh the Data After Adding new Transporter to Permissiob Id
+    let obj={
+      'PermissionId':this.Permissionid
+     }
+     this.Permissionid=this.Permissionid;
+ 
+     this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+       console.log(data);
+       this.ubtDetails=data.ubt;
+       this.PermissionDetails=data.PermissionData;
+       this.PoId=data.PermissionData[0].POId;
+       console.log(this.PoId);
      })
-     console.log(array);
+   }
+   openModalForEdit(items,template: TemplateRef<any>) {
+    
+ 
+      this.permissionId=this.Permissionid,
+      this.transporterId=items.TransporterId,
+      this.loadingconId=items.LoadingContId,
+      this.unloadingcontId=items.UnloadingContId
+    
+     // this.InputDetails=object;
+    this.getInputObject();
+  
+    this.modalRef = this.modalService.show(template);
+
+  }
+ 
+
+  getInputObject(){
+    let obj={
+      "PermissionId":this.permissionId,
+      "TransporterId":this.transporterId,
+      "LoadingContId":this.loadingconId,
+      "UnloadingContId": this.unloadingcontId
+      }
+      this.InputDetails=obj;
+      
+  }
+  deleteRecords(items,template2){
+    this.modalRef = this.modalService.show(template2);
+    let obj={
+        "PermissionId":this.Permissionid,
+        "TransporterId":items.TransporterId,
+        "LoadingContId":items.LoadingContId,
+        "UnloadingContId":items.UnloadingContId
+    }
+    console.log(obj)
+  this.deletInputObj=obj;
+  }
+  confirm(){
+    // console.log(this.deletInputObj);
+       this.permissionService.deleteIndividualRecords(this.deletInputObj).subscribe((data:any)=>{
+         console.log(data);
+         if(data=='Success'){
+          this.alertService.alert(AlertType.Success,"Record Deleted Sucessfully" )
+          }else{
+            this.alertService.alert(AlertType.Error,"Something went wrong");
+          }
+       })
+      
+       this.modalRef.hide();
+   }
+   decline(){
+     this.modalRef.hide();
    }
   onchange($event) {
     this.Id = $event
@@ -148,6 +299,19 @@ export class AmendpermissionComponent implements OnInit {
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+
+  onchangeTransporter($event){
+    this.selectedTransporter=$event;
+   // console.log(this.selectedTransporter)
+  }
+  onchangeLoadingContractor($event){
+    this.selectedLoadingContractor=$event;
+    //console.log(this.selectedLoadingContractor)
+  }
+  onchangeUnLoadingContractor($event){
+    this.selectedUnLoadingContractor=$event;
+    //console.log(this.unLoadingContractor)
   }
 
 }

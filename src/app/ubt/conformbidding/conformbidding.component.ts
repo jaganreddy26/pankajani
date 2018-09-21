@@ -3,6 +3,7 @@ import { UbtService } from '../ubt.service';
 
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from 'protractor';
 @Component({
   selector: 'app-conformbidding',
   templateUrl: './conformbidding.component.html',
@@ -135,6 +136,7 @@ base64data:any
     this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
       console.log(data);
      this.udtData=data;
+    
     })
   }
   onchange($event) {
@@ -157,11 +159,24 @@ base64data:any
   }
 
   send(){
+    let array:any=[];
+    this.udtData.forEach(element=>{
+      array.push({'UBTId':this.InputUbtId,
+                   'GoodsType': element.GoodsType,
+                   'CategoryId': element.CategoryId,
+                   'CategoryName': element.CategoryName,
+                   'Quantity': element.Quantity, 
+                   'BasePrice':element.BasePrice,
+                   'MaxMargin':element.MaxMargin,
+                   'BiddingQty':element.BiddingQty,
+                   'BiddingPrice':element.BiddingPrice
+                  })
+    })
     //console.log(this.base64data);
     //console.log(this.udtData);
     let object={
       "FilePath":'File/rasmi.pdf',
-      "ConfirmBiddingUbt":this.udtData
+      "ConfirmBiddingUbt":array
     }
    // console.log(object);
    this.ubtService.confirmBidding(object).subscribe((data:any)=>{

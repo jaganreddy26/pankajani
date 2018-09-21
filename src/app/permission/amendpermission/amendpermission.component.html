@@ -71,6 +71,189 @@
       Search
   </button>
 </div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center" *ngIf="PermissionDetails.length !=0">
+
+    <table class="table table-striped table-bordered table-list">
+            <thead>
+                <tr style="color:#6f6f6f;background-color:#f0f0f0">
+                    <th>S.No</th>
+                    <th>Transporter</th>
+                    <th>Transporter Rate</th>
+                    <th>Loading Contractor</th>
+                    <th>Loading Rate</th>
+                    <th>Unloading Contractor</th>
+                    <th>Unloading Rate</th>
+                    <th>Supplied Qty</th>
+                    <th>Supplied Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select
+                                placeholder="Transporter"
+                                [(ngModel)]="selectedTransporter"
+                                (ngModelChange)="onchangeTransporter($event)"
+                            >
+                                <mat-option
+                                    *ngFor="let item of transporter"
+                                    [value]="item.VendorId"
+                                >
+                                    {{item.VendorName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input
+                                placeholder="Transporter Rate"
+                                matInput
+                                [(ngModel)]="transporterRate"
+                            >
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select
+                                placeholder="Loading Contractor"
+                                [(ngModel)]="selectedLoadingContractor"
+                                (ngModelChange)="onchangeLoadingContractor($event)"
+                            >
+                                <mat-option
+                                    *ngFor="let item of loadingContractor"
+                                    [value]="item.VendorId"
+                                >
+                                    {{item.VendorName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input
+                                placeholder="Loading Rate"
+                                matInput
+                                [(ngModel)]="loadingRate"
+                            >
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-select
+                                placeholder="Unloading Contractor"
+                                [(ngModel)]="selectedUnLoadingContractor"
+                                (ngModelChange)="onchangeUnLoadingContractor($event)"
+                            >
+                                <mat-option
+                                    *ngFor="let item of unloadingContractor"
+                                    [value]="item.VendorId"
+                                >
+                                    {{item.VendorName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input
+                                placeholder="Unloading Rate"
+                                matInput
+                                [(ngModel)]="unloadingRate"
+                            >
+                        </mat-form-field>
+                    </td>
+                    <td>
+                            <mat-form-field>
+                                <input
+                                    placeholder="Supplied Qty"
+                                    matInput
+                                    [(ngModel)]="SuppliedQty"
+                                >
+                            </mat-form-field>
+                        </td>
+                        <td>
+                                <mat-form-field>
+                                    <input
+                                        placeholder="Supplied Price"
+                                        matInput
+                                        [(ngModel)]="SuppliedPrice"
+                                    >
+                                </mat-form-field>
+                            </td>
+        
+                    <td>
+                        <button
+                            class="btn btn"
+                            style="cursor: pointer;background-color: #3e54af;color:#fff"
+                            (click)="add()"
+                        >
+                        <i class="fa fa-plus"></i>
+                        </button>
+                    </td>
+                </tr>
+               <!-- <tr
+                    *ngFor="let items of addedNewProposalsToProposalId; let i = index"
+                    [attr.data-index]="i"
+                >
+                    <td>{{i + 1}}</td>
+                    <td>{{items.TransporterId}}</td>
+                    <td>{{items.TranAmount}}</td>
+                    <td>{{items.LoadContId}}</td>
+                    <td>{{items.LoadContAmount}}</td>
+                    <td>{{items.UnloadContId}}</td>
+                    <td>{{items.UnloadContAmount}}</td>
+                    <td>
+                        <button
+                            class="btn btn"
+                            style="cursor: pointer;background-color: #D50000 !important;color:#fff"
+                            (click)="delete(items)"
+                        >
+                            <i
+                                class="fa fa-trash"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
+                    </td>
+        
+                </tr>  -->
+                <tr
+                *ngFor="let items of newTransporterDetails; let i = index"
+                [attr.data-index]="i"
+            >
+                <td>{{i + 1}}</td>
+                <td>{{items.TransporterId}}</td>
+                <td>{{items.TransporterAmount}}</td>
+                <td>{{items.LoadingContId}}</td>
+                <td>{{items.LoadingContAmount}}</td>
+                <td>{{items.UnloadingContId}}</td>
+                <td>{{items.UnloadingContAmount}}</td>
+                <td>{{items.SuppliedQty}}</td>
+                <td>{{items.SuppliedPrice}}</td>
+                <td>
+                    <button
+                        class="btn btn"
+                        style="cursor: pointer;background-color: #D50000 !important;color:#fff"
+                        (click)="delete(items)"
+                    >
+                        <i
+                            class="fa fa-trash"
+                            aria-hidden="true"
+                        ></i>
+                    </button>
+                </td>
+    
+            </tr> 
+            </tbody>
+        </table>
+        <div align="right" class="padding-right" *ngIf="newTransporterDetails.length !=0">
+                <button mat-raised-button (click)="saveNewRecords()"  color="primary">Save</button>
+            </div>
+</div>
 <div
     fxLayout="row"
     fxLayoutAlign="start start"
@@ -147,6 +330,7 @@
         </div>
     </div>
     </div>
+   
     <div class="panel-body">
         <table
         class="table table-striped table-bordered table-list"
@@ -159,15 +343,17 @@
                      <th>POType</th>
                     <!-- <th scope="col">TransporterId</th> -->
                     <th>TransporterName</th>
-                    <th>TransporterAmount</th>
+                    <!-- <th>TransporterAmount</th> -->
                     <!-- <th scope="col"> LoadingContId</th> -->
                     <th>LoadingContName</th>
-                    <th>LoadingContAmount</th>
+                    <!-- <th>LoadingContAmount</th> -->
                     <!-- <th scope="col">UnloadingContId</th> -->
                     <th>UnloadingContName</th>
-                    <th>UnloadingContAmount</th>
+                    <!-- <th>UnloadingContAmount</th> -->
                     <th>SuppliedQty</th>
                     <th>SuppliedPrice</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -181,73 +367,61 @@
                     <td>{{items.POType}}</td>
                     <!-- <td>{{items.TransporterId}}</td> -->
                     <td>{{items.TransporterName}}</td>
-                    <td>  <mat-form-field>
-                        <input
-                            placeholder="TransporterAmount"
-                            matInput
-                            [(ngModel)]="items.TransporterAmount"
-                        >
-                    </mat-form-field>
-                </td>
+                    <!-- <td>{{items.TransporterAmount}}</td> -->
+                   
                     <!-- <td>{{items.LoadingContId}}</td> -->
                     <td>{{items.LoadingContName}}</td>
-                    <td>
-                        <mat-form-field>
-                            <input
-                                placeholder="LoadingContAmount"
-                                matInput
-                                [(ngModel)]="items.LoadingContAmount"
-                            >
-                        </mat-form-field>
-                    </td>
+                    <!-- <td>{{items.LoadingContAmount}}</td> -->
+                  
                     <!-- <td>{{items.UnloadingContId}}</td> -->
                     <td>{{items.UnloadingContName}}</td>
+                    <!-- <td>{{items.UnloadingContAmount}}</td> -->
+                    <td>{{items.SuppliedQty}}</td>
+                    <td>{{items.SuppliedPrice}}</td>
                     <td>
-                            <mat-form-field>
-                                    <input
-                                        placeholder="UnloadingContAmount"
-                                        matInput
-                                        [(ngModel)]="items.UnloadingContAmount"
-                                    >
-                                </mat-form-field>
+                            <button
+                             class="btn btn padding-left"
+                             style="cursor: pointer;color:#fff"
+                           (click)="openModalForEdit(items,template)"
+                         >
+                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                         </button>
                     </td>
                     <td>
-                    <mat-form-field>
-                        <input
-                            placeholder="SuppliedQty"
-                            matInput
-                            [(ngModel)]="items.SuppliedQty"
+                            <button
+                            class="btn btn"
+                            style="cursor: pointer;background-color: #D50000 !important;color:#fff;margin-left:8px"
+                            (click)="deleteRecords(items,template2)"
                         >
-                    </mat-form-field></td>
-                    <td>
-                            <mat-form-field>
-                                    <input
-                                        placeholder="SuppliedPrice"
-                                        matInput
-                                        [(ngModel)]="items.SuppliedPrice"
-                                    >
-                                </mat-form-field>
+                            <i
+                                class="fa fa-trash"
+                                aria-hidden="true"
+                            ></i>
+                        </button>
                     </td>
-    
                 </tr>
             </tbody>
         </table>
        
     </div>
-    <div
-align="left"
-class="padding-right"
->
-<button
-mat-raised-button
-fxFlex="16"
-(click)="update()"
-color="primary"
->
-SAVE
-</button>
-
-</div>
 
 </div>
     </div>
+
+    <ng-template #template  style="width:1308px;">
+            <div class="modal-header" style="background-color:#fff;width: 900px;">
+              <h4 class="modal-title pull-left">Modal</h4>
+
+            </div>
+            <div class="modal-body" style="background-color:#fff;width: 900px;">
+             <app-editamendpermission [Input]="(InputDetails)"></app-editamendpermission>
+            </div>
+          </ng-template>
+
+          <ng-template #template2 style="width:20px !important">
+                <div class="modal-body text-center" style="background-color:#fff !important">
+                  <p>Are you sure you want to delete?</p>
+                  <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+                  <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                </div>
+              </ng-template>
