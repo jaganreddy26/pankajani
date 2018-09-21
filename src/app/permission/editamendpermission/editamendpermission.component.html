@@ -15,11 +15,11 @@
     </div>
     <div class="padding-left">
         <span style="font-weight:400">UnloadContId : </span>
-        <span style="background-color: bisque">{{EditPermissionDetails.UnLoadingContractorAmount}}</span>
+        <span style="background-color: bisque">{{EditPermissionDetails.UnLoadingContractorName}}</span>
     </div>
     <div class="padding-left">
-        <span style="font-weight:400">ProposalId : </span>
-        <span style="background-color: bisque">{{editProposalDetails.PermissionId}}</span>
+        <span style="font-weight:400">PermissionId : </span>
+        <span style="background-color: bisque">{{EditPermissionDetails.PermissionId}}</span>
     </div>
 </div>
 </div>
@@ -27,16 +27,24 @@
 <div class="example-container">
     
 <mat-form-field fxFlex="30" class="padding-left">
-  <input matInput placeholder="TransporterAmount"  [(ngModel)]="editProposalDetails.TransporterAmount" >
+  <input matInput placeholder="TransporterAmount"  [(ngModel)]="EditPermissionDetails.TransporterAmount" >
 </mat-form-field>
    
 <mat-form-field fxFlex="30" class="padding-left">
-  <input matInput placeholder="LoadingContractorAmount" [(ngModel)]="editProposalDetails.LoadingContractorAmount">
+  <input matInput placeholder="LoadingContractorAmount" [(ngModel)]="EditPermissionDetails.LoadingContractorAmount">
  </mat-form-field>
  <mat-form-field fxFlex="30" class="padding-left">
-   <input matInput placeholder="UnLoadingContractorAmount" [(ngModel)]="editProposalDetails.UnLoadingContractorAmount">
+   <input matInput placeholder="UnLoadingContractorAmount" [(ngModel)]="EditPermissionDetails.UnLoadingContractorAmount">
   </mat-form-field>
-  
+  <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="SuppliedQty" [(ngModel)]="EditPermissionDetails.SuppliedQty">
+   </mat-form-field>
+   <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="SuppliedPrice" [(ngModel)]="EditPermissionDetails.SuppliedPrice">
+   </mat-form-field>
 
  
 </div>
+<div align="right">
+    <button mat-button style="color:#fff !important" (click)="updateRecord()">Update</button>
+  </div>

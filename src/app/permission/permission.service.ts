@@ -51,8 +51,18 @@ export class PermissionService {
     this.url= this.host+'/api/UbtApi/GetIndividualPermissionTransporter';
     return this.http.post(this.url,data)
   } 
+  // SAVE INDIVIDUAL PERMISSION TRANSPORTER
+  updateIndividualRecords(data){
+    this.url =this.host+'/api/UbtApi/EditIndividualPermissionTransporter';
+    return this.http.post(this.url,data)
+  }
   deleteIndividualRecords(data){
     this.url =this.host+'/api/UbtApi/DeleteIndividualPermissionTransporter';
+    return this.http.post(this.url,data)
+  }
+  // APPROVE & SEND PERMISSION
+  approveAndSendPermission(data){
+    this.url =this.host+'/api/UbtApi/ChangePermissionStatus';
     return this.http.post(this.url,data)
   }
 }

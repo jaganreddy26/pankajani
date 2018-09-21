@@ -280,10 +280,42 @@ deletInputObj:any={};
        })
       
        this.modalRef.hide();
+       let obj={
+        'PermissionId':this.Permissionid
+       }
+      // this.Permissionid=this.Permissionid;
+   
+       this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+         console.log(data);
+         this.ubtDetails=data.ubt;
+         this.PermissionDetails=data.PermissionData;
+         this.PoId=data.PermissionData[0].POId;
+         console.log(this.PoId);
+       })
    }
    decline(){
      this.modalRef.hide();
    }
+
+   onHide()
+   {
+     this.modalRef.hide();
+     let obj={
+      'PermissionId':this.Permissionid
+     }
+    // this.Permissionid=this.Permissionid;
+ 
+     this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+       console.log(data);
+       this.ubtDetails=data.ubt;
+       this.PermissionDetails=data.PermissionData;
+       this.PoId=data.PermissionData[0].POId;
+       console.log(this.PoId);
+     })
+   }
+
+
+
   onchange($event) {
     this.Id = $event
   }
