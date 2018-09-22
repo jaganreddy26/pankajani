@@ -135,6 +135,12 @@ podata:any=[];
   console.log(array);
    this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
      console.log(data);
+     if(data !== 'null'){
+
+      this.alertService.alert(AlertType.Success,"Permission Created Successfuly with Id As :"+ data)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
    })
   }
   onchange($event) {

@@ -36,8 +36,8 @@ EditPermissionDetails:any={};
   "UnloadingContId": this.EditPermissionDetails.UnLoadingContractorId,
   "UnloadingContAmount": this.EditPermissionDetails.UnLoadingContractorAmount,
   "SuppliedQty":this.EditPermissionDetails.SuppliedQty,
-  "SuppliedPrice":this.EditPermissionDetails.SuppliedPrice,
-  "POId":34
+  "SuppliedPrice":this.EditPermissionDetails.SuppliedPrice
+
 
     }
    //console.log(obj);

@@ -40,6 +40,7 @@ export class AmendpermissionComponent implements OnInit {
     PermissionDetails:any=[];
     PoId:any;
     Permissionid:any;
+    PermissionStatus:any;
     ///Adding new Proposal to proposalID
 transporter:any=[];
 loadingContractor:any=[];
@@ -170,6 +171,7 @@ deletInputObj:any={};
       this.ubtDetails=data.ubt;
       this.PermissionDetails=data.PermissionData;
       this.PoId=data.PermissionData[0].POId;
+      this.PermissionStatus=data.PermissionData[0].PermissionStatus;
       console.log(this.PoId);
     })
 
@@ -215,21 +217,23 @@ deletInputObj:any={};
         }else{
           this.alertService.alert(AlertType.Error,"Something went wrong");
         }
+        this.newTransporterDetails=[];
+        ///Refresh the Data After Adding new Transporter to Permissiob Id
+        let obj={
+          'PermissionId':this.Permissionid
+         }
+         this.Permissionid=this.Permissionid;
+     
+         this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+           console.log(data);
+           this.ubtDetails=data.ubt;
+           this.PermissionDetails=data.PermissionData;
+           this.PoId=data.PermissionData[0].POId;
+           this.PermissionStatus=data.PermissionData[0].PermissionStatus;
+           console.log(this.PoId);
+         })
     })
-    this.newTransporterDetails=[];
-    ///Refresh the Data After Adding new Transporter to Permissiob Id
-    let obj={
-      'PermissionId':this.Permissionid
-     }
-     this.Permissionid=this.Permissionid;
- 
-     this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
-       console.log(data);
-       this.ubtDetails=data.ubt;
-       this.PermissionDetails=data.PermissionData;
-       this.PoId=data.PermissionData[0].POId;
-       console.log(this.PoId);
-     })
+   
    }
    openModalForEdit(items,template: TemplateRef<any>) {
     
@@ -290,6 +294,7 @@ deletInputObj:any={};
          this.ubtDetails=data.ubt;
          this.PermissionDetails=data.PermissionData;
          this.PoId=data.PermissionData[0].POId;
+         this.PermissionStatus=data.PermissionData[0].PermissionStatus;
          console.log(this.PoId);
        })
    }
@@ -310,6 +315,7 @@ deletInputObj:any={};
        this.ubtDetails=data.ubt;
        this.PermissionDetails=data.PermissionData;
        this.PoId=data.PermissionData[0].POId;
+       this.PermissionStatus=data.PermissionData[0].PermissionStatus;
        console.log(this.PoId);
      })
    }
