@@ -65,4 +65,9 @@ export class PermissionService {
     this.url =this.host+'/api/UbtApi/ChangePermissionStatus';
     return this.http.post(this.url,data)
   }
+  // CONFIRM PERMISSION
+  confirmPermission(data){
+    this.url =this.host+'/api/UbtApi/ChangePermissionStatus';
+    return this.http.post(this.url,data)
+  }
 }
