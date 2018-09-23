@@ -38,6 +38,8 @@ seekPOdetailsData:any={};
 suppliedQtyValue:any;
 suppliedPriceValue:any;
 saveSeekPOData:any=[];
+poId:any;
+inputProposalId:any;
   constructor(private poService:PoService,private alertService :AlertService) { 
     this.getCustomer();
    
@@ -127,11 +129,14 @@ console.log(this.nodes);
   let obj={
     "ProposalId":$event.node.data.Id
   }
+  this.inputProposalId=$event.node.data.Id;
   this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
     //console.log(data);
     this.seekPOdetails=data.proposaldata;
     console.log(this.seekPOdetails);
     this.seekPOdetailsData=data.proposaldata[0];
+    this.poId=data.proposaldata[0].POId;
+    console.log(this.poId)
 //     console.log(this.seekPOdetailsData);
     this.ubtData=data.ubt;
 
@@ -160,6 +165,26 @@ save(){
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
     }
+
+    let obj={
+      "ProposalId": this.inputProposalId
+    }
+ 
+    this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
+      //console.log(data);
+      this.seekPOdetails=data.proposaldata;
+      console.log(this.seekPOdetails);
+      this.seekPOdetailsData=data.proposaldata[0];
+      this.poId=data.proposaldata[0].POId;
+      console.log(this.poId)
+  //     console.log(this.seekPOdetailsData);
+      this.ubtData=data.ubt;
+  
+  
+  // this.SuppliedQty1=this.seekPOdetailsData.SuppliedQty;
+  // console.log(this.SuppliedQty1)
+  
+    })
     
   })
 

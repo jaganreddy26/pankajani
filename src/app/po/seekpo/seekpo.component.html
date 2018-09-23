@@ -131,6 +131,10 @@
                     <span style="font-weight:400">ProposalId :</span>
                     <span style="background-color: cadetblue">{{ubtData.ProposalId}}</span>
                 </div>
+                <div class="padding-left">
+                    <span style="font-weight:400">poId :</span>
+                    <span style="background-color: cadetblue">{{poId}}</span>
+                </div>
             </div>
 
         </div>
@@ -199,7 +203,7 @@
         </div>
         <div
         align="right"
-        class="padding-right"
+        class="padding-right" *ngIf='poId==""'
     >
         <button
             mat-raised-button
@@ -207,7 +211,7 @@
             (click)="save()"
             color="primary"
         >
-            SAVE
+            CREATE PO
         </button>
 
     </div>
