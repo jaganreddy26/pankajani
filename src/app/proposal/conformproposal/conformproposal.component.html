@@ -112,6 +112,10 @@
                 <span style="font-weight:400">ProposalId : </span>
                 <span>{{ProposalId}}</span>
             </div>
+            <div class="padding-left">
+                <span style="font-weight:400">ProposalIdStatus : </span>
+                <span>{{ProposalIdStatus}}</span>
+            </div>
         </div>
     </div>
     <table class="table table-striped table-bordered table-list">
@@ -143,12 +147,12 @@
         </tr>
         </tbody>
     </table>
-    <div align="right" class="padding"
+    <div align="right" class="padding" *ngIf='ProposalIdStatus=="Open      " || ProposalIdStatus=="Sent      "'
 
     >
         <button  mat-raised-button (click)="saveDocumentPath()"  color="primary">SaveDocumentPath</button>
       
     </div>
-
+ 
 </div>
 </div>

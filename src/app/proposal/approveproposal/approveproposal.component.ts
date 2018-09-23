@@ -28,6 +28,7 @@ export class ApproveproposalComponent implements OnInit {
   GoodsType:any;
   ProposalId:any;
   ProposalIdStatus:any;
+  inputProposalId:any;
     //step 2 for Tree struture
     nodes:any=[];
     options: ITreeOptions = {
@@ -115,6 +116,7 @@ export class ApproveproposalComponent implements OnInit {
     let obj ={
       'ProposalId': $event.node.data.Id,
     }
+    this.inputProposalId=$event.node.data.Id;
     this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
      this.ProposalsDetailsByID=data;
     this.UbtId=data[0].UbtId;
@@ -137,6 +139,18 @@ export class ApproveproposalComponent implements OnInit {
             }else{
               this.alertService.alert(AlertType.Error,"Something went wrong");
             }
+            let obj ={
+              'ProposalId': this.inputProposalId,
+            }
+           // this.inputProposalId=$event.node.data.Id;
+            this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+             this.ProposalsDetailsByID=data;
+            this.UbtId=data[0].UbtId;
+            this.CustomerName=data[0].CustomerName;
+            this.GoodsType=data[0].GoodsType;
+            this.ProposalId=data[0].ProposalId;
+            this.ProposalIdStatus=data[0].Status;
+              })
         })
       }
       approveAndSend(){
@@ -152,6 +166,18 @@ export class ApproveproposalComponent implements OnInit {
             }else{
               this.alertService.alert(AlertType.Error,"Something went wrong");
             }
+            let obj ={
+              'ProposalId': this.inputProposalId,
+            }
+           // this.inputProposalId=$event.node.data.Id;
+            this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+             this.ProposalsDetailsByID=data;
+            this.UbtId=data[0].UbtId;
+            this.CustomerName=data[0].CustomerName;
+            this.GoodsType=data[0].GoodsType;
+            this.ProposalId=data[0].ProposalId;
+            this.ProposalIdStatus=data[0].Status;
+              })
         })
       }
   onchange($event) {

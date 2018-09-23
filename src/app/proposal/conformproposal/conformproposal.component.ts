@@ -21,12 +21,14 @@ export class ConformproposalComponent implements OnInit {
   status:any=[];
   StatusName:any;
   value:any;
+  inputProposalId:any;
   //
   ProposalsDetailsByID:any=[];
   UbtId:any;
   CustomerName:any;
   GoodsType:any;
   ProposalId:any;
+  ProposalIdStatus:any;
    //step 2 for Tree struture
    nodes:any=[];
    options: ITreeOptions = {
@@ -114,12 +116,14 @@ export class ConformproposalComponent implements OnInit {
     let obj ={
       'ProposalId': $event.node.data.Id,
     }
+    this.inputProposalId=$event.node.data.Id,
     this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
      this.ProposalsDetailsByID=data;
     this.UbtId=data[0].UbtId;
     this.CustomerName=data[0].CustomerName;
     this.GoodsType=data[0].GoodsType;
     this.ProposalId=data[0].ProposalId;
+    this.ProposalIdStatus=data[0].Status;
       })
       }
 
@@ -137,6 +141,19 @@ export class ConformproposalComponent implements OnInit {
         {
           this.alertService.alert(AlertType.Error,"Filepath Is Not Saved");
         }
+
+        let obj ={
+          'ProposalId':this.inputProposalId,
+        }
+        //this.inputProposalId=$event.node.data.Id,
+        this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>{
+         this.ProposalsDetailsByID=data;
+        this.UbtId=data[0].UbtId;
+        this.CustomerName=data[0].CustomerName;
+        this.GoodsType=data[0].GoodsType;
+        this.ProposalId=data[0].ProposalId;
+        this.ProposalIdStatus=data[0].Status;
+          })
        })
       }
   onchange($event) {
