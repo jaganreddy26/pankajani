@@ -1,3 +1,122 @@
 <mat-toolbar>
   <span>Create Offder</span>
 </mat-toolbar>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+    <table class="table table-striped table-bordered table-list">
+        <thead>
+            <tr style="color:#6f6f6f;background-color:#f0f0f0" >
+                <th>S.No</th>
+                <th>PoId</th>
+                <th>Vendor Type</th>
+                <th>Vendor Name</th>
+                <th>Seek Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="PoId"
+                            [(ngModel)]="SelectedPOId"
+                            (ngModelChange)="onchangePOId($event)"
+                        >
+                            <mat-option
+                                *ngFor="let item of poIds"
+                                [value]="item.POId"
+                            >
+                                {{item.POId}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="VendorType"
+                            [(ngModel)]="SelectedVendorType"
+                            (ngModelChange)="onchangeVendorType($event)"
+                        >
+                            <mat-option
+                                *ngFor="let item of vendorType"
+                                [value]="item.Name"
+                            >
+                                {{item.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field>
+                      <mat-select
+                          placeholder="VendorName"
+                          [(ngModel)]="SelectedVendorName"
+                          (ngModelChange)="onchangeVendorName($event)"
+                      >
+                          <mat-option
+                              *ngFor="let item of vendorName"
+                              [value]="item.VendorId"
+                          >
+                              {{item.VendorName}}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input placeholder="Rate"
+                      matInput
+                      [(ngModel)]="Rate"
+                  >
+              </mat-form-field>
+              </td>
+             
+
+                <td>
+                    <button
+                        class="btn btn"
+                        style="cursor: pointer;background-color: #3e54af;color:#fff"
+                        (click)="add()"
+                    >
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr
+            *ngFor='let items of addedCreateOfferDetails ;let i = index'
+            [attr.data-index]="i" 
+        >
+            <td>{{i + 1}}</td>
+            <td>{{items.PoId}}</td>
+            <td>{{items.VendorType}}</td>
+            <td>{{items.VendorName}}</td>
+            <td>{{items.Rate}}</td>
+          
+            <td>
+                <button
+                    class="btn btn"
+                    style="cursor: pointer;background-color: #D50000 !important;color:#fff"
+                    (click)="delete(items)"
+                >
+                    <i
+                        class="fa fa-trash"
+                        aria-hidden="true"
+                    ></i>
+                </button>
+            </td>
+            
+        </tr>
+       
+        </tbody>
+    </table>
+    <!-- <div align="center">
+        <pagination-controls  (pageChange)="p = $event"></pagination-controls>
+        <button mat-raised-button (click)="save()" color="primary">Save</button>
+      </div> -->
+</div>
+<div align="right" class="padding-right">
+    <button mat-raised-button (click)="save()" *ngIf='addedCreateOfferDetails.length !=0' color="primary">Save</button>
+</div>

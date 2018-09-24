@@ -4,7 +4,7 @@ import { SharedModule} from '../shared/shared.module';
 import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 import { SeekofferComponent } from './seekoffer/seekoffer.component';
 import { CreateofferComponent } from './createoffer/createoffer.component';
-
+import {OfferService} from './offer.service';
 
 const routes: Routes = [
     { path: 'Seekoffer', component:SeekofferComponent},
@@ -20,7 +20,7 @@ const routes: Routes = [
       RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules ,useHash:true }),
      SharedModule.forRoot()
      ],
-    providers: [],
+    providers: [OfferService],
     declarations: [SeekofferComponent, CreateofferComponent],
     exports: [RouterModule],
   })

@@ -21,14 +21,14 @@
                     <mat-form-field>
                         <mat-select
                             placeholder="PoId"
-                            [(ngModel)]="goodsTypeSelected"
-                            (ngModelChange)="onchangeGoodsType($event)"
+                            [(ngModel)]="SelectedPOId"
+                            (ngModelChange)="onchangePOId($event)"
                         >
                             <mat-option
-                                *ngFor="let item of goodsType"
-                                [value]="item.GoodsTypeName"
+                                *ngFor="let item of poIds"
+                                [value]="item.POId"
                             >
-                                {{item.GoodsTypeName}}
+                                {{item.POId}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -37,14 +37,14 @@
                     <mat-form-field>
                         <mat-select
                             placeholder="VendorType"
-                            [(ngModel)]="categoryIdSelected"
-                            (ngModelChange)="onchangeCategoryName($event)"
+                            [(ngModel)]="SelectedVendorType"
+                            (ngModelChange)="onchangeVendorType($event)"
                         >
                             <mat-option
-                                *ngFor="let item of CategoryNameList"
-                                [value]="item.CategoryId"
+                                *ngFor="let item of vendorType"
+                                [value]="item.Name"
                             >
-                                {{item.CategoryName}}
+                                {{item.Name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -53,14 +53,14 @@
                   <mat-form-field>
                       <mat-select
                           placeholder="VendorName"
-                          [(ngModel)]="goodsTypeSelected"
-                          (ngModelChange)="onchangeGoodsType($event)"
+                          [(ngModel)]="SelectedVendorName"
+                          (ngModelChange)="onchangeVendorName($event)"
                       >
                           <mat-option
-                              *ngFor="let item of goodsType"
-                              [value]="item.GoodsTypeName"
+                              *ngFor="let item of vendorName"
+                              [value]="item.VendorId"
                           >
-                              {{item.GoodsTypeName}}
+                              {{item.VendorName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -69,14 +69,14 @@
                   <mat-form-field>
                       <mat-select
                           placeholder="SeekType"
-                          [(ngModel)]="categoryIdSelected"
-                          (ngModelChange)="onchangeCategoryName($event)"
+                          [(ngModel)]="SelectedSeekType"
+                          (ngModelChange)="onchangeSeekType($event)"
                       >
                           <mat-option
-                              *ngFor="let item of CategoryNameList"
-                              [value]="item.CategoryId"
+                              *ngFor="let item of seekType"
+                              value="{{item}}"
                           >
-                              {{item.CategoryName}}
+                              {{item}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -93,16 +93,16 @@
                     </button>
                 </td>
             </tr>
-            <!-- <tr
-            *ngFor='let items of addedUbtDetails | paginate: { itemsPerPage: 5, currentPage: p }; let i = index'
+            <tr
+            *ngFor='let items of addedSeekDetails ;let i = index'
             [attr.data-index]="i" 
         >
             <td>{{i + 1}}</td>
-            <td>{{items.GoodsType}}</td>
-            <td>{{items.CategoryId}}</td>
-            <td>{{items.Quantity}}</td>
-            <td>{{items.BasePrice}}</td>
-            <td>{{items.MaxMargin}}</td>
+            <td>{{items.PoId}}</td>
+            <td>{{items.VendorType}}</td>
+            <td>{{items.VendorName}}</td>
+            <td>{{items.SeekType}}</td>
+          
             <td>
                 <button
                     class="btn btn"
@@ -116,7 +116,7 @@
                 </button>
             </td>
             
-        </tr> -->
+        </tr>
        
         </tbody>
     </table>
@@ -124,4 +124,7 @@
         <pagination-controls  (pageChange)="p = $event"></pagination-controls>
         <button mat-raised-button (click)="save()" color="primary">Save</button>
       </div> -->
+</div>
+<div align="right" class="padding-right">
+    <button mat-raised-button (click)="save()" *ngIf='addedSeekDetails.length !=0' color="primary">Save</button>
 </div>
