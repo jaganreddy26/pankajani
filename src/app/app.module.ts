@@ -13,7 +13,7 @@ import { UbtModule } from './ubt/ubt.module';
 import { PoModule } from './po/po.module';
 import { ProposalModule } from './proposal/proposal.module';
 import {PermissionModule} from './permission/permission.module';
-
+import {OfferModule} from './Offer/offer.module';
 
 
 
@@ -39,7 +39,8 @@ import {PermissionModule} from './permission/permission.module';
     UbtModule,
     PoModule,
     ProposalModule,
-    PermissionModule
+    PermissionModule,
+    OfferModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
