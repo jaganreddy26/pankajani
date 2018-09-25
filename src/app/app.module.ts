@@ -14,7 +14,7 @@ import { PoModule } from './po/po.module';
 import { ProposalModule } from './proposal/proposal.module';
 import {PermissionModule} from './permission/permission.module';
 import {OfferModule} from './Offer/offer.module';
-
+import {WorkOrderModule} from './WorkOrder/workOrder.module';
 
 
 
@@ -41,6 +41,7 @@ import {OfferModule} from './Offer/offer.module';
     ProposalModule,
     PermissionModule,
     OfferModule,
+    WorkOrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
