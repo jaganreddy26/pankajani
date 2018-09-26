@@ -21,7 +21,7 @@ export class ViewworkorderComponent implements OnInit {
   value:any;
   StatusName:any;
   status:any=[];
-  inputpermissionId:any;
+
    //step 2 for Tree struture
    nodes:any=[];
    //STEP2
@@ -32,6 +32,9 @@ export class ViewworkorderComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
+ubtDetails:any={};
+woData:any=[];
+WOStatus:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -103,13 +106,16 @@ export class ViewworkorderComponent implements OnInit {
   }
   onActivate($event){
     let object={
-      "PermissionId":$event.node.data.Id
+      "WOId":$event.node.data.Id
     }
-   // console.log(object);
-    //this.inputpermissionId=$event.node.data.Id;
-    this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
-      console.log(data);
-    })
+ // console.log(object);
+this.workOrderService.viewWorkOrderDetails(object).subscribe((data:any)=>{
+  console.log(data);
+  this.ubtDetails=data.ubt;
+      this.woData=data.WOData;
+      this.WOStatus=data.WOData[0].WOStatus;
+})
+
   }
 
   onchange($event) {

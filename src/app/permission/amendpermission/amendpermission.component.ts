@@ -135,15 +135,15 @@ deletInputObj:any={};
 
       // objectTypeTransport type Input Object
       let objectTypeTransport = {
-        ObjectType: 'Transport' 
+        ObjectType: 'Transporter' 
       };
     // objectTypeLoading type Input Object
       let objectTypeLoading = {
-        ObjectType: 'Loading' 
+        ObjectType: 'Loading Contractor' 
       };
     // objectTypeUnloading type Input Object
      let objectTypeUnloading = {
-        ObjectType: 'Unloading' 
+        ObjectType: 'Unloading Contractor' 
       };
   
        this.permissionService.getVendor(objectTypeTransport).subscribe((data:any)=>{

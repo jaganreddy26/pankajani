@@ -31,4 +31,14 @@ export class WorkorderService {
     this.url = this.host+'/api/UbtApi/GetWOSelection';
     return this.http.post(this.url,data)
   }
+  // CreateWorkOrderId
+  createWorkOrder(data){
+    this.url= this.host+'/api/UbtApi/PostCreateWO';
+    return this.http.post(this.url,data);
+  }
+  // VIEW WORK ORDER
+  viewWorkOrderDetails(data){
+    this.url= this.host+'/api/UbtApi/GetWODetails';
+    return this.http.post(this.url,data);
+  }
 }

@@ -3,6 +3,7 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-c
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import {WorkorderService} from '../workorder.service';
+import { element } from 'protractor';
 @Component({
   selector: 'app-createworkorder',
   templateUrl: './createworkorder.component.html',
@@ -32,6 +33,10 @@ export class CreateworkorderComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
+//
+ubtDetails:any={};
+woData:any=[];
+PermissionStatus:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -109,7 +114,36 @@ export class CreateworkorderComponent implements OnInit {
     //this.inputpermissionId=$event.node.data.Id;
     this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
       console.log(data);
+      this.ubtDetails=data.Ubt;
+      this.woData=data.WOData;
+      this.PermissionStatus=data.WOData[0].PermissionStatus;
     })
+  }
+  save(){
+    let InputArray:any=[];
+     this.woData.forEach(element=>{
+       InputArray.push({
+        "TransporterId":element.TransporterId,
+        "TransporterAmount":element.TransporterAmount,
+        "LoadingContId":element.LoadingContId,
+        "LoadingContAmount":element.LoadingContAmount,
+        "UnloadingContId":element.UnloadingContId,
+        "UnloadingContAmount":element.UnloadingContAmount,
+        "Quantity":element.Quantity,
+        "PermissionId":element.PermissionId
+        
+       })
+     })
+     console.log(InputArray);
+     this.workOrderService.createWorkOrder(InputArray).subscribe((data:any)=>{
+       console.log(data);
+       if(data !== 'null'){
+
+        this.alertService.alert(AlertType.Success,"Work Order Id Created Successfuly with Id :"+ data)
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
+     })
   }
 
   onchange($event) {
