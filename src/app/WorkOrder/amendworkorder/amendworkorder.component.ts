@@ -3,6 +3,7 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-c
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import {WorkorderService} from '../workorder.service';
+import { element } from 'protractor';
 @Component({
   selector: 'app-amendworkorder',
   templateUrl: './amendworkorder.component.html',
@@ -32,6 +33,9 @@ export class AmendworkorderComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
+ubtDetails:any={};
+woData:any=[];
+WOStatus:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -103,12 +107,43 @@ export class AmendworkorderComponent implements OnInit {
   }
   onActivate($event){
     let object={
-      "PermissionId":$event.node.data.Id
+      "WOId":$event.node.data.Id
     }
    // console.log(object);
     //this.inputpermissionId=$event.node.data.Id;
-    this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
+    // this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
+    //   console.log(data);
+    // })
+    this.workOrderService.viewWorkOrderDetails(object).subscribe((data:any)=>{
       console.log(data);
+      this.ubtDetails=data.ubt;
+          this.woData=data.WOData;
+          this.WOStatus=data.WOData[0].WOStatus;
+    })
+  }
+  Update(){
+    let InputArray:any=[]
+    this.woData.forEach(element=>{
+      InputArray.push({
+        "TransporterId":element.TransporterId,
+        "TransporterAmount":element.TransporterAmount,
+        "LoadingContId":element.LoadingContId,
+        "LoadingContAmount":element.LoadingContAmount,
+        "UnloadingContId":element.UnloadingContId,
+        "UnloadingContAmount":element.UnloadingContAmount,
+        "Quantity":element.Quantity,
+        "WOId":element.WOId
+        
+      })
+    })
+ // console.log(InputArray);
+    this.workOrderService.updateWorkOrderDetails(InputArray).subscribe((data:any)=>{
+     // console.log(data);
+      if(data=='Success'){
+        this.alertService.alert(AlertType.Success,"Record Updated Sucessfully" )
+        }else{
+          this.alertService.alert(AlertType.Error,"Something went wrong");
+        }
     })
   }
 

@@ -41,4 +41,15 @@ export class WorkorderService {
     this.url= this.host+'/api/UbtApi/GetWODetails';
     return this.http.post(this.url,data);
   }
+  // update Details
+  updateWorkOrderDetails(data){
+    this.url= this.host+'/api/UbtApi/AmendWO';
+    return this.http.post(this.url,data);
+  }
+  // Approve WO
+  approveWorkOrder(data){
+    this.url= this.host+'/api/UbtApi/ChangeWOStatus';
+    return this.http.post(this.url,data);
+  }
+
 }

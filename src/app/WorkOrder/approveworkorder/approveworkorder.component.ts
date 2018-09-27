@@ -3,6 +3,7 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-c
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import {WorkorderService} from '../workorder.service';
+import { element } from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-approveworkorder',
   templateUrl: './approveworkorder.component.html',
@@ -32,6 +33,10 @@ export class ApproveworkorderComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
+ubtDetails:any={};
+woData:any=[];
+WOStatus:any;
+InputWoId:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -103,12 +108,52 @@ export class ApproveworkorderComponent implements OnInit {
   }
   onActivate($event){
     let object={
-      "PermissionId":$event.node.data.Id
+      "WOId":$event.node.data.Id
     }
-   // console.log(object);
-    //this.inputpermissionId=$event.node.data.Id;
-    this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
+    this.InputWoId=$event.node.data.Id;
+    this.workOrderService.viewWorkOrderDetails(object).subscribe((data:any)=>{
       console.log(data);
+      this.ubtDetails=data.ubt;
+          this.woData=data.WOData;
+          this.WOStatus=data.WOData[0].WOStatus;
+    })
+  }
+  Approve(){
+    let InputArray:any=[]
+    this.woData.forEach(element=>{
+      InputArray.push({
+              "WOId":element.WOId,
+              "TransporterId":element.TransporterId,
+              "LoadingContId":element.LoadingContId,
+              "UnloadingContId":element.UnloadingContId,
+             "Status":'Approved'
+
+      })
+    })
+    console.log(InputArray);
+    this.workOrderService.approveWorkOrder(InputArray).subscribe((data:any)=>{
+      console.log(data);
+
+      if(data=='Success'){
+        this.alertService.alert(AlertType.Success,"Approved Updated Sucessfully" )
+        }
+        else if(data=='No record updated')
+        {
+          this.alertService.alert(AlertType.Error,"No Record updated");
+        }
+        else{
+          this.alertService.alert(AlertType.Error,"Something went wrong");
+        }
+        let object={
+          "WOId": this.InputWoId
+        }
+       
+        this.workOrderService.viewWorkOrderDetails(object).subscribe((data:any)=>{
+          console.log(data);
+          this.ubtDetails=data.ubt;
+              this.woData=data.WOData;
+              this.WOStatus=data.WOData[0].WOStatus;
+        })
     })
   }
 
