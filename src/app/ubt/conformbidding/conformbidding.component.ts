@@ -162,12 +162,13 @@ base64data:any
     let array:any=[];
     this.udtData.forEach(element=>{
       array.push({'UBTId':this.InputUbtId,
+                   'CustomerId':element.CustomerId,
                    'GoodsType': element.GoodsType,
                    'CategoryId': element.CategoryId,
-                   'CategoryName': element.CategoryName,
-                   'Quantity': element.Quantity, 
-                   'BasePrice':element.BasePrice,
-                   'MaxMargin':element.MaxMargin,
+                  //  'CategoryName': element.CategoryName,
+                  //  'Quantity': element.Quantity, 
+                  //  'BasePrice':element.BasePrice,
+                  //  'MaxMargin':element.MaxMargin,
                    'BiddingQty':element.BiddingQty,
                    'BiddingPrice':element.BiddingPrice
                   })
@@ -178,7 +179,7 @@ base64data:any
       "FilePath":'File/rasmi.pdf',
       "ConfirmBiddingUbt":array
     }
-   // console.log(object);
+  console.log(object);
    this.ubtService.confirmBidding(object).subscribe((data:any)=>{
      console.log(data);
      if(data=='Success'){
