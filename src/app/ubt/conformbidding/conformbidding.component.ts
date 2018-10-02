@@ -44,6 +44,8 @@ export class ConformbiddingComponent implements OnInit {
 file:any;
 filedata:any;
 base64data:any
+base64textString:any;
+
   constructor(private ubtService: UbtService,private alertService :AlertService) {
     this.getCustomer();
   }
@@ -56,21 +58,57 @@ base64data:any
       this.status = data;
     })
   }
-  changeListener($event) : void {
-    this.readThis($event.target);
-    console.log($event);
-  }
-  readThis(inputValue: any): void {
-    var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
 
-    myReader.onloadend = (e) => {
-      this.filedata = myReader.result;
-     this.base64data=this.filedata
-     // console.log(this.base64data);
-    }
-    myReader.readAsDataURL(file);
+
+  handleFileSelect(evt){
+    //console.log(evt);
+   
+
+    var fileType=evt.target.value;
+    console.log(fileType);
+    // let X=fileType.split("C:/fakepath/");
+    // console.log(X);
+    // let stringToSplit = "abc def ghi";
+    // let x = stringToSplit.split(" ");
+    // console.log(x[0]);
+
+    var files = evt.target.files;
+    var file = files[0];
+
+  if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload =this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
   }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
+          console.log(btoa(binaryString));
+          console.log(this.base64textString);
+  }
+
+
+  // changeListener($event) : void {
+  //       console.log($event);
+  //   this.readThis($event.target);
+
+  // }
+  // readThis(inputValue: any): void {
+  //   var file:File = inputValue.files[0];
+  //   var myReader:FileReader = new FileReader();
+
+  //   myReader.onloadend = (e) => {
+  //     this.filedata = myReader.result;
+    
+  //    this.base64data=this.filedata
+  //    // console.log(this.base64data);
+  //   }
+  //   myReader.readAsDataURL(file);
+  // }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {
       console.log(data);
@@ -159,35 +197,36 @@ base64data:any
   }
 
   send(){
-    let array:any=[];
-    this.udtData.forEach(element=>{
-      array.push({'UBTId':this.InputUbtId,
-                   'CustomerId':element.CustomerId,
-                   'GoodsType': element.GoodsType,
-                   'CategoryId': element.CategoryId,
-                  //  'CategoryName': element.CategoryName,
-                  //  'Quantity': element.Quantity, 
-                  //  'BasePrice':element.BasePrice,
-                  //  'MaxMargin':element.MaxMargin,
-                   'BiddingQty':element.BiddingQty,
-                   'BiddingPrice':element.BiddingPrice
-                  })
-    })
-    //console.log(this.base64data);
-    //console.log(this.udtData);
-    let object={
-      "FilePath":'File/rasmi.pdf',
-      "ConfirmBiddingUbt":array
-    }
-  console.log(object);
-   this.ubtService.confirmBidding(object).subscribe((data:any)=>{
-     console.log(data);
-     if(data=='Success'){
-      this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
-      }else{
-        this.alertService.alert(AlertType.Error,"Something went wrong");
-      }
-   })
+  //   let array:any=[];
+  //   this.udtData.forEach(element=>{
+  //     array.push({'UBTId':this.InputUbtId,
+  //                  'CustomerId':element.CustomerId,
+  //                  'GoodsType': element.GoodsType,
+  //                  'CategoryId': element.CategoryId,
+  //                 //  'CategoryName': element.CategoryName,
+  //                 //  'Quantity': element.Quantity, 
+  //                 //  'BasePrice':element.BasePrice,
+  //                 //  'MaxMargin':element.MaxMargin,
+  //                  'BiddingQty':element.BiddingQty,
+  //                  'BiddingPrice':element.BiddingPrice
+  //                 })
+  //   })
+  //   //console.log(this.base64data);
+  //   //console.log(this.udtData);
+  //   let object={
+  //     "FilePath":'File/rasmi.pdf',
+  //     "ConfirmBiddingUbt":array
+  //   }
+  // console.log(object);
+  //  this.ubtService.confirmBidding(object).subscribe((data:any)=>{
+  //    console.log(data);
+  //    if(data=='Success'){
+  //     this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
+  //     }else{
+  //       this.alertService.alert(AlertType.Error,"Something went wrong");
+  //     }
+  //  })
+  console.log(this.base64data);
   }
 
   

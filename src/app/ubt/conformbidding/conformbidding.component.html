@@ -152,8 +152,8 @@ class="card"
   </table>
 </div>
 <div align="left" class="padding-right" *ngIf='udtData.length !=0'>
-    <input type="file" (change)="changeListener($event)"/>
-
+    <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+   
 </div>
 <div align="right" *ngIf='udtData.length !=0'>
     <button mat-raised-button (click)="send()"  color="primary">Save</button>
