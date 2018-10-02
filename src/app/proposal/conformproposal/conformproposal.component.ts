@@ -22,7 +22,14 @@ export class ConformproposalComponent implements OnInit {
   StatusName:any;
   value:any;
   inputProposalId:any;
-  //
+  FilePath:any;
+  ConfirmBiddingType:any;
+  ProposalIdFolderPath:any;
+////==========base64formatedata Varibles=========////
+base64textString:any;
+FileName:any;
+FileType:any;
+//////
   ProposalsDetailsByID:any=[];
   UbtId:any;
   CustomerName:any;
@@ -49,6 +56,35 @@ export class ConformproposalComponent implements OnInit {
     this.proposalService.GetStatus(object).subscribe((data:any )=>{
       this.status = data;
     })
+  }
+  handleFileSelect(evt){
+    //console.log(evt);
+    var File=evt.target.value;
+   // console.log(File);
+     let subStringData=File.substr(12,27);
+    //console.log(X);
+    var FileName = subStringData.split('.')[0];
+    var FileType =subStringData.split('.')[1];
+    //console.log(filename);
+   // console.log(FileType);
+   this.FileName=FileName;
+   this.FileType=FileType;
+   var files = evt.target.files;
+    var file = files[0];
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+  }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
+          // console.log(this.FileName);
+          // console.log(this.FileType);
+           //console.log(this.base64textString);
+          
   }
   getCustomer() {
     this.proposalService.getCustomerName().subscribe((data: any) => {
@@ -124,15 +160,25 @@ export class ConformproposalComponent implements OnInit {
     this.GoodsType=data[0].GoodsType;
     this.ProposalId=data[0].ProposalId;
     this.ProposalIdStatus=data[0].Status;
+    this.ProposalIdFolderPath=data[0].FolderPath;
       })
       }
 
       saveDocumentPath(){
-       let obj={
-        ProposalId:this.ProposalId,
-        FilePath:'/ConfirmProposal/JR ACCOUNTANT.pdf'
-       }
-       this.proposalService.conformProposal(obj).subscribe((data:any)=>{
+
+        let obj={
+          "FilePath":this.ProposalIdFolderPath,
+          "EncryptedFile":this.base64textString,
+          "FileExtn":this.FileType,
+          "UploadedFileName":this.FileName
+        }
+
+       let object={
+        "ProposalId":this.ProposalId,
+        "FileDetails":obj
+      }
+      console.log(object);
+       this.proposalService.conformProposal(object).subscribe((data:any)=>{
    console.log(data);
          if(data == 'Success'){
 
@@ -153,6 +199,7 @@ export class ConformproposalComponent implements OnInit {
         this.GoodsType=data[0].GoodsType;
         this.ProposalId=data[0].ProposalId;
         this.ProposalIdStatus=data[0].Status;
+        this.ProposalIdFolderPath=data[0].FolderPath;
           })
        })
       }

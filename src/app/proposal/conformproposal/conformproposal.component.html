@@ -147,6 +147,10 @@
         </tr>
         </tbody>
     </table>
+    <div align="left" class="padding-right" *ngIf='ProposalIdStatus=="Open      " || ProposalIdStatus=="Sent      "'>
+        <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+       
+    </div>
     <div align="right" class="padding" *ngIf='ProposalIdStatus=="Open      " || ProposalIdStatus=="Sent      "'
 
     >
