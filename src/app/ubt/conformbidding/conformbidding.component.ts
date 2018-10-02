@@ -39,13 +39,12 @@ export class ConformbiddingComponent implements OnInit {
   StatusName:any;
 
   InputUbtId:any;
-  
+  FilePath:any;
+  ConfirmBiddingType:any;
 ////==========base64formatedata Varibles=========////
-file:any;
-filedata:any;
-base64data:any
 base64textString:any;
-
+FileName:any;
+FileType:any;
   constructor(private ubtService: UbtService,private alertService :AlertService) {
     this.getCustomer();
   }
@@ -64,13 +63,20 @@ base64textString:any;
     //console.log(evt);
    
 
-    var fileType=evt.target.value;
-    console.log(fileType);
-    // let X=fileType.split("C:/fakepath/");
-    // console.log(X);
-    // let stringToSplit = "abc def ghi";
-    // let x = stringToSplit.split(" ");
-    // console.log(x[0]);
+    var File=evt.target.value;
+   // console.log(File);
+  
+
+     let subStringData=File.substr(12,27);
+    //console.log(X);
+    var FileName = subStringData.split('.')[0];
+    var FileType =subStringData.split('.')[1];
+    //console.log(filename);
+   // console.log(FileType);
+   this.FileName=FileName;
+   this.FileType=FileType;
+    
+  
 
     var files = evt.target.files;
     var file = files[0];
@@ -87,28 +93,10 @@ base64textString:any;
 _handleReaderLoaded(readerEvt) {
    var binaryString = readerEvt.target.result;
           this.base64textString= btoa(binaryString);
-          console.log(btoa(binaryString));
-          console.log(this.base64textString);
+     
   }
 
 
-  // changeListener($event) : void {
-  //       console.log($event);
-  //   this.readThis($event.target);
-
-  // }
-  // readThis(inputValue: any): void {
-  //   var file:File = inputValue.files[0];
-  //   var myReader:FileReader = new FileReader();
-
-  //   myReader.onloadend = (e) => {
-  //     this.filedata = myReader.result;
-    
-  //    this.base64data=this.filedata
-  //    // console.log(this.base64data);
-  //   }
-  //   myReader.readAsDataURL(file);
-  // }
   getCustomer() {
     this.ubtService.getCustomerName().subscribe((data: any) => {
       console.log(data);
@@ -151,30 +139,11 @@ _handleReaderLoaded(readerEvt) {
     }
     this.InputUbtId=item.UbtId;
     this.editDetails = true;
-   // this.udtData = [];
-
-    // this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
-    //   // this.udtData = data;
-    //   data.forEach(element => {
-    //     this.udtData.push({ "UBTId":this.InputUbtId,
-    //                         'GoodsType': element.GoodsType,
-    //                         'CategoryId': element.CategoryId,
-    //                         'CategoryName': element.CategoryName,
-    //                         'Quantity': element.Quantity, 
-    //                         'BasePrice':element.BasePrice,
-    //                         'MaxMargin':element.MaxMargin,
-    //                         'BiddingQty':element.BiddingQty,
-    //                         'BiddingPrice':element.BiddingPrice
-    //                       });
-    //     this.agencyIdSelected = element.AgencyId;
-    //     this.customerIdSelected = element.CustomerName;
-    //     this.confirmBiddingStatus = element.ConfirmBidding;
-    //   }); 
-    // })
     this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
       console.log(data);
      this.udtData=data;
-    
+    this.FilePath=data[0].FilePath;
+    this.ConfirmBiddingType=data[0].ConfirmBidding;
     })
   }
   onchange($event) {
@@ -197,36 +166,49 @@ _handleReaderLoaded(readerEvt) {
   }
 
   send(){
-  //   let array:any=[];
-  //   this.udtData.forEach(element=>{
-  //     array.push({'UBTId':this.InputUbtId,
-  //                  'CustomerId':element.CustomerId,
-  //                  'GoodsType': element.GoodsType,
-  //                  'CategoryId': element.CategoryId,
-  //                 //  'CategoryName': element.CategoryName,
-  //                 //  'Quantity': element.Quantity, 
-  //                 //  'BasePrice':element.BasePrice,
-  //                 //  'MaxMargin':element.MaxMargin,
-  //                  'BiddingQty':element.BiddingQty,
-  //                  'BiddingPrice':element.BiddingPrice
-  //                 })
-  //   })
-  //   //console.log(this.base64data);
-  //   //console.log(this.udtData);
-  //   let object={
-  //     "FilePath":'File/rasmi.pdf',
-  //     "ConfirmBiddingUbt":array
-  //   }
-  // console.log(object);
-  //  this.ubtService.confirmBidding(object).subscribe((data:any)=>{
-  //    console.log(data);
-  //    if(data=='Success'){
-  //     this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
-  //     }else{
-  //       this.alertService.alert(AlertType.Error,"Something went wrong");
-  //     }
-  //  })
-  console.log(this.base64data);
+
+   // console.log(this.FileName);
+    //console.log(this.FileType);
+    let array:any=[];
+    this.udtData.forEach(element=>{
+      array.push({'UBTId':this.InputUbtId,
+                   'CustomerId':element.CustomerId,
+                   'GoodsType': element.GoodsType,
+                   'CategoryId': element.CategoryId,
+                   'BiddingQty':element.BiddingQty,
+                   'BiddingPrice':element.BiddingPrice
+                  })
+    })
+  
+    let object={
+      "FilePath":this.FilePath,
+      "EncryptedFile":this.base64textString,
+      "FileExtn":this.FileType,
+      "UploadedFileName":this.FileName,
+      "ConfirmBiddingUbt":array
+    }
+ // console.log(object);
+  
+   this.ubtService.confirmBidding(object).subscribe((data:any)=>{
+     console.log(data);
+     if(data=='Success'){
+      this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
+
+      let obj={
+        "UBTId":this.InputUbtId
+      }
+    
+      this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
+        console.log(data);
+       this.udtData=data;
+      this.FilePath=data[0].FilePath;
+      this.ConfirmBiddingType=data[0].ConfirmBidding;
+      })
+   })
+
   }
 
   
