@@ -205,6 +205,14 @@
         align="right"
         class="padding-right" *ngIf='poId==""'
     >
+    <mat-form-field style="width:50%">
+        <input
+            placeholder="PoId"
+            matInput
+            [(ngModel)]="CreatedPoId"
+           
+        >
+    </mat-form-field>
         <button
             mat-raised-button
             fxFlex="16"

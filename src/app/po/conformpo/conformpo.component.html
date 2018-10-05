@@ -139,6 +139,10 @@
 
         </div>
         <div align="right" class="padding" *ngIf='currentPoType =="DUMMY" || currentPoType == null '>
+           
+                <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+               
+            
             <mat-form-field >
                 <mat-select placeholder="ConformStatus" [(ngModel)]="item" (ngModelChange)="conformType($event)">
                     <mat-option *ngFor="let item of conformPoStatus" value="{{item}}">

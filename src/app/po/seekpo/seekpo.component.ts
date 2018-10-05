@@ -3,6 +3,7 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-c
 import {PoService} from '../po.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from 'protractor';
 @Component({
   selector: 'app-seekpo',
   templateUrl: './seekpo.component.html',
@@ -40,6 +41,7 @@ suppliedPriceValue:any;
 saveSeekPOData:any=[];
 poId:any;
 inputProposalId:any;
+CreatedPoId:any;
   constructor(private poService:PoService,private alertService :AlertService) { 
     this.getCustomer();
    
@@ -157,11 +159,28 @@ save(){
 
   // this.seekPOdetails="";
   // console.log(this.seekPOdetails);
-  this.poService.saveSeekPOSelection(this.seekPOdetails).subscribe((data:any)=>{
+  let InputArray:any=[];
+  this.seekPOdetails.forEach(element=>{
+    InputArray.push({
+      "ProposalId":element.ProposalId,
+      "TransporterId":element.TransporterId,
+      "TransporterAmount":element.TransporterAmount,
+      "LoadingContId":element.LoadingContId,
+      "LoadingContAmount":element.LoadingContAmount,
+      "UnloadingContId":element.UnloadingContId,
+      "UnloadingContAmount":element.UnloadingContAmount,
+      "SuppliedQty":element.SuppliedQty,
+      "SuppliedPrice":element.SuppliedPrice,
+      "POId":this.CreatedPoId
+      
+    })
+  })
+ // console.log(InputArray);
+  this.poService.saveSeekPOSelection(InputArray).subscribe((data:any)=>{
     //console.log(data);
-    if(data !== 'null'){
+    if(data=='Success'){
 
-      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ data)
+      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ this.CreatedPoId)
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
     }

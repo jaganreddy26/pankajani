@@ -43,6 +43,11 @@ export class ConformpoComponent implements OnInit {
     idField: "Id",
     hasChildrenField: "nodes"
   };
+  ////==========base64formatedata Varibles=========////
+base64textString:any;
+FilePath:any;
+FileName:any;
+FileType:any;
   constructor(private poservice: PoService,private alertService :AlertService) {
     this.getCustomer();
   }
@@ -54,6 +59,31 @@ export class ConformpoComponent implements OnInit {
     this.poservice.GetStatus(object).subscribe((data: any) => {
       this.status = data;
     });
+  }
+  handleFileSelect(evt){
+    //console.log(evt);
+    var File=evt.target.value;
+   // console.log(File);
+     let subStringData=File.substr(12,27);
+    //console.log(X);
+    var FileName = subStringData.split('.')[0];
+    var FileType =subStringData.split('.')[1];
+    //console.log(filename);
+   // console.log(FileType);
+   this.FileName=FileName;
+   this.FileType=FileType;
+   var files = evt.target.files;
+    var file = files[0];
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+  }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
   }
   getCustomer() {
     this.poservice.getCustomerName().subscribe((data: any) => {
@@ -130,6 +160,8 @@ export class ConformpoComponent implements OnInit {
      this.currentPoId=data.POData[0].POId;
      this.currentPOStatus=data.POData[0].POStatus;
      this.currentPoType=data.POData[0].POType;
+     this.FilePath=data.POData[0].FolderPath;
+     
     //  console.log(this.currentPOStatus);
     //  console.log(this.currentPoId);
      console.log(this.currentPoType);
@@ -141,13 +173,21 @@ export class ConformpoComponent implements OnInit {
 
   conforPo(){
     let obj={
+  
       "POId":this.currentPoId,
-      "Type":this.type
+      "Type":this.type,
+      "FileDetails":{
+            "FilePath":this.FilePath,
+            "EncryptedFile":this.base64textString,
+            "FileExtn":this.FileType,
+           "UploadedFileName":this.FileName
+          }
+
     }
-    //console.log(obj);
+   // console.log(obj);
     this.poservice.confirmPurchaseOrder(obj).subscribe((data:any)=>{
       console.log(data);
-      if(data !== 'null'){
+      if(data=='Success'){
 
         this.alertService.alert(AlertType.Success,"Confirmed the PurchaseOrder to this POId :"+ this.currentPoId)
          /// ToRefershing the data
