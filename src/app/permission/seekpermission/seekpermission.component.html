@@ -133,6 +133,15 @@
             <span style="font-weight:400">Status :</span>
             <span>{{ubtDetails.Status}}</span>
         </div>
+    
+        <div class="padding-left">
+                <span style="font-weight:400">BiddingQty :</span>
+                <span>{{ubtDetails.BiddingQty}}</span>
+            </div>
+     <div class="padding-left">
+                    <span style="font-weight:400">BiddingPrice :</span>
+                    <span>{{ubtDetails.BiddingPrice}}</span>
+                </div>
     </div>
 </div>
 <div class="panel-body">
@@ -172,8 +181,26 @@
                 <!-- <td>{{items.UnloadingContId}}</td> -->
                 <td>{{items.UnloadingContName}}</td>
                 <td>{{items.UnloadingContAmount}}</td>
-                <td>{{items.SuppliedQty}}</td>
-                <td>{{items.SuppliedPrice}}</td>
+                <td>
+                    <mat-form-field style="width:50%">
+                            <input
+                                placeholder="SuppliedQty"
+                                matInput
+                                [(ngModel)]="items.SuppliedQty"
+                                (ngModelChange)="onchangeSuppliedQty($event)"
+                            >
+                        </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field style="width:50%">
+                            <input
+                                placeholder="SuppliedPrice"
+                                matInput
+                                [(ngModel)]="items.SuppliedPrice"
+                                (ngModelChange)="onchangeSuppliedPrice($event)"
+                            >
+                        </mat-form-field>
+                    </td>
 
             </tr>
         </tbody>

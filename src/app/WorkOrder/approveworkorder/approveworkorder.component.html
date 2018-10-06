@@ -185,6 +185,7 @@
 align="left"
 class="padding-right" *ngIf='WOStatus=="Open      "'
 >
+<input type="file" id="filePicker" (change)="handleFileSelect($event)">
 <button
 mat-raised-button
 fxFlex="16"

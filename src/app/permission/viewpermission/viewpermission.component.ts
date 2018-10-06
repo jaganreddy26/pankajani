@@ -35,7 +35,7 @@ export class ViewpermissionComponent implements OnInit {
   ////////////
   ubtDetails:any={}
   PermissionDetails:any=[];
-
+  PermissionStatus:any;
   constructor(private permissionService:PermissionService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -111,6 +111,7 @@ export class ViewpermissionComponent implements OnInit {
      console.log(data);
      this.ubtDetails=data.ubt;
      this.PermissionDetails=data.PermissionData;
+     this.PermissionStatus=data.PermissionData[0].PermissionStatus;
    })
   }
   onchange($event) {

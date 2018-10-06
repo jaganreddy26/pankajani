@@ -37,6 +37,11 @@ ubtDetails:any={};
 woData:any=[];
 WOStatus:any;
 InputWoId:any;
+      ////==========base64formatedata Varibles=========////
+base64textString:any;
+FileName:any;
+FileType:any;
+FolderPath:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -116,6 +121,7 @@ InputWoId:any;
       this.ubtDetails=data.ubt;
           this.woData=data.WOData;
           this.WOStatus=data.WOData[0].WOStatus;
+          this.FolderPath=data.WOData[0].FolderPath;
     })
   }
   Approve(){
@@ -130,8 +136,20 @@ InputWoId:any;
 
       })
     })
-    console.log(InputArray);
-    this.workOrderService.approveWorkOrder(InputArray).subscribe((data:any)=>{
+    // console.log(InputArray);
+    let InputObject={
+      "CreateWO":InputArray,
+      "FileDetails":{
+                    "FilePath":this.FolderPath,
+                    "EncryptedFile":this.base64textString,
+                    "FileExtn":this.FileType,
+                    "UploadedFileName":this.FileName
+                  }
+
+
+    }
+    console.log(InputObject);
+    this.workOrderService.approveWorkOrder(InputObject).subscribe((data:any)=>{
       console.log(data);
 
       if(data=='Success'){
@@ -155,6 +173,9 @@ InputWoId:any;
               this.WOStatus=data.WOData[0].WOStatus;
         })
     })
+    this.base64textString="";
+    this.FileType="";
+    this.FileName="";
   }
 
   onchange($event) {
@@ -172,6 +193,35 @@ InputWoId:any;
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+  handleFileSelect(evt){
+    //console.log(evt);
+    var File=evt.target.value;
+   // console.log(File);
+     let subStringData=File.substr(12,27);
+    //console.log(X);
+    var FileName = subStringData.split('.')[0];
+    var FileType =subStringData.split('.')[1];
+    //console.log(filename);
+   // console.log(FileType);
+   this.FileName=FileName;
+   this.FileType=FileType;
+   var files = evt.target.files;
+    var file = files[0];
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+  }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
+          // console.log(this.FileName);
+          // console.log(this.FileType);
+           //console.log(this.base64textString);
+          
   }
 
 }

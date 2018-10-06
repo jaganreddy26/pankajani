@@ -206,6 +206,7 @@ save(){
     })
     
   })
+  this.CreatedPoId="";
 
  
 }

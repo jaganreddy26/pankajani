@@ -38,6 +38,11 @@ export class ConfirmpermissionComponent implements OnInit {
       ////////////
       ubtDetails:any={}
       PermissionDetails:any=[];
+      ////==========base64formatedata Varibles=========////
+base64textString:any;
+FileName:any;
+FileType:any;
+FolderPath:any;
   constructor(private permissionService:PermissionService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -113,13 +118,14 @@ export class ConfirmpermissionComponent implements OnInit {
        this.ubtDetails=data.ubt;
        this.PermissionDetails=data.PermissionData;
        this.PermissionStatus=data.PermissionData[0].PermissionStatus;
+       this.FolderPath=data.PermissionData[0].FolderPath;
        console.log(this.PermissionStatus)
      })
   }
   confirm(){
-    let array:any=[];
+    let Inputarray:any=[];
     this.PermissionDetails.forEach(element=>{
-      array.push({
+      Inputarray.push({
         "PermissionId":element.PermissionId,
         "TransporterId":element.TransporterId,
         "LoadingContId":element.LoadingContId,
@@ -128,8 +134,19 @@ export class ConfirmpermissionComponent implements OnInit {
 
       })
     })
-   // console.log(array);
-   this.permissionService.confirmPermission(array).subscribe((data:any)=>{
+    let Inputobject={
+      "CreatePermission":Inputarray,
+      "FileDetails":{
+                    "FilePath":this.FolderPath,
+                     "EncryptedFile":this.base64textString,
+                     "FileExtn":this.FileType,
+                     "UploadedFileName":this.FileName
+                    }
+
+      
+    }
+   //console.log(Inputobject);
+  this.permissionService.confirmPermission(Inputobject).subscribe((data:any)=>{
      console.log(data);
      if(data=='Success'){
       this.alertService.alert(AlertType.Success,"Confirmed Sucessfully " )
@@ -144,9 +161,13 @@ export class ConfirmpermissionComponent implements OnInit {
          this.ubtDetails=data.ubt;
          this.PermissionDetails=data.PermissionData;
          this.PermissionStatus=data.PermissionData[0].PermissionStatus;
+         this.FolderPath=data.PermissionData[0].FolderPath;
          console.log(this.PermissionStatus)
        })
    })
+  this.base64textString="";
+  this.FileType="";
+  this.FileName="";
   }
   onchange($event) {
     this.Id = $event
@@ -163,6 +184,36 @@ export class ConfirmpermissionComponent implements OnInit {
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+
+  handleFileSelect(evt){
+    //console.log(evt);
+    var File=evt.target.value;
+   // console.log(File);
+     let subStringData=File.substr(12,27);
+    //console.log(X);
+    var FileName = subStringData.split('.')[0];
+    var FileType =subStringData.split('.')[1];
+    //console.log(filename);
+   // console.log(FileType);
+   this.FileName=FileName;
+   this.FileType=FileType;
+   var files = evt.target.files;
+    var file = files[0];
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+  }
+}
+
+_handleReaderLoaded(readerEvt) {
+   var binaryString = readerEvt.target.result;
+          this.base64textString= btoa(binaryString);
+          // console.log(this.FileName);
+          // console.log(this.FileType);
+           //console.log(this.base64textString);
+          
   }
 
 

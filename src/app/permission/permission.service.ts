@@ -62,7 +62,7 @@ export class PermissionService {
   }
   // APPROVE & SEND PERMISSION
   approveAndSendPermission(data){
-    this.url =this.host+'/api/UbtApi/ChangePermissionStatus';
+    this.url =this.host+'/api/UbtApi/ApprovePermissionStatus';
     return this.http.post(this.url,data)
   }
   // CONFIRM PERMISSION

@@ -128,8 +128,6 @@ podata:any=[];
         'SuppliedQty':element.SuppliedQty,
         'SuppliedPrice':element.SuppliedPrice,
         'POId':element.POId
-
-
       })
     })
   console.log(array);
@@ -159,5 +157,6 @@ podata:any=[];
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
+
 
 }
