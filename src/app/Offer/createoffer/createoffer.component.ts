@@ -15,6 +15,7 @@ export class CreateofferComponent implements OnInit {
   vendorName:any=[];
   SelectedVendorName:any;
   Rate:any;
+  PermitNo:any;
   addedCreateOfferDetails:any=[];
   constructor(private offerService:OfferService,private alertService :AlertService) {
     this.GetPoIds();
@@ -51,7 +52,8 @@ export class CreateofferComponent implements OnInit {
       'PoId':this.SelectedPOId,
       'VendorType':this.SelectedVendorType,
       'VendorName':this.SelectedVendorName,
-      'Rate':this.Rate
+      'Rate':this.Rate,
+      'PermitNo':this.PermitNo
     }
     console.log(object);
     this.addedCreateOfferDetails.push(object);
@@ -59,6 +61,7 @@ export class CreateofferComponent implements OnInit {
     this.SelectedVendorType="";
     this.SelectedVendorName="";
     this.Rate="";
+    this.PermitNo="";
   }
   delete(items){
     let index = this.addedCreateOfferDetails.indexOf(items);
@@ -69,7 +72,7 @@ export class CreateofferComponent implements OnInit {
     let InputArray:any=[];
     this.addedCreateOfferDetails.forEach(element => {
       InputArray.push({
-        "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"Rate":element.Rate
+        "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"Rate":element.Rate,"PermitNo":element.PermitNo
       })
       
     });

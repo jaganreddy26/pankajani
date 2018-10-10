@@ -35,6 +35,12 @@ export class SeekpermissionComponent implements OnInit {
 /////
 ubtDetails:any={};
 podata:any=[];
+Transporter:any=[];
+selectedTransporter:any;
+LoadingContractor:any=[];
+selectedLoadingContractor:any;
+UnloadingContractor:any=[];
+selectedUnLoadingContractor:any;
   constructor(private permissionService:PermissionService,private alertService :AlertService) { 
     this.getCustomer();
   }
@@ -114,16 +120,45 @@ podata:any=[];
    this.ubtDetails=data.Ubt;
    this.podata=data.POData;
   })
+ 
+  let objTransporter={
+    "POId":$event.node.data.Id,
+    "ObjectType":"Transporter"
+  }
+  //console.log(objTransporter)
+this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objTransporter).subscribe((data:any)=>{
+  // console.log(data);
+  this.Transporter=data;
+})
+  let objLoadingContractor={
+    "POId":$event.node.data.Id,
+    "ObjectType":"Loading Contractor"
+  }
+  //console.log(objLoadingContractor)
+  this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objLoadingContractor).subscribe((data:any)=>{
+   // console.log(data);
+  this.LoadingContractor=data;  
+  })
+  let objUnLoadingContractor={
+    "POId":$event.node.data.Id,
+    "ObjectType":"UnLoading Contractor"
+  }
+  //console.log(objUnLoadingContractor)
+  this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objUnLoadingContractor).subscribe((data:any)=>{
+    // console.log(data); 
+this.UnloadingContractor=data;
+  })
+
   }
   save(){
     let array:any=[];
     this.podata.forEach(element=>{
       array.push({
-        'TransporterId':element.TransporterId,
+        'TransporterId':this.selectedTransporter,
         'TransporterAmount':element.TransporterAmount,
-        'LoadingContId':element.LoadingContId,
+        'LoadingContId':this.selectedLoadingContractor,
         'LoadingContAmount':element.LoadingContAmount,
-        'UnloadingContId':element.UnloadingContId,
+        'UnloadingContId':this.selectedUnLoadingContractor,
         'UnloadingContAmount':element.UnloadingContAmount,
         'SuppliedQty':element.SuppliedQty,
         'SuppliedPrice':element.SuppliedPrice,
@@ -131,15 +166,15 @@ podata:any=[];
       })
     })
   console.log(array);
-   this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
-     console.log(data);
-     if(data !== 'null'){
+  //  this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
+  //    console.log(data);
+  //    if(data !== 'null'){
 
-      this.alertService.alert(AlertType.Success,"Permission Created Successfuly with Id As :"+ data)
-    }else{
-      this.alertService.alert(AlertType.Error,"Something went wrong");
-    }
-   })
+  //     this.alertService.alert(AlertType.Success,"Permission Created Successfuly with Id As :"+ data)
+  //   }else{
+  //     this.alertService.alert(AlertType.Error,"Something went wrong");
+  //   }
+  //  })
   }
   onchange($event) {
     this.Id = $event
@@ -156,6 +191,18 @@ podata:any=[];
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+  onchangeTransporter($event){
+    this.selectedTransporter=$event;
+   // console.log(this.selectedTransporter);
+  }
+  onchangeLoadingContractor($event){
+    this.selectedLoadingContractor=$event;
+   // console.log(this.selectedTransporter);
+  }
+  onchangeUnLoadingContractor($event){
+    this.selectedUnLoadingContractor=$event;
+   // console.log(this.selectedTransporter);
   }
 
 

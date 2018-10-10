@@ -26,6 +26,11 @@ export class PermissionService {
     this.url = this.host+'/api/UbtApi/GetUBT';
     return this.http.post(this.url,data)
   }
+  // Get Transporter, loading contractor, unloading contractor Details
+  getTransporterLoadingContractorUnLoadingContractorDetails(data){
+    this.url=this.host+'/api/UbtApi/GetVendorForPermission';
+    return this.http.post(this.url,data);
+  }
   getSeekPermissionDetailsByPoId(data){
     this.url=this.host+'/api/UbtApi/GetSeekPermissionSelection';
     return this.http.post(this.url,data);

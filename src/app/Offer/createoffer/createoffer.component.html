@@ -10,7 +10,8 @@
                 <th>PoId</th>
                 <th>Vendor Type</th>
                 <th>Vendor Name</th>
-                <th>Seek Type</th>
+                <th>Rate</th>
+                <th>PermitNo</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -73,6 +74,14 @@
                   >
               </mat-form-field>
               </td>
+              <td>
+                <mat-form-field>
+                  <input placeholder="PermitNo"
+                      matInput
+                      [(ngModel)]="PermitNo"
+                  >
+              </mat-form-field>
+              </td>
              
 
                 <td>
@@ -94,7 +103,7 @@
             <td>{{items.VendorType}}</td>
             <td>{{items.VendorName}}</td>
             <td>{{items.Rate}}</td>
-          
+            <td>{{items.PermitNo}}</td>
             <td>
                 <button
                     class="btn btn"
