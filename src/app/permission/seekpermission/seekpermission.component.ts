@@ -154,11 +154,11 @@ this.UnloadingContractor=data;
     let array:any=[];
     this.podata.forEach(element=>{
       array.push({
-        'TransporterId':this.selectedTransporter,
+        'TransporterId':element.selectedTransporter,
         'TransporterAmount':element.TransporterAmount,
-        'LoadingContId':this.selectedLoadingContractor,
+        'LoadingContId':element.LoadingContId,
         'LoadingContAmount':element.LoadingContAmount,
-        'UnloadingContId':this.selectedUnLoadingContractor,
+        'UnloadingContId':element.UnloadingContId,
         'UnloadingContAmount':element.UnloadingContAmount,
         'SuppliedQty':element.SuppliedQty,
         'SuppliedPrice':element.SuppliedPrice,
@@ -166,15 +166,15 @@ this.UnloadingContractor=data;
       })
     })
   console.log(array);
-  //  this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
-  //    console.log(data);
-  //    if(data !== 'null'){
+   this.permissionService.createPermissionByPoid(array).subscribe((data:any)=>{
+     console.log(data);
+     if(data !== 'null'){
 
-  //     this.alertService.alert(AlertType.Success,"Permission Created Successfuly with Id As :"+ data)
-  //   }else{
-  //     this.alertService.alert(AlertType.Error,"Something went wrong");
-  //   }
-  //  })
+      this.alertService.alert(AlertType.Success,"Permission Created Successfuly with Id As :"+ data)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
+   })
   }
   onchange($event) {
     this.Id = $event

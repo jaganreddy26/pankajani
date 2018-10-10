@@ -177,7 +177,7 @@
                 <mat-form-field>
                     <mat-select
                         placeholder="Transporter"
-                        [(ngModel)]="selectedTransporter"
+                        [(ngModel)]="items.TransporterId"
                         (ngModelChange)="onchangeTransporter($event)"
                     >
                         <mat-option
@@ -195,7 +195,7 @@
                     <mat-form-field>
                         <mat-select
                             placeholder="LoadingContractor"
-                            [(ngModel)]="selectedLoadingContractor"
+                            [(ngModel)]="items.LoadingContId"
                             (ngModelChange)="onchangeLoadingContractor($event)"
                         >
                             <mat-option
@@ -213,7 +213,7 @@
                         <mat-form-field>
                                 <mat-select
                                     placeholder="UnloadingContractor"
-                                    [(ngModel)]="selectedUnLoadingContractor"
+                                    [(ngModel)]="items.UnloadingContId"
                                     (ngModelChange)="onchangeUnLoadingContractor($event)"
                                 >
                                     <mat-option
