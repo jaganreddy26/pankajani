@@ -154,7 +154,7 @@ this.UnloadingContractor=data;
     let array:any=[];
     this.podata.forEach(element=>{
       array.push({
-        'TransporterId':element.selectedTransporter,
+        'TransporterId':element.TransporterId,
         'TransporterAmount':element.TransporterAmount,
         'LoadingContId':element.LoadingContId,
         'LoadingContAmount':element.LoadingContAmount,

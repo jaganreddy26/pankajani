@@ -158,28 +158,9 @@ export class ViewubtComponent implements OnInit {
               this.udtData = data;
               console.log(this.udtData)
             }
-            // else{
-            //   this.editDetails = false;
-            // }
+         
           
           })
-//     if($event.node.data.children){
 
-//     }
-//     else{
-//       this.editDetails = true;
-//       let object = { 
-//         'UbtId': $event.node.data.parent.UbtId,
-//         'CustomerId':this.customerId,
-//         "GoodsType":$event.node.parent.data.GoodsTypes,
-//         "CategoryId":$event.node.parent.data.Id
-//        }
-//        console.log(object);
-//           this.ubtService.getIndividualUBTCategoryDetails(object).subscribe((data: any) => {
-//            this.udtData = data;
-//            console.log(this.udtData)
-//           })
-
-//         }
 }
 }
