@@ -15,13 +15,7 @@ import { ProposalModule } from './proposal/proposal.module';
 import {PermissionModule} from './permission/permission.module';
 import {OfferModule} from './Offer/offer.module';
 import {WorkOrderModule} from './WorkOrder/workOrder.module';
-
-
-
-
-
-
-
+import {MasterDataModule} from './MasterData/masterData.module';
 
 
 @NgModule({
@@ -41,7 +35,8 @@ import {WorkOrderModule} from './WorkOrder/workOrder.module';
     ProposalModule,
     PermissionModule,
     OfferModule,
-    WorkOrderModule
+    WorkOrderModule,
+    MasterDataModule
   ],
   providers: [],
   bootstrap: [AppComponent]
