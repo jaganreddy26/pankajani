@@ -5,6 +5,7 @@ import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { element } from 'protractor';
 @Component({
   selector: 'app-amendproposal',
   templateUrl: './amendproposal.component.html',
@@ -26,7 +27,8 @@ export class AmendproposalComponent implements OnInit {
   ProposalsDetailsByID:any=[];
   UbtId:any;
   CategoryId:any;
-  CategoryName
+  GoodsType:any;
+  CategoryName:any;
   ProposalIdStatic:any;
 ///Adding new Proposal to proposalID
 transporter:any=[];
@@ -40,6 +42,8 @@ selectedTransporter:any;
  unloadingRate:any;
  addedNewProposalsToProposalId:any=[];
  inputProposalId:any;
+ LoadingPoint:any;
+ UnLoadingPoint:any;
 //To edit the proposal details for Input parameters
 transporterId:any
 loadContId:any;
@@ -191,6 +195,7 @@ this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>
   //below recods are for displaying as satatic data
   this.UbtId=data[0].UbtId,
   this.CategoryId=data[0].CategoryId,
+  this.GoodsType=data[0].GoodsType
   this.CategoryName=data[0].CategoryName
   })
 }
@@ -218,6 +223,24 @@ delete(items){
   this.addedNewProposalsToProposalId.splice(index,1);
 }
 saveNewProposal(){
+  let Inputarray:any=[];
+  this.addedNewProposalsToProposalId.forEach(element=>{
+    Inputarray.push({
+      "UbtId":this.UbtId,
+      "CategoryId":this.CategoryId,
+      "GoodsType":this.GoodsType,
+      "LoadingPoint":this.LoadingPoint,
+      "UnloadingPoint":this.UnLoadingPoint,
+      "TransporterId":element.TransporterId,
+      "TranAmount":element.TranAmount,
+      "LoadContId":element.LoadContId,
+      "LoadContAmount":element.LoadContAmount,
+      "UnloadContId":element.UnloadContId,
+      "UnloadContAmount":element.UnloadContAmount,
+      "ProposalId":this.ProposalIdStatic
+    })
+  })
+  console.log(Inputarray);
 this.proposalService.addProposalByProposalId(this.addedNewProposalsToProposalId).subscribe((data:any)=>{
   console.log(data);
   if(data=='Success'){
@@ -235,9 +258,12 @@ this.proposalService.getProposalsDetailsByProposalId(obj).subscribe((data:any)=>
   //below recods are for displaying as satatic data
   this.UbtId=data[0].UbtId,
   this.CategoryId=data[0].CategoryId,
+  this.GoodsType=data[0].GoodsType,
   this.CategoryName=data[0].CategoryName
   })
 this.addedNewProposalsToProposalId=[];
+this.LoadingPoint="";
+this.UnLoadingPoint="";
 }
 openModal(items,template1: TemplateRef<any>){
 

@@ -299,8 +299,22 @@
                 </tr>
             </tbody>
         </table>
-        <div align="right" class="padding-right">
-            <button mat-raised-button (click)="saveProposal()" *ngIf='addedSeekProposalDetails.length !=0' color="primary">Save</button>
+        <div align="right" class="padding-right" *ngIf='addedSeekProposalDetails.length !=0'>
+            <mat-form-field fxFlex="20.3">
+                <input
+                    placeholder="LoadingPoint"
+                    matInput
+                    [(ngModel)]="LoadingPoint"
+                >
+              </mat-form-field>
+              <mat-form-field fxFlex="20.3">
+                <input
+                    placeholder="UnLoadingPoint"
+                    matInput
+                    [(ngModel)]="UnLoadingPoint"
+                >
+              </mat-form-field>
+            <button mat-raised-button (click)="saveProposal()"  color="primary">Save</button>
     </div>
     </div>
    
