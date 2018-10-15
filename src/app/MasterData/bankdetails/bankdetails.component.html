@@ -1,3 +1,79 @@
-<p>
-  bankdetails works!
-</p>
+<mat-toolbar>
+  <span>Approve Permission</span>
+</mat-toolbar>
+<button type="button" class="btn btn-default" (click)="add()" style="position: absolute;
+top: 78px;
+right: 20px;
+color: #fff;">Add</button>
+<button type="button" class="btn btn-default" (click)="save()" style="position: fixed;
+bottom: 36px;
+right: 20px;
+z-index:1;
+color: #fff;">Save</button>
+<div
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between center"
+  class="card padding"
+  *ngFor="let item of bank"
+>
+<!-- <mat-form-field>
+  <mat-select
+      placeholder="CompanyId"
+      [(ngModel)]="item.CompanyId"
+      fxFlex="33.3"
+  >
+      <mat-option
+          *ngFor="let item of unloadingContractor"
+          [value]="item.VendorId"
+      >
+          {{item.VendorName}}
+      </mat-option>
+  </mat-select>
+</mat-form-field> -->
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="Bank Name"
+      matInput
+      [(ngModel)]="item.BankName"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="Branch Name"
+      matInput
+      [(ngModel)]="item.BranchName"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="Location"
+      matInput
+      [(ngModel)]="item.Location"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="Account Number"
+      matInput
+      [(ngModel)]="item.AccountNumber"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="IFSC Code"
+      matInput
+      [(ngModel)]="item.IFSCcode"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3">
+  <input
+      placeholder="Account Holder Name"
+      matInput
+      [(ngModel)]="item.AccountHolderName"
+  >
+</mat-form-field>
+<mat-radio-group>
+  <mat-radio-button value="Yes" (change)="changeDeafaultAc($event,item)">Yes</mat-radio-button>
+  <mat-radio-button value="No" (change)="changeDeafaultAc($event,item)">No</mat-radio-button>
+</mat-radio-group>
+</div>
