@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BankDetails } from '../../shared/entities/bankDetails';
 import {MasterService} from '../master.service';
-
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert'
 @Component({
   selector: 'app-bankdetails',
   templateUrl: './bankdetails.component.html',
@@ -18,7 +19,7 @@ export class BankdetailsComponent implements OnInit {
   DeafaultAc:any;
   CompanyIds:any=[];
   addedbankDetails:any=[];
-  constructor(private masterService:MasterService) {
+  constructor(private masterService:MasterService,private alertService :AlertService) {
   let object={"BusinessId": 0}
   this.getCustomerId(object);
    }
@@ -50,7 +51,16 @@ this.AccountHolderName="";
 this.DeafaultAc="";
   }
   save(){
-console.log(this.addedbankDetails);
+this.masterService.saveBankDetails(this.addedbankDetails).subscribe((data:any)=>{
+  if(data=='Success'){
+    this.alertService.alert(AlertType.Success,"Record Added Successfully" )
+    }
+    else if(data=='ERROR')
+    {
+      this.alertService.alert(AlertType.Error,"Records Addding is Failed");
+    }
+    this.addedbankDetails="";
+})
   }
  
 

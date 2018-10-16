@@ -15,4 +15,9 @@ export class MasterService {
     this.url = this.host+'/api/UbtApi/GetCustomers';
     return this.http.post(this.url,data)
   }
+  // SAVING BANK INFORMATION
+  saveBankDetails(data){
+    this.url = this.host+'/api/MasterDataApi/PostBankDetails';
+    return this.http.post(this.url,data)
+  }
 }

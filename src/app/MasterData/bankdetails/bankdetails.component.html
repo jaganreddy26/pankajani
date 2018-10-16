@@ -5,7 +5,7 @@
 top: 78px;
 right: 20px;
 color: #fff;">Add</button>
-<button type="button" class="btn btn-default" (click)="save()" style="position: fixed;
+<button type="button" *ngIf='addedbankDetails.length !=0' class="btn btn-default" (click)="save()" style="position: fixed;
 bottom: 36px;
 right: 20px;
 z-index:1;
@@ -74,6 +74,7 @@ color: #fff;">Save</button>
   >
 </mat-form-field>
 <mat-radio-group>
+        <span style="font-weight:400">Default Account:</span>
   <mat-radio-button value="Yes" (change)="changeDeafaultAc($event)">Yes</mat-radio-button>
   <mat-radio-button value="No" (change)="changeDeafaultAc($event)">No</mat-radio-button>
 </mat-radio-group>
