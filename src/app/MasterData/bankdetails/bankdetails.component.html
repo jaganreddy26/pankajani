@@ -16,12 +16,12 @@ color: #fff;">Save</button>
   class="card padding"
   
 >
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <mat-select
       placeholder="CompanyId"
       [(ngModel)]="CompanyIdSelected"
       (ngModelChange)="onchangeCompanyId($event)"
-      fxFlex="33.3"
+      fxFlex="33.3" class="padding-left"
   >
       <mat-option
           *ngFor="let item of CompanyIds"
@@ -31,42 +31,42 @@ color: #fff;">Save</button>
       </mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Bank Name"
       matInput
       [(ngModel)]="BankName"
   >
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Branch Name"
       matInput
       [(ngModel)]="BranchName"
   >
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Location"
       matInput
       [(ngModel)]="Location"
   >
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Account Number"
       matInput
       [(ngModel)]="AccountNumber"
   >
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="IFSC Code"
       matInput
       [(ngModel)]="IFSCcode"
   >
 </mat-form-field>
-<mat-form-field fxFlex="33.3">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Account Holder Name"
       matInput
