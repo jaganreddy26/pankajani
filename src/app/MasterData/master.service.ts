@@ -20,4 +20,14 @@ export class MasterService {
     this.url = this.host+'/api/MasterDataApi/PostBankDetails';
     return this.http.post(this.url,data)
   }
+  //getBusinessId
+  getBusinessId(){
+    this.url = this.host+'/api/DefaultApi/GetBusinessName';
+     return this.http.get(this.url)
+  }
+  // SAVING PLANT INFORMATION
+  savePlantDetails(data){
+    this.url = this.host+'/api/MasterDataApi/PostPlantDetails';
+    return this.http.post(this.url,data)
+  }
 }
