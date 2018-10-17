@@ -142,7 +142,14 @@
            
                 <input type="file" id="filePicker" (change)="handleFileSelect($event)">
                
-            
+                <mat-form-field fxFlex="20">
+                    <input
+                        placeholder="BuyersPONo"
+                        matInput
+                        [(ngModel)]="BuyersPONo"
+                    >
+                  </mat-form-field>
+
             <mat-form-field >
                 <mat-select placeholder="ConformStatus" [(ngModel)]="item" (ngModelChange)="conformType($event)">
                     <mat-option *ngFor="let item of conformPoStatus" value="{{item}}">

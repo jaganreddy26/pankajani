@@ -3,6 +3,7 @@ import {ProposalServiceService} from '../proposal.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-seekproposal',
   templateUrl: './seekproposal.component.html',
@@ -44,8 +45,9 @@ export class SeekproposalComponent implements OnInit {
  selectedUnLoadingContractor:any;
  unloadingRate:any;
  addedSeekProposalDetails:any=[];
- 
- allSeekProposalDetails:any=[]
+ UnLoadingPoint:any;
+ LoadingPoint:any;
+
 
  RefreshInput:any;
  //STEP2
@@ -144,21 +146,7 @@ export class SeekproposalComponent implements OnInit {
   
   //step 5 when we click any perticular item in tree events
   onActivate($event){   
-    // when click on  ubtId this method will come
-//     let obj1 ={
-//       'UbtId': $event.node.data.Id,
-//     }
-//  console.log(obj1);
-//     this.proposalService.getIndividualUbtDetails(obj1).subscribe((data:any)=>{
-//   console.log(data);
-//      this.udtData=data; 
-//      this.ubtDetails = true;
-//      this.hideSeekproposal=false;
-//     })
-    // if($event.node.data.children){
 
-    // }
-  //  else{
       let obj = {
         'CategoryId': $event.node.data.Id,
         'GoodsType':$event.node.data.GoodsTypes,
@@ -242,7 +230,7 @@ export class SeekproposalComponent implements OnInit {
    }
  console.log(object);
  this.addedSeekProposalDetails.push(object);
- this.allSeekProposalDetails.push(object);
+
 //  console.log(this.allSeekProposalDetails);
  this.selectedTransporter="";
  this.transporterRate="";
@@ -252,8 +240,26 @@ export class SeekproposalComponent implements OnInit {
  this.unloadingRate="";
   }
   saveProposal(){
-    console.log(this.allSeekProposalDetails);
-    this.proposalService.addProposal(this.allSeekProposalDetails).subscribe((data:any)=>{
+    console.log(this.addedSeekProposalDetails);
+    let Inputarray:any=[];
+    this.addedSeekProposalDetails.forEach(element=>{
+       Inputarray.push({
+        'UbtId':element.UbtId,
+        "CategoryId":element.CategoryId,
+        "GoodsType":element.GoodsType,
+        'TransporterId':element.TransporterId,
+        'TranAmount':element.TranAmount,
+        'LoadContId':element.LoadContId,
+        'LoadContAmount':element.LoadContAmount,
+        'UnloadContId':element.UnloadContId,
+        'UnloadContAmount':element.UnloadContAmount,
+        'LoadingPoint':this.LoadingPoint,
+        'UnloadingPoint':this.UnLoadingPoint
+
+       })
+    })
+    console.log(Inputarray);
+       this.proposalService.addProposal(Inputarray).subscribe((data:any)=>{
       console.log(data);
       if(data !== 'null'){
 
@@ -262,9 +268,10 @@ export class SeekproposalComponent implements OnInit {
         this.alertService.alert(AlertType.Error,"Something went wrong");
       }
     })
-    this.allSeekProposalDetails = [];
-    this.addedSeekProposalDetails=[];
 
+    this.addedSeekProposalDetails=[];
+    this.LoadingPoint="";
+    this.UnLoadingPoint="";
     //To Refreshing the the data
    // console.log(this.RefreshInput);
     this.proposalService.getSeekProposals(this.RefreshInput).subscribe((data:any)=>{
@@ -276,12 +283,11 @@ export class SeekproposalComponent implements OnInit {
        this.ubtDetails = false;
        this.checkingProposalId=data[0].ProposalId;
        console.log(this.checkingProposalId);
-     //console.log(this.seekProposalsDetails)
+  
      this.ubtidInput=this.seekProposalsDetails.UbtId;
      this.categoryidInput=this.seekProposalsDetails.CategoryId;
      this.goodstypeInput=this.seekProposalsDetails.GoodsType;
      });
-
   }
   delete(items){
     let index = this.addedSeekProposalDetails.indexOf(items);

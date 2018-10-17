@@ -48,6 +48,7 @@ base64textString:any;
 FilePath:any;
 FileName:any;
 FileType:any;
+BuyersPONo:any;
   constructor(private poservice: PoService,private alertService :AlertService) {
     this.getCustomer();
   }
@@ -173,7 +174,7 @@ _handleReaderLoaded(readerEvt) {
 
   conforPo(){
     let obj={
-  
+      "BuyersPONo":this.BuyersPONo,
       "POId":this.currentPoId,
       "Type":this.type,
       "FileDetails":{
