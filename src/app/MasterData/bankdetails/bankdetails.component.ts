@@ -9,7 +9,7 @@ import { AlertType } from '../../shared/alerts/_models/alert'
   styleUrls: ['./bankdetails.component.css']
 })
 export class BankdetailsComponent implements OnInit {
-  CompanyId:any;
+  CompanyIdSelected:any;
   BankName:any;
   BranchName:any;
   Location:any;
@@ -30,7 +30,7 @@ export class BankdetailsComponent implements OnInit {
   add(){
 let object={
 "AcNo":this.AccountNumber,
-"CompanyId":this.CompanyId,
+"CompanyId":this.CompanyIdSelected,
 "BankName":this.BankName,
 "BranchName":this.BranchName,
 "Location":this.Location,
@@ -42,7 +42,7 @@ let object={
 console.log(object);
 this.addedbankDetails.push(object);
 this.AccountNumber="";
-this.CompanyId="";
+this.CompanyIdSelected="";
 this.BankName="";
 this.BranchName="";
 this.Location="";
@@ -75,8 +75,8 @@ this.DeafaultAc=$event.value;
 
  }
   onchangeCompanyId($event){
-this.CompanyId=$event;
-//console.log(this.CompanyId);
+this.CompanyIdSelected=$event;
+//console.log(this.CompanyIdSelected);
   }
   delete(item){
     let index = this.addedbankDetails.indexOf(item);
