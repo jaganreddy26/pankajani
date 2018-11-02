@@ -6,14 +6,20 @@ import {MasterService} from '../master.service';
   styleUrls: ['./add-business.component.css']
 })
 export class AddBusinessComponent implements OnInit {
+  public show:any=0;
+  Editble:any=0;
+ // public buttonName:any = 'Show';
 BusinessIds:any=[];
 status:any=[];
 /////
 Businessid:any;
 Name:any;
 ActiveStatus:any;
+///
+addedBusinesses:any=[]
 
   constructor(private masterService:MasterService) {
+    console.log(this.show);
     this.GetBusinessid();
     this.GetStatus();
 ///To get all ADD Business.
@@ -24,7 +30,7 @@ ActiveStatus:any;
   }
   GetBusinessid(){
     this.masterService.getBusinessIds().subscribe((data:any)=>{
-     // console.log(data);
+      console.log(data);
       this.BusinessIds=data;
     })
   }
@@ -45,11 +51,32 @@ ActiveStatus:any;
     //console.log(obj);
   this.masterService.SaveBusiness(obj).subscribe((data:any)=>{
     console.log(data);
+    
+  this.GetBusiness();
   })
   this.Businessid="";
   this.Name="";
   this.ActiveStatus="";
+
   }
+
+  Edit(){
+   console.log(this.show);
+
+   if(this.show==0){
+    this.Editble=1;
+    this.show=1;
+    }
+    else{
+      this.Editble=0;
+      this.show=0;
+    }
+    console.log(this.Editble);
+    console.log(this.show);
+  }
+
+  
+  
 
 //GetBusiness
 GetBusiness(){
@@ -58,7 +85,9 @@ GetBusiness(){
   }
   this.masterService.getAllBusinesses(obj).subscribe((data:any)=>{
     console.log(data);
+    this.addedBusinesses=data;
   })
+  this.GetBusinessid();
 }
 
   onchangeBusinessId($event){
