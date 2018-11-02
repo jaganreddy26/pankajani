@@ -5,7 +5,11 @@ import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 import { BankdetailsComponent } from './bankdetails/bankdetails.component';
 import { PlantdetailsComponent } from './plantdetails/plantdetails.component';
 import {MasterService} from './master.service';
+import { AddBusinessComponent } from './add-business/add-business.component';
+import { AddCompanyComponent } from './add-company/add-company.component';
 const routes: Routes = [
+  { path: 'addbusiness', component:AddBusinessComponent},
+  { path: 'addcompany', component:AddCompanyComponent },
   { path: 'bankdetails', component:BankdetailsComponent},
   { path: 'plantdetails', component:PlantdetailsComponent },
  
@@ -20,7 +24,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [MasterService],
-    declarations: [BankdetailsComponent, PlantdetailsComponent],
+    declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }

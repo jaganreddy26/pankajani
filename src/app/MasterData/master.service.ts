@@ -30,4 +30,24 @@ export class MasterService {
     this.url = this.host+'/api/MasterDataApi/PostPlantDetails';
     return this.http.post(this.url,data)
   }
+  // Get Business Id for adding the Business
+  getBusinessIds(){
+    this.url = this.host+'/api/MasterDataApi/GetBusinessId';
+    return this.http.get(this.url)
+  }
+  //Get Status for adding the Business
+  getStatus(){
+    this.url = this.host+'/api/MasterDataApi/GetActiveStatus';
+    return this.http.get(this.url)
+  }
+  // Saveing the BusinessId
+  SaveBusiness(data){
+    this.url = this.host+'/api/MasterDataApi/SaveBusiness';
+    return this.http.post(this.url,data)
+  }
+  //GetBusiness
+  getAllBusinesses(data){
+    this.url = this.host+'/api/MasterDataApi/GetBusiness';
+    return this.http.post(this.url,data)
+  }
 }
