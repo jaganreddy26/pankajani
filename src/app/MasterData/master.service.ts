@@ -50,4 +50,14 @@ export class MasterService {
     this.url = this.host+'/api/MasterDataApi/GetBusiness';
     return this.http.post(this.url,data)
   }
+  //Save the CompanyDetails
+  saveComapnyDetails(data){
+    this.url = this.host+'/api/MasterDataApi/SaveCompanyDetails';
+    return this.http.post(this.url,data)
+  }
+  //GetCompanyDetails
+  getcompanyDetails(data){
+    this.url = this.host+'/api/MasterDataApi/GetCompanyDetails';
+    return this.http.post(this.url,data)
+  }
 }

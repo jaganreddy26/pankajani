@@ -1,18 +1,86 @@
 import { Component, OnInit } from '@angular/core';
 import {MasterService} from '../master.service';
+import {addCompany} from '../../shared/entities/addCompany';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
   styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
-
-  constructor(private masterService:MasterService) {
-   
+addcompanyDetail:addCompany=new addCompany();
+BusinessIDs:any=[];
+status:any=[];
+addCompanyDetails:any=[];
+  constructor(private masterService:MasterService,private alertService :AlertService) {
+   this.getBusinessId();
+   this.getStatus();
+   this.getAddedCompanyDetails();
    }
 
   ngOnInit() {
   }
+getBusinessId(){
+  this.masterService.getBusinessIds().subscribe((data:any)=>{
+   // console.log(data);
+    this.BusinessIDs=data;
+  })
+}
+getStatus(){
+  this.masterService.getStatus().subscribe((data:any)=>{
+   // console.log(data);
+    this.status=data;
+  })
+}
+Save(){
+ // console.log(this.addcompanyDetail);
+  this.masterService.saveComapnyDetails(this.addcompanyDetail).subscribe((data:any)=>{
+   // console.log(data);
+    if(data !== 'null'){
 
+      this.alertService.alert(AlertType.Success, data)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
+  })
+  this.addcompanyDetail.BusinessId="";
+  this.addcompanyDetail.CompanyName="";
+  this.addcompanyDetail.Email="";
+  this.addcompanyDetail.AlternateEmail="";
+  this.addcompanyDetail.Mobile="";
+  this.addcompanyDetail.AlternateMobile="";
+  this.addcompanyDetail.Address1="";
+  this.addcompanyDetail.Address2="";
+  this.addcompanyDetail.Address3="";
+  this.addcompanyDetail.CIN="";
+  this.addcompanyDetail.GSTIN="";
+  this.addcompanyDetail.PAN="";
+  this.addcompanyDetail.TAN_NO="";
+  this.addcompanyDetail.Status="";
+}
+  //GetCompanyDetails
+  getAddedCompanyDetails(){
+    let obj={
+      "CompanyId":"0"
+    }
+    this.masterService.getcompanyDetails(obj).subscribe((data:any)=>{
+      console.log(data);
+     this.addCompanyDetails=data;
+    })
+  }
+onchangeBusinessID($event){
+  this.addcompanyDetail.BusinessId=$event;
+}
+onchangeStatus($event){
+
+  if($event==true)
+    this.addcompanyDetail.Status=1;
+
+  else
+    this.addcompanyDetail.Status=0;
+
+  console.log(this.addcompanyDetail.Status)
+}
 
 }
