@@ -60,4 +60,9 @@ export class MasterService {
     this.url = this.host+'/api/MasterDataApi/GetCompanyDetails';
     return this.http.post(this.url,data)
   }
+  //GetCompanyDetails By companyId
+  getCompanyDetailsByid(data){
+    this.url = this.host+'/api/MasterDataApi/GetCompanyDetails';
+    return this.http.post(this.url,data)
+  }
 }

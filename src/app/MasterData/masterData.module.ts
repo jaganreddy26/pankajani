@@ -7,6 +7,7 @@ import { PlantdetailsComponent } from './plantdetails/plantdetails.component';
 import {MasterService} from './master.service';
 import { AddBusinessComponent } from './add-business/add-business.component';
 import { AddCompanyComponent } from './add-company/add-company.component';
+import { AddCompanyeditComponent } from './add-companyedit/add-companyedit.component';
 const routes: Routes = [
   { path: 'addbusiness', component:AddBusinessComponent},
   { path: 'addcompany', component:AddCompanyComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [MasterService],
-    declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent],
+    declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }

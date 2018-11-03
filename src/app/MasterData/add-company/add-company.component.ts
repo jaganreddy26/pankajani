@@ -3,17 +3,21 @@ import {MasterService} from '../master.service';
 import {addCompany} from '../../shared/entities/addCompany';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
   styleUrls: ['./add-company.component.css']
 })
 export class AddCompanyComponent implements OnInit {
+  modalRef: BsModalRef;
 addcompanyDetail:addCompany=new addCompany();
 BusinessIDs:any=[];
 status:any=[];
-addCompanyDetails:any=[];
-  constructor(private masterService:MasterService,private alertService :AlertService) {
+addedCompanyDetails:any=[];
+InputId:any;
+  constructor(private masterService:MasterService,private alertService :AlertService,private modalService: BsModalService) {
    this.getBusinessId();
    this.getStatus();
    this.getAddedCompanyDetails();
@@ -65,10 +69,37 @@ Save(){
       "CompanyId":"0"
     }
     this.masterService.getcompanyDetails(obj).subscribe((data:any)=>{
-      console.log(data);
-     this.addCompanyDetails=data;
+     // console.log(data);
+     this.addedCompanyDetails=data;
     })
   }
+
+
+
+  openModalEdit(items,template){
+    this.modalRef = this.modalService.show(template);
+    // console.log(items.CompanyId)
+    this.InputId=items.CompanyId;
+  }
+
+  onHide()
+   {
+    this.getAddedCompanyDetails();
+     this.modalRef.hide();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 onchangeBusinessID($event){
   this.addcompanyDetail.BusinessId=$event;
 }
