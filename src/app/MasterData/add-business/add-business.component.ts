@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {MasterService} from '../master.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-add-business',
   templateUrl: './add-business.component.html',
   styleUrls: ['./add-business.component.css']
 })
 export class AddBusinessComponent implements OnInit {
-  public show:any=0;
-  Editble:any=0;
+  // public show:any=0;
+  // Editble:any=0;
  // public buttonName:any = 'Show';
+ modalRef: BsModalRef;
 BusinessIds:any=[];
 status:any=[];
 /////
@@ -17,9 +20,9 @@ Name:any;
 ActiveStatus:any;
 ///
 addedBusinesses:any=[]
-
-  constructor(private masterService:MasterService) {
-    console.log(this.show);
+InputId:any;
+  constructor(private masterService:MasterService,private modalService: BsModalService) {
+    
     this.GetBusinessid();
     this.GetStatus();
 ///To get all ADD Business.
@@ -59,21 +62,25 @@ addedBusinesses:any=[]
   this.ActiveStatus="";
 
   }
-
-  Edit(){
-   console.log(this.show);
-
-   if(this.show==0){
-    this.Editble=1;
-    this.show=1;
-    }
-    else{
-      this.Editble=0;
-      this.show=0;
-    }
-    console.log(this.Editble);
-    console.log(this.show);
+  openModalEdit(items,template){
+    this.modalRef = this.modalService.show(template);
+    // console.log(items.CompanyId)
+   this.InputId=items.Id;
   }
+  // Edit(){
+  //  console.log(this.show);
+
+  //  if(this.show==0){
+  //   this.Editble=1;
+  //   this.show=1;
+  //   }
+  //   else{
+  //     this.Editble=0;
+  //     this.show=0;
+  //   }
+  //   console.log(this.Editble);
+  //   console.log(this.show);
+  // }
 
   
   
@@ -89,6 +96,11 @@ GetBusiness(){
   })
   this.GetBusinessid();
 }
+onHide()
+{
+ this.GetBusiness();
+  this.modalRef.hide();
+ }
 
   onchangeBusinessId($event){
   //  console.log($event);

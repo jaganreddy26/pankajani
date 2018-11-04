@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input,SimpleChanges,EventEmitter,Output} from '@angular/core';
 import {MasterService} from '../master.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-add-companyedit',
   templateUrl: './add-companyedit.component.html',
@@ -12,7 +14,7 @@ export class AddCompanyeditComponent implements OnInit {
   companyDetails:any={};
 
   Status:any=[];
-  constructor(private masterService:MasterService) { }
+  constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {
   }
@@ -36,10 +38,36 @@ this.masterService.getStatus().subscribe((data:any)=>{
     }
   }
   updateRecords(){
-    console.log(this.companyDetails);
- 
-      
+    // console.log(this.companyDetails);
+let inputobject={
+  "CompanyId":this.companyDetails.CompanyId,
+"CompanyName":this.companyDetails.CompanyName,
+"Email":this.companyDetails.Email,
+"AlternateEmail":this.companyDetails.AlternateEmail,
+"Mobile":this.companyDetails.Mobile,
+"AlternateMobile":this.companyDetails.AlternateMobile,
+"Address1":this.companyDetails.Address1,
+"Address2":this.companyDetails.Address2,
+"Address3":this.companyDetails.Address3,
+"CIN":this.companyDetails.CIN,
+"GSTIN":this.companyDetails.GSTIN,
+"PAN":this.companyDetails.PAN,
+"TAN_NO":this.companyDetails.TAN_NO,
+"Status":this.companyDetails.Status
+}
+
+ console.log(inputobject);
+      this.masterService.UpdateCompanyDetails(inputobject).subscribe((data:any)=>{
+       // console.log(data);
+       if(data !== 'null'){
+
+        this.alertService.alert(AlertType.Success, data)
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
+      })
     this.Onclose();
+   
   }
   Onclose(){
     this.close.emit();

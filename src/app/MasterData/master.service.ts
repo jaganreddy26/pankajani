@@ -50,12 +50,22 @@ export class MasterService {
     this.url = this.host+'/api/MasterDataApi/GetBusiness';
     return this.http.post(this.url,data)
   }
+  //GetBusiness by id
+  getBusinessDetailsById(data){
+    this.url = this.host+'/api/MasterDataApi/GetBusiness';
+    return this.http.post(this.url,data)
+  }
+  //UpdateBusineesDetails
+  UpdateBusinessDetail(data){
+    this.url = this.host+'/api/MasterDataApi/UpdateBusiness';
+    return this.http.post(this.url,data)
+  }
   //Save the CompanyDetails
   saveComapnyDetails(data){
     this.url = this.host+'/api/MasterDataApi/SaveCompanyDetails';
     return this.http.post(this.url,data)
   }
-  //GetCompanyDetails
+  //GetCompanyDetails 
   getcompanyDetails(data){
     this.url = this.host+'/api/MasterDataApi/GetCompanyDetails';
     return this.http.post(this.url,data)
@@ -63,6 +73,11 @@ export class MasterService {
   //GetCompanyDetails By companyId
   getCompanyDetailsByid(data){
     this.url = this.host+'/api/MasterDataApi/GetCompanyDetails';
+    return this.http.post(this.url,data)
+  }
+  //Update Company Details Api 
+  UpdateCompanyDetails(data){
+    this.url = this.host+'/api/MasterDataApi/UpdateCompanyDetails';
     return this.http.post(this.url,data)
   }
 }

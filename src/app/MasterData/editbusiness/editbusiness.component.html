@@ -1,0 +1,21 @@
+<div class="padding-left">
+  <span style="font-weight:400">BusinessId : </span>
+  <span style="background-color: bisque">{{businessDetails.Id}}</span>
+</div>
+
+<div class="example-container">
+  
+  <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="Name"  [(ngModel)]="businessDetails.Name" >
+  </mat-form-field>
+     
+  <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="ActiveStatus" [(ngModel)]="businessDetails.ActiveStatus">
+   </mat-form-field>
+
+  
+   
+  </div>
+  <div align="right">
+    <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
+  </div>
