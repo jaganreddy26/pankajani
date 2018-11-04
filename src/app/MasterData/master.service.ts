@@ -17,9 +17,24 @@ export class MasterService {
   }
   // SAVING BANK INFORMATION
   saveBankDetails(data){
-    this.url = this.host+'/api/MasterDataApi/PostBankDetails';
+    this.url = this.host+'/api/MasterDataApi/SaveBankDetails';
     return this.http.post(this.url,data)
   }
+  // Get all BankDetails
+  getAllBankDetails(data){
+    this.url = this.host+'/api/MasterDataApi/GetBankDetails';
+    return this.http.post(this.url,data)
+  }
+  //get bank Details by AccountNumber
+  gatBankDetailsbyACCNO(data){
+    this.url = this.host+'/api/MasterDataApi/GetBankDetails';
+    return this.http.post(this.url,data)
+  }
+//Update Bank Details
+upadteBankDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdateBankDetails';
+  return this.http.post(this.url,data)
+}
   //getBusinessId
   getBusinessId(){
     this.url = this.host+'/api/DefaultApi/GetBusinessName';

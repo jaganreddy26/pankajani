@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BankDetails } from '../../shared/entities/bankDetails';
 import {MasterService} from '../master.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
-import { AlertType } from '../../shared/alerts/_models/alert'
+import { AlertType } from '../../shared/alerts/_models/alert';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-bankdetails',
   templateUrl: './bankdetails.component.html',
@@ -18,10 +20,17 @@ export class BankdetailsComponent implements OnInit {
   AccountHolderName:any;
   DeafaultAc:any;
   CompanyIds:any=[];
+  Status:any=[];
+  ActiveStatus:any;
   addedbankDetails:any=[];
-  constructor(private masterService:MasterService,private alertService :AlertService) {
+  AllBankDetails:any=[];
+  modalRef: BsModalRef;
+  InputId:any;
+  constructor(private masterService:MasterService,private alertService :AlertService,private modalService: BsModalService) {
   let object={"BusinessId": 0}
   this.getCustomerId(object);
+  this.GetStatus();
+  this.getBankDetails();
    }
 
   ngOnInit() {
@@ -36,8 +45,8 @@ let object={
 "Location":this.Location,
 "IFSC":this.IFSCcode,
 "AcHolderName":this.AccountHolderName,
-"DefaultAc":this.DeafaultAc
-
+"DefaultAc":this.DeafaultAc,
+"Status":this.ActiveStatus,
 }
 console.log(object);
 this.addedbankDetails.push(object);
@@ -49,20 +58,37 @@ this.Location="";
 this.IFSCcode="";
 this.AccountHolderName="";
 this.DeafaultAc="";
+this.ActiveStatus="";
   }
   save(){
 this.masterService.saveBankDetails(this.addedbankDetails).subscribe((data:any)=>{
-  if(data=='Success'){
-    this.alertService.alert(AlertType.Success,"Record Added Successfully" )
-    }
-    else if(data=='ERROR')
-    {
-      this.alertService.alert(AlertType.Error,"Records Addding is Failed");
-    }
+  if(data !== 'null'){
+
+    this.alertService.alert(AlertType.Success, data)
+  }else{
+    this.alertService.alert(AlertType.Error,"Something went wrong");
+  }
+  this.getBankDetails();
     this.addedbankDetails="";
 })
   }
- 
+
+  openModalEdit(items,template){
+    this.modalRef = this.modalService.show(template);
+    // console.log(items.CompanyId)
+    this.InputId=items.AcNo;
+  }
+
+ //To Get All Bank Details
+ getBankDetails(){
+   let obj={
+    "AcNo":"0"
+   }
+   this.masterService.getAllBankDetails(obj).subscribe((data:any)=>{
+     //console.log(data);
+     this.AllBankDetails=data;
+   })
+ }
 
   getCustomerId(data:any){
     this.masterService.getCompanyId(data).subscribe((data:any)=>{
@@ -70,6 +96,17 @@ this.masterService.saveBankDetails(this.addedbankDetails).subscribe((data:any)=>
    this.CompanyIds =data;
     })
   }
+  GetStatus(){
+    this.masterService.getStatus().subscribe((data:any)=>{
+      this.Status=data;
+    })
+  }
+  onHide()
+   {
+    this.getBankDetails();
+     this.modalRef.hide();
+    }
+
   changeDeafaultAc($event){
 this.DeafaultAc=$event.value;
 
@@ -77,6 +114,16 @@ this.DeafaultAc=$event.value;
   onchangeCompanyId($event){
 this.CompanyIdSelected=$event;
 //console.log(this.CompanyIdSelected);
+  }
+  onchangeStatus($event){
+    //console.log($event);
+    if($event=='true'){
+      this.ActiveStatus=1;
+    }
+    else{
+      this.ActiveStatus=0;
+    }
+  //  console.log(this.ActiveStatus);
   }
   delete(item){
     let index = this.addedbankDetails.indexOf(item);

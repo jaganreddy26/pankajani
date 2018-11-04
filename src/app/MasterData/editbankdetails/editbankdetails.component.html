@@ -1,0 +1,67 @@
+<div class="card">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400"> Id :</span>
+    <span>{{bankDetails.Id}}</span>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400">CompanyId :</span>
+    <span>{{bankDetails.CompanyId}}</span>
+</div>
+</div>
+<div class="example-container">
+                
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="Bank Name"  [(ngModel)]="bankDetails.BankName" >
+        </mat-form-field>
+           
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="Branch Name" [(ngModel)]="bankDetails.BranchName">
+         </mat-form-field>
+         <mat-form-field fxFlex="30" class="padding-left">
+           <input matInput placeholder="Location" [(ngModel)]="bankDetails.Location">
+          </mat-form-field>
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="IFSC"  [(ngModel)]="bankDetails.IFSC" >
+              </mat-form-field>
+                 
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="AcHolderName" [(ngModel)]="bankDetails.AcHolderName">
+               </mat-form-field>
+      
+         
+   
+  </div>
+  <div class="example-container">
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="AccountNumber" [(ngModel)]="bankDetails.AcNo">
+               </mat-form-field>
+        
+               <mat-form-field  class="padding-left">
+                    <mat-select
+                    placeholder="Status"
+                
+                    (ngModelChange)="onchangeStatus($event)"
+                    fxFlex="33.3" class="padding-left"
+                >
+                    <mat-option
+                        *ngFor="let item of Status"
+                        [value]="item.Id"
+                    >
+                        {{item.Id}}
+                    </mat-option>
+            </mat-select>
+            </mat-form-field>
+               <mat-radio-group>
+                    <span style="font-weight:400">Default Account:</span>
+              <mat-radio-button value="Yes" (change)="changeDeafaultAc($event)">Yes</mat-radio-button>
+              <mat-radio-button value="No" (change)="changeDeafaultAc($event)">No</mat-radio-button>
+            </mat-radio-group>
+  </div>
+  <div align="right">
+        <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
+      </div>
