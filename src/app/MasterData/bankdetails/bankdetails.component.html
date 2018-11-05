@@ -199,12 +199,10 @@ color: #fff;">Save</button>
   </table>
 </div>
 
-<ng-template #template style="width:1308px;">
-    <div class="modal-header " style="background-color:#fff;width: 900px;">
-      <h4 class="modal-title pull-left">Edit Bank Details</h4>
-    </div>
-    <div class="modal-body" style="background-color:#fff;width: 900px;">
+<ng-template #template >
+
+
       
-       <app-editbankdetails [Inputdata]="(InputId)" (close)="onHide()"></app-editbankdetails>
-      </div>
+       <app-editbankdetails [Inputdata]="InputId" (close)="onHide()"></app-editbankdetails>
+
 </ng-template>

@@ -69,5 +69,7 @@ changeDeafaultAc($event){
   this.DeafaultAc=$event.value;
   console.log(this.DeafaultAc)
    }
-   
+   onchangeStatus($event){
+     
+   }
 }

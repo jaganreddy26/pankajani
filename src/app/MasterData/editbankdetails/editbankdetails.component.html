@@ -1,4 +1,5 @@
-<div class="card">
+<h2 mat-dialog-title>Edit Bank Details</h2>
+<mat-dialog-content class="mat-typography">
     <div
     fxLayout="row"
     fxLayoutAlign="space-between center"
@@ -11,7 +12,6 @@
 <div class="padding-left">
     <span style="font-weight:400">CompanyId :</span>
     <span>{{bankDetails.CompanyId}}</span>
-</div>
 </div>
 <div class="example-container">
                 
@@ -44,15 +44,15 @@
                <mat-form-field  class="padding-left">
                     <mat-select
                     placeholder="Status"
-                
+                    [(ngModel)]="bankDetails.StatusDescription"
                     (ngModelChange)="onchangeStatus($event)"
                     fxFlex="33.3" class="padding-left"
                 >
                     <mat-option
                         *ngFor="let item of Status"
-                        [value]="item.Id"
+                        [value]="item.Name"
                     >
-                        {{item.Id}}
+                        {{item.Name}}
                     </mat-option>
             </mat-select>
             </mat-form-field>
@@ -61,7 +61,9 @@
               <mat-radio-button value="Yes" (change)="changeDeafaultAc($event)">Yes</mat-radio-button>
               <mat-radio-button value="No" (change)="changeDeafaultAc($event)">No</mat-radio-button>
             </mat-radio-group>
-  </div>
-  <div align="right">
+            </div>
+
+</mat-dialog-content>
+  <mat-dialog-actions align="end">
         <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
-      </div>
+      </mat-dialog-actions>

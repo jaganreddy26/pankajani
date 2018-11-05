@@ -45,6 +45,8 @@ import {MatTreeModule} from '@angular/material/tree';
 import { TreeModule } from 'angular-tree-component';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -74,7 +76,7 @@ import {MatRadioModule} from '@angular/material/radio';
         FormsModule, MatButtonModule, MatCheckboxModule, MatStepperModule,
          MatIconModule, FlexLayoutModule, MatExpansionModule, MatTabsModule, 
          MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule
-         ,MatChipsModule,MatToolbarModule,MatTreeModule,TreeModule.forRoot(),NgxPaginationModule,MatRadioModule
+         ,MatChipsModule,MatToolbarModule,MatTreeModule,TreeModule.forRoot(),NgxPaginationModule,MatRadioModule,MatDialogModule
 
 
         //
@@ -93,7 +95,7 @@ import {MatRadioModule} from '@angular/material/radio';
         BrowserAnimationsModule, AngularFontAwesomeModule, SidebarModule
         , TooltipModule, TimepickerModule, TypeaheadModule, BsDatepickerModule, MatButtonModule, MatCheckboxModule, MatStepperModule, MatIconModule,
          FlexLayoutModule, MatExpansionModule, MatTabsModule, MatCardModule, MatInputModule,MatSelectModule,MatTableModule,MatListModule,MatChipsModule
-         ,MatToolbarModule,MatTreeModule,TreeModule,NgxPaginationModule,MatRadioModule
+         ,MatToolbarModule,MatTreeModule,TreeModule,NgxPaginationModule,MatRadioModule,MatDialogModule
 
     ],
     // to declare the services in providers

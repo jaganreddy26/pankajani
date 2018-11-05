@@ -253,6 +253,6 @@ body{
     .form-control {
         font-weight: 300 !important;
     }
-    .mat-select-value {
-        font-weight: 300 !important;
+    .mat-select-value{
+        max-width:  100% !important;
     }

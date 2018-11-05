@@ -72,5 +72,7 @@ let inputobject={
   Onclose(){
     this.close.emit();
   }
-
+  onchangeStatus($event){
+    
+  }
 }
