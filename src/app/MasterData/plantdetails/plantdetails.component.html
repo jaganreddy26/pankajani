@@ -16,21 +16,21 @@ color: #fff;">Save</button>
   class="card padding"
   
 >
-<!-- <mat-form-field fxFlex="33.3" class="padding-left">
+<mat-form-field fxFlex="33.3" class="padding-left">
   <mat-select
-      placeholder="CompanyId"
-      [(ngModel)]="CompanyIdSelected"
-     
+      placeholder="BusinessId"
+      [(ngModel)]="plant.BusinessId"
+      (ngModelChange)="onchangeBusinessId($event)"
       fxFlex="33.3" class="padding-left"
   >
       <mat-option
-          *ngFor="let item of CompanyIds"
-          [value]="item.CustomerId"
+          *ngFor="let item of BusinessIds"
+          [value]="item.BusinessId"
       >
-          {{item.CustomerName}}
+          {{item.BusinessName}}
       </mat-option>
   </mat-select>
-</mat-form-field> -->
+</mat-form-field>
 <mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Plant Name"

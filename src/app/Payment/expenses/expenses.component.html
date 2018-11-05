@@ -1,0 +1,96 @@
+<mat-toolbar>
+  <span>Expenses</span>
+</mat-toolbar>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+    <table class="table table-striped table-bordered table-list">
+        <thead>
+            <tr style="color:#6f6f6f;background-color:#f0f0f0" >
+                <th>S.No</th>
+                <th>PermissionId</th>
+                
+                <th>Reason</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="PermissionId"
+                            [(ngModel)]="SelectedPermissionId"
+                            (ngModelChange)="onchangePermissionId($event)"
+                        >
+                            <mat-option
+                                *ngFor="let item of PermissionIds"
+                                [value]="item.PermissionId"
+                            >
+                                {{item.PermissionId}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+              
+   
+              <td>
+                <mat-form-field>
+                  <input placeholder="Reason"
+                      matInput
+                      [(ngModel)]="Reason"
+                  >
+              </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input placeholder="Amount"
+                      matInput
+                      [(ngModel)]="Amount"
+                  >
+              </mat-form-field>
+              </td>
+             
+
+                <td>
+                    <button
+                        class="btn btn"
+                        style="cursor: pointer;background-color: #3e54af;color:#fff"
+                        (click)="add()"
+                    >
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr
+            *ngFor='let items of addedExpenses ;let i = index'
+            [attr.data-index]="i" 
+        >
+            <td>{{i + 1}}</td>
+            <td>{{items.PermissionId}}</td>
+            <td>{{items.Reason}}</td>
+            <td>{{items.Amount}}</td>
+          
+            <td>
+                <button
+                    class="btn btn"
+                    style="cursor: pointer;background-color: #D50000 !important;color:#fff"
+                    (click)="delete(items)"
+                >
+                    <i
+                        class="fa fa-trash"
+                        aria-hidden="true"
+                    ></i>
+                </button>
+            </td>
+            
+        </tr>
+       
+        </tbody>
+    </table>
+   
+</div>
+<div align="right" class="padding-right">
+  <button mat-raised-button (click)="save()" *ngIf='addedExpenses.length !=0' color="primary">Save</button>
+</div>

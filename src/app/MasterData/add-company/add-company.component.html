@@ -1,0 +1,185 @@
+<mat-toolbar>
+  <span>Add Company</span>
+</mat-toolbar>
+<button type="button" class="btn btn-default" (click)="Save()" style="position: absolute;
+top: 78px;
+right: 20px;
+color: #fff;">Save</button>
+<div
+fxLayout="row wrap"
+fxLayoutAlign="start center"
+class="card padding"
+
+>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<mat-select
+    placeholder="BusinessId"
+    [(ngModel)]="addcompanyDetail.BusinessId"
+    (ngModelChange)="onchangeBusinessID($event)"
+    fxFlex="33.3" class="padding-left"
+>
+    <mat-option
+        *ngFor="let item of BusinessIDs"
+        [value]="item.Id"
+    >
+        {{item.Id}}
+    </mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="Company Name"
+    matInput
+    [(ngModel)]="addcompanyDetail.CompanyName"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="Email"
+    matInput
+    [(ngModel)]="addcompanyDetail.Email"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="AlternateEmail"
+    matInput
+    [(ngModel)]="addcompanyDetail.AlternateEmail"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="Mobile"
+    matInput
+    [(ngModel)]="addcompanyDetail.Mobile"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="AlternateMobile"
+    matInput
+    [(ngModel)]="addcompanyDetail.AlternateMobile"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+<input
+    placeholder="Address1"
+    matInput
+    [(ngModel)]="addcompanyDetail.Address1"
+>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Address2"
+      matInput
+      [(ngModel)]="addcompanyDetail.Address2"
+  >
+  </mat-form-field>
+  <mat-form-field fxFlex="33.3" class="padding-left">
+    <input
+        placeholder="Address3"
+        matInput
+        [(ngModel)]="addcompanyDetail.Address3"
+    >
+    </mat-form-field>
+    <mat-form-field fxFlex="33.3" class="padding-left">
+      <input
+          placeholder="CIN"
+          matInput
+          [(ngModel)]="addcompanyDetail.CIN"
+      >
+      </mat-form-field>
+      <mat-form-field fxFlex="33.3" class="padding-left">
+        <input
+            placeholder="GSTIN"
+            matInput
+            [(ngModel)]="addcompanyDetail.GSTIN"
+        >
+        </mat-form-field>
+        <mat-form-field fxFlex="33.3" class="padding-left">
+          <input
+              placeholder="PAN"
+              matInput
+              [(ngModel)]="addcompanyDetail.PAN"
+          >
+          </mat-form-field>
+          <mat-form-field fxFlex="33.3" class="padding-left">
+            <input
+                placeholder="TAN NO"
+                matInput
+                [(ngModel)]="addcompanyDetail.TAN_NO"
+            >
+            </mat-form-field>
+            <mat-form-field fxFlex="33.3" class="padding-left">
+            <mat-select
+            placeholder="Status"
+            [(ngModel)]="addcompanyDetail.Status"
+            (ngModelChange)="onchangeStatus($event)"
+            fxFlex="33.3" class="padding-left"
+        >
+            <mat-option
+                *ngFor="let item of status"
+                [value]="item.Id"
+            >
+                {{item.Id}}
+            </mat-option>
+</mat-select>
+</mat-form-field>
+
+</div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" *ngIf='addedCompanyDetails.length !=0'>
+  <thead>
+      <tr style="color:#6f6f6f;background-color:#f0f0f0">
+         
+          <th>CompanyId </th>
+          <th>CompanyName</th>
+          <th>Email </th>
+          <th>Address1</th>
+          <th>Address2 </th>
+          <th>Address3</th>
+          <th>Status </th>
+          <th>StatusDescription</th>
+          <th>Action</th>
+        
+      </tr>
+  </thead>
+<tbody>
+  <tr
+      *ngFor="let items of addedCompanyDetails; let i = index"
+      [attr.data-index]="i"
+       >
+    
+      <td>{{items.CompanyId}} </td>
+      <td>{{items.CompanyName}}</td>
+      <td>{{items.Email}} </td>
+      <td>{{items.Address1}}</td>
+      <td>{{items.Address2}} </td>
+      <td>{{items.Address3}}</td>
+      <td>{{items.Status}} </td>
+      <td>{{items.StatusDescription}}</td>
+      <td>
+        <button
+    mat-raised-button
+    fxFlex="16"
+    (click)="openModalEdit(items,template)"
+    color="primary"
+>
+   Edit
+</button>
+    </td>
+     
+
+  </tr>
+</tbody>
+</table>
+</div>
+<ng-template #template style="width:1308px;">
+    <div class="modal-header " style="background-color:#fff;width: 900px;">
+      <h4 class="modal-title pull-left">Edit Company Details</h4>
+    </div>
+    <div class="modal-body" style="background-color:#fff;width: 900px;">
+       <app-add-companyedit [Inputdata]="(InputId)" (close)="onHide()"></app-add-companyedit>
+      </div>
+</ng-template>
