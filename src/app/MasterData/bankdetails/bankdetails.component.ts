@@ -19,6 +19,7 @@ export class BankdetailsComponent implements OnInit {
   DeafaultAc:any;
   CompanyIds:any=[];
   addedbankDetails:any=[];
+  CompanyIdSelected
   constructor(private masterService:MasterService,private alertService :AlertService) {
   let object={"BusinessId": 0}
   this.getCustomerId(object);
