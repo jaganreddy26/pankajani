@@ -25,7 +25,7 @@ export class EditbankdetailsComponent implements OnInit {
    let obj={
     "AcNo":this.inputAccountNumber
    }
-   this.masterService.gatBankDetailsbyACCNO(obj).subscribe((data:any)=>{
+   this.masterService.getBankDetailsbyACCNO(obj).subscribe((data:any)=>{
      console.log(data);
      this.bankDetails=data[0];
    })
@@ -70,6 +70,10 @@ changeDeafaultAc($event){
   console.log(this.DeafaultAc)
    }
    onchangeStatus($event){
-     
+    if($event==true)
+    this.bankDetails.Status=1;
+
+  else
+    this.bankDetails.Status=0;
    }
 }

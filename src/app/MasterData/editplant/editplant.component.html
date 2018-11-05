@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>Edit Plant Details</h2>
+<mat-dialog-content class="mat-typography">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400"> PlantId :</span>
+    <span>{{plantDetails.PlantId}}</span>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400">PlantName :</span>
+    <span>{{plantDetails.PlantName}}</span>
+</div>
+<div class="example-container">
+                
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="Email"  [(ngModel)]="plantDetails.Email" >
+        </mat-form-field>
+           
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="AlternateEmail" [(ngModel)]="plantDetails.AlternateEmail">
+         </mat-form-field>
+         <mat-form-field fxFlex="30" class="padding-left">
+           <input matInput placeholder="Mobile" [(ngModel)]="plantDetails.Mobile">
+          </mat-form-field>
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="AlternateMobile"  [(ngModel)]="plantDetails.AlternateMobile" >
+              </mat-form-field>
+                 
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="CompanyId" [(ngModel)]="plantDetails.CompanyId">
+               </mat-form-field>
+      
+         
+   
+  </div>
+  <div class="example-container">
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address1" [(ngModel)]="plantDetails.Address1">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address2" [(ngModel)]="plantDetails.Address2">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address3" [(ngModel)]="plantDetails.Address3">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="CIN" [(ngModel)]="plantDetails.CIN">
+               </mat-form-field>
+               
+
+            </div>
+            <div class="example-container">
+              <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="GSTIN" [(ngModel)]="plantDetails.GSTIN">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="PAN" [(ngModel)]="plantDetails.PAN">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="TAN_NO" [(ngModel)]="plantDetails.TAN_NO">
+               </mat-form-field>
+               <mat-form-field  class="padding-left">
+                <mat-select
+                placeholder="Status"
+                [(ngModel)]="value"
+                (ngModelChange)="onchangeStatus($event)"
+                fxFlex="33.3" class="padding-left"
+            >
+                <mat-option
+                    *ngFor="let item of Status"
+                    [value]="item.Id"
+                >
+                    {{item.Id}}
+                </mat-option>
+        </mat-select>
+        </mat-form-field>
+            </div>
+</mat-dialog-content>
+  <mat-dialog-actions align="end">
+        <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
+      </mat-dialog-actions>

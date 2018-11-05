@@ -13,6 +13,7 @@ export class EditbusinessComponent implements OnInit {
   inputBusinessid:any;
   ////////////
   businessDetails:any={}
+  Status:any=[];
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {
@@ -28,7 +29,10 @@ export class EditbusinessComponent implements OnInit {
     // console.log(data);
      this.businessDetails=data[0]
    })
-
+   this.masterService.getStatus().subscribe((data:any)=>{
+    console.log(data);
+    this.Status=data;
+  })
     }
   }
   updateRecords(){
@@ -51,6 +55,13 @@ export class EditbusinessComponent implements OnInit {
   }
   Onclose(){
     this.close.emit();
+  }
+  onchangeStatus($event){
+    if($event==true)
+    this.businessDetails.ActiveStatus=1;
+
+  else
+    this.businessDetails.ActiveStatus=0;
   }
 
 }

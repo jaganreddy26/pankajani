@@ -2,6 +2,7 @@ import { Component, OnInit ,Input,SimpleChanges,EventEmitter,Output} from '@angu
 import {MasterService} from '../master.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+
 @Component({
   selector: 'app-add-companyedit',
   templateUrl: './add-companyedit.component.html',
@@ -73,6 +74,10 @@ let inputobject={
     this.close.emit();
   }
   onchangeStatus($event){
-    
+    if($event==true)
+    this.companyDetails.Status=1;
+
+  else
+    this.companyDetails.Status=0;
   }
 }

@@ -1,6 +1,13 @@
+<h2 mat-dialog-title>Edit Company Details</h2>
+<mat-dialog-content class="mat-typography">
+  <div
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+</div>
 <div class="padding-left">
-  <span style="font-weight:400">CompanyId : </span>
-  <span style="background-color: bisque">{{companyDetails.CompanyId}}</span>
+  <span style="font-weight:400"> Id :</span>
+  <span>{{companyDetails.CompanyId}}</span>
 </div>
 <div class="example-container">
   
@@ -57,7 +64,7 @@
       <mat-form-field  class="padding-left">
         <mat-select
         placeholder="Status"
-    
+        [(ngModel)]="companyDetails.StatusDescription"
         (ngModelChange)="onchangeStatus($event)"
         fxFlex="33.3" class="padding-left"
     >
@@ -72,7 +79,7 @@
       
        
       </div>
-
-<div align="right">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
   <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
-</div>
+</mat-dialog-actions>

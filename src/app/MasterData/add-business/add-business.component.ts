@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MasterService} from '../master.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { MatDialog } from "@angular/material";
 @Component({
   selector: 'app-add-business',
   templateUrl: './add-business.component.html',
@@ -22,7 +23,7 @@ ActiveStatus:any;
 addedBusinesses:any=[]
 InputId:any;
 value:any;
-  constructor(private masterService:MasterService,private modalService: BsModalService) {
+  constructor(private masterService:MasterService,private modalService: BsModalService,private dialog: MatDialog) {
     
     this.GetBusinessid();
     this.GetStatus();
@@ -64,7 +65,7 @@ value:any;
 
   }
   openModalEdit(items,template){
-    this.modalRef = this.modalService.show(template);
+    this.dialog.open(template);
     // console.log(items.CompanyId)
    this.InputId=items.Id;
   }
@@ -100,7 +101,7 @@ GetBusiness(){
 onHide()
 {
  this.GetBusiness();
-  this.modalRef.hide();
+ this.dialog.closeAll();
  }
 
   onchangeBusinessId($event){

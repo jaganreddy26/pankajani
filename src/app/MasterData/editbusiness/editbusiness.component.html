@@ -1,21 +1,41 @@
-<div class="padding-left">
-  <span style="font-weight:400">BusinessId : </span>
-  <span style="background-color: bisque">{{businessDetails.Id}}</span>
+<h2 mat-dialog-title>Edit Business Details</h2>
+<mat-dialog-content class="mat-typography">
+  <div
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
 </div>
 
+<div class="padding-left">
+  <span style="font-weight:400"> BusinessId :</span>
+  <span>{{businessDetails.Id}}</span>
+</div>
 <div class="example-container">
   
   <mat-form-field fxFlex="30" class="padding-left">
     <input matInput placeholder="Name"  [(ngModel)]="businessDetails.Name" >
   </mat-form-field>
      
-  <mat-form-field fxFlex="30" class="padding-left">
-    <input matInput placeholder="ActiveStatus" [(ngModel)]="businessDetails.ActiveStatus">
-   </mat-form-field>
+  <mat-form-field  class="padding-left">
+    <mat-select
+    placeholder="Status"
+    [(ngModel)]="businessDetails.StatusDescription"
+    (ngModelChange)="onchangeStatus($event)"
+    fxFlex="33.3" class="padding-left"
+>
+    <mat-option
+        *ngFor="let item of Status"
+        [value]="item.Id"
+    >
+        {{item.Id}}
+    </mat-option>
+</mat-select>
+</mat-form-field>
 
   
    
   </div>
-  <div align="right">
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
     <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
-  </div>
+</mat-dialog-actions>

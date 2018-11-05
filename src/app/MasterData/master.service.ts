@@ -26,7 +26,7 @@ export class MasterService {
     return this.http.post(this.url,data)
   }
   //get bank Details by AccountNumber
-  gatBankDetailsbyACCNO(data){
+  getBankDetailsbyACCNO(data){
     this.url = this.host+'/api/MasterDataApi/GetBankDetails';
     return this.http.post(this.url,data)
   }
@@ -35,6 +35,11 @@ upadteBankDetails(data){
   this.url = this.host+'/api/MasterDataApi/UpdateBankDetails';
   return this.http.post(this.url,data)
 }
+//get BusinessId in Plant Details
+getBusinessIdForPlantDetails(){
+  this.url = this.host+'/api/UbtAPI/GetBusinessName';
+     return this.http.get(this.url)
+}
   //getBusinessId
   getBusinessId(){
     this.url = this.host+'/api/DefaultApi/GetBusinessName';
@@ -42,9 +47,24 @@ upadteBankDetails(data){
   }
   // SAVING PLANT INFORMATION
   savePlantDetails(data){
-    this.url = this.host+'/api/MasterDataApi/PostPlantDetails';
+    this.url = this.host+'/api/MasterDataApi/SavePlantDetails';
     return this.http.post(this.url,data)
   }
+  //Get All PlantDetails
+  getAllPlantDetails(data){
+    this.url = this.host+'/api/MasterDataApi/GetPlantDetails';
+    return this.http.post(this.url,data)
+  }
+  //Get by PlantDetails PlantId
+getPlantDetailsByPlantId(data){
+  this.url = this.host+'/api/MasterDataApi/GetPlantDetails';
+  return this.http.post(this.url,data)
+}
+//Update Plant Details
+updatePlantDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdatePlantDetails';
+  return this.http.post(this.url,data)
+}
   // Get Business Id for adding the Business
   getBusinessIds(){
     this.url = this.host+'/api/MasterDataApi/GetBusinessId';

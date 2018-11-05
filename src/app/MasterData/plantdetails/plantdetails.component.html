@@ -5,9 +5,9 @@
 top: 78px;
 right: 20px;
 color: #fff;">Add</button> -->
-<button type="button"  class="btn btn-default" (click)="save()" style="position: fixed;
-bottom: 36px;
-right: 20px;
+<button type="button"  class="btn btn-default" (click)="save()" style="position: absolute;
+top: 78px;
+right: 80px;
 z-index:1;
 color: #fff;">Save</button>
 <div
@@ -19,7 +19,7 @@ color: #fff;">Save</button>
 <mat-form-field fxFlex="33.3" class="padding-left">
   <mat-select
       placeholder="BusinessId"
-      [(ngModel)]="plant.BusinessId"
+      [(ngModel)]="value"
       (ngModelChange)="onchangeBusinessId($event)"
       fxFlex="33.3" class="padding-left"
   >
@@ -27,7 +27,7 @@ color: #fff;">Save</button>
           *ngFor="let item of BusinessIds"
           [value]="item.BusinessId"
       >
-          {{item.BusinessName}}
+          {{item.BusinessId}}
       </mat-option>
   </mat-select>
 </mat-form-field>
@@ -49,12 +49,12 @@ color: #fff;">Save</button>
   <input
       placeholder="Alternative Email"
       matInput
-      [(ngModel)]="plant.AlternativeEmail"
+      [(ngModel)]="plant.AlternateEmail"
   >
 </mat-form-field>
 <mat-form-field fxFlex="33.3" class="padding-left">
   <input
-      placeholder="Mobiler"
+      placeholder="Mobile"
       matInput
       [(ngModel)]="plant.Mobile"
   >
@@ -63,7 +63,7 @@ color: #fff;">Save</button>
   <input
       placeholder="AlternativeMobile"
       matInput
-      [(ngModel)]="plant.AlternativeMobile"
+      [(ngModel)]="plant.AlternateMobile"
   >
 </mat-form-field>
 <mat-form-field fxFlex="33.3" class="padding-left">
@@ -115,4 +115,87 @@ color: #fff;">Save</button>
       [(ngModel)]="plant.TAN_NO"
   >
 </mat-form-field>
+<mat-form-field fxFlex="10">
+    <mat-select
+        placeholder="Status"
+        [(ngModel)]="value"
+        (ngModelChange)="onchangeStatus($event)"
+    
+    >
+        <mat-option
+            *ngFor="let item of Status"
+            value="{{item.Id}}"
+        >
+            {{item.Id}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
 </div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" *ngIf='allplantDeatils.length !=0'>
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+          
+            <th>PlantId </th>
+            <th>PlantName</th>
+            <th>Mobile</th>
+            <!-- <th>AlternateMobile</th> -->
+            <th>Email</th>
+            <!-- <th>AlternateEmail</th> -->
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>Address3</th>
+            <th>StatusDescription</th>
+            <th>CIN</th>
+            <th>GSTIN</th>
+            <!-- <th>PAN</th> -->
+            <!-- <th>TAN_NO</th> -->
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of allplantDeatils; let i = index"
+        [attr.data-index]="i"
+         >
+     
+        <td>{{items.PlantId}}</td>
+        <td>{{items.PlantName}}</td>
+        <td>{{items.Mobile}}</td>
+        <!-- <td>{{items.AlternateMobile}}</td> -->
+        <td>{{items.Email}}</td>
+        <!-- <td>{{items.AlternateEmail}}</td> -->
+        <td>{{items.Address1}}</td>
+        <td>{{items.Address2}}</td>
+        <td>{{items.Address3}}</td>
+        <td>{{items.Status}}</td>
+        <td>{{items.CIN}}</td>
+        <td>{{items.GSTIN}}</td>
+        <!-- <td>{{items.PAN}}</td> -->
+        <!-- <td>{{items.TAN_NO}}</td> -->
+        <td>{{items.StatusDescription}}</td>
+        <td>
+            <button
+            mat-raised-button
+            fxFlex="16"
+            (click)="openModalEdit(items,template)"
+            color="primary"
+        >
+           Edit
+        </button>
+         
+        </td>
+  
+    </tr>
+  </tbody>
+  </table>
+</div>
+<ng-template #template >
+
+
+      
+    <app-editplant [Inputdata]="InputId" (close)="onHide()"></app-editplant>
+
+</ng-template>

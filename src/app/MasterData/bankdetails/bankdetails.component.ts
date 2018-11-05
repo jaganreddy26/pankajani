@@ -107,6 +107,7 @@ export class BankdetailsComponent implements OnInit {
   onHide() {
     this.getBankDetails();
     this.dialog.closeAll();
+
   }
 
   changeDeafaultAc($event) {

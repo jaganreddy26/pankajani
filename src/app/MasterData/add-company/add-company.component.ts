@@ -5,6 +5,7 @@ import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { MatDialog } from "@angular/material";
 @Component({
   selector: 'app-add-company',
   templateUrl: './add-company.component.html',
@@ -17,7 +18,7 @@ BusinessIDs:any=[];
 status:any=[];
 addedCompanyDetails:any=[];
 InputId:any;
-  constructor(private masterService:MasterService,private alertService :AlertService,private modalService: BsModalService) {
+  constructor(private masterService:MasterService,private alertService :AlertService,private modalService: BsModalService,private dialog: MatDialog) {
    this.getBusinessId();
    this.getStatus();
    this.getAddedCompanyDetails();
@@ -77,7 +78,7 @@ Save(){
 
 
   openModalEdit(items,template){
-    this.modalRef = this.modalService.show(template);
+    this.dialog.open(template);
     // console.log(items.CompanyId)
     this.InputId=items.CompanyId;
   }
@@ -85,7 +86,7 @@ Save(){
   onHide()
    {
     this.getAddedCompanyDetails();
-     this.modalRef.hide();
+    this.dialog.closeAll();
     }
 
 
