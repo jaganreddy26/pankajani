@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'bankdetails', component:BankdetailsComponent},
   { path: 'plantdetails', component:PlantdetailsComponent },
   { path: 'areaofBusiness', component:AreaofBusinessComponent },
- 
+  { path: 'vendor',component:VendorComponent}
    ];
 
 @NgModule({
