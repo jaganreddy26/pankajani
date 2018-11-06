@@ -1,0 +1,50 @@
+<mat-toolbar>
+  <span>Area of Business</span>
+</mat-toolbar>
+<div
+  class="padding"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly end"
+>
+
+ 
+  <div fxFlex="20">
+      <span>Name</span>
+      <mat-form-field  class="padding-left">
+          <input
+              placeholder="Name"
+              matInput
+              [(ngModel)]="Name"
+          >
+        </mat-form-field>
+  </div>
+
+
+  <!-- <div fxFlex="20"> -->
+
+  <mat-form-field fxFlex="10">
+      <mat-select
+          placeholder="Status"
+          [(ngModel)]="value"
+          (ngModelChange)="onchangeStatus($event)"
+      
+      >
+          <mat-option
+              *ngFor="let item of status"
+              value="{{item.Id}}"
+          >
+              {{item.Id}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <!-- </div> -->
+  <button
+      mat-raised-button
+      fxFlex="16"
+      (click)="Save()"
+      color="primary"
+  >
+     Save
+  </button>
+
+</div>
