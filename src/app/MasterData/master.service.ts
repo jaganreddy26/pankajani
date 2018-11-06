@@ -115,4 +115,21 @@ updatePlantDetails(data){
     this.url = this.host+'/api/MasterDataApi/UpdateCompanyDetails';
     return this.http.post(this.url,data)
   }
+/////////////////// AREA Of Busines Api //////////////////
+
+  //save area of business details
+  saveAreaOfBusinessDetails(data){
+    this.url = this.host+'/api/MasterDataApi/SaveBusinessAreaDetails';
+    return this.http.post(this.url,data)
+  }
+/// GetBusinessAreaDetails
+getAreaBusinessDetails(data){
+  this.url = this.host+'/api/MasterDataApi/GetBusinessAreaDetails';
+    return this.http.post(this.url,data)
+}
+//upadteBusiness Area Details by
+updateAreaOfBusinessDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdateBusinessAreaDetails';
+  return this.http.post(this.url,data)
+} 
 }
