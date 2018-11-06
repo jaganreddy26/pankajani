@@ -14,6 +14,7 @@ export class EditplantComponent implements OnInit {
   inputPlantId:any;
   plantDetails:any={};
   Status:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

@@ -28,11 +28,13 @@ export class BankdetailsComponent implements OnInit {
   modalRef: BsModalRef;
   InputId: any;
   value: any;
+  businessId:any;
   constructor(private masterService: MasterService, private alertService: AlertService, private modalService: BsModalService, private dialog: MatDialog) {
     let object = { "BusinessId": 0 }
     this.getCustomerId(object);
     this.GetStatus();
     this.getBankDetails();
+   this.businessId = localStorage.getItem('businessId')
   }
 
   ngOnInit() {

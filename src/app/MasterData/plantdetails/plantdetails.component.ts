@@ -15,6 +15,7 @@ plant:Plants = new Plants();
 Status:any=[];
 allplantDeatils:any=[];
 InputId:any;
+value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) { 
   this.GetbusinnessId();
   this.GetStatus();

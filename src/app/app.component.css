@@ -68,3 +68,7 @@ alert{
     width: 40%;
     text-align: center;
 }
+.spacer {
+    position: fixed;
+    right: 6px;
+  }

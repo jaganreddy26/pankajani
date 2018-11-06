@@ -14,5 +14,8 @@ export class AppComponent {
   constructor(public router: Router) {
   console.log(this.router.url)
 }
+logout(){
+localStorage.clear()
+}
 }
 
