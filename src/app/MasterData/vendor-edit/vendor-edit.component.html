@@ -1,0 +1,97 @@
+<h2 mat-dialog-title>Edit Vendor Details</h2>
+<mat-dialog-content class="mat-typography">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400"> VendorId :</span>
+    <span>{{vendorDetails.VendorId}}</span>
+</div>
+
+<div class="padding-left" >
+    <span style="font-weight:400">CompanyId :</span>
+    <span>{{vendorDetails.CompanyId}}</span>
+</div>
+
+<div class="example-container">
+                
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="Email"  [(ngModel)]="vendorDetails.Email" >
+        </mat-form-field>
+           
+        <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="AlternateEmail" [(ngModel)]="vendorDetails.AlternateEmail">
+         </mat-form-field>
+         <mat-form-field fxFlex="30" class="padding-left">
+            <input matInput placeholder="Phone" [(ngModel)]="vendorDetails.Phone">
+           </mat-form-field>
+         <mat-form-field fxFlex="30" class="padding-left">
+           <input matInput placeholder="Mobile" [(ngModel)]="vendorDetails.Mobile">
+          </mat-form-field>
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="AlternateMobile"  [(ngModel)]="vendorDetails.AlternateMobile" >
+              </mat-form-field>
+  </div>
+  <div class="example-container">
+        <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address1" [(ngModel)]="vendorDetails.Address1">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address2" [(ngModel)]="vendorDetails.Address2">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="Address3" [(ngModel)]="vendorDetails.Address3">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="CIN" [(ngModel)]="vendorDetails.CIN">
+               </mat-form-field>
+               
+
+            </div>
+    <div class="example-container">
+                <mat-form-field fxFlex="30" class="padding-left">
+                        <input matInput placeholder="BusinessAreaId" [(ngModel)]="vendorDetails.BusinessAreaId">
+                       </mat-form-field>
+                       <mat-form-field fxFlex="30" class="padding-left">
+                        <input matInput placeholder="CompanyName" [(ngModel)]="vendorDetails.CompanyName">
+                       </mat-form-field>
+                       <mat-form-field fxFlex="30" class="padding-left">
+                        <input matInput placeholder="BusinessArea" [(ngModel)]="vendorDetails.BusinessArea">
+                       </mat-form-field>
+                     
+                       <mat-form-field fxFlex="30" class="padding-left">
+                          <input matInput placeholder="GSTIN" [(ngModel)]="vendorDetails.GSTIN">
+                         </mat-form-field>
+        
+                    </div>
+            <div class="example-container">
+          
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="PAN" [(ngModel)]="vendorDetails.PAN">
+               </mat-form-field>
+               <mat-form-field fxFlex="30" class="padding-left">
+                <input matInput placeholder="TAN_NO" [(ngModel)]="vendorDetails.TAN_NO">
+               </mat-form-field>
+               <mat-form-field  class="padding-left">
+                <mat-select
+                placeholder="Status"
+                [(ngModel)]="value"
+                (ngModelChange)="onchangeStatus($event)"
+                fxFlex="33.3" class="padding-left"
+            >
+                <mat-option
+                    *ngFor="let item of Status"
+                    [value]="item.Id"
+                >
+                    {{item.Id}}
+                </mat-option>
+        </mat-select>
+        </mat-form-field>
+            </div>
+</mat-dialog-content>
+  <mat-dialog-actions align="end">
+        <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
+      </mat-dialog-actions>
+

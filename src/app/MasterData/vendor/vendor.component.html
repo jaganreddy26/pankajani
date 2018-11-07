@@ -1,3 +1,213 @@
-<p>
-  vendor works!
-</p>
+<mat-toolbar>
+  <span>Vendor Details</span>
+</mat-toolbar>
+
+<button type="button"  class="btn btn-default" (click)="save()" style="position: absolute;
+top: 78px;
+right: 80px;
+z-index:1;
+color: #fff;">Save</button>
+<div
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  class="card padding"
+  
+>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <mat-select
+      placeholder="BusinessAreaId"
+      [(ngModel)]="value"
+      (ngModelChange)="onchangeBusinessAreaId($event)"
+      fxFlex="33.3" class="padding-left"
+  >
+      <mat-option
+          *ngFor="let item of BusinessAreaIds"
+          [value]="item.Id"
+      >
+          {{item.Name}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Vendor Name"
+      matInput
+      [(ngModel)]="vendor.VendorName"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Email"
+      matInput
+      [(ngModel)]="vendor.Email"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Alternative Email"
+      matInput
+      [(ngModel)]="vendor.AlternateEmail"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Phone"
+      matInput
+      [(ngModel)]="vendor.Phone"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Mobile"
+      matInput
+      [(ngModel)]="vendor.Mobile"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="AlternativeMobile"
+      matInput
+      [(ngModel)]="vendor.AlternateMobile"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Address1"
+      matInput
+      [(ngModel)]="vendor.Address1"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Address2"
+      matInput
+      [(ngModel)]="vendor.Address2"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="Address3"
+      matInput
+      [(ngModel)]="vendor.Address3"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="CIN"
+      matInput
+      [(ngModel)]="vendor.CIN"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="GSTIN"
+      matInput
+      [(ngModel)]="vendor.GSTIN"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="PAN"
+      matInput
+      [(ngModel)]="vendor.PAN"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="TAN_NO"
+      matInput
+      [(ngModel)]="vendor.TAN_NO"
+  >
+</mat-form-field>
+<!-- <mat-form-field fxFlex="33.3" class="padding-left">
+  <input
+      placeholder="CompanyId"
+      matInput
+      [(ngModel)]="vendor.CompanyId"
+  >
+</mat-form-field> -->
+<mat-form-field fxFlex="10">
+    <mat-select
+        placeholder="Status"
+        [(ngModel)]="value"
+        (ngModelChange)="onchangeStatus($event)"
+    
+    >
+        <mat-option
+            *ngFor="let item of Status"
+            value="{{item.Id}}"
+        >
+            {{item.Id}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+</div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" *ngIf='allVendorDeatils.length !=0'>
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+          
+            <th>VendorId </th>
+            <th>BusinessAreaId</th>
+            <th>BusinessArea</th>
+            <th>VendorName</th>
+            <th>Mobile</th>
+            <!-- <th>AlternateMobile</th> -->
+            <th>Email</th>
+            <!-- <th>AlternateEmail</th> -->
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>Address3</th>
+            <th>StatusDescription</th>
+            <th>CIN</th>
+            <th>GSTIN</th>
+            <!-- <th>PAN</th> -->
+            <!-- <th>TAN_NO</th> -->
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of allVendorDeatils; let i = index"
+        [attr.data-index]="i"
+         >
+     
+        <td>{{items.VendorId}}</td>
+        <td>{{items.BusinessAreaId}}</td>
+        <td>{{items.BusinessArea}}</td>
+        <td>{{items.VendorName}}</td>
+        <td>{{items.Mobile}}</td>
+        <!-- <td>{{items.AlternateMobile}}</td> -->
+        <td>{{items.Email}}</td>
+        <!-- <td>{{items.AlternateEmail}}</td> -->
+        <td>{{items.Address1}}</td>
+        <td>{{items.Address2}}</td>
+        <td>{{items.Address3}}</td>
+        <td>{{items.Status}}</td>
+        <td>{{items.CIN}}</td>
+        <td>{{items.GSTIN}}</td>
+        <!-- <td>{{items.PAN}}</td> -->
+        <!-- <td>{{items.TAN_NO}}</td> -->
+        <td>{{items.StatusDescription}}</td>
+        <td>
+            <button
+            mat-raised-button
+            fxFlex="16"
+            (click)="openModalEdit(items,template)"
+            color="primary"
+        >
+           Edit
+        </button>
+         
+        </td>
+  
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+<ng-template #template >
+        <app-vendor-edit [Inputdata]="InputId" (close)="onHide()"></app-vendor-edit>
+    </ng-template>

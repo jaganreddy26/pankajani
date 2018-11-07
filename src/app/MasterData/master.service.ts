@@ -132,4 +132,26 @@ updateAreaOfBusinessDetails(data){
   this.url = this.host+'/api/MasterDataApi/UpdateBusinessAreaDetails';
   return this.http.post(this.url,data)
 } 
+/////////////////// VENDOR DETAILS //////////////////
+
+//save saveVendor Details 
+saveVendorDetails(data){
+  this.url = this.host+'/api/MasterDataApi/SaveVendorDetails';
+  return this.http.post(this.url,data)
+}
+//Get All Vendor Details
+getVendorDetails(data){
+  this.url = this.host+'/api/MasterDataApi/GetVendorDetails';
+  return this.http.post(this.url,data)
+} 
+//Get Perticular Vendor Details
+getVendorDetailsByVendorId(data){
+  this.url = this.host+'/api/MasterDataApi/GetVendorDetails';
+  return this.http.post(this.url,data)
+}
+//upadte Vendor Details
+updateVendorDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdateVendorDetails';
+  return this.http.post(this.url,data)
+}
 }
