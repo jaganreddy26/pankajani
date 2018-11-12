@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MasterService} from '../master.service';
+import { MatDialog } from "@angular/material";
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
@@ -12,7 +13,8 @@ export class GoodstypeComponent implements OnInit {
   Name:any;
   ActiveStatus:any;
   GoodsTypeDetails:any=[];
-  constructor(private masterService:MasterService,private alertService :AlertService) {
+  InputId:any;
+  constructor(private masterService:MasterService,private dialog: MatDialog,private alertService :AlertService) {
     this.GetStatus();
     this.GetAllGoodsTypeDetils();
    }
@@ -54,6 +56,12 @@ export class GoodstypeComponent implements OnInit {
     this.masterService.getStatus().subscribe((data: any) => {
       this.status = data;
     })
+  }
+  openModalEdit(items,template){
+    this.dialog.open(template);
+    // this.modalRef = this.modalService.show(template);
+     console.log(items.CompanyId)
+    this.InputId = items.CompanyId;
   }
   onchangeStatus($event){
     //console.log($event);

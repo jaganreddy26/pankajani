@@ -17,6 +17,8 @@ import { EditAreaBusinessComponent } from './edit-area-business/edit-area-busine
 import { VendorEditComponent } from './vendor-edit/vendor-edit.component';
 import { AgencyComponent } from './agency/agency.component';
 import { GoodstypeComponent } from './goodstype/goodstype.component';
+import { AgencyEditComponent } from './agency-edit/agency-edit.component';
+import { GoodstypeEditComponent } from './goodstype-edit/goodstype-edit.component';
 const routes: Routes = [
   { path: 'addbusiness', component:AddBusinessComponent},
   { path: 'addcompany', component:AddCompanyComponent },
@@ -39,7 +41,7 @@ const routes: Routes = [
     providers: [MasterService],
     declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent, EditbusinessComponent, EditbankdetailsComponent, EditplantComponent,
        AreaofBusinessComponent, VendorComponent, EditAreaBusinessComponent,
-        VendorEditComponent,AgencyComponent, GoodstypeComponent],
+        VendorEditComponent,AgencyComponent, GoodstypeComponent, AgencyEditComponent, GoodstypeEditComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }
