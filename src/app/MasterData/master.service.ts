@@ -154,4 +154,16 @@ updateVendorDetails(data){
   this.url = this.host+'/api/MasterDataApi/UpdateVendorDetails';
   return this.http.post(this.url,data)
 }
+/////////////////// GOODS TYPE  //////////////////
+
+// SaveGoodsTypeDetails
+saveGoodsTypeDetails(data){
+  this.url = this.host+'/api/MasterDataApi/SaveGoodsTypeDetails';
+  return this.http.post(this.url,data)
+}
+// GetGoodsTypeDetails
+getGoodsTypeDetails(data){
+  this.url = this.host+'/api/MasterDataApi/GetGoodsTypeDetails';
+  return this.http.post(this.url,data)
+}
 }

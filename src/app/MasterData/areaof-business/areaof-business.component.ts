@@ -70,8 +70,9 @@ this.InputId = object;
   }
 
   onHide() {
-    this.GetAllAreaBusinessDetails();
+   
     this.dialog.closeAll();
+    this.GetAllAreaBusinessDetails();
 
   }
 

@@ -34,7 +34,7 @@ export class BankdetailsComponent implements OnInit {
     this.getCustomerId(object);
     this.GetStatus();
     this.getBankDetails();
-   this.businessId = localStorage.getItem('businessId')
+  
   }
 
   ngOnInit() {

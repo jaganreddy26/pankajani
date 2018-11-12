@@ -15,13 +15,17 @@ import { AreaofBusinessComponent } from './areaof-business/areaof-business.compo
 import { VendorComponent } from './vendor/vendor.component';
 import { EditAreaBusinessComponent } from './edit-area-business/edit-area-business.component';
 import { VendorEditComponent } from './vendor-edit/vendor-edit.component';
+import { AgencyComponent } from './agency/agency.component';
+import { GoodstypeComponent } from './goodstype/goodstype.component';
 const routes: Routes = [
   { path: 'addbusiness', component:AddBusinessComponent},
   { path: 'addcompany', component:AddCompanyComponent },
   { path: 'bankdetails', component:BankdetailsComponent},
   { path: 'plantdetails', component:PlantdetailsComponent },
   { path: 'areaofBusiness', component:AreaofBusinessComponent },
-  { path: 'vendor',component:VendorComponent}
+  { path: 'vendor',component:VendorComponent},
+  { path: 'agency',component:AgencyComponent},
+  { path: 'goodstype',component:GoodstypeComponent},
    ];
 
 @NgModule({
@@ -33,7 +37,9 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [MasterService],
-    declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent, EditbusinessComponent, EditbankdetailsComponent, EditplantComponent, AreaofBusinessComponent, VendorComponent, EditAreaBusinessComponent, VendorEditComponent],
+    declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent, EditbusinessComponent, EditbankdetailsComponent, EditplantComponent,
+       AreaofBusinessComponent, VendorComponent, EditAreaBusinessComponent,
+        VendorEditComponent,AgencyComponent, GoodstypeComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }

@@ -10,12 +10,16 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-
+  businessId:any;
   constructor(public router: Router) {
   console.log(this.router.url)
+  this.businessId = localStorage.getItem('businessId');
+  console.log(this.businessId);
 }
 logout(){
-localStorage.clear()
+localStorage.clear();
+this.businessId="";
+console.log(this.businessId);
 }
 }
 
