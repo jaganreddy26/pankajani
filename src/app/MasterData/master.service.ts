@@ -75,6 +75,10 @@ updatePlantDetails(data){
     this.url = this.host+'/api/MasterDataApi/GetBusinessId';
     return this.http.get(this.url)
   }
+  getBusiness_Ids(data){
+    this.url = this.host+'/api/MasterDataApi/GetBusiness';
+    return this.http.post(this.url,data)
+  }
   //Get Status for adding the Business
   getStatus(){
     this.url = this.host+'/api/MasterDataApi/GetActiveStatus';

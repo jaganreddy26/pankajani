@@ -27,7 +27,10 @@ InputId:any;
   ngOnInit() {
   }
 getBusinessId(){
-  this.masterService.getBusinessIds().subscribe((data:any)=>{
+  let object={
+    'Id':0
+  }
+  this.masterService.getBusiness_Ids(object).subscribe((data:any)=>{
    // console.log(data);
     this.BusinessIDs=data;
   })

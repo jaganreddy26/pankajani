@@ -6,15 +6,21 @@ import {environment} from '../../environments/environment';
 })
 
 export class UbtService {
-  BusinessId:any =localStorage.getItem('businessId');
+   BusinessId:any =localStorage.getItem('businessId');
   private host = environment.API_END_POINT;
   private url: string = '';
   constructor(private http:HttpClient) { }
-
+//Get customers in create ubt
+  getCustomer(data)
+  {
+    // var data = {BusinessId:this.BusinessId } ;
+    this.url = this.host+'/api/UbtAPI/GetCustomers';
+    return this.http.post(this.url,data)
+  }
   getCustomerName()
   {
-    var data = {BusinessId:this.BusinessId } ;
-    this.url = this.host+'/api/UbtApi/GetCustomers';
+     var data = {BusinessId:this.BusinessId } ;
+    this.url = this.host+'/api/UbtAPI/GetCustomers';
     return this.http.post(this.url,data)
   }
   getAgency(Id:any){

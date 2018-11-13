@@ -51,7 +51,7 @@ export class LogiinInService {
 
  getBusinessName(){
      console.log('hii')
-     this.url = this.host+'/api/DefaultApi/GetBusinessName';
+     this.url = this.host+'/api/UbtAPI/GetBusinessName';
      return this.http.get(this.url)
  }
 
