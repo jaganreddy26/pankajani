@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Edit Category Details</h2>
+<mat-dialog-content class="mat-typography">
+    <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400"> CategoryId :</span>
+    <span>{{categoryDetails.CategoryId}}</span>
+</div>
+<div class="padding-left">
+    <span style="font-weight:400">CustomerId :</span>
+    <span>{{categoryDetails.CustomerId}}</span>
+</div>
+
+<div class="example-container">
+        
+   <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="CategoryName" [(ngModel)]="categoryDetails.CategoryName">
+   </mat-form-field>          
+  <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="CustomerName"  [(ngModel)]="categoryDetails.CustomerName" >
+  </mat-form-field>
+  <mat-form-field  class="padding-left">
+    <mat-select
+    placeholder="Status"
+    [(ngModel)]="value"
+    (ngModelChange)="onchangeStatus($event)"
+    fxFlex="33.3" class="padding-left"
+>
+    <mat-option
+        *ngFor="let item of Status"
+        [value]="item.Id"
+    >
+        {{item.Id}}
+    </mat-option>
+</mat-select>
+</mat-form-field>  
+<mat-form-field fxFlex="25" class="padding-left">
+  <mat-select
+  placeholder="GoodsType"
+  [(ngModel)]="value"
+  (ngModelChange)="onchangeGoodsType($event)"
+   class="padding-left"
+  >
+  <mat-option
+      *ngFor="let item of GoodsTypeIds"
+      [value]="item.Id"
+  >
+      {{item.Id}}
+  </mat-option>
+  </mat-select>
+  </mat-form-field>
+  <!-- <mat-form-field fxFlex="30" class="padding-left">
+    <input matInput placeholder="AlternateEmail" [(ngModel)]="categoryDetails.AlternateEmail">
+   </mat-form-field>
+   <mat-form-field fxFlex="30" class="padding-left">
+     <input matInput placeholder="Mobile" [(ngModel)]="categoryDetails.Mobile">
+    </mat-form-field>
+  <mat-form-field fxFlex="30" class="padding-left">
+          <input matInput placeholder="AlternateMobile"  [(ngModel)]="categoryDetails.AlternateMobile" >
+        </mat-form-field> -->
+
+</div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>
+</mat-dialog-actions>

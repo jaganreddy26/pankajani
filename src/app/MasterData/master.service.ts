@@ -15,6 +15,11 @@ export class MasterService {
     this.url = this.host+'/api/UbtApi/GetCustomers';
     return this.http.post(this.url,data)
   }
+  // GetCustomers
+  getCustomers(data){
+    this.url = this.host+'/api/UbtApi/GetCustomers';
+    return this.http.post(this.url,data)
+  }
   // SAVING BANK INFORMATION
   saveBankDetails(data){
     this.url = this.host+'/api/MasterDataApi/SaveBankDetails';
@@ -154,6 +159,29 @@ updateVendorDetails(data){
   this.url = this.host+'/api/MasterDataApi/UpdateVendorDetails';
   return this.http.post(this.url,data)
 }
+
+///////////////////// AGENCY  /////////////////////
+
+// SaveAgencyDetails
+saveAgencyDetails(data){
+  this.url = this.host+'/api/MasterDataApi/SaveAgencyDetails';
+  return this.http.post(this.url,data)
+}
+// GetAgencyDetailsAll
+getAgencyDetailsAll(data){
+  this.url = this.host+'/api/MasterDataApi/GetAgencyDetails';
+  return this.http.post(this.url,data)
+} 
+// GetAgencyDetails by AgencyId
+getAgencyDetailsByAgencyId(data){
+  this.url = this.host+'/api/MasterDataApi/GetAgencyDetails';
+  return this.http.post(this.url,data)
+}
+// UpdateAgencyDetails
+updateAgencyDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdateAgencyDetails';
+  return this.http.post(this.url,data)
+}
 /////////////////// GOODS TYPE  //////////////////
 
 // SaveGoodsTypeDetails
@@ -166,4 +194,40 @@ getGoodsTypeDetails(data){
   this.url = this.host+'/api/MasterDataApi/GetGoodsTypeDetails';
   return this.http.post(this.url,data)
 }
+// GetGoodsTypeDetails By Id
+getGoodsTypeDetailsById(data){
+  this.url = this.host+'/api/MasterDataApi/GetGoodsTypeDetails';
+  return this.http.post(this.url,data)
+}
+// UpdateGoodsTypeDetails
+updateGoodsTypeDetails(data){
+  this.url = this.host+'/api/MasterDataApi/UpdateGoodsTypeDetails';
+  return this.http.post(this.url,data)
+}
+///////////// Add CATRGORY /////////////////
+// GetGoodsType
+getGoodsType(data){
+  this.url = this.host+'/api/MasterDataApi/GetGoodsType';
+  return this.http.post(this.url,data)
+}
+// SaveCategoryDetails
+ saveCategoryDetails(data){
+  this.url = this.host+'/api/MasterDataApi/SaveCategoryDetails';
+  return this.http.post(this.url,data)
+ }
+ // GetCategoryDetails
+ getCategoryDetails(data){
+  this.url = this.host+'/api/MasterDataApi/GetCategoryDetails';
+  return this.http.post(this.url,data)
+ }
+  // GetCategoryDetails By CategoryId
+  getCategoryDetailsByCategoryId(data){
+    this.url = this.host+'/api/MasterDataApi/GetCategoryDetails';
+  return this.http.post(this.url,data)
+  }
+  // UpdateCategoryDetails:
+  updateCategoryDetails(data){
+    this.url = this.host+'/api/MasterDataApi/UpdateCategoryDetails';
+    return this.http.post(this.url,data) 
+  }
 }

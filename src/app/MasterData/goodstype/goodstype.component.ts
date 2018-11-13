@@ -52,6 +52,11 @@ export class GoodstypeComponent implements OnInit {
         this.GoodsTypeDetails=data;
       })
     }
+    onHide() {
+      this.GetAllGoodsTypeDetils();
+      this.dialog.closeAll();
+  
+    }
   GetStatus() {
     this.masterService.getStatus().subscribe((data: any) => {
       this.status = data;
@@ -59,9 +64,11 @@ export class GoodstypeComponent implements OnInit {
   }
   openModalEdit(items,template){
     this.dialog.open(template);
-    // this.modalRef = this.modalService.show(template);
-     console.log(items.CompanyId)
-    this.InputId = items.CompanyId;
+    let object={
+      "CompanyId":items.CompanyId,
+      "Id":items.Id
+    }
+    this.InputId =object;
   }
   onchangeStatus($event){
     //console.log($event);

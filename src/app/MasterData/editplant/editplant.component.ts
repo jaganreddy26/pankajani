@@ -39,7 +39,7 @@ export class EditplantComponent implements OnInit {
 
 updateRecords(){
   this.masterService.updatePlantDetails(this.plantDetails).subscribe((data:any)=>{
-    console.log(data);
+   // console.log(data);
     if(data !== 'null'){
 
       this.alertService.alert(AlertType.Success, data)

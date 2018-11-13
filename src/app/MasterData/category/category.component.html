@@ -1,0 +1,115 @@
+<mat-toolbar>
+  <span>Add Category</span>
+</mat-toolbar>
+<button type="button"  class="btn btn-default" (click)="save()" style="position: absolute;
+top: 78px;
+right: 80px;
+z-index:1;
+color: #fff;">Save</button>
+<div
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  class="card padding"
+  
+>
+<mat-form-field fxFlex="25" class="padding-left">
+<mat-select
+placeholder="CustomerId"
+[(ngModel)]="value"
+(ngModelChange)="onchangeCustomerId($event)"
+
+>
+<mat-option
+    *ngFor="let item of CustomerIds"
+    [value]="item.CustomerId"
+>
+    {{item.CustomerId}}
+</mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="25" class="padding-left">
+<mat-select
+placeholder="GoodsType"
+[(ngModel)]="value"
+(ngModelChange)="onchangeGoodsType($event)"
+ class="padding-left"
+>
+<mat-option
+    *ngFor="let item of GoodsTypeIds"
+    [value]="item.Id"
+>
+    {{item.Id}}
+</mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="25" class="padding-left">
+  <input
+      placeholder="CategoryName"
+      matInput
+      [(ngModel)]="category.CategoryName"
+  >
+</mat-form-field>
+<mat-form-field fxFlex="25" class="padding-left">
+<mat-select
+placeholder="Status"
+[(ngModel)]="value"
+(ngModelChange)="onchangeStatus($event)"
+
+>
+<mat-option
+    *ngFor="let item of Status"
+    value="{{item.Id}}"
+>
+    {{item.Id}}
+</mat-option>
+</mat-select>
+</mat-form-field>
+</div>
+
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" *ngIf='allCategoryDetails.length !=0'>
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+            <!-- <th>CategoryId</th> -->
+            <th>CategoryName</th>
+            <!-- <th>GoodsType </th> -->
+            <!-- <th>CustomerId</th> -->
+            <th>CustomerName</th>
+            <th>Status</th>
+            <th>StatusDescription</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of allCategoryDetails; let i = index"
+        [attr.data-index]="i"
+         >
+     
+        <!-- <td>{{items.CategoryId}}</td> -->
+        <td>{{items.CategoryName}}</td>
+        <!-- <td>{{items.GoodsType}}</td> -->
+        <!-- <td>{{items.CustomerId}}</td> -->
+        <td>{{items.CustomerName}}</td>
+        <td>{{items.Status}}</td>
+        <td>{{items.StatusDescription}}</td>
+        <td>
+            <button
+            mat-raised-button
+            fxFlex="16"
+            (click)="openModalEdit(items,template)"
+            color="primary"
+        >
+           Edit
+        </button>
+         
+        </td>
+  
+    </tr>
+  </tbody>
+  </table>
+</div>
+<ng-template #template >
+    <app-categoryedit [Inputdata]="InputId" (close)="onHide()"></app-categoryedit>
+</ng-template>
