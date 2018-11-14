@@ -47,7 +47,8 @@ export class AmendubtComponent implements OnInit {
   agencynew:any=[];
   ubtidInput:any;
   customerIDStatic:any;
-  AgencyIdStatic:any;
+  CustomerId:any;
+  AgencyId:any;
   customerNameStatic:any;
   AgencyName:any;
   //below are variables are to send send the input details in object formate(to get "getIndividualUbtCategory")
@@ -128,52 +129,60 @@ this.getedit();
       'CustomerId': this.customerId,
       'FromDate': this.FromDate,
       'ToDate': this.ToDate,
-
+      'Status':this.StatusName
     }
     this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
     })
-
+    this.StatusName="";
+    this.value="";
   }
 
   edit(item) {
     this.ubtidInput=item.UbtId
-    // console.log(item)
+     console.log(item)
     this.individualUbtDetailsInput=item;
     console.log(this.individualUbtDetailsInput);
     this.editDetails = true;
     this.udtData = [];
     
     this.ubtService.GetIndividualUbtDetails(item).subscribe((data: any) => {
-
-      data.forEach(element => {
-        this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
-        this.agencyIdSelected = element.AgencyId;
-        this.customerIdSelected = element.CustomerName;
-        this.confirmBiddingStatus = element.ConfirmBidding;
-       this.customerIDStatic=element.CustomerId;
-       this.AgencyIdStatic=element.AgencyId;
-       this.customerNameStatic=element.CustomerName;
-       this.AgencyName=element.AgencyName;
-       console.log(this.customerIDStatic);
+    console.log(data);
+    this.udtData=data;
+    this.customerIDStatic={
+      'CustomerId':data[0].CustomerId
+    }
+    this.CustomerId=data[0].CustomerId;
+    this.AgencyId=data[0].AgencyId
+    //console.log(this.customerIDStatic);
+      // data.forEach(element => {
+      //   this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+      //   this.agencyIdSelected = element.AgencyId;
+      //   this.customerIdSelected = element.CustomerName;
+      //   this.confirmBiddingStatus = element.ConfirmBidding;
+      //  this.customerIDStatic=element.CustomerId;
+      //  this.AgencyIdStatic=element.AgencyId;
+      //  this.customerNameStatic=element.CustomerName;
+      //  this.AgencyName=element.AgencyName;
+      //  console.log(this.customerIDStatic);
       
        
-      }); 
+      // }); 
     
-      this.getGoodsTypeListForNew(this.customerIDStatic);
-    this.getCategoryNameListForNew(this.customerIDStatic);
+      this.getGoodsTypeListForNew();
+    this.getCategoryNameListForNew();
     })
     
     
   }
-  getGoodsTypeListForNew(id) {
-    this.ubtService.getGoodsType(this.customerIDStatic).subscribe((data: any) => {
+  getGoodsTypeListForNew() {
+    this.ubtService.getGoodsTypeByCustomerId(this.customerIDStatic).subscribe((data: any) => {
      console.log(data);
       this.goodsTypenew = data;
     })
   }
-  getCategoryNameListForNew(id) {
-    this.ubtService.getCategoryName(this.customerIDStatic).subscribe((data: any) => {
+  getCategoryNameListForNew() {
+    this.ubtService.getCategoryNameByCustomerId(this.customerIDStatic).subscribe((data: any) => {
      console.log(data);
       this.CategoryNameListnew = data;
     })
@@ -183,6 +192,9 @@ this.getedit();
     this.getAgencyName($event);
     this.getGoodsTypeList($event);
     this.getCategoryNameList($event);
+ }
+ onchangeStatus($event){
+
  }
  getGoodsTypeList(id) {
   this.ubtService.getGoodsType(id).subscribe((data: any) => {
@@ -222,15 +234,15 @@ console.log(data);
     console.log(this.selectedCategoryId);
   }
   onchangeGoodsType($event){
-
+    this.StatusName=$event
   }
   //--(Adding new category to the existing UBT_ID request data)--//
   add(){
     let object={
       'UBTId':this.ubtidInput,
       'BusinessId':this.ubtService.BusinessId,
-      'AgencyId':this.AgencyIdStatic,
-      'CustomerId':this.customerIDStatic,
+      'AgencyId':this.AgencyId,
+      'CustomerId':this.CustomerId,
       'GoodsType':this.goodsTypeSelected,
       'CategoryId':this.selectedCategoryId,
       'Quantity':this.Quantity,
@@ -249,7 +261,7 @@ console.log(data);
    //--(ENDED)--//
 
    saveRecords(){
-     //console.log(this.addedNewCategoryToUbtId);
+    // console.log(this.addedNewCategoryToUbtId);
     this.ubtService.addNewCategoryToUbtId(this.addedNewCategoryToUbtId).subscribe((data:any)=>{
       console.log(data);
       if(data=='Success'){
@@ -257,23 +269,29 @@ console.log(data);
            
     this.ubtService.GetIndividualUbtDetails(this.individualUbtDetailsInput).subscribe((data: any) => {
       this.udtData =[];
-            data.forEach(element => {
-              this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
-              this.agencyIdSelected = element.AgencyId;
-              this.customerIdSelected = element.CustomerName;
-              this.confirmBiddingStatus = element.ConfirmBidding;
-             this.customerIDStatic=element.CustomerId;
-             this.AgencyIdStatic=element.AgencyId;
-             console.log(this.customerIDStatic);
+      this.udtData=data;
+      this.customerIDStatic={
+        'CustomerId':data[0].CustomerId
+      }
+      this.CustomerId=data[0].CustomerId;
+      this.AgencyId=data[0].AgencyId
+            // data.forEach(element => {
+            //   this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+            //   this.agencyIdSelected = element.AgencyId;
+            //   this.customerIdSelected = element.CustomerName;
+            //   this.confirmBiddingStatus = element.ConfirmBidding;
+            //  this.customerIDStatic=element.CustomerId;
+            //  this.AgencyIdStatic=element.AgencyId;
+            //  console.log(this.customerIDStatic);
             
              
-            }); 
+            // }); 
           
-            this.getGoodsTypeListForNew(this.customerIDStatic);
-          this.getCategoryNameListForNew(this.customerIDStatic);
+            this.getGoodsTypeListForNew();
+          this.getCategoryNameListForNew();
           })
         }else{
-          this.alertService.alert(AlertType.Error,"Something went wrong");
+          this.alertService.alert(AlertType.Error,"AlreadyExits");
         }
     })
     this.addedNewCategoryToUbtId=[];
@@ -333,14 +351,14 @@ this.edit(this.individualUbtDetailsInput);
                 this.customerIdSelected = element.CustomerName;
                 this.confirmBiddingStatus = element.ConfirmBidding;
                this.customerIDStatic=element.CustomerId;
-               this.AgencyIdStatic=element.AgencyId;
+               this.AgencyId=element.AgencyId;
                console.log(this.customerIDStatic);
               
                
               }); 
             
-              this.getGoodsTypeListForNew(this.customerIDStatic);
-            this.getCategoryNameListForNew(this.customerIDStatic);
+              this.getGoodsTypeListForNew();
+            this.getCategoryNameListForNew();
             })
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");

@@ -93,6 +93,8 @@ export class ViewubtComponent implements OnInit {
       this.nodes = parent;
 
   })
+  this.StatusName="";
+  this.value="";
 
   }
 
@@ -100,6 +102,10 @@ export class ViewubtComponent implements OnInit {
 
   onchange($event) {
     this.Id = $event
+  }
+  onchangeStatus($event){
+    this.StatusName=$event;
+    //console.log(this.StatusName);
   }
 
   fromDateChange() {

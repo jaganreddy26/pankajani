@@ -98,6 +98,7 @@ export class VendorComponent implements OnInit {
   }
   onchangeBusinessAreaId($event){
   this.vendor.BusinessAreaId=$event;
+  console.log(this.vendor.BusinessAreaId)
   }
   onchangeStatus($event) {
 

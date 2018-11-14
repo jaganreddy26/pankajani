@@ -23,27 +23,45 @@ export class UbtService {
     this.url = this.host+'/api/UbtAPI/GetCustomers';
     return this.http.post(this.url,data)
   }
+  //old one Get Agency
   getAgency(Id:any){
     var data = {CustomerId:Id } ;
     this.url=this.host+'/api/UbtApi/GetAgency';
     return this.http.post(this.url,data)
   }
+  // New one  Get Agency by CustomerId
+  getAgencyByCustomerId(data){
+    this.url=this.host+'/api/UbtAPI/GetAgency';
+    return this.http.post(this.url,data)
+  }
+   //old one getGoodsType
   getGoodsType(Id:any){
     var data = {CustomerId:Id } ;
     this.url=this.host+'/api/UbtApi/GetGoodsType';
     return this.http.post(this.url,data)
   }
+    // New one  getGoodsType by CustomerId
+    getGoodsTypeByCustomerId(data){
+      this.url=this.host+'/api/UbtAPI/GetGoodsType';
+    return this.http.post(this.url,data)
+    }
+    //old one getCategoryName
   getCategoryName(Id:any){
     var data = {CustomerId:Id};
     this.url =this.host+'/api/UbtApi/GetCategory';
     return this.http.post(this.url,data);
+  }
+   // New one  getCategoryName by CustomerId
+   getCategoryNameByCustomerId(data){
+    this.url=this.host+'/api/UbtAPI/GetCategory';
+  return this.http.post(this.url,data)
   }
   CreateUbt(data){
      this.url=this.host+'/api/UbtAPI/CreateUBT';
      return this.http.post(this.url,data);
   }
   getViewUbtDetails(data){
-    this.url =this.host+'/api/UbtApi/GetUBT';
+    this.url =this.host+'/api/UbtAPI/GetUBT';
     return this.http.post(this.url,data);
   }
   getIndividualUbt(data){

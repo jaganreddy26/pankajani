@@ -47,45 +47,49 @@ addedUbtDetails:any=[];
       this.customer=data;
     })
   }
-  getAgencyName(id){
-    this.ubtService.getAgency(id).subscribe((data:any)=>{
+  getAgencyName(data){
+    this.ubtService.getAgencyByCustomerId(data).subscribe((data:any)=>{
  //console.log(data);
      this.agency=data;
     })
   }
-  getGoodsTypeList(id){
-    this.ubtService.getGoodsType(id).subscribe((data:any)=>{
+  getGoodsTypeList(data){
+    this.ubtService.getGoodsTypeByCustomerId(data).subscribe((data:any)=>{
   // console.log(data);
       this.goodsType=data;
     })
   }
-  getCategoryNameList(id){
-    this.ubtService.getCategoryName(id).subscribe((data:any)=>{
+  getCategoryNameList(data){
+    this.ubtService.getCategoryNameByCustomerId(data).subscribe((data:any)=>{
      // console.log(data);
       this.CategoryNameList=data;
     })
   }
 
   onchange($event) {
+    //console.log($event);
+    let object={
+      "CustomerId":$event
+    }
     this.customerId= $event
-    this.getAgencyName($event);
-    this.getGoodsTypeList($event);
-    this.getCategoryNameList($event);
+    this.getAgencyName(object);
+    this.getGoodsTypeList(object);
+    this.getCategoryNameList(object);
   }
 
   onchangeGoodsType($event){
     this.selectedGoodstype=$event
-    // console.log(this.selectedGoodstype);
+   console.log(this.selectedGoodstype);
   }
   onchangeCategoryName($event){
     this.selectedCategoryId=$event
-   // console.log(this.selectedCategoryId);
+   console.log(this.selectedCategoryId);
   }
 
   onchangeAgency($event){
  
-      this.Id=$event;
-   // console.log(this.Id);
+      this.agencyId=$event;
+    console.log(this.agencyId);
   }
 
   save(){
@@ -106,13 +110,6 @@ this.addedUbtDetails=[];
  }
 
   add(){
-    if(this.customerId==2){
-      this.agencyId=-1;
-    }
-    else{
-
-      this.agencyId=this.agencyIdSelected;
-    }
 
     let object={
       'BusinessId':localStorage.getItem('businessId'),
@@ -124,8 +121,8 @@ this.addedUbtDetails=[];
        'MaxMargin':this.MaxMargin,
        'CategoryId':this.selectedCategoryId
     }
-
-    this.addedUbtDetails.push(object);
+//console.log(object);
+ this.addedUbtDetails.push(object);
     this.goodsTypeSelected ="";
     this.categoryIdSelected ="";
     this.Quantity ="";
@@ -133,7 +130,7 @@ this.addedUbtDetails=[];
     this.MaxMargin ="";
     this.agencyIdSelected="";
     this.selectedCategoryId="";
-
+    this.customerIdSelected="";
  
 
   }

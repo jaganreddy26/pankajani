@@ -53,6 +53,7 @@
             <mat-select
                 placeholder="Status"
                 [(ngModel)]="StatusName"
+                (ngModelChange)="onchangeStatus($event)"
             >
                 <mat-option
                     *ngFor="let item of status"
