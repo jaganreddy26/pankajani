@@ -121,7 +121,7 @@ this.addedUbtDetails=[];
        'MaxMargin':this.MaxMargin,
        'CategoryId':this.selectedCategoryId
     }
-//console.log(object);
+console.log(object);
  this.addedUbtDetails.push(object);
     this.goodsTypeSelected ="";
     this.categoryIdSelected ="";
