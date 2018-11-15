@@ -58,9 +58,18 @@ export class SeekproposalComponent implements OnInit {
   hasChildrenField: 'nodes',
   
 }
+//Input Parameters Ids for Transporter,LoadingTransporter and UnloadingTransporter
+TransporterID:any;
+loadingTransporter:any;
+UnloadingTransporter:any;
   constructor(private proposalService: ProposalServiceService,private alertService :AlertService) {
     this.getCustomer();
-   
+    this.TransporterID = localStorage.getItem('TransporterID');
+    this.loadingTransporter = localStorage.getItem('loadingTransporter');
+    this.UnloadingTransporter = localStorage.getItem('UnloadingTransporter');
+     console.log(this.TransporterID);
+     console.log(this.loadingTransporter);
+     console.log(this.UnloadingTransporter);
    }
 
  
@@ -173,15 +182,15 @@ export class SeekproposalComponent implements OnInit {
      });
     // objectTypeTransport type Input Object
      let objectTypeTransport = {
-      ObjectType: 'Transporter' 
+      "Id":this.TransporterID
     };
   // objectTypeLoading type Input Object
     let objectTypeLoading = {
-      ObjectType: 'Loading Contractor' 
+      "Id":this.loadingTransporter
     };
   // objectTypeUnloading type Input Object
    let objectTypeUnloading = {
-      ObjectType: 'Unloading Contractor' 
+    "Id":this.UnloadingTransporter
     };
 
      this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
@@ -228,10 +237,10 @@ export class SeekproposalComponent implements OnInit {
       'UnloadContId':this.selectedUnLoadingContractor,
       'UnloadContAmount':this.unloadingRate,
    }
- console.log(object);
+ //console.log(object);
  this.addedSeekProposalDetails.push(object);
 
-//  console.log(this.allSeekProposalDetails);
+  console.log(this.addedSeekProposalDetails);
  this.selectedTransporter="";
  this.transporterRate="";
  this.selectedLoadingContractor="";
@@ -240,10 +249,11 @@ export class SeekproposalComponent implements OnInit {
  this.unloadingRate="";
   }
   saveProposal(){
-    console.log(this.addedSeekProposalDetails);
+    //console.log(this.addedSeekProposalDetails);
     let Inputarray:any=[];
     this.addedSeekProposalDetails.forEach(element=>{
        Inputarray.push({
+       'CompanyId':localStorage.getItem('businessId'),
         'UbtId':element.UbtId,
         "CategoryId":element.CategoryId,
         "GoodsType":element.GoodsType,
@@ -258,7 +268,7 @@ export class SeekproposalComponent implements OnInit {
 
        })
     })
-    console.log(Inputarray);
+  //  console.log(Inputarray);
        this.proposalService.addProposal(Inputarray).subscribe((data:any)=>{
       console.log(data);
       if(data !== 'null'){

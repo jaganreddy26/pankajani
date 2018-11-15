@@ -14,7 +14,10 @@ export class AreaofBusinessComponent implements OnInit {
   ActiveStatus:any;
   BusinessAreaDetailas:any=[];
   InputId:any;
-  transporterID:any;
+  TransporterID:any;
+  loadingTransporter:any;
+  UnloadingTransporter:any;
+
   constructor(private masterService:MasterService,
     private alertService :AlertService,private dialog: MatDialog) {
     this.GetStatus();
@@ -59,8 +62,16 @@ this.ActiveStatus="";
     this.masterService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
        console.log(data);
       this.BusinessAreaDetailas=data;
-     this.transporterID=data[1].Id;
-     console.log(this.transporterID);
+     this.TransporterID=data[0].Id;
+    //  console.log(this.TransporterID);
+    localStorage.setItem('TransporterID',this.TransporterID)
+     this.loadingTransporter=data[1].Id;
+    //  console.log(this.loadingTransporter);
+    localStorage.setItem('loadingTransporter',this.loadingTransporter)
+     this.UnloadingTransporter=data[2].Id;
+    //  console.log(this.UnloadingTransporter);
+    localStorage.setItem('UnloadingTransporter',this.UnloadingTransporter)
+
     })
   }
   openModalEdit(items,template){

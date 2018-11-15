@@ -178,27 +178,27 @@ _handleReaderLoaded(readerEvt) {
       "UploadedFileName":this.FileName,
       "ConfirmBiddingUbt":array
     }
-  console.log(object);
+  //console.log(object);
   
-  //  this.ubtService.confirmBidding(object).subscribe((data:any)=>{
-  //    console.log(data);
-  //    if(data=='Success'){
-  //     this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
-  //     }else{
-  //       this.alertService.alert(AlertType.Error,"Something went wrong");
-  //     }
+   this.ubtService.confirmBidding(object).subscribe((data:any)=>{
+     console.log(data);
+     if(data=='Success'){
+      this.alertService.alert(AlertType.Success,"Confirm Bidding Successfuly For This "+this.InputUbtId);
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+      }
 
-  //     let obj={
-  //       "UBTId":this.InputUbtId
-  //     }
+      let obj={
+        "UBTId":this.InputUbtId
+      }
     
-  //     this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
-  //       console.log(data);
-  //      this.udtData=data;
-  //     this.FilePath=data[0].FilePath;
-  //     this.ConfirmBiddingType=data[0].ConfirmBidding;
-  //     })
-  //  })
+      this.ubtService.GetIndividualUbtDetails(obj).subscribe((data:any)=>{
+        console.log(data);
+       this.udtData=data;
+      this.FilePath=data[0].FilePath;
+      this.ConfirmBiddingType=data[0].ConfirmBidding;
+      })
+   })
 
   }
   onchangeStatus($event){

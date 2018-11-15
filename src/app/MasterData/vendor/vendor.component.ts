@@ -50,8 +50,9 @@ export class VendorComponent implements OnInit {
       } else {
         this.alertService.alert(AlertType.Error, "Something went wrong");
       }
+      this.GetAllVendorDetails();
     })
-    this.GetAllVendorDetails();
+   
     this.vendor.BusinessAreaId="";
     this.vendor.VendorName="";
     this.vendor.Email="";

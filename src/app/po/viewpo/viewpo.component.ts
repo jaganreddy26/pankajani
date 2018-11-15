@@ -116,6 +116,7 @@ console.log(this.nodes);
   onActivate($event){
     //console.log($event.node.data.Id);
       let object={
+        "CompanyId":localStorage.getItem('businessId'),
       "POId":$event.node.data.Id
     }
     this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{

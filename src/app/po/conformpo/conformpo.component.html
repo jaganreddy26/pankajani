@@ -157,6 +157,11 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <div fxFlex="20">
+                <span>BuyersPoDate</span>
+                <input class="form-control" placeholder="BuyersPoDate" bsDatepicker #dp="bsDatepicker" [(ngModel)]="BuyersPoDate"
+                    (ngModelChange)="buyersPoDate()" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+            </div>
             <button mat-raised-button (click)="conforPo()" color="primary" style="margin-left:16px">
                 Save
             </button>

@@ -162,6 +162,7 @@ save(){
   let InputArray:any=[];
   this.seekPOdetails.forEach(element=>{
     InputArray.push({
+      "CompanyId":localStorage.getItem('businessId'),
       "ProposalId":element.ProposalId,
       "TransporterId":element.TransporterId,
       "TransporterAmount":element.TransporterAmount,

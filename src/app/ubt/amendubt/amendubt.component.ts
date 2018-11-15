@@ -335,7 +335,7 @@ this.edit(this.individualUbtDetailsInput);
     "UbtId":this.ubtidInput,
     "CategoryId":items.CategoryId,
     "GoodsType":items.GoodsType,
-    "CustomerId":this.customerIDStatic
+    "CustomerId":this.customerId
    }
  console.log(obj);
    this.ubtService.deleteCategoryId(obj).subscribe((data:any)=>{
@@ -345,17 +345,24 @@ this.edit(this.individualUbtDetailsInput);
       this.alertService.alert(AlertType.Success,"Successfuly deleted this "+ items.GoodsType +" and"+items.CategoryName);
       this.ubtService.GetIndividualUbtDetails(this.individualUbtDetailsInput).subscribe((data: any) => {
         this.udtData =[];
-              data.forEach(element => {
-                this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
-                this.agencyIdSelected = element.AgencyId;
-                this.customerIdSelected = element.CustomerName;
-                this.confirmBiddingStatus = element.ConfirmBidding;
-               this.customerIDStatic=element.CustomerId;
-               this.AgencyId=element.AgencyId;
-               console.log(this.customerIDStatic);
+        this.udtData =[];
+        this.udtData=data;
+        this.customerIDStatic={
+          'CustomerId':data[0].CustomerId
+        }
+        this.CustomerId=data[0].CustomerId;
+        this.AgencyId=data[0].AgencyId
+              // data.forEach(element => {
+              //   this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
+              //   this.agencyIdSelected = element.AgencyId;
+              //   this.customerIdSelected = element.CustomerName;
+              //   this.confirmBiddingStatus = element.ConfirmBidding;
+              //  this.customerIDStatic=element.CustomerId;
+              //  this.AgencyId=element.AgencyId;
+              //  console.log(this.customerIDStatic);
               
                
-              }); 
+              // }); 
             
               this.getGoodsTypeListForNew();
             this.getCategoryNameListForNew();

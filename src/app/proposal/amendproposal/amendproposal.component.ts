@@ -61,9 +61,19 @@ deletInputObj:any={};
     
   }
   modalRef: BsModalRef;
+  //Input Parameters Ids for Transporter,LoadingTransporter and UnloadingTransporter
+TransporterID:any;
+loadingTransporter:any;
+UnloadingTransporter:any;
   constructor(private proposalService: ProposalServiceService,
     private alertService :AlertService,private modalService: BsModalService) { 
     this.getCustomer();
+    this.TransporterID = localStorage.getItem('TransporterID');
+    this.loadingTransporter = localStorage.getItem('loadingTransporter');
+    this.UnloadingTransporter = localStorage.getItem('UnloadingTransporter');
+     console.log(this.TransporterID);
+     console.log(this.loadingTransporter);
+     console.log(this.UnloadingTransporter);
   }
 
   ngOnInit() {
@@ -160,15 +170,15 @@ deletInputObj:any={};
   
     // objectTypeTransport type Input Object
     let objectTypeTransport = {
-      ObjectType: 'Transporter' 
+      "Id":this.TransporterID
     };
   // objectTypeLoading type Input Object
     let objectTypeLoading = {
-      ObjectType: 'Loading Contractor' 
+      "Id":this.loadingTransporter
     };
   // objectTypeUnloading type Input Object
    let objectTypeUnloading = {
-      ObjectType: 'Unloading Contractor' 
+    "Id":this.UnloadingTransporter
     };
 
      this.proposalService.getVendor(objectTypeTransport).subscribe((data:any)=>{
@@ -226,6 +236,7 @@ saveNewProposal(){
   let Inputarray:any=[];
   this.addedNewProposalsToProposalId.forEach(element=>{
     Inputarray.push({
+      'CompanyId':localStorage.getItem('businessId'),
       "UbtId":this.UbtId,
       "CategoryId":this.CategoryId,
       "GoodsType":this.GoodsType,

@@ -174,6 +174,7 @@ _handleReaderLoaded(readerEvt) {
         }
 
        let object={
+        "CompanyId":localStorage.getItem('businessId'),
         "ProposalId":this.ProposalId,
         "FileDetails":obj
       }

@@ -112,6 +112,7 @@ console.log(this.nodes);
   }
   onActivate($event){
     let obj ={
+      "CompanyId":localStorage.getItem('businessId'),
       'POId': $event.node.data.Id,
       
     }
@@ -151,8 +152,8 @@ console.log(this.nodes);
              // console.log(data);
              this.currentPoId=data.POData[0].POId;
              this.currentPOStatus=data.POData[0].POStatus;
-             console.log(this.currentPOStatus);
-             console.log(this.currentPoId);
+            //  console.log(this.currentPOStatus);
+            //  console.log(this.currentPoId);
               this.approvePodetails=data.POData;
               this.ubtdetailsByPoId=data.ubt;
             })

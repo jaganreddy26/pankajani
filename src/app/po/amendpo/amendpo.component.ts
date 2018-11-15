@@ -110,20 +110,21 @@ export class AmendpoComponent implements OnInit {
     
     //step 4 for Tree struture here the tree struture we form in the HTML
       this.nodes = parent;
-console.log(this.nodes);
+//console.log(this.nodes);
 
     })
 
   }
 
   onActivate($event){
-  console.log($event.node.data.Id);
+  //console.log($event.node.data.Id);
 
       let object={
+        "CompanyId":localStorage.getItem('businessId'),
       "POId":$event.node.data.Id
     }
     this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
-      console.log(data);
+     // console.log(data);
 
     this.checkingPoId=data.POData[0].POId;
    console.log(this.checkingPoId);
@@ -140,9 +141,19 @@ console.log(this.nodes);
     //console.log(this.amendPodetails);
       let array:any=[];
       this.amendPodetails.forEach(element => {
-        array.push({'ProposalId':this.ubtdetailsByPoId.ProposalId,'TransporterId':element.TransporterId,'TransporterAmount':element.TransporterAmount,'LoadingContId':element.LoadingContId,
-      'LoadingContAmount':element.LoadingContAmount,'UnloadingContId':element.UnloadingContId,'UnloadingContAmount':element.UnloadingContAmount,'SuppliedQty':element.SuppliedQty,
-    'SuppliedPrice':element.SuppliedPrice,'POId':element.POId})
+        array.push({
+          'CompanyId':localStorage.getItem('businessId'),
+          'ProposalId':this.ubtdetailsByPoId.ProposalId,
+          'TransporterId':element.TransporterId,
+          'TransporterAmount':element.TransporterAmount,
+          'LoadingContId':element.LoadingContId,
+          'LoadingContAmount':element.LoadingContAmount,
+          'UnloadingContId':element.UnloadingContId,
+          'UnloadingContAmount':element.UnloadingContAmount,
+          'SuppliedQty':element.SuppliedQty,
+          'SuppliedPrice':element.SuppliedPrice,
+          'POId':element.POId
+        })
       });
       console.log(array)
     this.poservice.updateandSaveamendPoDetails(array).subscribe((data:any)=>{

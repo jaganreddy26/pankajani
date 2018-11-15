@@ -18,10 +18,12 @@ export class ConformpoComponent implements OnInit {
   Id: any;
   FromDate: any = new Date();
   ToDate: any = new Date();
+  BuyersPoDate:any= new Date();
   businessId: any;
   customerId: any;
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
+  buyersPoDateChanged:any;
   ids: any = [];
   status: any = [];
   StatusName: any;
@@ -174,9 +176,11 @@ _handleReaderLoaded(readerEvt) {
 
   conforPo(){
     let obj={
-      "BuyersPONo":this.BuyersPONo,
+      "CompanyId":localStorage.getItem('businessId'),
       "POId":this.currentPoId,
       "Type":this.type,
+      "BuyersPONo":this.BuyersPONo,
+      "BuyersPoDate":this.BuyersPoDate,
       "FileDetails":{
             "FilePath":this.FilePath,
             "EncryptedFile":this.base64textString,
@@ -240,4 +244,17 @@ _handleReaderLoaded(readerEvt) {
       this.ToDate.getDate();
     this.ToDate = todate;
   }
+  buyersPoDate() {
+    this.buyersPoDateChanged = true;
+    this.BuyersPoDate.toLocaleDateString();
+    var buyersPoDate =
+      this.BuyersPoDate.getDate() +
+      "-" +
+      (this.BuyersPoDate.getMonth() + 1) +
+      "-" +
+      this.BuyersPoDate.getFullYear();
+    this.BuyersPoDate = buyersPoDate;
+    console.log(this.BuyersPoDate);
+  }
+
 }
