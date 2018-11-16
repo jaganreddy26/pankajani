@@ -178,7 +178,7 @@ _handleReaderLoaded(readerEvt) {
       "UploadedFileName":this.FileName,
       "ConfirmBiddingUbt":array
     }
-  //console.log(object);
+  console.log(object);
   
    this.ubtService.confirmBidding(object).subscribe((data:any)=>{
      console.log(data);
