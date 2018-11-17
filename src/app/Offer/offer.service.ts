@@ -5,19 +5,21 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class OfferService {
+ // BusinessId:any =localStorage.getItem('businessId');
   private host = environment.API_END_POINT;
   private url: string = '';
   constructor(private http:HttpClient) { }
 
   // PO ID
-  getPoId(){
+  getPoId(data){
     this.url =this.host+'/api/UbtApi/GetPOId';
-    return this.http.get(this.url);
+    return this.http.post(this.url,data);
   }
   // VENDOR TYPE
-  getVendorType(){
+  getVendorType(data){
+
     this.url =this.host+'/api/UbtApi/GetVendorType';
-    return this.http.get(this.url);
+    return this.http.post(this.url,data);
   }
   // VENDOR NAME
   getVendorName(data){

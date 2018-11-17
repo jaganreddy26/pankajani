@@ -123,7 +123,7 @@ selectedUnLoadingContractor:any;
  
   let objTransporter={
     "POId":$event.node.data.Id,
-    "ObjectType":"Transporter"
+    "BusinessAreaId":localStorage.getItem('TransporterID')
   }
   //console.log(objTransporter)
 this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objTransporter).subscribe((data:any)=>{
@@ -132,7 +132,7 @@ this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails
 })
   let objLoadingContractor={
     "POId":$event.node.data.Id,
-    "ObjectType":"Loading Contractor"
+    "BusinessAreaId":localStorage.getItem('loadingTransporter')
   }
   //console.log(objLoadingContractor)
   this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objLoadingContractor).subscribe((data:any)=>{
@@ -141,7 +141,7 @@ this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails
   })
   let objUnLoadingContractor={
     "POId":$event.node.data.Id,
-    "ObjectType":"UnLoading Contractor"
+    "BusinessAreaId":localStorage.getItem('UnloadingTransporter')
   }
   //console.log(objUnLoadingContractor)
   this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objUnLoadingContractor).subscribe((data:any)=>{
@@ -154,6 +154,7 @@ this.UnloadingContractor=data;
     let array:any=[];
     this.podata.forEach(element=>{
       array.push({
+        "CompanyId":localStorage.getItem('businessId'),
         'TransporterId':element.TransporterId,
         'TransporterAmount':element.TransporterAmount,
         'LoadingContId':element.LoadingContId,

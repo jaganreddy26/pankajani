@@ -27,13 +27,19 @@ addedSeekDetails:any=[]
   }
 
   GetPoIds(){
-    this.offerService.getPoId().subscribe((data:any)=>{
+    let object={
+      "CompanyId":localStorage.getItem('businessId')
+    }
+    this.offerService.getPoId(object).subscribe((data:any)=>{
      // console.log(data);
-      this.poIds=data;
+      this.poIds=data;data
     })
   }
   GetVendorType(){
-    this.offerService.getVendorType().subscribe((data:any)=>{
+    let object={
+      "CompanyId":localStorage.getItem('businessId')
+    }
+    this.offerService.getVendorType(object).subscribe((data:any)=>{
     //  console.log(data);
       this.vendorType=data;
     })
@@ -41,9 +47,10 @@ addedSeekDetails:any=[]
 
 GetVendorName(){
   let object={
-    "Name":this.SelectedVendorType
+    "CompanyId":localStorage.getItem('businessId'),
+    "BusinessAreaId":this.SelectedVendorType
   }
-  //console.log(object);
+  console.log(object);
   this.offerService.getVendorName(object).subscribe((data:any)=>{
    // console.log(data);
     this.vendorName=data;
@@ -57,7 +64,7 @@ add(){
     'VendorName':this.SelectedVendorName,
     'SeekType':this.SelectedSeekType
   }
- // console.log(object);
+  //console.log(object);
 this.addedSeekDetails.push(object);
   this.SelectedPOId="";
   this.SelectedVendorType="";
@@ -72,7 +79,7 @@ save(){
   let inputArray:any=[];
   this.addedSeekDetails.forEach(element => {
     inputArray.push({
-      "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"SeekType":element.SeekType
+      "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"SeekType":element.SeekType,"CompanyId":localStorage.getItem('businessId')
     })
   });
  // console.log(inputArray);
@@ -101,7 +108,7 @@ save(){
   }
   onchangeVendorType($event){
   this.SelectedVendorType=$event
- // console.log(this.SelectedVendorType);
+  console.log(this.SelectedVendorType);
  this.GetVendorName();
   }
   onchangeVendorName($event){

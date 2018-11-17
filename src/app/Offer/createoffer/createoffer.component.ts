@@ -18,20 +18,26 @@ export class CreateofferComponent implements OnInit {
   PermitNo:any;
   addedCreateOfferDetails:any=[];
   constructor(private offerService:OfferService,private alertService :AlertService) {
-    this.GetPoIds();
+   this.GetPoIds();
     this.GetVendorType();
    }
 
   ngOnInit() {
   }
   GetPoIds(){
-    this.offerService.getPoId().subscribe((data:any)=>{
+    let object={
+      "CompanyId":localStorage.getItem('businessId')
+    }
+    this.offerService.getPoId(object).subscribe((data:any)=>{
      // console.log(data);
       this.poIds=data;
     })
   }
   GetVendorType(){
-    this.offerService.getVendorType().subscribe((data:any)=>{
+    let object={
+      "CompanyId":localStorage.getItem('businessId')
+    }
+    this.offerService.getVendorType(object).subscribe((data:any)=>{
     //  console.log(data);
       this.vendorType=data;
     })
@@ -39,9 +45,10 @@ export class CreateofferComponent implements OnInit {
   GetVendorName(){
     let object={
       "POId":this.SelectedPOId,
-      "Name":this.SelectedVendorType
+      "CompanyId":localStorage.getItem('businessId'),
+      "BusinessAreaId":this.SelectedVendorType
     }
-    //console.log(object);
+    console.log(object);
     this.offerService.getVendorNameforCreateOffer(object).subscribe((data:any)=>{
       //console.log(data);
       this.vendorName=data;
@@ -72,11 +79,11 @@ export class CreateofferComponent implements OnInit {
     let InputArray:any=[];
     this.addedCreateOfferDetails.forEach(element => {
       InputArray.push({
-        "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"Rate":element.Rate,"PermitNo":element.PermitNo
+        "Offer":{"POId":element.PoId,"VendorId":element.VendorName},"Rate":element.Rate,"PermitNo":element.PermitNo,"CompanyId":localStorage.getItem('businessId')
       })
       
     });
-    console.log(InputArray);
+    //console.log(InputArray);
      this.offerService.saveCreateOffer(InputArray).subscribe((data:any)=>{
        console.log(data);
        if(data=='Success'){
