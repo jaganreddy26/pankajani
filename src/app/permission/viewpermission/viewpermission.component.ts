@@ -105,7 +105,8 @@ export class ViewpermissionComponent implements OnInit {
    // console.log('hi');
   // console.log($event.node.data.Id);
    let obj={
-    'PermissionId':$event.node.data.Id
+    'PermissionId':$event.node.data.Id,
+    'CompanyId':localStorage.getItem('businessId')
    }
    this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
      console.log(data);

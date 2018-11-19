@@ -110,6 +110,7 @@ FolderPath:any;
   }
   onActivate($event){
     let obj={
+      "CompanyId":localStorage.getItem('businessId'),
       'PermissionId':$event.node.data.Id
      }
      this.InputPermissionId=$event.node.data.Id
@@ -140,8 +141,9 @@ FolderPath:any;
                     "FilePath":this.FolderPath,
                      "EncryptedFile":this.base64textString,
                      "FileExtn":this.FileType,
-                     "UploadedFileName":this.FileName
-                    }
+                     "UploadedFileName":this.FileName,
+                    },
+      "CompanyId":localStorage.getItem('businessId'),
 
       
     }
@@ -154,7 +156,8 @@ FolderPath:any;
         this.alertService.alert(AlertType.Error,"Something went wrong");
       }
       let obj={
-        'PermissionId':this.InputPermissionId
+        'PermissionId':this.InputPermissionId,
+        "CompanyId":localStorage.getItem('businessId'),
        }
        this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
          console.log(data);

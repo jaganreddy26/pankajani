@@ -133,17 +133,36 @@ deletInputObj:any={};
   }
   onActivate($event){
 
+    
+
+    let obj={
+     'PermissionId':$event.node.data.Id,
+     'CompanyId':localStorage.getItem('businessId')
+    }
+    this.Permissionid=$event.node.data.Id;
+
+    this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+      console.log(data);
+      this.ubtDetails=data.ubt;
+      this.PermissionDetails=data.PermissionData;
+      this.PoId=data.PermissionData[0].POId;
+      this.PermissionStatus=data.PermissionData[0].PermissionStatus;
+      //console.log(this.PoId);
+    })
       // objectTypeTransport type Input Object
       let objectTypeTransport = {
-        ObjectType: 'Transporter' 
+        "POId":this.PoId,
+        "BusinessAreaId":localStorage.getItem('TransporterID')
       };
     // objectTypeLoading type Input Object
       let objectTypeLoading = {
-        ObjectType: 'Loading Contractor' 
+        "POId":this.PoId,
+        "BusinessAreaId":localStorage.getItem('loadingTransporter')
       };
     // objectTypeUnloading type Input Object
      let objectTypeUnloading = {
-        ObjectType: 'Unloading Contractor' 
+      "POId":this.PoId,
+      "BusinessAreaId":localStorage.getItem('UnloadingTransporter')
       };
   
        this.permissionService.getVendor(objectTypeTransport).subscribe((data:any)=>{
@@ -160,20 +179,6 @@ deletInputObj:any={};
       });
     // console.log('hi');
    // console.log($event.node.data.Id);
-
-    let obj={
-     'PermissionId':$event.node.data.Id
-    }
-    this.Permissionid=$event.node.data.Id;
-
-    this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
-      console.log(data);
-      this.ubtDetails=data.ubt;
-      this.PermissionDetails=data.PermissionData;
-      this.PoId=data.PermissionData[0].POId;
-      this.PermissionStatus=data.PermissionData[0].PermissionStatus;
-      console.log(this.PoId);
-    })
 
    }
    add(){
@@ -220,7 +225,8 @@ deletInputObj:any={};
         this.newTransporterDetails=[];
         ///Refresh the Data After Adding new Transporter to Permissiob Id
         let obj={
-          'PermissionId':this.Permissionid
+          'PermissionId':this.Permissionid,
+          'CompanyId':localStorage.getItem('businessId')
          }
          this.Permissionid=this.Permissionid;
      
@@ -253,10 +259,12 @@ deletInputObj:any={};
 
   getInputObject(){
     let obj={
+      "CompanyId":localStorage.getItem('businessId'),
       "PermissionId":this.permissionId,
       "TransporterId":this.transporterId,
       "LoadingContId":this.loadingconId,
-      "UnloadingContId": this.unloadingcontId
+      "UnloadingContId": this.unloadingcontId,
+   
       }
       this.InputDetails=obj;
       
@@ -264,6 +272,7 @@ deletInputObj:any={};
   deleteRecords(items,template2){
     this.modalRef = this.modalService.show(template2);
     let obj={
+        "CompanyId":localStorage.getItem('businessId'),
         "PermissionId":this.Permissionid,
         "TransporterId":items.TransporterId,
         "LoadingContId":items.LoadingContId,
@@ -285,7 +294,8 @@ deletInputObj:any={};
       
        this.modalRef.hide();
        let obj={
-        'PermissionId':this.Permissionid
+        'PermissionId':this.Permissionid,
+        'CompanyId':localStorage.getItem('businessId')
        }
       // this.Permissionid=this.Permissionid;
    
@@ -306,7 +316,8 @@ deletInputObj:any={};
    {
      this.modalRef.hide();
      let obj={
-      'PermissionId':this.Permissionid
+      'PermissionId':this.Permissionid,
+          'CompanyId':localStorage.getItem('businessId')
      }
     // this.Permissionid=this.Permissionid;
  

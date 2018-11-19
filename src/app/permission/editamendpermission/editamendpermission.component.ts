@@ -28,6 +28,7 @@ EditPermissionDetails:any={};
   }
   updateRecord(){
     let obj={
+  "CompanyId":localStorage.getItem('businessId'),
   "PermissionId":this.EditPermissionDetails.PermissionId,
   "TransporterId":this.EditPermissionDetails.TransporterId,
   "TransporterAmount": this.EditPermissionDetails.TransporterAmount,

@@ -108,7 +108,8 @@ PermissionStatus:any;
   }
   onActivate($event){
     let object={
-      "PermissionId":$event.node.data.Id
+      'PermissionId':$event.node.data.Id,
+      'CompanyId':localStorage.getItem('businessId')
     }
    // console.log(object);
     //this.inputpermissionId=$event.node.data.Id;

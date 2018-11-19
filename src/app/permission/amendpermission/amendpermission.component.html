@@ -72,7 +72,7 @@
   </button>
 </div>
 <div class="panel-body padding"   fxLayout="row wrap"
-    fxLayoutAlign="center center" *ngIf='PermissionDetails.length !=0 && PermissionStatus=="Open      "'>
+    fxLayoutAlign="center center" *ngIf='PermissionDetails.length !=0 && PermissionStatus=="Open"'>
 
     <table class="table table-striped table-bordered table-list">
             <thead>
@@ -356,8 +356,8 @@
                     <!-- <th>UnloadingContAmount</th> -->
                     <th>SuppliedQty</th>
                     <th>SuppliedPrice</th>
-                    <th *ngIf='PermissionStatus=="Open      "'>Edit</th>
-                    <th *ngIf='PermissionStatus=="Open      "'>Delete</th>
+                    <th *ngIf='PermissionStatus=="Open"'>Edit</th>
+                    <th *ngIf='PermissionStatus=="Open"'>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -382,7 +382,7 @@
                     <!-- <td>{{items.UnloadingContAmount}}</td> -->
                     <td>{{items.SuppliedQty}}</td>
                     <td>{{items.SuppliedPrice}}</td>
-                    <td *ngIf='PermissionStatus=="Open      "' >
+                    <td *ngIf='PermissionStatus=="Open"' >
                             <button
                              class="btn btn padding-left"
                              style="cursor: pointer;color:#fff"
@@ -391,7 +391,7 @@
                          <i class="fa fa-pencil" aria-hidden="true"></i>
                          </button>
                     </td>
-                    <td *ngIf='PermissionStatus=="Open      "'>
+                    <td *ngIf='PermissionStatus=="Open"'>
                             <button
                             class="btn btn"
                             style="cursor: pointer;background-color: #D50000 !important;color:#fff;margin-left:8px"
