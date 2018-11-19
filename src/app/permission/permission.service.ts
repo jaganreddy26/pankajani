@@ -39,10 +39,10 @@ export class PermissionService {
     this.url=this.host+'/api/UbtApi/PostCreatePermission';
     return this.http.post(this.url,data);
   }
-  getVendor(data){
-    this.url =this.host+'/api/UbtApi/GetVendor';
-    return this.http.post(this.url,data);
-  }
+  // getVendor(data){
+  //   this.url =this.host+'/api/UbtApi/GetVendor';
+  //   return this.http.post(this.url,data);
+  // }
   getPermissionDetailsByPermissionId(data){
     this.url= this.host+'/api/UbtApi/GetPermissionDetails';
     return this.http.post(this.url,data)
