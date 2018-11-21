@@ -13,6 +13,7 @@ export class GoodstypeEditComponent implements OnInit {
   inputobject:any;
   goodsTypeDetails:any={};
   Status:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

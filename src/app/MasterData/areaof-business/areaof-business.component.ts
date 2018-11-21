@@ -17,7 +17,7 @@ export class AreaofBusinessComponent implements OnInit {
   TransporterID:any;
   loadingTransporter:any;
   UnloadingTransporter:any;
-
+  value:any;
   constructor(private masterService:MasterService,
     private alertService :AlertService,private dialog: MatDialog) {
     this.GetStatus();

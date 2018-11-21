@@ -13,6 +13,7 @@ export class EditAreaBusinessComponent implements OnInit {
   inputObject:any={}
   AreaBusinessDetails:any={};
   Status:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

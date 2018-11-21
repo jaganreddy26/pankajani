@@ -14,6 +14,7 @@ export class GoodstypeComponent implements OnInit {
   ActiveStatus:any;
   GoodsTypeDetails:any=[];
   InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private dialog: MatDialog,private alertService :AlertService) {
     this.GetStatus();
     this.GetAllGoodsTypeDetils();

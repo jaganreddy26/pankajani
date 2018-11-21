@@ -14,6 +14,7 @@ export class CategoryeditComponent implements OnInit {
   categoryDetails:any={};
   Status:any=[];
   GoodsTypeIds:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

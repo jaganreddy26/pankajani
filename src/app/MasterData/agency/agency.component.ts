@@ -15,6 +15,7 @@ export class AgencyComponent implements OnInit {
   Status:any=[];
   allAgencyDeatils:any=[];
   InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) {
     this.GetCustomers();
     this.GetStatus();

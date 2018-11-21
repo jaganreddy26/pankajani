@@ -16,6 +16,7 @@ CustomerIds:any=[];
 Status:any=[];
 allCategoryDetails:any=[];
 InputId:any;
+value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) { 
     this.GetGoodsType();
     this.GetCustomers();

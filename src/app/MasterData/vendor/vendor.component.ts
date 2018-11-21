@@ -15,6 +15,7 @@ export class VendorComponent implements OnInit {
   Status:any=[];
   allVendorDeatils:any=[];
   InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,
               private dialog: MatDialog) {
                 this.vendor.CompanyId = localStorage.getItem('businessId')

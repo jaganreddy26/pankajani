@@ -12,6 +12,7 @@ export class AgencyEditComponent implements OnInit {
   @Output() close:EventEmitter <any> = new EventEmitter();
   agencyDetail:any={}
   Status:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

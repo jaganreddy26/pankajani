@@ -14,6 +14,7 @@ export class VendorEditComponent implements OnInit {
   inputVendorData:any={}
   vendorDetails:any={}
   Status:any=[]
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {
