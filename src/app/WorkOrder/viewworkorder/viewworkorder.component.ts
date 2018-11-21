@@ -106,7 +106,8 @@ WOStatus:any;
   }
   onActivate($event){
     let object={
-      "WOId":$event.node.data.Id
+      "WOId":$event.node.data.Id,
+      "CompanyId":localStorage.getItem('businessId')
     }
  // console.log(object);
 this.workOrderService.viewWorkOrderDetails(object).subscribe((data:any)=>{

@@ -54,7 +54,11 @@ export class LogiinInService {
      this.url = this.host+'/api/UbtAPI/GetBusinessName';
      return this.http.get(this.url)
  }
-
+/// GetBusinessAreaDetails
+getAreaBusinessDetails(data){
+    this.url = this.host+'/api/MasterDataApi/GetBusinessAreaDetails';
+      return this.http.post(this.url,data)
+  }
 
 
 

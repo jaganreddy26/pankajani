@@ -144,7 +144,8 @@ FolderPath:any;
                     "EncryptedFile":this.base64textString,
                     "FileExtn":this.FileType,
                     "UploadedFileName":this.FileName
-                  }
+                  },
+        "CompanyId":localStorage.getItem('businessId')
 
 
     }

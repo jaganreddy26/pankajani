@@ -107,7 +107,8 @@ WOStatus:any;
   }
   onActivate($event){
     let object={
-      "WOId":$event.node.data.Id
+      "WOId":$event.node.data.Id,
+      "CompanyId":localStorage.getItem('businessId')
     }
    // console.log(object);
     //this.inputpermissionId=$event.node.data.Id;
@@ -125,6 +126,7 @@ WOStatus:any;
     let InputArray:any=[]
     this.woData.forEach(element=>{
       InputArray.push({
+        "CompanyId":localStorage.getItem('businessId'),
         "TransporterId":element.TransporterId,
         "TransporterAmount":element.TransporterAmount,
         "LoadingContId":element.LoadingContId,
@@ -132,18 +134,20 @@ WOStatus:any;
         "UnloadingContId":element.UnloadingContId,
         "UnloadingContAmount":element.UnloadingContAmount,
         "Quantity":element.Quantity,
-        "WOId":element.WOId
+        "WOId":element.WOId,
+        "PermissionId":element.PermissionId,
         
       })
     })
- // console.log(InputArray);
+  // console.log(InputArray);
     this.workOrderService.updateWorkOrderDetails(InputArray).subscribe((data:any)=>{
      // console.log(data);
-      if(data=='Success'){
-        this.alertService.alert(AlertType.Success,"Record Updated Sucessfully" )
-        }else{
-          this.alertService.alert(AlertType.Error,"Something went wrong");
-        }
+     if(data !== 'null'){
+
+      this.alertService.alert(AlertType.Success, data)
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+    }
     })
   }
 

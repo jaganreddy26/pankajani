@@ -62,15 +62,15 @@ this.ActiveStatus="";
     this.masterService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
        console.log(data);
       this.BusinessAreaDetailas=data;
-     this.TransporterID=data[0].Id;
-    //  console.log(this.TransporterID);
-    localStorage.setItem('TransporterID',this.TransporterID)
-     this.loadingTransporter=data[1].Id;
-    //  console.log(this.loadingTransporter);
-    localStorage.setItem('loadingTransporter',this.loadingTransporter)
-     this.UnloadingTransporter=data[2].Id;
-    //  console.log(this.UnloadingTransporter);
-    localStorage.setItem('UnloadingTransporter',this.UnloadingTransporter)
+    //  this.TransporterID=data[0].Id;
+    // //  console.log(this.TransporterID);
+    // localStorage.setItem('TransporterID',this.TransporterID)
+    //  this.loadingTransporter=data[1].Id;
+    // //  console.log(this.loadingTransporter);
+    // localStorage.setItem('loadingTransporter',this.loadingTransporter)
+    //  this.UnloadingTransporter=data[2].Id;
+    // //  console.log(this.UnloadingTransporter);
+    // localStorage.setItem('UnloadingTransporter',this.UnloadingTransporter)
 
     })
   }

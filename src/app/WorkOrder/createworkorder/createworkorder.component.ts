@@ -124,6 +124,7 @@ PermissionStatus:any;
     let InputArray:any=[];
      this.woData.forEach(element=>{
        InputArray.push({
+        "CompanyId":localStorage.getItem('businessId'),
         "TransporterId":element.TransporterId,
         "TransporterAmount":element.TransporterAmount,
         "LoadingContId":element.LoadingContId,

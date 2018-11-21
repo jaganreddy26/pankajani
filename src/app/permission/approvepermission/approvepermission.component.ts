@@ -108,7 +108,8 @@ export class ApprovepermissionComponent implements OnInit {
 
   onActivate($event){
     let obj={
-      'PermissionId':$event.node.data.Id
+      'PermissionId':$event.node.data.Id,
+       "CompanyId":localStorage.getItem('businessId')
      }
      this.InputPermissionId=$event.node.data.Id
      this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
@@ -123,7 +124,9 @@ export class ApprovepermissionComponent implements OnInit {
   approve(){
     let array:any=[];
     this.PermissionDetails.forEach(element=>{
-      array.push({"PermissionId":element.PermissionId,
+      array.push({
+                  "CompanyId":localStorage.getItem('businessId'),
+                  "PermissionId":element.PermissionId,
                   "TransporterId":element.TransporterId,
                   "LoadingContId":element.LoadingContId,
                   "UnloadingContId":element.UnloadingContId,
