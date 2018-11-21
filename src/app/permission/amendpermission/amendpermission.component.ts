@@ -165,16 +165,16 @@ deletInputObj:any={};
       "BusinessAreaId":localStorage.getItem('UnloadingTransporter')
       };
   
-       this.permissionService.getVendor(objectTypeTransport).subscribe((data:any)=>{
+       this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeTransport).subscribe((data:any)=>{
          this.transporter=data;
        });
   
-       this.permissionService.getVendor(objectTypeLoading).subscribe((data:any)=>{
+       this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeLoading).subscribe((data:any)=>{
         this.loadingContractor=data;
       });
    
   
-      this.permissionService.getVendor(objectTypeUnloading).subscribe((data:any)=>{
+      this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeUnloading).subscribe((data:any)=>{
        this.unloadingContractor=data;
       });
     // console.log('hi');
