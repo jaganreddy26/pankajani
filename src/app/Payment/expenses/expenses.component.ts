@@ -15,7 +15,8 @@ export class ExpensesComponent implements OnInit {
   addedExpenses:any=[];
   constructor(private paymentServive:PaymentService,private alertService :AlertService) {
     let obj={
-      "ObjectType":'PERMISSION'
+      "ObjectType":'PERMISSION',
+      "CompanyId":localStorage.getItem('businessId'),
     }
     this.paymentServive.getGetPermissionId(obj).subscribe((data:any)=>{
      // console.log(data);
@@ -39,8 +40,21 @@ export class ExpensesComponent implements OnInit {
   }
 
   save(){
-   // console.log(this.addedExpenses);
-this.paymentServive.savePostExpenses(this.addedExpenses).subscribe((data:any)=>{
+    let addedDetails:any=[]
+   this.addedExpenses.forEach(element => {
+     addedDetails.push({
+      "PermissionId":element.PermissionId,
+      "Reason":element.Reason,
+      "Amount":element.Amount
+     })
+   });
+   console.log(addedDetails);
+    let object={
+      "CompanyId":localStorage.getItem('businessId'),
+      "Expenses":addedDetails
+    }
+    console.log(object);
+this.paymentServive.savePostExpenses(object).subscribe((data:any)=>{
   //console.log(data);
   if(data=='Success'){
     this.alertService.alert(AlertType.Success,"Record Added Successfully" )

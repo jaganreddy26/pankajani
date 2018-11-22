@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PaymentService} from '../payment.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from 'protractor';
 @Component({
   selector: 'app-advance-payment',
   templateUrl: './advance-payment.component.html',
@@ -15,6 +16,7 @@ export class AdvancePaymentComponent implements OnInit {
   addedAdvancePayments:any=[];
     constructor(private paymentServive:PaymentService,private alertService :AlertService) {
     let obj={
+      "CompanyId":localStorage.getItem('businessId'),
       "ObjectType":'WO'
     }
     this.paymentServive.getWoId(obj).subscribe((data:any)=>{
@@ -40,8 +42,18 @@ this.Remarks="";
 this.SelectedWOId="";
   }
   save(){
-//console.log(this.addedAdvancePayments)
-this.paymentServive.savePostAdvancePayment(this.addedAdvancePayments).subscribe((data:any)=>{
+   let addedArrany:any=[]
+   this.addedAdvancePayments.forEach(element=>{
+     addedArrany.push({
+      "CompanyId":localStorage.getItem('businessId'),
+      "Id":element.Id,
+      "Type":element.Type,
+      "Amount":element.Amount,
+      "Remarks":element.Remarks
+     })
+   })
+console.log(addedArrany)
+this.paymentServive.savePostAdvancePayment(addedArrany).subscribe((data:any)=>{
   console.log(data);
   if(data=='Success'){
     this.alertService.alert(AlertType.Success,"Record Added Successfully" )
