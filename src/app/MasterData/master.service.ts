@@ -234,4 +234,31 @@ getGoodsType(data){
     this.url = this.host+'/api/MasterDataApi/UpdateCategoryDetails';
     return this.http.post(this.url,data) 
   }
+  ///////////// TAX /////////////////
+
+  //DropdownFor GoodsID
+  getGoodsTypeID(data){
+    this.url = this.host+'/api/MasterDataApi/GetGoodsType';
+    return this.http.post(this.url,data) 
+  }
+  //SavingAPI
+  saveGoodsDetails(data){
+    this.url = this.host+'/api/MasterDataApi/SaveGoodsDetails';
+    return this.http.post(this.url,data) 
+  }
+  //saved GoodsDetails 
+  getaddedGoodsDetails(data){
+    this.url = this.host+'/api/MasterDataApi/GetGoodsTaxDetails';
+    return this.http.post(this.url,data)  
+  }
+  //GoodsDetailsBy ID
+  getGoodsDetailsById(data){
+    this.url = this.host+'/api/MasterDataApi/GetGoodsTaxDetails';
+    return this.http.post(this.url,data)  
+  }
+  //upading API
+  UpdateTAXGoodsDetails(data){
+    this.url = this.host+'/api/MasterDataApi/SaveGoodsDetails';
+    return this.http.post(this.url,data) 
+  }
 }

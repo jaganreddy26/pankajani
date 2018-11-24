@@ -1,0 +1,125 @@
+<mat-toolbar>
+  <span>TAX Details</span>
+</mat-toolbar>
+<button type="button"  class="btn btn-default" (click)="save()" style="position: absolute;
+top: 78px;
+right: 80px;
+z-index:1;
+color: #fff;">Save</button>
+<div fxLayout="row wrap" fxLayoutAlign="start center"class="card padding">
+    <mat-form-field fxFlex="33.3" class="padding-left">
+        <mat-select
+            placeholder="GoodsId"
+            [(ngModel)]="value"
+            (ngModelChange)="onchangeGoodsType($event)"
+            fxFlex="33.3" class="padding-left"
+        >
+            <mat-option
+                *ngFor="let item of goodsID"
+                [value]="item.Id"
+            >
+                {{item.Id}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="33.3" class="padding-left">
+          <input
+              placeholder="CGST"
+              matInput
+              [(ngModel)]="tax.CGST"
+          >
+        </mat-form-field>
+        <mat-form-field fxFlex="33.3" class="padding-left">
+          <input
+              placeholder="SGST"
+              matInput
+              [(ngModel)]="tax.SGST"
+          >
+        </mat-form-field>
+        <mat-form-field fxFlex="33.3" class="padding-left">
+          <input
+              placeholder="TDS"
+              matInput
+              [(ngModel)]="tax.TDS"
+          >
+        </mat-form-field>
+        <mat-form-field fxFlex="33.3" class="padding-left">
+            <input
+                placeholder="TCS"
+                matInput
+                [(ngModel)]="tax.TCS"
+            >
+          </mat-form-field>
+          <mat-form-field fxFlex="33.3" class="padding-left">
+            <input
+                placeholder="IGST"
+                matInput
+                [(ngModel)]="tax.IGST"
+            >
+          </mat-form-field>
+          <mat-form-field fxFlex="33.3">
+              <mat-select
+                  placeholder="Status"
+                  [(ngModel)]="value"
+                  (ngModelChange)="onchangeStatus($event)"
+              
+              >
+                  <mat-option
+                      *ngFor="let item of Status"
+                      value="{{item.Id}}"
+                  >
+                      {{item.Id}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+</div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" *ngIf='allGoodsDetails.length !=0'>
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+          
+            <th>CompanyId </th>
+            <th>GoodsId</th>
+            <th>CGST</th>
+            <th>SGST</th>
+            <th>IGST</th>
+            <th>TDS</th>
+            <th>TCS</th>
+            <th>StatusDescription</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of allGoodsDetails; let i = index"
+        [attr.data-index]="i"
+         >
+     
+        <td>{{items.CompanyId}}</td>
+        <td>{{items.GoodsId}}</td>
+        <td>{{items.CGST}}</td>
+        <td>{{items.SGST}}</td>
+        <td>{{items.IGST}}</td>
+        <td>{{items.TDS}}</td>
+        <td>{{items.TCS}}</td>
+        <td>{{items.StatusDescription}}</td>
+        <td>
+            <button
+            mat-raised-button
+            fxFlex="16"
+            (click)="openModalEdit(items,template)"
+            color="primary"
+        >
+           Edit
+        </button>
+         
+        </td>
+  
+    </tr>
+  </tbody>
+  </table>
+</div>
+<ng-template #template >
+    <app-taxedit [Inputdata]="InputId" (close)="onHide()"></app-taxedit>
+</ng-template>
