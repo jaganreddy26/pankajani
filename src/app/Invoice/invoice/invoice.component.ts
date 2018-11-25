@@ -54,5 +54,17 @@ this.Show=1;
 //console.log(this.PermissionId);
 this.GetInvoiceData();
   }
-
+  download(items){
+    console.log(items)
+    
+   let  url = items.FilePath;
+    const a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    a.href = url;
+     a.target = "_blank"
+    a.download = 'data.txt';
+    a.click();
+    console.log(url)
+  }
 }

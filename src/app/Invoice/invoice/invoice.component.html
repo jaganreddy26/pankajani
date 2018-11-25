@@ -167,7 +167,10 @@
         <td>{{items.SuppliedQty}}</td>
         <td> {{items.PermissionId}}</td>
         <td>{{items.PermissionStatus}}</td>
-        <a href="home.pdf">{{items.FilePath}}</a>
+        <td>
+            <button (click)="download(items)">Download</button>
+        </td>
+       
     </tr>
   </tbody>
   </table>
