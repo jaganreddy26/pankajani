@@ -42,10 +42,18 @@ this.GetPermissionIDs();
       //console.log(data);
       this.BankDetails=data.BankDetails;
       this.InvoicePath=data.InvoicePath;
-      this.PermissionData=data.PermissionData;
+      this.PermissionData = data.PermissionData;
       this.CustomerDetails=data.PlantDetails;
       this.UBTdata=data.UBT;
+      let array =[];
+      this.PermissionData.forEach(element => {
+        array.push( element.SuppliedQty)
+      });
+      console.log(array)
+      for (var i = 0, sum = 0; i < array.length; sum += array[i++]);
+      console.log(sum);
     })
+  
   }
 
   onchangePermissionId($event){
