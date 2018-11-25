@@ -137,6 +137,44 @@
   </div>
 
 </div> 
+<!--BANK DETAILS -->
+<mat-toolbar style="background-color: aqua">
+    <span>BANK DETAILS</span>
+  </mat-toolbar>
+  <div class="modal-body" style="background-color:#fff;width: 900px;">
+  <table class="table table-striped table-bordered table-list">
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+           
+            <th>AcNo </th>
+            <th>AcHolderName</th>        
+            <th>IFSC</th>
+            <th>BankName</th>
+            <th>DefaultAc</th>        
+            <!-- <th>PermissionStatus</th>
+            <th>DOCUMENT</th> -->
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of BankDetails; let i = index"
+        [attr.data-index]="i"
+         >
+      
+        <td>{{items.AcNo}} </td>
+        <td> {{items.AcHolderName}}</td>
+        <td>{{items.IFSC}}</td>
+        <td>{{items.BankName}}</td>
+        <td> {{items.DefaultAc}}</td>
+        <!-- <td>{{items.PermissionStatus}}</td>
+        <td>
+            <button (click)="download(items)">Download</button>
+        </td> -->
+       
+    </tr>
+  </tbody>
+  </table>
+</div>
 <!-- PERMISSION INFORMATION -->
 <mat-toolbar style="background-color: aqua">
     <span>PERMISSION DETAILS</span>
