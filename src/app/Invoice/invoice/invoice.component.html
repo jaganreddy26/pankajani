@@ -1,0 +1,175 @@
+<mat-toolbar>
+  <span>Generate Invoice</span>
+</mat-toolbar>
+<div
+  class="padding"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly end"
+>
+
+  <mat-form-field fxFlex="20">
+      <mat-select
+          placeholder="PermissionId"
+          [(ngModel)]="value"
+          (ngModelChange)="onchangePermissionId($event)"
+      >
+          <mat-option
+              *ngFor="let item of PermissionIds"
+              value="{{item.PermissionId}}"
+          >
+              {{item.PermissionId}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center" *ngIf='Show !=null'>
+<!-- UBT INFORMATION -->
+<mat-toolbar style="background-color: aqua">
+    <span>UBT DETAILS</span>
+  </mat-toolbar>
+<div class="modal-body" style="background-color:#fff;width: 900px;">
+    <div class="card">
+        <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center" 
+       
+    >
+        <div class="padding-left">
+            <span style="font-weight:400">UbtId : </span>
+            <span style="background-color: bisque">{{UBTdata.UbtId}}</span>
+        </div>
+
+        <div class="padding-left">
+            <span style="font-weight:400">CustomerName : </span>
+            <span style="background-color: bisque">{{UBTdata.CustomerName}}</span>
+        </div>
+        <div class="padding-left">
+            <span style="font-weight:400">CategoryName : </span>
+            <span style="background-color: bisque">{{UBTdata.CategoryName}}</span>
+        </div>
+        <div class="padding-left">
+          <span style="font-weight:400">GoodsType : </span>
+          <span style="background-color: bisque">{{UBTdata.GoodsType}}</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="card">
+      <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center" 
+     
+  >
+      <div class="padding-left">
+          <span style="font-weight:400">BiddingQty : </span>
+          <span style="background-color: bisque">{{UBTdata.BiddingQty}}</span>
+      </div>
+
+      <div class="padding-left">
+          <span style="font-weight:400">BiddingPrice : </span>
+          <span style="background-color: bisque">{{UBTdata.BiddingPrice}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">BiddingDocumentPath : </span>
+          <span style="background-color: bisque">Path</span>
+      </div>
+      <div class="padding-left">
+        <span style="font-weight:400">Status : </span>
+        <span style="background-color: bisque">{{UBTdata.Status}}</span>
+    </div>
+  </div>
+  </div>
+
+</div> 
+<!-- CUSTOMER INFORMAATION -->
+<mat-toolbar style="background-color: aqua">
+    <span>CUSTOMER DETAILS</span>
+  </mat-toolbar>
+<div class="modal-body" style="background-color:#fff;width: 900px;">
+    <div class="card">
+        <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center" 
+       
+    >
+        <div class="padding-left">
+            <span style="font-weight:400">CustomerName : </span>
+            <span style="background-color: bisque">{{CustomerDetails.PlantName}}</span>
+        </div>
+
+        <div class="padding-left">
+            <span style="font-weight:400">Mobile : </span>
+            <span style="background-color: bisque">{{CustomerDetails.Mobile}}</span>
+        </div>
+        <div class="padding-left">
+            <span style="font-weight:400">Email : </span>
+            <span style="background-color: bisque">{{CustomerDetails.Email}}</span>
+        </div>
+        <div class="padding-left">
+          <span style="font-weight:400">PAN : </span>
+          <span style="background-color: bisque">{{CustomerDetails.PAN}}</span>
+      </div>
+    </div>
+    </div>
+
+    <div class="card">
+      <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center" 
+     
+  >
+      <div class="padding-left">
+          <span style="font-weight:400">GSTIN : </span>
+          <span style="background-color: bisque">{{CustomerDetails.GSTIN}}</span>
+      </div>
+
+      <div class="padding-left">
+          <span style="font-weight:400">CIN : </span>
+          <span style="background-color: bisque">{{CustomerDetails.CIN}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">TAN_NO : </span>
+          <span style="background-color: bisque">{{CustomerDetails.TAN_NO}}</span>
+      </div>
+   
+  </div>
+  </div>
+
+</div> 
+<!-- PERMISSION INFORMATION -->
+<mat-toolbar style="background-color: aqua">
+    <span>PERMISSION DETAILS</span>
+  </mat-toolbar>
+  <div class="modal-body" style="background-color:#fff;width: 900px;">
+  <table class="table table-striped table-bordered table-list">
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+           
+            <th>TransporterName </th>
+            <th>LoadingContName</th>        
+            <th>UnloadingContName</th>
+            <th>SuppliedQty</th>
+            <th>PermissionId</th>        
+            <th>PermissionStatus</th>
+            <th>DOCUMENT</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let items of PermissionData; let i = index"
+        [attr.data-index]="i"
+         >
+      
+        <td>{{items.TransporterName}} </td>
+        <td> {{items.LoadingContName}}</td>
+        <td>{{items.UnloadingContName}}</td>
+        <td>{{items.SuppliedQty}}</td>
+        <td> {{items.PermissionId}}</td>
+        <td>{{items.PermissionStatus}}</td>
+        <a href="home.pdf">{{items.FilePath}}</a>
+    </tr>
+  </tbody>
+  </table>
+</div>
+</div>

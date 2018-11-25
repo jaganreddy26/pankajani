@@ -17,6 +17,7 @@ import {OfferModule} from './Offer/offer.module';
 import {WorkOrderModule} from './WorkOrder/workOrder.module';
 import {MasterDataModule} from './MasterData/masterData.module';
 import {PaymentModule} from './Payment/payment.module';
+import {InvoiceModule} from './Invoice/Invoice.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {PaymentModule} from './Payment/payment.module';
     OfferModule,
     WorkOrderModule,
     MasterDataModule,
-    PaymentModule
+    PaymentModule,
+    InvoiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
