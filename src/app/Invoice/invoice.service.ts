@@ -19,4 +19,9 @@ export class InvoiceService {
       this.url = this.host+'/api/PaymentApi/GetInvoiceData';
       return this.http.post(this.url,data)
     }
+    //SAVE A INVOICE
+    SaveAInvoice(data){
+      this.url = this.host+'/api/PaymentApi/PostInvoice';
+      return this.http.post(this.url,data)
+    }
 }

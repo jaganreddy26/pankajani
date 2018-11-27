@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {InvoiceService} from '../invoice.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
@@ -15,7 +17,17 @@ export class InvoiceComponent implements OnInit {
   CustomerDetails:any={};
   UBTdata:any={};
   Show:any;
-  constructor(private invoiceservice:InvoiceService) {
+  allsuppliedQuantity:any;
+  InvoiceNO:any;
+  ACcountNumber:any;
+  //Date functions
+  fromDateChanged: boolean = false;
+  toDateChanged: boolean = false;
+  buyersPoDateChanged:any;
+  FromDate: any = new Date();
+  ToDate: any = new Date();
+  InvoiceDate:any= new Date();
+    constructor(private invoiceservice:InvoiceService,private alertService :AlertService) {
 this.GetPermissionIDs();
    }
 
@@ -41,6 +53,7 @@ this.GetPermissionIDs();
     this.invoiceservice.GetInvoiceData(object).subscribe((data:any)=>{
       //console.log(data);
       this.BankDetails=data.BankDetails;
+      this.ACcountNumber=data.BankDetails[0].AcNo;
       this.InvoicePath=data.InvoicePath;
       this.PermissionData = data.PermissionData;
       this.CustomerDetails=data.PlantDetails;
@@ -49,13 +62,37 @@ this.GetPermissionIDs();
       this.PermissionData.forEach(element => {
         array.push( element.SuppliedQty)
       });
-      console.log(array)
+      //console.log(array)
       for (var i = 0, sum = 0; i < array.length; sum += array[i++]);
-      console.log(sum);
+   this.allsuppliedQuantity=sum;
     })
   
   }
-
+  Save(){
+    let object={      
+             "CompanyId":localStorage.getItem('businessId'),
+             "InvoiceId":this.InvoiceNO,
+             "PermissionId":this.PermissionId,
+             "InvoiceQty":this.allsuppliedQuantity,
+             "AcNo":this.ACcountNumber,
+             "CustomerId":this.UBTdata.CustomerId,
+             "GoodsId":this.UBTdata.GoodsType,
+             "InvoiceDate":this.InvoiceDate,
+             "InvoicePath":this.InvoicePath
+    }
+    // console.log(object);
+    this.invoiceservice.SaveAInvoice(object).subscribe((data:any)=>{
+      console.log(data);
+      if(data){
+        this.alertService.alert(AlertType.Success,"UBT Created Successfuly with id :"+ data)
+        }else{
+          this.alertService.alert(AlertType.Error,"Something went wrong");
+        }
+    })
+    this.InvoiceDate="";
+    this.InvoiceNO="";
+    this.allsuppliedQuantity="";
+  }
   onchangePermissionId($event){
 this.PermissionId=$event;
 this.Show=1;
@@ -74,5 +111,39 @@ this.GetInvoiceData();
     a.download = 'data.txt';
     a.click();
     console.log(url)
+  }
+  fromDateChange() {
+    this.fromDateChanged = true;
+    this.FromDate.toLocaleDateString();
+    var fromdate =
+      this.FromDate.getFullYear() +
+      "-" +
+      (this.FromDate.getMonth() + 1) +
+      "-" +
+      this.FromDate.getDate();
+    this.FromDate = fromdate;
+  }
+  toDateChange() {
+    this.toDateChanged = true;
+    this.ToDate.toLocaleDateString();
+    var todate =
+      this.ToDate.getFullYear() +
+      "-" +
+      (this.ToDate.getMonth() + 1) +
+      "-" +
+      this.ToDate.getDate();
+    this.ToDate = todate;
+  }
+  invioceDate() {
+    this.buyersPoDateChanged = true;
+    this.InvoiceDate.toLocaleDateString();
+    var buyersPoDate =
+      this.InvoiceDate.getDate() +
+      "-" +
+      (this.InvoiceDate.getMonth() + 1) +
+      "-" +
+      this.InvoiceDate.getFullYear();
+    this.InvoiceDate = buyersPoDate;
+    console.log(this.InvoiceDate);
   }
 }
