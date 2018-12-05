@@ -31,7 +31,7 @@ export class InvoiceComponent implements OnInit {
   InvoiceDate:any= new Date();
   value:any;
   url:any;
-    constructor(private invoiceservice:InvoiceService,private alertService :AlertService,private dialog: MatDialog,private dom:DomSanitizer) {
+    constructor(private invoiceservice:InvoiceService,private alertService :AlertService,private dialog: MatDialog,private domSanitizer:DomSanitizer) {
 this.GetPermissionIDs();
    }
 
@@ -107,7 +107,7 @@ this.GetInvoiceData();
   download(items,template){
     console.log(items)
     this.dialog.open(template);
-   this.url =this.dom.bypassSecurityTrustResourceUrl(items.FilePath);
+   this.url =this.domSanitizer.bypassSecurityTrustResourceUrl(items.FilePath);
     // const a = document.createElement('a');
     // a.setAttribute('style', 'display:none;');
     // document.body.appendChild(a);
