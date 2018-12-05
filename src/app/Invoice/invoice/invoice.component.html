@@ -206,7 +206,7 @@
         <td> {{items.PermissionId}}</td>
         <td>{{items.PermissionStatus}}</td>
         <td>
-            <button (click)="download(items)">Download</button>
+            <button (click)="download(items,template)">Download</button>
         </td>
        
     </tr>
@@ -214,3 +214,17 @@
   </table>
 </div>
 </div>
+<ng-template #template>
+    <h2 mat-dialog-title>View File</h2>
+    <mat-dialog-content class="mat-typography">
+        <div
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+    >
+    <object [data]="url">
+        <embed [src]="url" style="width:1000px;height:90vh"/>
+    </object>
+    
+    </div>
+    </mat-dialog-content>
+</ng-template>

@@ -14,6 +14,7 @@ export class TaxeditComponent implements OnInit {
   inputobject:any;
   taxDetails:any={};
   Status:any=[];
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

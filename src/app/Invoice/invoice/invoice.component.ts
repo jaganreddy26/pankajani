@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {InvoiceService} from '../invoice.service';
+import { MatDialog } from "@angular/material";
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
@@ -15,7 +17,9 @@ export class InvoiceComponent implements OnInit {
   CustomerDetails:any={};
   UBTdata:any={};
   Show:any;
-  constructor(private invoiceservice:InvoiceService) {
+  value:any;
+  url:any;
+  constructor(private invoiceservice:InvoiceService,private dialog: MatDialog,private dom:DomSanitizer) {
 this.GetPermissionIDs();
    }
 
@@ -62,17 +66,19 @@ this.Show=1;
 //console.log(this.PermissionId);
 this.GetInvoiceData();
   }
-  download(items){
+  download(items,template){
+    this.dialog.open(template);
     console.log(items)
-    
-   let  url = items.FilePath;
-    const a = document.createElement('a');
-    a.setAttribute('style', 'display:none;');
-    document.body.appendChild(a);
-    a.href = url;
-     a.target = "_blank"
-    a.download = 'data.txt';
-    a.click();
-    console.log(url)
+    this.url = this.dom.bypassSecurityTrustResourceUrl(items.FilePath)
+  //  let  url = items.FilePath;
+  //   const a = document.createElement('a');
+  //   a.setAttribute('style', 'display:none;');
+  //   document.body.appendChild(a);
+  //   a.href = url;
+  //    a.target = "_blank"
+  //   a.download = 'data.txt';
+  //   a.click();
+  //   console.log(url)
   }
+
 }

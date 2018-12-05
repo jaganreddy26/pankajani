@@ -15,6 +15,7 @@ export class TaxComponent implements OnInit {
   Status:any=[];
   allGoodsDetails:any=[];
   InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) { 
     this.tax.CompanyId=localStorage.getItem('businessId');
     this.GetGoodsTypeId();
