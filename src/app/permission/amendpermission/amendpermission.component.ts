@@ -55,6 +55,9 @@ selectedTransporter:any;
  SuppliedPrice:any;
  newTransporterDetails:any=[];
  /////
+ objectTypeTransport:any;
+ objectTypeLoading:any;
+ objectTypeUnloading:any;
  modalRef: BsModalRef;
 
  permissionId:any
@@ -147,42 +150,57 @@ deletInputObj:any={};
       this.PermissionDetails=data.PermissionData;
       this.PoId=data.PermissionData[0].POId;
       this.PermissionStatus=data.PermissionData[0].PermissionStatus;
-      //console.log(this.PoId);
-    })
-      // objectTypeTransport type Input Object
-      let objectTypeTransport = {
-        "POId":this.PoId,
-        "BusinessAreaId":localStorage.getItem('TransporterID')
-      };
-    // objectTypeLoading type Input Object
-      let objectTypeLoading = {
-        "POId":this.PoId,
-        "BusinessAreaId":localStorage.getItem('loadingTransporter')
-      };
-    // objectTypeUnloading type Input Object
-     let objectTypeUnloading = {
-      "POId":this.PoId,
-      "BusinessAreaId":localStorage.getItem('UnloadingTransporter')
-      };
-  
-       this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeTransport).subscribe((data:any)=>{
-         this.transporter=data;
-       });
-  
-       this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeLoading).subscribe((data:any)=>{
+      console.log(this.PoId);
+        // objectTypeTransport type Input Object
+        this.objectTypeTransport = {
+          "POId":this.PoId,
+          "BusinessAreaId":localStorage.getItem('TransporterID')
+        };
+        //console.log(this.objectTypeTransport)
+        this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(this.objectTypeTransport).subscribe((data:any)=>{
+          this.transporter=data;
+        });
+      // objectTypeLoading type Input Object
+        this.objectTypeLoading = {
+          "POId":this.PoId,
+          "BusinessAreaId":localStorage.getItem('loadingTransporter')
+        };
+        //console.log(this.objectTypeLoading)
+              this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(this.objectTypeLoading).subscribe((data:any)=>{
         this.loadingContractor=data;
       });
+      // objectTypeUnloading type Input Object
+       this.objectTypeUnloading = {
+        "POId":this.PoId,
+        "BusinessAreaId":localStorage.getItem('UnloadingTransporter')
+        };
+          this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(this.objectTypeUnloading).subscribe((data:any)=>{
+        this.unloadingContractor=data;
+      });
+        //console.log(this.objectTypeUnloading)
+    })
+
+    
+  
+      //  this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(this.objectTypeTransport).subscribe((data:any)=>{
+      //    this.transporter=data;
+      //  });
+  
+      //  this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeLoading).subscribe((data:any)=>{
+      //   this.loadingContractor=data;
+      // });
    
   
-      this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeUnloading).subscribe((data:any)=>{
-       this.unloadingContractor=data;
-      });
+      // this.permissionService.getTransporterLoadingContractorUnLoadingContractorDetails(objectTypeUnloading).subscribe((data:any)=>{
+      //  this.unloadingContractor=data;
+      // });
     // console.log('hi');
    // console.log($event.node.data.Id);
 
    }
    add(){
     let object={
+      "CompanyId":localStorage.getItem('businessId'),
       'PermissionId':this.Permissionid,
       'TransporterId':this.selectedTransporter,
       'TransporterAmount':this.transporterRate,
