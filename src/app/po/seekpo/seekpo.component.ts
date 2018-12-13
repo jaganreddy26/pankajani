@@ -178,7 +178,8 @@ save(){
       
     })
   })
- // console.log(InputArray);
+  console.log(InputArray);
+
   this.poService.saveSeekPOSelection(InputArray).subscribe((data:any)=>{
     //console.log(data);
     if(data=='Success'){
