@@ -155,8 +155,8 @@
                         <!-- <th scope="col">UnloadingContId</th> -->
                         <th>UnloadingContName</th>
                         <th>UnloadingContAmount</th>
-                        <th>SuppliedQty</th>
-                        <th>SuppliedPrice</th>
+                        <!-- <th>SuppliedQty</th>
+                        <th>SuppliedPrice</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -175,7 +175,7 @@
                         <!-- <td>{{items.UnloadingContId}}</td> -->
                         <td>{{items.UnloadingContName}}</td>
                         <td>{{items.UnloadingContAmount}}</td>
-                        <td>
+                        <!-- <td>
                             <mat-form-field style="width:50%">
                                 <input
                                     placeholder="SuppliedQty"
@@ -194,7 +194,7 @@
                                   
                                 >
                             </mat-form-field>
-                        </td>
+                        </td> -->
 
                     </tr>
                 </tbody>
@@ -205,11 +205,27 @@
         align="right"
         class="padding-right" 
     >
-    <mat-form-field style="width:50%">
+    <mat-form-field style="width:20%">
         <input
             placeholder="PoId"
             matInput
             [(ngModel)]="CreatedPoId"
+           
+        >
+    </mat-form-field>
+    <mat-form-field style="width:20%">
+        <input
+            placeholder="SuppliedQty"
+            matInput
+            [(ngModel)]="SuppliedQty"
+           
+        >
+    </mat-form-field>
+    <mat-form-field style="width:20%">
+        <input
+            placeholder="SuppliedPrice"
+            matInput
+            [(ngModel)]="SuppliedPrice"
            
         >
     </mat-form-field>

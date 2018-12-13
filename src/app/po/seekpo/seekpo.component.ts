@@ -42,6 +42,8 @@ saveSeekPOData:any=[];
 poId:any;
 inputProposalId:any;
 CreatedPoId:any;
+SuppliedQty:any;
+SuppliedPrice:any;
   constructor(private poService:PoService,private alertService :AlertService) { 
     this.getCustomer();
    
@@ -170,8 +172,8 @@ save(){
       "LoadingContAmount":element.LoadingContAmount,
       "UnloadingContId":element.UnloadingContId,
       "UnloadingContAmount":element.UnloadingContAmount,
-      "SuppliedQty":element.SuppliedQty,
-      "SuppliedPrice":element.SuppliedPrice,
+      "SuppliedQty":this.SuppliedQty,
+      "SuppliedPrice":this.SuppliedPrice,
       "POId":this.CreatedPoId
       
     })
