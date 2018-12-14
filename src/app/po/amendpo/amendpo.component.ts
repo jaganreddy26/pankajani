@@ -27,7 +27,10 @@ export class AmendpoComponent implements OnInit {
   UbtId:any;
   CategoryId:any;
   CategoryName
-  // Amend details
+
+  SuppliedQty:any;
+  SuppliedPrice:any;
+    // Amend details
   checkingPoId:any;
   amendPodetails:any=[];
   ubtdetailsByPoId:any={};
@@ -129,6 +132,10 @@ export class AmendpoComponent implements OnInit {
     this.checkingPoId=data.POData[0].POId;
    console.log(this.checkingPoId);
     this.amendPodetails=data.POData;
+    this.SuppliedQty=data.POData[0].SuppliedQty;
+    this.SuppliedPrice=data.POData[0].SuppliedPrice;
+    console.log(this.SuppliedQty);
+    console.log(this.SuppliedPrice);
     this.ubtdetailsByPoId=data.ubt;
     
     })
@@ -150,8 +157,8 @@ export class AmendpoComponent implements OnInit {
           'LoadingContAmount':element.LoadingContAmount,
           'UnloadingContId':element.UnloadingContId,
           'UnloadingContAmount':element.UnloadingContAmount,
-          'SuppliedQty':element.SuppliedQty,
-          'SuppliedPrice':element.SuppliedPrice,
+          'SuppliedQty':this.SuppliedQty,
+          'SuppliedPrice':this.SuppliedPrice,
           'POId':element.POId
         })
       });

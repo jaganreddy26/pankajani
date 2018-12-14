@@ -168,8 +168,8 @@
                         <th>TransporterAmount</th>
                         <th>LoadingContAmount</th>
                         <th>UnloadingContAmount</th>
-                        <th>SuppliedQty</th>
-                        <th>SuppliedPrice</th>
+                        <!-- <th>SuppliedQty</th>
+                        <th>SuppliedPrice</th> -->
                         <!-- <th>Action</th> -->
                     </tr>
                 </thead>
@@ -214,7 +214,7 @@
                                 >
                             </mat-form-field>
                         </td>
-                        <td>
+                        <!-- <td>
                             <mat-form-field>
                                 <input
                                     placeholder="SuppliedQty"
@@ -231,7 +231,7 @@
                                     [(ngModel)]="items.SuppliedPrice"
                                 >
                             </mat-form-field>
-                        </td>
+                        </td> -->
                         <!-- <td>
                 <button
                  class="btn btn padding-left"
@@ -244,9 +244,23 @@
                     </tr>
                 </tbody>
             </table>
-            
-        
         </div>
+        <mat-form-field style="width:20%">
+            <input
+                placeholder="SuppliedQty"
+                matInput
+                [(ngModel)]="SuppliedQty"
+               
+            >
+        </mat-form-field>
+        <mat-form-field style="width:20%">
+            <input
+                placeholder="SuppliedPrice"
+                matInput
+                [(ngModel)]="SuppliedPrice"
+               
+            >
+        </mat-form-field>
         <div
             align="left"
             class="padding-right"
