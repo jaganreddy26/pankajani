@@ -36,10 +36,6 @@ EditPermissionDetails:any={};
   "LoadingContAmount": this.EditPermissionDetails.LoadingContractorAmount,
   "UnloadingContId": this.EditPermissionDetails.UnLoadingContractorId,
   "UnloadingContAmount": this.EditPermissionDetails.UnLoadingContractorAmount,
-  "SuppliedQty":this.EditPermissionDetails.SuppliedQty,
-  "SuppliedPrice":this.EditPermissionDetails.SuppliedPrice
-
-
     }
    //console.log(obj);
     this.permissionService.updateIndividualRecords(obj).subscribe((data:any)=>{

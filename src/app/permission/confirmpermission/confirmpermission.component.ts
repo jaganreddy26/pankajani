@@ -24,6 +24,10 @@ export class ConfirmpermissionComponent implements OnInit {
   status:any=[];
   PermissionStatus:any;
   InputPermissionId:any;
+  PermissionDateChanged:any;
+  PermissionDate:any= new Date();
+  permissionExpiredDateChanged:any;
+  permissionExpiredDate:any=new Date();
       ///
      //step 2 for Tree struture
      nodes:any=[];
@@ -38,6 +42,7 @@ export class ConfirmpermissionComponent implements OnInit {
       ////////////
       ubtDetails:any={}
       PermissionDetails:any=[];
+
       ////==========base64formatedata Varibles=========////
 base64textString:any;
 FileName:any;
@@ -124,30 +129,31 @@ FolderPath:any;
      })
   }
   confirm(){
-    let Inputarray:any=[];
-    this.PermissionDetails.forEach(element=>{
-      Inputarray.push({
-        "PermissionId":element.PermissionId,
-        "TransporterId":element.TransporterId,
-        "LoadingContId":element.LoadingContId,
-        "UnloadingContId":element.UnloadingContId,
-        "Status":'Confirmed'
+    // let Inputarray:any=[];
+    // this.PermissionDetails.forEach(element=>{
+    //   Inputarray.push({
+    //     "PermissionId":element.PermissionId,
+    //     "TransporterId":element.TransporterId,
+    //     "LoadingContId":element.LoadingContId,
+    //     "UnloadingContId":element.UnloadingContId,
+    //     "Status":'Confirmed'
 
-      })
-    })
+    //   })
+    // })
     let Inputobject={
-      "CreatePermission":Inputarray,
+      "PermissionId":this.InputPermissionId,
+      "Status":'Confirmed',
+      "CompanyId":localStorage.getItem('businessId'),
+      "PermissionDate":this.PermissionDate,
+      "PermissionExpiredDate":this.permissionExpiredDate,
       "FileDetails":{
                     "FilePath":this.FolderPath,
                      "EncryptedFile":this.base64textString,
                      "FileExtn":this.FileType,
                      "UploadedFileName":this.FileName,
-                    },
-      "CompanyId":localStorage.getItem('businessId'),
-
-      
+                    }
     }
-   //console.log(Inputobject);
+   console.log(Inputobject);
   this.permissionService.confirmPermission(Inputobject).subscribe((data:any)=>{
      console.log(data);
      if(data=='Success'){
@@ -217,6 +223,31 @@ _handleReaderLoaded(readerEvt) {
           // console.log(this.FileType);
            //console.log(this.base64textString);
           
+  }
+  permissionDate() {
+   
+    this.PermissionDateChanged = true;
+    this.PermissionDate.toLocaleDateString();
+    var PermissionDate =
+      this.PermissionDate.getDate() +
+      "-" +
+      (this.PermissionDate.getMonth() + 1) +
+      "-" +
+      this.PermissionDate.getFullYear();
+    this.PermissionDate = PermissionDate;
+    console.log(this.PermissionDate);
+  }
+  PermissionExpiredDate(){
+    this.permissionExpiredDateChanged = true;
+    this.permissionExpiredDate.toLocaleDateString();
+    var permissionExpiredDate =
+      this.permissionExpiredDate.getDate() +
+      "-" +
+      (this.permissionExpiredDate.getMonth() + 1) +
+      "-" +
+      this.permissionExpiredDate.getFullYear();
+    this.permissionExpiredDate = permissionExpiredDate;
+    console.log(this.permissionExpiredDate);
   }
 
 

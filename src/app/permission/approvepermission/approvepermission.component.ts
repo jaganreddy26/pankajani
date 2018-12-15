@@ -122,19 +122,25 @@ export class ApprovepermissionComponent implements OnInit {
   }
 
   approve(){
-    let array:any=[];
-    this.PermissionDetails.forEach(element=>{
-      array.push({
-                  "CompanyId":localStorage.getItem('businessId'),
-                  "PermissionId":element.PermissionId,
-                  "TransporterId":element.TransporterId,
-                  "LoadingContId":element.LoadingContId,
-                  "UnloadingContId":element.UnloadingContId,
-                  "Status":'Approved'
-      })
-    })
-  //  console.log(array);
-  this.permissionService.approveAndSendPermission(array).subscribe((data:any)=>{
+    // let array:any=[];
+    // this.PermissionDetails.forEach(element=>{
+    //   array.push({
+    //               "CompanyId":localStorage.getItem('businessId'),
+    //               "PermissionId":element.PermissionId,
+    //               "TransporterId":element.TransporterId,
+    //               "LoadingContId":element.LoadingContId,
+    //               "UnloadingContId":element.UnloadingContId,
+    //               "Status":'Approved'
+    //   })
+    // })
+      //  console.log(array);
+    let object= {
+      "CompanyId":localStorage.getItem('businessId'),
+      "PermissionId":this.InputPermissionId,
+      "Status":'Approved'
+    }
+
+  this.permissionService.approveAndSendPermission(object).subscribe((data:any)=>{
     console.log(data);
     if(data=='Success'){
       this.alertService.alert(AlertType.Success,"Approved Sucessfully " )

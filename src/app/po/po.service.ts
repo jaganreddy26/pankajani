@@ -71,4 +71,14 @@ export class PoService {
     this.url=this.host+'/api/UbtApi/PostConfirmPurchaseOrder';
     return this.http.post(this.url,data);
   }
+  //GetSplitReason
+  GetSplitReason(){
+    this.url=this.host+'/api/UbtApi/GetSplitReason';
+    return this.http.get(this.url);
+  }
+  //GetSplitPOData
+  GetSplitPOData(data){
+    this.url=this.host+'/api/UbtApi/GetSplitPOData';
+    return this.http.post(this.url,data);
+  }
 }

@@ -7,6 +7,7 @@ import { ViewpoComponent } from './viewpo/viewpo.component';
 import { AmendpoComponent } from './amendpo/amendpo.component';
 import { ApprovepoComponent } from './approvepo/approvepo.component';
 import { ConformpoComponent } from './conformpo/conformpo.component';
+import { RevisedPOComponent } from './revised-po/revised-po.component';
 
 
 
@@ -30,8 +31,7 @@ const routes: Routes = [
     { path: 'AmendPO', component: AmendpoComponent},
     { path: 'ApprovePO', component: ApprovepoComponent},
     { path: 'ConfirmPO', component: ConformpoComponent},
-  
-
+    {path:  'RevisedPO',component:RevisedPOComponent}
 
 
 
@@ -48,7 +48,7 @@ const routes: Routes = [
    SharedModule.forRoot()
    ],
   providers: [],
-  declarations: [SeekpoComponent,ViewpoComponent,AmendpoComponent,ApprovepoComponent,ConformpoComponent],
+  declarations: [SeekpoComponent,ViewpoComponent,AmendpoComponent,ApprovepoComponent,ConformpoComponent, RevisedPOComponent],
   exports: [RouterModule],
 })
 export class PoModule { }
