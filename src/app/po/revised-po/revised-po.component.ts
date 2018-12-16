@@ -20,13 +20,15 @@ export class RevisedPOComponent implements OnInit {
   fromDateChanged: boolean = false;
   toDateChanged: boolean = false;
   ids: any = [];
+  POIDInput:any;
 
   ChangeQuantity:any=[];
   StatusName:any;
   viewdata:any;
 
   CompletedQuantity:any;
-  RevisedPrice:any
+  RevisedPrice:any;
+  SplitReason:any;
 
       //step 2 for Tree struture
       nodes:any=[];
@@ -121,6 +123,7 @@ console.log(this.nodes);
         // "CompanyId":localStorage.getItem('businessId'),
       "POId":$event.node.data.Id
     }
+    this.POIDInput=$event.node.data.Id
    
       this.poservice.GetSplitReason().subscribe((data:any)=>{
       console.log(data);
@@ -144,8 +147,55 @@ console.log(this.nodes);
 this.CompletedQuantity=0;
 
   }
+
+
+
+
+  Save(){
+
+    let SplitWOData:any=[];
+
+    this.workorder.forEach(element => {
+      SplitWOData.push({
+        "InternalId":element.InternalId,
+        "WOId":element.WOId,
+        "TransporterId":element.TransporterId,
+        "TransporterAmount":element.TransporterAmount,
+        "LoadingContId":element.LoadingContId,
+        "LoadingContAmount":element.LoadingContAmount,
+        "UnloadingContId":element.UnloadingContId,
+        "UnloadingContAmount":element.UnloadingContAmount,
+        "CompletedQuantity":element.CompletedQuantity
+      })
+    });
+
+    let object={
+"CompanyId":localStorage.getItem('businessId'),
+"POId":this.POIDInput,
+"CompletedQty":this.CompletedQuantity,
+"RevisedPrice":this.RevisedPrice,
+"SplitReason":this.SplitReason,
+"PermissionId":this.PermissionData.PermissionId,
+"SplitWOData":SplitWOData
+}
+// console.log(object);
+this.poservice.saveSplitPo(object).subscribe((data:any)=>{
+  console.log(data);
+})
+  }
+
+
+
+
+
+
+
   onchangeChangeQuantity($event){
     console.log($event);
+  }
+  onchangeReasonName($event){
+    this.SplitReason=$event
+  //  console.log(this.SplitReason)
   }
 
   onchange($event) {

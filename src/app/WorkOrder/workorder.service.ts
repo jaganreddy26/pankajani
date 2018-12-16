@@ -51,5 +51,20 @@ export class WorkorderService {
     this.url= this.host+'/api/UbtApi/ChangeWOStatus';
     return this.http.post(this.url,data);
   }
+    //GetSplitReason
+  GetSplitReason(){
+      this.url=this.host+'/api/UbtApi/GetSplitReason';
+      return this.http.get(this.url);
+    }
+      //GetSplitWOData
+  GetSplitWOData(data){
+    this.url=this.host+'/api/UbtApi/GetSplitWOData';
+    return this.http.post(this.url,data);
+  }
+  //SAVE SPLIT WO
+  saveSplitWo(data){
+    this.url=this.host+'/api/UbtApi/SaveSplitWO';
+    return this.http.post(this.url,data);
+  }
 
 }

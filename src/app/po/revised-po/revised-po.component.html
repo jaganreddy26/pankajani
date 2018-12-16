@@ -48,7 +48,7 @@ Search
       >
           <mat-option
               *ngFor="let item of ReasonName"
-              value="{{item.ReasonName}}"
+              value="{{item.Id}}"
           >
               {{item.ReasonName}}
           </mat-option>
@@ -183,7 +183,7 @@ Search
       </div>
   </div>
 
-
+  <!-- PermissionData -->
   <mat-toolbar style="background-color: rgb(57, 110, 226)">
       <span>PermissionData</span>
     </mat-toolbar>
@@ -254,5 +254,12 @@ Search
     </tbody>
     </table>
   </div>
+ 
+    <div align="right" class="padding" >
+        <button mat-raised-button fxFlex="16" (click)="Save()" color="primary">
+    Save
+    </button>
+    </div>
+
   
 

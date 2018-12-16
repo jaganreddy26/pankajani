@@ -81,4 +81,9 @@ export class PoService {
     this.url=this.host+'/api/UbtApi/GetSplitPOData';
     return this.http.post(this.url,data);
   }
+  //SAVE SPLIT PO
+  saveSplitPo(data){
+    this.url=this.host+'/api/UbtApi/SaveSplitPO';
+    return this.http.post(this.url,data);
+  }
 }
