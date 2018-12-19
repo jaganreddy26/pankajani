@@ -261,4 +261,14 @@ getGoodsType(data){
     this.url = this.host+'/api/MasterDataApi/SaveGoodsDetails';
     return this.http.post(this.url,data) 
   }
+  //SaveCancellationReasonDetails
+  SaveCancellationReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/SaveCancellationReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  //GetCancellationReasonDetails
+  GetCancellationReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/GetCancellationReasonDetails';
+    return this.http.post(this.url,data)
+  }
 }

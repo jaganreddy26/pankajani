@@ -23,6 +23,8 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryeditComponent } from './categoryedit/categoryedit.component';
 import { TaxComponent } from './tax/tax.component';
 import { TaxeditComponent } from './taxedit/taxedit.component';
+import { CancelreasonComponent } from './cancelreason/cancelreason.component';
+import { PaymentreasonComponent } from './paymentreason/paymentreason.component';
 const routes: Routes = [
   { path: 'addbusiness', component:AddBusinessComponent},
   { path: 'addcompany', component:AddCompanyComponent },
@@ -33,7 +35,9 @@ const routes: Routes = [
   { path: 'agency',component:AgencyComponent},
   { path: 'goodstype',component:GoodstypeComponent},
   { path: 'category',component:CategoryComponent},
-  { path: 'tax',component:TaxComponent}
+  { path: 'tax',component:TaxComponent},
+  {path: 'cancelreason',component:CancelreasonComponent},
+  {path:'paymentreason',component:PaymentreasonComponent}
    ];
 
 @NgModule({
@@ -47,7 +51,7 @@ const routes: Routes = [
     providers: [MasterService],
     declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent, EditbusinessComponent, EditbankdetailsComponent, EditplantComponent,
        AreaofBusinessComponent, VendorComponent, EditAreaBusinessComponent,
-        VendorEditComponent,AgencyComponent, GoodstypeComponent, AgencyEditComponent, GoodstypeEditComponent, CategoryComponent, CategoryeditComponent, TaxComponent, TaxeditComponent],
+        VendorEditComponent,AgencyComponent, GoodstypeComponent, AgencyEditComponent, GoodstypeEditComponent, CategoryComponent, CategoryeditComponent, TaxComponent, TaxeditComponent, CancelreasonComponent, PaymentreasonComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }
