@@ -70,7 +70,7 @@
             <button
             mat-raised-button
             fxFlex="16"
-            (click)="openModalEdit(items,template)"
+            (click)="openModalEdit(item,template)"
             color="primary"
         >
            Edit
@@ -82,3 +82,9 @@
   </tbody>
   </table>
 </div>
+
+
+<ng-template #template >
+   
+    <app-edit-cancel-reason [Inputdata]="InputId" (close)="onHide()"></app-edit-cancel-reason>
+</ng-template>

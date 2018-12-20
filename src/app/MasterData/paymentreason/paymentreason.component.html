@@ -1,3 +1,90 @@
-<p>
-  paymentreason works!
-</p>
+<mat-toolbar>
+  <span>Payment Reason</span>
+</mat-toolbar>
+<div
+  class="padding"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly end"
+>
+  <div fxFlex="20">
+      <span>Name</span>
+      <mat-form-field  class="padding-left">
+          <input
+              placeholder="Name"
+              matInput
+              [(ngModel)]="Name"
+          >
+        </mat-form-field>
+  </div>
+
+
+  <!-- <div fxFlex="20"> -->
+
+  <mat-form-field fxFlex="10">
+      <mat-select
+          placeholder="Status"
+          [(ngModel)]="value"
+          (ngModelChange)="onchangeStatus($event)"
+      
+      >
+          <mat-option
+              *ngFor="let item of status"
+              value="{{item.Id}}"
+          >
+              {{item.Id}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <!-- </div> -->
+  <button
+      mat-raised-button
+      fxFlex="16"
+      (click)="Save()"
+      color="primary"
+  >
+     Save
+  </button>
+
+</div>
+<div class="panel-body padding"   fxLayout="row wrap"
+    fxLayoutAlign="center center">
+<table class="table table-striped table-bordered table-list" >
+    <thead>
+        <tr style="color:#6f6f6f;background-color:#f0f0f0">
+            <th>CompanyId</th>
+            <th>Name</th>
+            <th>StatusDescription</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  <tbody>
+    <tr
+        *ngFor="let item of PaymentReasonDetails; let i = index"
+        [attr.data-index]="i"
+         >
+     
+        <td>{{item.CompanyId}}</td>
+        <td>{{item.Name}}</td>
+        <td>{{item.StatusDescription}}</td>
+        <td>
+            <button
+            mat-raised-button
+            fxFlex="16"
+            (click)="openModalEdit(item,template)"
+            color="primary"
+        >
+           Edit
+        </button>
+         
+        </td>
+  
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+
+<!-- <ng-template #template >
+   
+    <app-edit-cancel-reason [Inputdata]="InputId" (close)="onHide()"></app-edit-cancel-reason>
+</ng-template> -->

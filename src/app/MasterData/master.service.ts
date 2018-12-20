@@ -261,6 +261,7 @@ getGoodsType(data){
     this.url = this.host+'/api/MasterDataApi/SaveGoodsDetails';
     return this.http.post(this.url,data) 
   }
+  //////    CancellationReasonDetails      //////
   //SaveCancellationReasonDetails
   SaveCancellationReasonDetails(data){
     this.url=this.host+'/api/MasterDataApi/SaveCancellationReasonDetails';
@@ -269,6 +270,27 @@ getGoodsType(data){
   //GetCancellationReasonDetails
   GetCancellationReasonDetails(data){
     this.url=this.host+'/api/MasterDataApi/GetCancellationReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  //GetCancellationReasonDetailsBYID
+  getCancellationReasonDetailsBYID(data){
+    this.url=this.host+'/api/MasterDataApi/GetCancellationReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  //UpdateCancellationReasonDetails
+  updateCancellationReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/SaveCancellationReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  ////// PaymentReasonDetails /////////
+  //savePaymentReasonDetails
+  savePaymentReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/SavePaymentReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  //GetPaymentReasonDetails:
+  getPaymentReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/GetPaymentReasonDetails';
     return this.http.post(this.url,data)
   }
 }

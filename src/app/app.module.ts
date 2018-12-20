@@ -19,9 +19,11 @@ import {MasterDataModule} from './MasterData/masterData.module';
 import {PaymentModule} from './Payment/payment.module';
 import {InvoiceModule} from './Invoice/Invoice.module';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,

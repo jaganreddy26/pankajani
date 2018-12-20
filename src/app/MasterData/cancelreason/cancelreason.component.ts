@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MasterService} from '../../MasterData/master.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { MatDialog } from "@angular/material";
 @Component({
   selector: 'app-cancelreason',
   templateUrl: './cancelreason.component.html',
@@ -12,7 +13,9 @@ export class CancelreasonComponent implements OnInit {
   ActiveStatus:any;
   Name:any;
   CancellationReasonDetails:any=[];
-  constructor(private masterService:MasterService,private alertService :AlertService) { 
+  ///
+  InputId:any;
+  constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) { 
     this.GetStatus();
     this.GetAllCancellationReasonDetails();
   }
@@ -55,14 +58,31 @@ GetAllCancellationReasonDetails(){
     this.CancellationReasonDetails=data;
   })
 }
+
+openModalEdit(item,template){
+  this.dialog.open(template);
+  let object={
+    "CompanyId":item.CompanyId,
+    "Id":item.Id
+  }
+  console.log(object);
+  this.InputId =object;
+}
+
+
+onHide() {
+   
+  this.dialog.closeAll();
+  this.GetAllCancellationReasonDetails();
+
+}
+
   onchangeStatus($event){
-    //console.log($event);
     if($event=='true'){
       this.ActiveStatus=1;
     }
     else{
       this.ActiveStatus=0;
     }
-  //  console.log(this.ActiveStatus);
   }
 }
