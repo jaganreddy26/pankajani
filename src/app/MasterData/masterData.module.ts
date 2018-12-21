@@ -26,6 +26,7 @@ import { TaxeditComponent } from './taxedit/taxedit.component';
 import { CancelreasonComponent } from './cancelreason/cancelreason.component';
 import { PaymentreasonComponent } from './paymentreason/paymentreason.component';
 import { EditCancelReasonComponent } from './edit-cancel-reason/edit-cancel-reason.component';
+import { EditpaymentreasonComponent } from './editpaymentreason/editpaymentreason.component';
 const routes: Routes = [
   { path: 'addbusiness', component:AddBusinessComponent},
   { path: 'addcompany', component:AddCompanyComponent },
@@ -52,7 +53,7 @@ const routes: Routes = [
     providers: [MasterService],
     declarations: [BankdetailsComponent, PlantdetailsComponent, AddBusinessComponent, AddCompanyComponent, AddCompanyeditComponent, EditbusinessComponent, EditbankdetailsComponent, EditplantComponent,
        AreaofBusinessComponent, VendorComponent, EditAreaBusinessComponent,
-        VendorEditComponent,AgencyComponent, GoodstypeComponent, AgencyEditComponent, GoodstypeEditComponent, CategoryComponent, CategoryeditComponent, TaxComponent, TaxeditComponent, CancelreasonComponent, PaymentreasonComponent, EditCancelReasonComponent],
+        VendorEditComponent,AgencyComponent, GoodstypeComponent, AgencyEditComponent, GoodstypeEditComponent, CategoryComponent, CategoryeditComponent, TaxComponent, TaxeditComponent, CancelreasonComponent, PaymentreasonComponent, EditCancelReasonComponent, EditpaymentreasonComponent],
     exports: [RouterModule],
   })
   export class MasterDataModule { }

@@ -13,6 +13,7 @@ export class PaymentreasonComponent implements OnInit {
   ActiveStatus:any;
   Name:any;
   PaymentReasonDetails:any=[];
+  InputId:any
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) {
     this.GetStatus();
     this.getPaymentReasonDetails();
@@ -64,5 +65,21 @@ export class PaymentreasonComponent implements OnInit {
     else{
       this.ActiveStatus=0;
     }
+  }
+  //////////////
+  openModalEdit(item,template){
+    this.dialog.open(template);
+    let object={
+      "CompanyId":item.CompanyId,
+      "Id":item.Id
+    }
+    // console.log(object);
+    this.InputId =object;
+  }
+  onHide() {
+   
+    this.dialog.closeAll();
+    this.getPaymentReasonDetails();
+  
   }
 }

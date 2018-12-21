@@ -282,6 +282,10 @@ getGoodsType(data){
     this.url=this.host+'/api/MasterDataApi/SaveCancellationReasonDetails';
     return this.http.post(this.url,data)
   }
+
+
+
+
   ////// PaymentReasonDetails /////////
   //savePaymentReasonDetails
   savePaymentReasonDetails(data){
@@ -293,4 +297,14 @@ getGoodsType(data){
     this.url=this.host+'/api/MasterDataApi/GetPaymentReasonDetails';
     return this.http.post(this.url,data)
   }
+   //GetPaymentReasonDetailsByID:
+   getPaymentReasonDetailsBYID(data){
+    this.url=this.host+'/api/MasterDataApi/GetPaymentReasonDetails';
+    return this.http.post(this.url,data)
+  }
+  //UpdatePaymentReasonDetails
+   UpdatePaymentReasonDetails(data){
+    this.url=this.host+'/api/MasterDataApi/SavePaymentReasonDetails';
+    return this.http.post(this.url,data)
+   }
 }
