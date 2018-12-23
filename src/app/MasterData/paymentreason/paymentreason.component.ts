@@ -25,7 +25,7 @@ export class PaymentreasonComponent implements OnInit {
   Save(){
     let object ={
       "CompanyId":localStorage.getItem('businessId'),
-      "Name":this.ActiveStatus.Name,
+      "Name":this.Name,
       "Status":this.ActiveStatus
     }
     this.masterService.savePaymentReasonDetails(object).subscribe((data:any)=>{

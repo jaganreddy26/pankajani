@@ -33,5 +33,34 @@ export class PaymentService {
     this.url=this.host+'/api/PaymentApi/PostAdvancePayment';
     return this.http.post(this.url,data);
   }
-  
+ /////////// PAYMENT PAGE /////////////
+ GetPaymentFor(){
+  this.url=this.host+'/api/PaymentApi/GetPaymentFor';
+  return this.http.get(this.url);
+ } 
+ //GetReferenceId
+ GetReferenceId(data){
+  this.url=this.host+'/api/PaymentApi/GetReferenceId';
+  return this.http.post(this.url,data);
+ }
+ //GetPaymentMode
+ GetPaymentMode(){
+  this.url=this.host+'/api/PaymentApi/GetPaymentMode';
+  return this.http.get(this.url);
+ }
+ //GetPaymentReason
+ GetPaymentReason(){
+  this.url=this.host+'/api/PaymentApi/GetPaymentReason';
+  return this.http.get(this.url);
+ }
+ //GetPaymentType
+ GetPaymentType(){
+  this.url=this.host+'/api/PaymentApi/GetPaymentType';
+  return this.http.get(this.url);
+ }
+ //savePayment
+ savePayment(data){
+  this.url=this.host+'/api/PaymentApi/SavePayment';
+  return this.http.post(this.url,data);
+ }
 }

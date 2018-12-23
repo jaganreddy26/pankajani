@@ -23,7 +23,7 @@ export class EditpaymentreasonComponent implements OnInit {
     if (changes['Inputdata']) {
       this.inputobject=this.Inputdata;
   console.log(this.inputobject);
-  this.masterService.getCancellationReasonDetailsBYID(this.inputobject).subscribe((data:any)=>{
+  this.masterService.GetPaymentReasonDetailsBYID(this.inputobject).subscribe((data:any)=>{
     console.log(data);
     this.paymentReasonDetails=data[0];
   })
@@ -41,7 +41,7 @@ export class EditpaymentreasonComponent implements OnInit {
           "Name":this.paymentReasonDetails.Name,
           "Status":this.ActiveStatus
     }
-    this.masterService.SaveCancellationReasonDetails(obj).subscribe((data:any)=>{
+    this.masterService.UpdatePaymentReasonDetails(obj).subscribe((data:any)=>{
 
      if(data !== 'null'){
 

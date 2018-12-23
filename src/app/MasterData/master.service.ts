@@ -298,7 +298,7 @@ getGoodsType(data){
     return this.http.post(this.url,data)
   }
    //GetPaymentReasonDetailsByID:
-   getPaymentReasonDetailsBYID(data){
+   GetPaymentReasonDetailsBYID(data){
     this.url=this.host+'/api/MasterDataApi/GetPaymentReasonDetails';
     return this.http.post(this.url,data)
   }

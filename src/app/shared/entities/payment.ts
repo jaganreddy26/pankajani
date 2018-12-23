@@ -11,6 +11,7 @@ export class Payment {
     PaymentMode: any;
     PaymentReason: any;
     PaymentType: any;
+    // PaymentFor:any;
     FileDetails: any =  new FileDetails()
 }
 export class FileDetails {

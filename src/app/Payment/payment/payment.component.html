@@ -1,18 +1,33 @@
 <mat-toolbar>
-    <span>Expenses</span>
+    <span>Payment</span>
   </mat-toolbar>
   <div class="panel-body padding"   fxLayout="row wrap"
       fxLayoutAlign="center center">
+      <mat-form-field fxFlex="55">
+        <mat-select
+            placeholder="PaymentFor"
+            [(ngModel)]="payment.PaymentFor"
+            (ngModelChange)="onchangePaymentFor($event)"
+        >
+            <mat-option
+                *ngFor="let item of PaymentFor"
+                [value]="item"
+            >
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 <mat-form-field fxFlex="55">
     <mat-select
         placeholder="Reference Id"
         [(ngModel)]="payment.ReferenceId"
+        (ngModelChange)="onchangeReferenceId($event)"
     >
         <mat-option
             *ngFor="let item of ReferenceIds"
-            [value]="item.ReferenceId"
+            [value]="item"
         >
-            {{item.ReferenceIds}}
+            {{item}}
         </mat-option>
     </mat-select>
 </mat-form-field>
@@ -20,12 +35,13 @@
     <mat-select
         placeholder="Payment Mode"
         [(ngModel)]="payment.PaymentMode"
+        (ngModelChange)="onchangePaymentModes($event)"
     >
         <mat-option
             *ngFor="let item of PaymentModes"
-            [value]="item.PaymentMode"
+            [value]="item.Id"
         >
-            {{item.PaymentMode}}
+            {{item.Name}}
         </mat-option>
     </mat-select>
 </mat-form-field>
@@ -33,12 +49,13 @@
     <mat-select
         placeholder="Payment Reason"
         [(ngModel)]="payment.PaymentReason"
+        (ngModelChange)="onchangePaymentReasons($event)"
     >
         <mat-option
             *ngFor="let item of PaymentReasons"
-            [value]="item.PaymentReason"
+            [value]="item.Id"
         >
-            {{item.PaymentReason}}
+            {{item.Name}}
         </mat-option>
     </mat-select>
 </mat-form-field>
@@ -82,12 +99,13 @@
     <mat-select
         placeholder="PaymentType"
         [(ngModel)]="payment.PaymentType"
+        (ngModelChange)="onchangePaymentType($event)"
     >
         <mat-option
             *ngFor="let item of PaymentTypes"
-            [value]="item.PaymentType"
+            [value]="item"
         >
-            {{item.PaymentType}}
+            {{item}}
         </mat-option>
     </mat-select>
 </mat-form-field>
@@ -97,7 +115,9 @@
         [(ngModel)]="payment.PaymentAmount"
     >
 </mat-form-field> -->
+
 <div align="right" class="padding-right" fxFlex="46">
+        <input type="file" id="filePicker" (change)="handleFileSelect($event)">
     <button mat-raised-button (click)="save()"  color="primary">Save</button>
   </div>
 </div>
