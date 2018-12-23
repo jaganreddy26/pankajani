@@ -15,6 +15,7 @@ export class CancelreasonComponent implements OnInit {
   CancellationReasonDetails:any=[];
   ///
   InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) { 
     this.GetStatus();
     this.GetAllCancellationReasonDetails();

@@ -13,7 +13,8 @@ export class PaymentreasonComponent implements OnInit {
   ActiveStatus:any;
   Name:any;
   PaymentReasonDetails:any=[];
-  InputId:any
+  InputId:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,private dialog: MatDialog) {
     this.GetStatus();
     this.getPaymentReasonDetails();

@@ -1,0 +1,103 @@
+<mat-toolbar>
+    <span>Expenses</span>
+  </mat-toolbar>
+  <div class="panel-body padding"   fxLayout="row wrap"
+      fxLayoutAlign="center center">
+<mat-form-field fxFlex="55">
+    <mat-select
+        placeholder="Reference Id"
+        [(ngModel)]="payment.ReferenceId"
+    >
+        <mat-option
+            *ngFor="let item of ReferenceIds"
+            [value]="item.ReferenceId"
+        >
+            {{item.ReferenceIds}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <mat-select
+        placeholder="Payment Mode"
+        [(ngModel)]="payment.PaymentMode"
+    >
+        <mat-option
+            *ngFor="let item of PaymentModes"
+            [value]="item.PaymentMode"
+        >
+            {{item.PaymentMode}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <mat-select
+        placeholder="Payment Reason"
+        [(ngModel)]="payment.PaymentReason"
+    >
+        <mat-option
+            *ngFor="let item of PaymentReasons"
+            [value]="item.PaymentReason"
+        >
+            {{item.PaymentReason}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="Payment Amount"
+        matInput
+        [(ngModel)]="payment.PaymentAmount"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="Payment Date"
+        matInput
+        [(ngModel)]="payment.PaymentDate"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="TransferFromAc"
+        matInput
+        [(ngModel)]="payment.TransferFromAc"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="TransferToAc"
+        matInput
+        [(ngModel)]="payment.TransferToAc"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="BankName"
+        matInput
+        [(ngModel)]="payment.BankName"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <input placeholder="UTRNo"
+        matInput
+        [(ngModel)]="payment.UTRNo"
+    >
+</mat-form-field>
+<mat-form-field fxFlex="55">
+    <mat-select
+        placeholder="PaymentType"
+        [(ngModel)]="payment.PaymentType"
+    >
+        <mat-option
+            *ngFor="let item of PaymentTypes"
+            [value]="item.PaymentType"
+        >
+            {{item.PaymentType}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<!-- <mat-form-field fxFlex="55">
+    <input placeholder="Payment Amount"
+        matInput
+        [(ngModel)]="payment.PaymentAmount"
+    >
+</mat-form-field> -->
+<div align="right" class="padding-right" fxFlex="46">
+    <button mat-raised-button (click)="save()"  color="primary">Save</button>
+  </div>
+</div>

@@ -14,6 +14,7 @@ export class EditpaymentreasonComponent implements OnInit {
   paymentReasonDetails:any={};
   Status:any=[];
   ActiveStatus:any;
+  value:any;
   constructor(private masterService: MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

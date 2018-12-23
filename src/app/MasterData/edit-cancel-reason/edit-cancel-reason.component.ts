@@ -16,6 +16,7 @@ export class EditCancelReasonComponent implements OnInit {
   Status:any=[];
   AreaBusinessDetails:any;
   ActiveStatus:any;
+  value:any;
   constructor(private masterService:MasterService,private alertService :AlertService) { }
 
   ngOnInit() {

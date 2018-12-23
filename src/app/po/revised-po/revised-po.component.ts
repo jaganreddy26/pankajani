@@ -45,7 +45,7 @@ export class RevisedPOComponent implements OnInit {
    POData:any={};
    PermissionData:any={};
    workorder:any=[];
-
+   value:any;
   constructor(private poservice: PoService,private alertService :AlertService) { 
   
     let object = {

@@ -5,10 +5,13 @@ import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { AdvancePaymentComponent } from './advance-payment/advance-payment.component';
 import {PaymentService} from './payment.service';
+import { PaymentComponent } from './payment/payment.component';
+
 
 const routes: Routes = [
     { path: 'Expenses', component:ExpensesComponent},
     { path: 'AdvancePayment', component:AdvancePaymentComponent },
+    { path: 'Payment', component:PaymentComponent },
    
   ];
 
@@ -21,7 +24,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [PaymentService],
-    declarations: [ExpensesComponent, AdvancePaymentComponent],
+    declarations: [ExpensesComponent, PaymentComponent,AdvancePaymentComponent],
     exports: [RouterModule],
   })
   export class PaymentModule { }
