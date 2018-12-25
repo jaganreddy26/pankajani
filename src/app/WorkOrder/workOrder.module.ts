@@ -8,13 +8,14 @@ import { AmendworkorderComponent } from './amendworkorder/amendworkorder.compone
 import { ApproveworkorderComponent } from './approveworkorder/approveworkorder.component';
 import {WorkorderService} from './workorder.service';
 import { RevisedWOComponent } from './revised-wo/revised-wo.component';
+import { CancelwoComponent } from './cancelwo/cancelwo.component';
 const routes: Routes = [
-    { path: 'Createworkorder', component:CreateworkorderComponent},
-    { path: 'Viewworkorder', component:ViewworkorderComponent},
+     { path: 'Createworkorder', component:CreateworkorderComponent},
+     { path: 'Viewworkorder', component:ViewworkorderComponent},
      { path: 'Amendworkorder', component:AmendworkorderComponent},
-    { path: 'Approveworkorder', component:ApproveworkorderComponent},
+     { path: 'Approveworkorder', component:ApproveworkorderComponent},
      {path: 'RevisedWO',component:RevisedWOComponent},
-    
+     {path:'cancelWo',component:CancelwoComponent}
    
   ];
 
@@ -27,7 +28,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [WorkorderService],
-    declarations: [CreateworkorderComponent, ViewworkorderComponent, AmendworkorderComponent, ApproveworkorderComponent, RevisedWOComponent],
+    declarations: [CreateworkorderComponent, ViewworkorderComponent, AmendworkorderComponent, ApproveworkorderComponent, RevisedWOComponent, CancelwoComponent],
     exports: [RouterModule],
   })
   export class WorkOrderModule { }

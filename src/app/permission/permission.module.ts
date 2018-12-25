@@ -9,6 +9,7 @@ import { AmendpermissionComponent } from './amendpermission/amendpermission.comp
 import { ApprovepermissionComponent } from './approvepermission/approvepermission.component';
 import { ConfirmpermissionComponent } from './confirmpermission/confirmpermission.component';
 import { EditamendpermissionComponent } from './editamendpermission/editamendpermission.component';
+import { CancelpermissionComponent } from './cancelpermission/cancelpermission.component';
 
 //routing pathes 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'AmendPermission', component: AmendpermissionComponent},
   { path: 'ApprovePermission', component: ApprovepermissionComponent},
   { path: 'ConfirmPermission', component: ConfirmpermissionComponent},
+  { path: 'Cancelpermission', component: CancelpermissionComponent},
 ];
 
 @NgModule({
@@ -29,7 +31,7 @@ const routes: Routes = [
      SharedModule.forRoot()
      ],
     providers: [PermissionService],
-    declarations: [SeekpermissionComponent, ViewpermissionComponent, AmendpermissionComponent, ApprovepermissionComponent, ConfirmpermissionComponent, EditamendpermissionComponent],
+    declarations: [SeekpermissionComponent, ViewpermissionComponent, AmendpermissionComponent, ApprovepermissionComponent, ConfirmpermissionComponent, EditamendpermissionComponent, CancelpermissionComponent],
     exports: [RouterModule],
   })
   export class PermissionModule { }

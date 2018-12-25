@@ -75,15 +75,18 @@ FileType:any;
   ///////////////////////////////////////////////////////////////
   save(){
 console.log(this.payment);
+let obj={
+  
+}
 this.payment="";
 this.paymentServive.savePayment(this.payment).subscribe((data:any)=>{
   console.log(data);
-  if (data !== 'null') {
+  // if (data !== 'null') {
 
-    this.alertService.alert(AlertType.Success, data)
-  } else {
-    this.alertService.alert(AlertType.Error, "Something went wrong");
-  }
+  //   this.alertService.alert(AlertType.Success, data)
+  // } else {
+  //   this.alertService.alert(AlertType.Error, "Something went wrong");
+  // }
 })
 }
 ///// 
