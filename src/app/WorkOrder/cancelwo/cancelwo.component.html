@@ -1,3 +1,186 @@
-<p>
-  cancelwo works!
-</p>
+<mat-toolbar>
+  <span>Cancel WorkOrder</span>
+</mat-toolbar>
+<div
+  class="padding"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-evenly end"
+>
+
+  <mat-form-field fxFlex="20">
+      <mat-select
+          placeholder="Customer"
+          [(ngModel)]="value"
+          (ngModelChange)="onchange($event)"
+      >
+          <mat-option
+              *ngFor="let item of customer"
+              value="{{item.CustomerId}}"
+          >
+              {{item.CustomerName}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <div fxFlex="20">
+      <span>From Date</span>
+      <input
+          class="form-control"
+          placeholder="DateOfJoin"
+          bsDatepicker
+          #dp="bsDatepicker"
+          [(ngModel)]="FromDate"
+          (ngModelChange)="fromDateChange()"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+      >
+  </div>
+
+  <div fxFlex="20">
+      <span>To Date</span>
+      <input
+          class="form-control"
+          placeholder="DateOfJoin"
+          bsDatepicker
+          #dp="bsDatepicker"
+          [(ngModel)]="ToDate"
+          (ngModelChange)="toDateChange()"
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+      >
+  </div>
+  <!-- <div fxFlex="20"> -->
+          
+  <mat-form-field fxFlex="10">
+          <mat-select
+              placeholder="Status"
+              [(ngModel)]="StatusName"
+          >
+              <mat-option
+                  *ngFor="let item of status"
+                  value="{{item.StatusName}}"
+              >
+                  {{item.StatusName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+  <!-- </div> -->
+  <button
+      mat-raised-button
+      fxFlex="16"
+      (click)="search()"
+      color="primary"
+  >
+      Search
+  </button>
+</div>
+<div fxLayout="row" fxLayoutAlign="start start" class="padding">
+
+  <div fxFlex="20" class="card" *ngIf="nodes.length != 0">
+      <tree-root [nodes]="nodes" [options]="options" (activate)="onActivate($event)"></tree-root>
+  </div>
+  <div
+  fxFlex="80"
+  class="container"
+  *ngIf="woData.length !=0"
+>
+<div class="card">
+  <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+  >
+      <div class="padding-left">
+          <span style="font-weight:400">UBT Id :</span>
+          <span>{{ubtDetails.UbtId}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">Customer Name :</span>
+          <span>{{ubtDetails.CustomerName}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">Agency :</span>
+          <span>{{ubtDetails.AgencyName}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">Goods Type :</span>
+          <span>{{ubtDetails.GoodsType}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">Category Name :</span>
+          <span>{{ubtDetails.CategoryName}}</span>
+      </div>
+  </div>
+  <hr>
+  <div
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+  >
+      <div class="padding-left">
+          <span style="font-weight:400">BasePrice :</span>
+          <span>{{ubtDetails.BasePrice}}</span>
+      </div>
+
+      <div class="padding-left">
+          <span style="font-weight:400">MaxMargin :</span>
+          <span>{{ubtDetails.MaxMargin}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">Quantity :</span>
+          <span>{{ubtDetails.Quantity}}</span>
+      </div>
+      
+      <div class="padding-left">
+          <span style="font-weight:400">Status :</span>
+          <span>{{ubtDetails.Status}}</span>
+      </div>
+      <div class="padding-left">
+          <span style="font-weight:400">WOStatus :</span>
+          <span style="background-color: cadetblue">{{WOStatus}}</span>
+      </div>
+  </div>
+</div>
+<div class="panel-body">
+  <table
+  class="table table-striped table-bordered table-list"
+  fxFlex="20"
+>
+<thead style="color: #3e54af">
+  <tr style="color: white;background-color:#3e54af">
+              <th scope="col">S.No</th>
+              <th scope="col">WOId</th>
+              <th>TransporterName</th>
+              <th>TransporterAmount</th>
+              <!-- <th scope="col"> LoadingContId</th> -->
+              <th>LoadingContName</th>
+              <th>LoadingContAmount</th>
+              <!-- <th scope="col">UnloadingContId</th> -->
+              <th>UnloadingContName</th>
+              <th>UnloadingContAmount</th>
+              <th>Quantity</th>
+              <!--<th>SuppliedPrice</th> -->
+          </tr>
+      </thead>
+      <tbody>
+
+          <tr
+              *ngFor="let items of woData; let i = index"
+              [attr.data-index]="i"
+          >
+              <td>{{i + 1}}</td>
+              <td>{{items.WOId}}</td>
+              <td>{{items.TransporterName}}</td>
+              <td>{{items.TransporterAmount}}</td>
+              <!-- <td>{{items.LoadingContId}}</td> -->
+              <td>{{items.LoadingContName}}</td>
+              <td>{{items.LoadingContAmount}}</td>
+              <!-- <td>{{items.UnloadingContId}}</td> -->
+              <td>{{items.UnloadingContName}}</td>
+              <td>{{items.UnloadingContAmount}}</td>
+               <td>{{items.Quantity}}</td>
+              <!--<td>{{items.SuppliedPrice}}</td> -->
+
+          </tr>
+      </tbody>
+  </table>
+ 
+</div>
+
+</div>
+</div>

@@ -65,7 +65,7 @@ login(){
      
       })
       this.appService.navigate('/home',{})
-      location.reload()
+    //  location.reload()
     })
    
   
