@@ -13,13 +13,17 @@ export class AppComponent {
   businessId:any;
   constructor(public router: Router) {
   console.log(this.router.url)
-  this.businessId = localStorage.getItem('businessId');
-  console.log(this.businessId);
+
+  
+  setTimeout(()=>{  
+    this.businessId = localStorage.getItem('businessId');
+    console.log(this.businessId);
+}, 100);
+
 }
 logout(){
 localStorage.clear();
-this.businessId="";
-console.log(this.businessId);
+location.reload()
 }
 }
 

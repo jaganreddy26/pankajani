@@ -46,26 +46,29 @@ login(){
       //console.log(data)
       localStorage.setItem('access_token',data.access_token)
       localStorage.setItem('businessId',this.businessId)
+      let obj={
+        "CompanyId":this.businessId,
+         "Id":0
+      }
+      this.logiinInService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
+         console.log(data);
+      
+       this.TransporterID=data[0].Id;
+        console.log(this.TransporterID);
+      localStorage.setItem('TransporterID',this.TransporterID)
+       this.loadingTransporter=data[1].Id;
+     console.log(this.loadingTransporter);
+      localStorage.setItem('loadingTransporter',this.loadingTransporter)
+       this.UnloadingTransporter=data[2].Id;
+      console.log(this.UnloadingTransporter);
+      localStorage.setItem('UnloadingTransporter',this.UnloadingTransporter)
+     
+      })
       this.appService.navigate('/home',{})
+      location.reload()
     })
-    let obj={
-      "CompanyId":this.businessId,
-       "Id":0
-    }
-    this.logiinInService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
-       console.log(data);
-    
-     this.TransporterID=data[0].Id;
-      console.log(this.TransporterID);
-    localStorage.setItem('TransporterID',this.TransporterID)
-     this.loadingTransporter=data[1].Id;
-   console.log(this.loadingTransporter);
-    localStorage.setItem('loadingTransporter',this.loadingTransporter)
-     this.UnloadingTransporter=data[2].Id;
-    console.log(this.UnloadingTransporter);
-    localStorage.setItem('UnloadingTransporter',this.UnloadingTransporter)
+   
   
-    })
   }else{
     this.alertService.alert(AlertType.Error,"Please Select Bussines Name");
   }
