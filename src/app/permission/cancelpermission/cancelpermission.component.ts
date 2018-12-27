@@ -90,10 +90,10 @@ export class CancelpermissionComponent implements OnInit {
          element.children.forEach(element =>{
           // parent.push(element)
            element.children.forEach(element=>{
-           parent.push(element)
-          //  element.children.forEach(element=>{
-          //    parent.push(element)
-          //  })
+          // parent.push(element)
+           element.children.forEach(element=>{
+             parent.push(element)
+           })
            })
          })
         });

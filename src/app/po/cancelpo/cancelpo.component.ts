@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
 import {PoService} from '../po.service';
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-cancelpo',
   templateUrl: './cancelpo.component.html',
@@ -36,8 +37,24 @@ export class CancelpoComponent implements OnInit {
    hasChildrenField: 'nodes',
    
  }
- 
-  constructor(private poService: PoService) {
+ ////
+ CancelReason:any=[];
+ viewdata:any;
+ UbtData:any={};
+ POData:any={};
+ PermissionData:any={};
+ workorder:any=[];
+ CancelPermission:any;
+ CancelWO:any;
+ canceldDate:any = new Date();
+ CompansationFrom:any;
+ CompansationTo:any;
+ CompletedQuantity:any;
+ canceldDateChanged: boolean = true;
+ POID:any;
+ CancelReasonID:any;
+
+  constructor(private poService: PoService,private alertService :AlertService) {
     this.getCustomer();
    }
 
@@ -107,21 +124,28 @@ console.log(this.nodes);
   }
 
   onActivate($event){
-    console.log($event.node.data.Id);
+    this.POID=$event.node.data.Id
+    this.viewdata=1
+   // console.log($event.node.data.Id);
       let object={
         "CompanyId":localStorage.getItem('businessId'),
       "POId":$event.node.data.Id
     }
-    // this.poService.getPoDetailsByPoId(object).subscribe((data:any)=>{
+ this.poService.getCancelPOData(object).subscribe((data:any)=>{
+   console.log(data);
+   this.UbtData=data.UbtData;
+   this.POData=data.POData;
+   this.PermissionData=data.PermissionData;
+   this.workorder=data.WO;
 
-    //   this.currentPoId=data.POData[0].POId;
-    //  this.currentPOStatus=data.POData[0].POStatus;
-    //  console.log(this.currentPOStatus);
-    //  console.log(this.currentPoId);
-    //   this.viewPoDetails=data.POData;
-    //   this.ubtdetailsByPoId=data.ubt;
-     
-    // })
+ })
+ let object1={
+  "BusinessId":localStorage.getItem('businessId'),
+}
+ this.poService.GetCancelReason(object1).subscribe((data:any)=>{
+   console.log(data);
+   this.CancelReason=data
+ })
   }
  
   onchange($event) {
@@ -139,5 +163,46 @@ console.log(this.nodes);
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+  onchangeCancelReason($event){
+    this.CancelReasonID=$event;
+    console.log(this.CancelReasonID)
+  }
+  canceldDateChange() {
+    this.canceldDateChanged = true;
+    this.canceldDate.toLocaleDateString();
+   // var canceldDate = this.canceldDate.getFullYear() + '-' + (this.canceldDate.getMonth() + 1) + '-' + this.canceldDate.getDate();
+    var canceldDate = this.canceldDate.getDate() +'-'+(this.canceldDate.getMonth() + 1) + '-'+this.canceldDate.getFullYear();
+    this.canceldDate = canceldDate;
+
+  }
+  changeCancelPermission($event) {
+    this.CancelPermission = $event.value;
+    console.log(this.CancelPermission);
+  }
+  changeCancelWO($event){
+    this.CancelWO =$event.value;
+    console.log(this.CancelWO);
+  }
+  save(){
+let object={
+  "POId":this.POID,
+  "CancelId":this.CancelReasonID,
+  "CompensationFrom":this.CompansationFrom,
+  "CompensationTo":this.CompansationTo,
+  "CompletedQuantity":this.CompletedQuantity,
+  "CancelPermission":this.CancelPermission,
+  "CancelWO":this.CancelWO,
+  "CancelledOn":this.canceldDate
+}
+this.poService.SaveCancelPO(object).subscribe((data:any)=>{
+  console.log(data);
+  if (data !== 'null') {
+
+    this.alertService.alert(AlertType.Success, data)
+  } else {
+    this.alertService.alert(AlertType.Error, "Something went wrong");
+  }
+})
   }
 }

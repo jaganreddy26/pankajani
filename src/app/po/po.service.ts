@@ -87,4 +87,19 @@ export class PoService {
     this.url=this.host+'/api/UbtApi/SaveSplitPO';
     return this.http.post(this.url,data);
   }
+  // GetCancelPOData
+  getCancelPOData(data){
+    this.url=this.host+'/api/UbtApi/GetCancelPOData';
+    return this.http.post(this.url,data);
+  }
+  //GetCancelReason
+  GetCancelReason(data){
+    this.url=this.host+'/api/UbtApi/GetCancelReason';
+    return this.http.post(this.url,data);
+  }
+  //SAVE CANCEL PURCHASE ORDER
+  SaveCancelPO(data){
+    this.url=this.host+'/api/UbtApi/SaveCancelPO';
+    return this.http.post(this.url,data);
+  }
 }
