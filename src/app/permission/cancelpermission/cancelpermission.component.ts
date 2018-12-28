@@ -32,10 +32,25 @@ export class CancelpermissionComponent implements OnInit {
     hasChildrenField: 'nodes',
     
   }
-  ////////////
-  ubtDetails:any={}
-  PermissionDetails:any=[];
-  PermissionStatus:any;
+  /////////////////////
+PermissionID:any;
+viewdata:any;
+CancelReason:any=[];
+UbtData:any={};
+ POData:any={};
+ PermissionData:any={};
+ workorder:any=[];
+ canceldDateChanged: any = new Date();
+canceldDateChange: boolean = false;
+ CancelReasonID:any;
+ CancelPurchaseOrder:any;
+ CancelWO:any;
+ canceldDate:any = new Date();
+ CompansationFrom:any;
+ CompansationTo:any;
+ CompletedQuantity:any;
+ CreatedBy:any;
+
   constructor(private permissionService:PermissionService,private alertService :AlertService){
     this.getCustomer();
    }
@@ -103,17 +118,28 @@ export class CancelpermissionComponent implements OnInit {
   }
   onActivate($event){
    // console.log('hi');
-   console.log($event.node.data.Id);
-  //  let obj={
-  //   'PermissionId':$event.node.data.Id,
-  //   'CompanyId':localStorage.getItem('businessId')
-  //  }
-  //  this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
-  //    console.log(data);
-  //    this.ubtDetails=data.ubt;
-  //    this.PermissionDetails=data.PermissionData;
-  //    this.PermissionStatus=data.PermissionData[0].PermissionStatus;
-  //  })
+   //console.log($event.node.data.Id);
+   this.PermissionID=$event.node.data.Id;
+   this.viewdata=1;
+   let obj={
+    'PermissionId':$event.node.data.Id,
+    'CompanyId':localStorage.getItem('businessId')
+   }
+   this.permissionService.GetCancelPermissionData(obj).subscribe((data:any)=>{
+     console.log(data);
+
+    this.UbtData=data.UbtData;
+    this.POData=data.POData;
+    this.PermissionData=data.PermissionData;
+    this.workorder=data.WO;
+   })
+   let object1={
+    "BusinessId":localStorage.getItem('businessId'),
+  }
+   this.permissionService.GetCancelReason(object1).subscribe((data:any)=>{
+     console.log(data);
+     this.CancelReason=data
+   })
   }
   onchange($event) {
     this.Id = $event
@@ -130,5 +156,49 @@ export class CancelpermissionComponent implements OnInit {
     this.ToDate.toLocaleDateString();
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
+  }
+  onchangeCancelReason($event){
+    this.CancelReasonID=$event;
+    console.log(this.CancelReasonID)
+  }
+  oncanceldDateChange() {
+    this.canceldDateChange = true;
+    this.canceldDate.toLocaleDateString();
+   // var canceldDate = this.canceldDate.getFullYear() + '-' + (this.canceldDate.getMonth() + 1) + '-' + this.canceldDate.getDate();
+    var canceldDate = this.canceldDate.getDate() +'-'+(this.canceldDate.getMonth() + 1) + '-'+this.canceldDate.getFullYear();
+    this.canceldDate = canceldDate;
+console.log(this.canceldDate);
+  }
+  changeCancelPurchaseOrder($event) {
+    this.CancelPurchaseOrder = $event.value;
+    console.log(this.CancelPurchaseOrder);
+  }
+  changeCancelWO($event){
+    this.CancelWO =$event.value;
+    console.log(this.CancelWO);
+  }
+  save(){
+    let object={
+      "PermissionId":this.PermissionID,
+      "CancelId":this.CancelReasonID,
+      "CompensationFrom":this.CompansationFrom,
+      "CompensationTo":this.CompansationTo,
+      "CompletedQuantity":this.CompletedQuantity,
+      "CancelPO":this.CancelPurchaseOrder,
+      "CancelWO":this.CancelWO,
+      "CanceledOn":this.canceldDate,
+      "CreatedBy":this.CreatedBy
+    }
+    //console.log(object);
+ 
+    this.permissionService.SaveCancelPermission(object).subscribe((data:any)=>{
+      console.log(data)
+            if (data !== 'null') {
+
+        this.alertService.alert(AlertType.Success, data)
+      } else {
+        this.alertService.alert(AlertType.Error, "Something went wrong");
+      }
+    })
   }
 }

@@ -75,4 +75,19 @@ export class PermissionService {
     this.url =this.host+'/api/UbtApi/ChangePermissionStatus';
     return this.http.post(this.url,data)
   }
+   //GetCancelReason
+   GetCancelReason(data){
+    this.url=this.host+'/api/UbtApi/GetCancelReason';
+    return this.http.post(this.url,data);
+  }
+  // GetCancelPermissionData
+  GetCancelPermissionData(data){
+    this.url =this.host+'/api/UbtApi/GetCancelPermissionData';
+    return this.http.post(this.url,data)
+  }
+  //SAVE CANCEL ERMISSION
+  SaveCancelPermission(data){
+    this.url =this.host+'/api/UbtApi/SaveCancelPermission';
+    return this.http.post(this.url,data)
+  }
 }
