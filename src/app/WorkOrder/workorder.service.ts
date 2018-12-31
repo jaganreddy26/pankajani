@@ -66,5 +66,19 @@ export class WorkorderService {
     this.url=this.host+'/api/UbtApi/SaveSplitWO';
     return this.http.post(this.url,data);
   }
-
+     //GetCancelReason
+     GetCancelReason(data){
+      this.url=this.host+'/api/UbtApi/GetCancelReason';
+      return this.http.post(this.url,data);
+    }
+  // GetCancelWOData
+  getCancelWOData(data){
+    this.url=this.host+'/api/UbtApi/GetCancelWOData';
+    return this.http.post(this.url,data);
+  }
+  // SAVE CANCEL WORK ORDER
+  saveCancelWorkOrder(data){
+    this.url=this.host+'/api/UbtApi/SaveCancelWO';
+    return this.http.post(this.url,data);
+  }
 }

@@ -42,8 +42,12 @@ saveSeekPOData:any=[];
 poId:any;
 inputProposalId:any;
 CreatedPoId:any;
-SuppliedQty:any;
-SuppliedPrice:any;
+SuppliedQtyRoad:any;
+SuppliedPriceRoad:any;
+SuppliedQtyRake:any;
+SuppliedPriceRake:any;
+SuppliedQtyShip:any;
+SuppliedPriceShip:any;
   constructor(private poService:PoService,private alertService :AlertService) { 
     this.getCustomer();
    
@@ -159,28 +163,31 @@ onchangeSuppliedPrice($event){
   
 save(){
 
-  // this.seekPOdetails="";
-  // console.log(this.seekPOdetails);
-  let InputArray:any=[];
+  let PurchaseOrderVendor:any=[];
   this.seekPOdetails.forEach(element=>{
-    InputArray.push({
-      "CompanyId":localStorage.getItem('businessId'),
+    PurchaseOrderVendor.push({
       "ProposalId":element.ProposalId,
       "TransporterId":element.TransporterId,
       "TransporterAmount":element.TransporterAmount,
       "LoadingContId":element.LoadingContId,
       "LoadingContAmount":element.LoadingContAmount,
       "UnloadingContId":element.UnloadingContId,
-      "UnloadingContAmount":element.UnloadingContAmount,
-      "SuppliedQty":this.SuppliedQty,
-      "SuppliedPrice":this.SuppliedPrice,
-      "POId":this.CreatedPoId
-      
+      "UnloadingContAmount":element.UnloadingContAmount,     
     })
   })
-  console.log(InputArray);
 
-  this.poService.saveSeekPOSelection(InputArray).subscribe((data:any)=>{
+  let inputobject={
+"CompanyId":this.poService.BusinessId,
+"SuppliedQtyRoad":this.SuppliedQtyRoad,
+"SuppliedPriceRoad":this.SuppliedPriceRoad,
+"SuppliedQtyRake":this.SuppliedQtyRake,
+"SuppliedPriceRake":this.SuppliedPriceRake,
+"SuppliedQtyShip":this.SuppliedQtyShip,
+"SuppliedPriceShip":this.SuppliedPriceShip,
+"PurchaseOrderVendor":PurchaseOrderVendor
+  }
+//console.log(inputobject);
+  this.poService.saveSeekPOSelection(inputobject).subscribe((data:any)=>{
     //console.log(data);
     if(data=='Success'){
 
@@ -210,8 +217,12 @@ save(){
     })
     
   })
-  this.CreatedPoId="";
-
+  this.SuppliedPriceRoad="";
+this.SuppliedQtyRoad="";
+this.SuppliedPriceRake="";
+this.SuppliedQtyRake="";
+this.SuppliedPriceShip="";
+this.SuppliedQtyShip="";
  
 }
 

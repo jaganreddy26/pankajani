@@ -176,7 +176,7 @@ _handleReaderLoaded(readerEvt) {
 
   conforPo(){
     let obj={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.poservice.BusinessId,
       "POId":this.currentPoId,
       "Type":this.type,
       "BuyersPONo":this.BuyersPONo,

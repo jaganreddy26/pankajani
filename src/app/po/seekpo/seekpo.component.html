@@ -202,43 +202,72 @@
            
         </div>
         <div
-        align="right"
+ 
         class="padding-right" *ngIf="poId == null"
     >
+    
     <mat-form-field style="width:20%">
         <input
-            placeholder="PoId"
+            placeholder="SuppliedQtyRoad"
             matInput
-            [(ngModel)]="CreatedPoId"
+            [(ngModel)]="SuppliedQtyRoad"
            
         >
     </mat-form-field>
     <mat-form-field style="width:20%">
         <input
-            placeholder="SuppliedQty"
+            placeholder="SuppliedPriceRoad"
             matInput
-            [(ngModel)]="SuppliedQty"
+            [(ngModel)]="SuppliedPriceRoad"
            
         >
     </mat-form-field>
     <mat-form-field style="width:20%">
-        <input
-            placeholder="SuppliedPrice"
-            matInput
-            [(ngModel)]="SuppliedPrice"
-           
-        >
-    </mat-form-field>
-        <button
-            mat-raised-button
-            fxFlex="16"
-            (click)="save()"
-            color="primary"
-        >
-            CREATE PO
-        </button>
+            <input
+                placeholder="SuppliedQtyRake"
+                matInput
+                [(ngModel)]="SuppliedQtyRake"
+               
+            >
+        </mat-form-field>
+        <mat-form-field style="width:20%">
+                <input
+                    placeholder="SuppliedPriceRake"
+                    matInput
+                    [(ngModel)]="SuppliedPriceRake"
+                   
+                >
+            </mat-form-field>
+       
     
     </div>
+    <div  class="padding-right" *ngIf="poId == null">
+
+<mat-form-field style="width:20%">
+    <input
+        placeholder="SuppliedQtyShip"
+        matInput
+        [(ngModel)]="SuppliedQtyShip"
+       
+    >
+</mat-form-field>
+<mat-form-field style="width:20%">
+    <input
+        placeholder="SuppliedPriceShip"
+        matInput
+        [(ngModel)]="SuppliedPriceShip"
+       
+    >
+</mat-form-field>
+<button
+mat-raised-button
+fxFlex="16"
+(click)="save()"
+color="primary"
+>
+CREATE PO
+</button>
+</div>
     </div>
 
 </div>
