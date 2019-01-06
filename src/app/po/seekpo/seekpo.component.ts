@@ -186,7 +186,7 @@ save(){
 "SuppliedPriceShip":this.SuppliedPriceShip,
 "PurchaseOrderVendor":PurchaseOrderVendor
   }
-//console.log(inputobject);
+console.log(inputobject);
   this.poService.saveSeekPOSelection(inputobject).subscribe((data:any)=>{
     //console.log(data);
     if(data=='Success'){

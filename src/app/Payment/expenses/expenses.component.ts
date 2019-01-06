@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PaymentService} from '../payment.service';
 import { AlertService } from '../../shared/alerts/_services/alert.service';
 import { AlertType } from '../../shared/alerts/_models/alert';
+import { element } from '@angular/core/src/render3/instructions';
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.component.html',
@@ -48,6 +49,8 @@ export class ExpensesComponent implements OnInit {
       "Amount":element.Amount
      })
    });
+
+
    console.log(addedDetails);
     let object={
       "CompanyId":localStorage.getItem('businessId'),
