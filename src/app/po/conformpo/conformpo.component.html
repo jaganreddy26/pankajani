@@ -149,6 +149,13 @@
                         [(ngModel)]="BuyersPONo"
                     >
                   </mat-form-field>
+                  <mat-form-field fxFlex="20">
+                    <input
+                        placeholder="ConfirmPOId"
+                        matInput
+                        [(ngModel)]="ConfirmPOId"
+                    >
+                  </mat-form-field>
 
             <mat-form-field >
                 <mat-select placeholder="ConformStatus" [(ngModel)]="item" (ngModelChange)="conformType($event)">

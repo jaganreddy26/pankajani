@@ -51,6 +51,7 @@ FilePath:any;
 FileName:any;
 FileType:any;
 BuyersPONo:any;
+ConfirmPOId:any;
   constructor(private poservice: PoService,private alertService :AlertService) {
     this.getCustomer();
   }
@@ -177,7 +178,8 @@ _handleReaderLoaded(readerEvt) {
   conforPo(){
     let obj={
       "CompanyId":this.poservice.BusinessId,
-      "POId":this.currentPoId,
+      "DummyPOId":this.currentPoId,
+      "ConfirmPOId":this.ConfirmPOId,
       "Type":this.type,
       "BuyersPONo":this.BuyersPONo,
       "BuyersPoDate":this.BuyersPoDate,
@@ -195,25 +197,28 @@ _handleReaderLoaded(readerEvt) {
       if(data=='Success'){
 
         this.alertService.alert(AlertType.Success,"Confirmed the PurchaseOrder to this POId :"+ this.currentPoId)
-         /// ToRefershing the data
+         /// ToRefershing the data based upon poID
         let obj ={
-          'POId':  this.InputpoId
+          'POId': this.ConfirmPOId
         }
         console.log(obj);
         this.poservice.getconformPoDetails(obj).subscribe((data:any)=>{
-         // console.log(data);
          this.currentPoId=data.POData[0].POId;
          this.currentPOStatus=data.POData[0].POStatus;
          this.currentPoType=data.POData[0].POType;
-        
          console.log(this.currentPoType);
           this.conformPodetails=data.POData;
           this.ubtdetailsByPoId=data.ubt;
         })
+         /// ToRefershing the Tree strecture data after adding the ConfirmPoID
+        this.search();
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
       }
     })
+    this.BuyersPONo="";
+    this.ConfirmPOId="";
+    this.type="";
   }
   conformType($event){
     //console.log($event);

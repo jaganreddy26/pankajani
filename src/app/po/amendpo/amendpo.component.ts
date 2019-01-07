@@ -45,6 +45,7 @@ export class AmendpoComponent implements OnInit {
    
  }
   modalRef: BsModalRef;
+  POID:any;
   constructor(private poservice: PoService,
     private alertService :AlertService,private modalService: BsModalService) { 
     this.getCustomer();
@@ -120,10 +121,10 @@ export class AmendpoComponent implements OnInit {
   }
 
   onActivate($event){
-  //console.log($event.node.data.Id);
+  this.POID=$event.node.data.Id;
 
       let object={
-        "CompanyId":localStorage.getItem('businessId'),
+        "CompanyId":this.poservice.BusinessId,
       "POId":$event.node.data.Id
     }
     this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
@@ -149,7 +150,6 @@ export class AmendpoComponent implements OnInit {
       let array:any=[];
       this.amendPodetails.forEach(element => {
         array.push({
-          'CompanyId':localStorage.getItem('businessId'),
           'ProposalId':this.ubtdetailsByPoId.ProposalId,
           'TransporterId':element.TransporterId,
           'TransporterAmount':element.TransporterAmount,
@@ -157,19 +157,39 @@ export class AmendpoComponent implements OnInit {
           'LoadingContAmount':element.LoadingContAmount,
           'UnloadingContId':element.UnloadingContId,
           'UnloadingContAmount':element.UnloadingContAmount,
-          'SuppliedQty':this.SuppliedQty,
-          'SuppliedPrice':this.SuppliedPrice,
-          'POId':element.POId
-        })
+            })
       });
-      console.log(array)
-    this.poservice.updateandSaveamendPoDetails(array).subscribe((data:any)=>{
-     // console.log(data);
+      let object={
+        'CompanyId':this.poservice.BusinessId,
+        'POId':this.POID,
+        'SuppliedQty':this.SuppliedQty,
+        'SuppliedPrice':this.SuppliedPrice,
+        'PurchaseOrderVendor':array
+      }
+      console.log(object)
+    this.poservice.updateandSaveamendPoDetails(object).subscribe((data:any)=>{
+     console.log(data);
      if(data !== 'null'){
 
-      this.alertService.alert(AlertType.Success,"Updated Successfully ")
+      this.alertService.alert(AlertType.Success,data)
+  /// ToRefershing the data based upon poID
+  let object={
+    "CompanyId":this.poservice.BusinessId,
+  "POId":this.POID
+}
+this.poservice.getAmendPoDetails(object).subscribe((data:any)=>{
+this.checkingPoId=data.POData[0].POId;
+console.log(this.checkingPoId);
+this.amendPodetails=data.POData;
+this.SuppliedQty=data.POData[0].SuppliedQty;
+this.SuppliedPrice=data.POData[0].SuppliedPrice;
+console.log(this.SuppliedQty);
+console.log(this.SuppliedPrice);
+this.ubtdetailsByPoId=data.ubt;
+
+})
     }else{
-      this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.alertService.alert(AlertType.Error,data);
     }
     })
   }
