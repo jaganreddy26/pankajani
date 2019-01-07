@@ -52,8 +52,10 @@ export class AgencyComponent implements OnInit {
      if (data !== 'null') {
 
       this.alertService.alert(AlertType.Success, data)
+      this.getAllAgencyDetails();
     } else {
       this.alertService.alert(AlertType.Error, "Something went wrong");
+      this.getAllAgencyDetails();
     }
    })
    this.agency.CustomerId="";

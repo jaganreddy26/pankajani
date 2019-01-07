@@ -25,7 +25,7 @@ export class GoodstypeComponent implements OnInit {
   Save(){
     // localStorage.getItem('businessId')
    let obj= {
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.masterService.BusinessId,
       "Name":this.Name,
       "Status":this.ActiveStatus,
       }
@@ -34,18 +34,20 @@ export class GoodstypeComponent implements OnInit {
        console.log(data);
        if(data !== 'null'){
 
-        this.alertService.alert(AlertType.Success, data)
+        this.alertService.alert(AlertType.Success, data);
+        this.GetAllGoodsTypeDetils();
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
+        this.GetAllGoodsTypeDetils();
       }
-      this.GetAllGoodsTypeDetils();
+    
      })
       this.Name="";
       this.ActiveStatus="";
     }
     GetAllGoodsTypeDetils(){
       let object={
-        "CompanyId":localStorage.getItem('businessId'),
+        "CompanyId":this.masterService.BusinessId,
         "Id":'0'
       }
       this.masterService.getGoodsTypeDetails(object).subscribe((data:any)=>{

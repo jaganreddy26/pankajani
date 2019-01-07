@@ -68,11 +68,13 @@ export class BankdetailsComponent implements OnInit {
     this.masterService.saveBankDetails(this.addedbankDetails).subscribe((data: any) => {
       if (data !== 'null') {
 
-        this.alertService.alert(AlertType.Success, data)
+        this.alertService.alert(AlertType.Success, data);
+        this.getBankDetails();
       } else {
         this.alertService.alert(AlertType.Error, "Something went wrong");
+        this.getBankDetails();
       }
-      this.getBankDetails();
+  
       this.addedbankDetails = "";
     })
   }

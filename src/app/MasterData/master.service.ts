@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class MasterService {
+  BusinessId:any =localStorage.getItem('businessId');
   private host = environment.API_END_POINT;
   //url
   private url: string = '';

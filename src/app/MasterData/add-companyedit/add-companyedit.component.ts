@@ -66,8 +66,9 @@ let inputobject={
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
       }
+      this.Onclose();
       })
-    this.Onclose();
+ 
    
   }
   Onclose(){

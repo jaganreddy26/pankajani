@@ -34,7 +34,7 @@ export class AreaofBusinessComponent implements OnInit {
   Save(){
   // localStorage.getItem('businessId')
  let obj= {
-    "CompanyId":localStorage.getItem('businessId'),
+    "CompanyId":this.masterService.BusinessId,
     "Name":this.Name,
     "Status":this.ActiveStatus,
     }
@@ -56,7 +56,7 @@ this.ActiveStatus="";
   }
   GetAllAreaBusinessDetails(){
     let obj={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.masterService.BusinessId,
        "Id":0
     }
     this.masterService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
@@ -76,7 +76,7 @@ this.ActiveStatus="";
   }
   openModalEdit(items,template){
 let object={
-  "CompanyId":localStorage.getItem('businessId'),
+  "CompanyId":this.masterService.BusinessId,
 "Id":items.Id
 }
 this.dialog.open(template);

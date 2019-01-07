@@ -48,8 +48,10 @@ Save(){
     if(data !== 'null'){
 
       this.alertService.alert(AlertType.Success, data)
+      this.getAddedCompanyDetails();
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.getAddedCompanyDetails();
     }
   })
   this.addcompanyDetail.BusinessId="";

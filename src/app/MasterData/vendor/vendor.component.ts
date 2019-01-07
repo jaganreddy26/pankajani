@@ -18,7 +18,7 @@ export class VendorComponent implements OnInit {
   value:any;
   constructor(private masterService:MasterService,private alertService :AlertService,
               private dialog: MatDialog) {
-                this.vendor.CompanyId = localStorage.getItem('businessId')
+                this.vendor.CompanyId = this.masterService.BusinessId;
                 this.GetBusinessAreaId();
                 this.GetStatus();
                 this.GetAllVendorDetails();
@@ -28,7 +28,7 @@ export class VendorComponent implements OnInit {
   }
   GetBusinessAreaId(){
     let obj={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.masterService.BusinessId,
        "Id":0
     }
     this.masterService.getAreaBusinessDetails(obj).subscribe((data:any)=>{
@@ -75,7 +75,7 @@ export class VendorComponent implements OnInit {
   //Get VENDOR DETAILS
   GetAllVendorDetails(){
     let object={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.masterService.BusinessId,
       "VendorId":"0"
     }
     this.masterService.getVendorDetails(object).subscribe((data:any)=>{
@@ -87,7 +87,7 @@ export class VendorComponent implements OnInit {
   openModalEdit(items,template){
     this.dialog.open(template);
     let object={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.masterService.BusinessId,
       "VendorId":items.VendorId
       }
       this.InputId =object

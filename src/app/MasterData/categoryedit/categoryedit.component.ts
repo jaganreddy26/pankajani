@@ -25,12 +25,14 @@ export class CategoryeditComponent implements OnInit {
       console.log(data);
       if(data !== 'null'){
 
-        this.alertService.alert(AlertType.Success, data)
+        this.alertService.alert(AlertType.Success, data);
+        this.Onclose();
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
+        this.Onclose();
       }
     })
-    this.Onclose();
+   
       }
       Onclose(){
         this.close.emit();
@@ -59,14 +61,17 @@ export class CategoryeditComponent implements OnInit {
   }
   
   }
-  onchangeStatus($event) {
+  onchangeStatus($event){
+ 
     if ($event == 'true') {
       this.categoryDetails.Status = 1;
     }
     else {
       this.categoryDetails.Status = 0;
     }
+    console.log(this.categoryDetails.Status);
   }
+
   onchangeGoodsType($event){
     this.categoryDetails.GoodsType=$event;
   }

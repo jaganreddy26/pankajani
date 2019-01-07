@@ -35,9 +35,11 @@ this.masterService.saveCategoryDetails(this.category).subscribe((data:any)=>{
   //console.log(data);
   if (data !== 'null') {
 
-    this.alertService.alert(AlertType.Success, data)
+    this.alertService.alert(AlertType.Success, data);
+    this.GetAllCategoryDetails();
   } else {
     this.alertService.alert(AlertType.Error, "Something went wrong");
+    this.GetAllCategoryDetails();
   }
 })
 
@@ -45,7 +47,7 @@ this.category.GoodsType="";
 this.category.CustomerId="";
 this.category.CategoryName="";
 this.category.Status="";
-this.GetAllCategoryDetails();
+
   }
   GetAllCategoryDetails(){
     let object={
@@ -58,7 +60,7 @@ this.GetAllCategoryDetails();
   }
 GetGoodsType(){
   let obj={
-    "CompanyId":localStorage.getItem('businessId')
+    "CompanyId":this.masterService.BusinessId
   }
   this.masterService.getGoodsType(obj).subscribe((data:any)=>{
     console.log(data);
