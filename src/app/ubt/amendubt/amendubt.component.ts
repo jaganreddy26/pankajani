@@ -360,10 +360,7 @@ this.edit(this.individualUbtDetailsInput);
               //  this.customerIDStatic=element.CustomerId;
               //  this.AgencyId=element.AgencyId;
               //  console.log(this.customerIDStatic);
-              
-               
-              // }); 
-            
+              // });
               this.getGoodsTypeListForNew();
             this.getCategoryNameListForNew();
             })

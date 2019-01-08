@@ -236,7 +236,7 @@ saveNewProposal(){
   let Inputarray:any=[];
   this.addedNewProposalsToProposalId.forEach(element=>{
     Inputarray.push({
-      'CompanyId':localStorage.getItem('businessId'),
+      'CompanyId':this.proposalService.BusinessId,
       "UbtId":this.UbtId,
       "CategoryId":this.CategoryId,
       "GoodsType":this.GoodsType,
@@ -317,19 +317,30 @@ updateRecord(){
     console.log(data);
     if(data=='Success'){
       this.alertService.alert(AlertType.Success,"Successfuly Updated the Record Details ")
+      //refreshing the data
+  
+      let objId ={
+        'ProposalId': this.ProposalIdStatic
+      }
+      this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
+        this.ProposalsDetailsByID=data;
+        })
+        this.modalRef.hide();
       }else{
         this.alertService.alert(AlertType.Error,"Failed the Updated Record Details ");
+          //refreshing the data
+  
+      let objId ={
+        'ProposalId': this.ProposalIdStatic
+      }
+      this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
+        this.ProposalsDetailsByID=data;
+        })
+        this.modalRef.hide();
       }
   })
-  // this.editProposalDetails="";
-  this.modalRef.hide();
-  let objId ={
-    'ProposalId': this.ProposalIdStatic
-  }
-  this.proposalService.getProposalsDetailsByProposalId(objId).subscribe((data:any)=>{
-    this.ProposalsDetailsByID=data;
-  console.log('method called');
-    })
+
+
   
 }
 deleteProposal(items,template2){

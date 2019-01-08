@@ -253,7 +253,7 @@ UnloadingTransporter:any;
     let Inputarray:any=[];
     this.addedSeekProposalDetails.forEach(element=>{
        Inputarray.push({
-       'CompanyId':localStorage.getItem('businessId'),
+       'CompanyId':this.proposalService.BusinessId,
         'UbtId':element.UbtId,
         "CategoryId":element.CategoryId,
         "GoodsType":element.GoodsType,
@@ -274,15 +274,7 @@ UnloadingTransporter:any;
       if(data !== 'null'){
 
         this.alertService.alert(AlertType.Success,"ProposalID Created Successfuly with id :"+ data)
-      }else{
-        this.alertService.alert(AlertType.Error,"Something went wrong");
-      }
-    })
-
-    this.addedSeekProposalDetails=[];
-    this.LoadingPoint="";
-    this.UnLoadingPoint="";
-    //To Refreshing the the data
+         //To Refreshing the the data
    // console.log(this.RefreshInput);
     this.proposalService.getSeekProposals(this.RefreshInput).subscribe((data:any)=>{
       //  console.log(data);
@@ -298,6 +290,33 @@ UnloadingTransporter:any;
      this.categoryidInput=this.seekProposalsDetails.CategoryId;
      this.goodstypeInput=this.seekProposalsDetails.GoodsType;
      });
+
+   }
+   else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+         //To Refreshing the the data
+   // console.log(this.RefreshInput);
+    this.proposalService.getSeekProposals(this.RefreshInput).subscribe((data:any)=>{
+      //  console.log(data);
+      this.udtData="";
+       this.seekProposalsDetails=data[0];
+     
+       this.hideSeekproposal=true;
+       this.ubtDetails = false;
+       this.checkingProposalId=data[0].ProposalId;
+       console.log(this.checkingProposalId);
+  
+     this.ubtidInput=this.seekProposalsDetails.UbtId;
+     this.categoryidInput=this.seekProposalsDetails.CategoryId;
+     this.goodstypeInput=this.seekProposalsDetails.GoodsType;
+     });
+      }
+    })
+
+    this.addedSeekProposalDetails=[];
+    this.LoadingPoint="";
+    this.UnLoadingPoint="";
+   
   }
   delete(items){
     let index = this.addedSeekProposalDetails.indexOf(items);

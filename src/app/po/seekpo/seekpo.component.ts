@@ -191,31 +191,39 @@ console.log(inputobject);
     //console.log(data);
     if(data=='Success'){
 
-      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ this.CreatedPoId)
+      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ this.CreatedPoId);
+      //Refreshing the data
+      let obj={
+        "ProposalId": this.inputProposalId
+      }
+   
+      this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
+        //console.log(data);
+        this.seekPOdetails=data.proposaldata;
+        console.log(this.seekPOdetails);
+        this.seekPOdetailsData=data.proposaldata[0];
+        this.poId=data.proposaldata[0].POId;
+        console.log(this.poId)
+        this.ubtData=data.ubt;
+      })
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
+        //Refreshing the data
+        let obj={
+          "ProposalId": this.inputProposalId
+        }
+     
+        this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
+          //console.log(data);
+          this.seekPOdetails=data.proposaldata;
+          console.log(this.seekPOdetails);
+          this.seekPOdetailsData=data.proposaldata[0];
+          this.poId=data.proposaldata[0].POId;
+          console.log(this.poId)
+          this.ubtData=data.ubt;
+        })
     }
 
-    let obj={
-      "ProposalId": this.inputProposalId
-    }
- 
-    this.poService.getSeekPOSelection(obj).subscribe((data:any)=>{
-      //console.log(data);
-      this.seekPOdetails=data.proposaldata;
-      console.log(this.seekPOdetails);
-      this.seekPOdetailsData=data.proposaldata[0];
-      this.poId=data.proposaldata[0].POId;
-      console.log(this.poId)
-  //     console.log(this.seekPOdetailsData);
-      this.ubtData=data.ubt;
-  
-  
-  // this.SuppliedQty1=this.seekPOdetailsData.SuppliedQty;
-  // console.log(this.SuppliedQty1)
-  
-    })
-    
   })
   this.SuppliedPriceRoad="";
 this.SuppliedQtyRoad="";
