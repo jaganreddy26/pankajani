@@ -31,7 +31,7 @@ export class CancelreasonComponent implements OnInit {
   }
   Save(){
 let object={
-  "CompanyId":localStorage.getItem('businessId'),
+  "CompanyId":this.masterService.BusinessId,
   "Name":this.Name,
   "Status":this.ActiveStatus
 }
@@ -51,7 +51,7 @@ let object={
   }
 GetAllCancellationReasonDetails(){
   let object={
-    "CompanyId":localStorage.getItem('businessId'),
+    "CompanyId":this.masterService.BusinessId,
     "Id":0
   }
   this.masterService.GetCancellationReasonDetails(object).subscribe((data:any)=>{

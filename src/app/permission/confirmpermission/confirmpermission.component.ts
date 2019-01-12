@@ -115,7 +115,7 @@ FolderPath:any;
   }
   onActivate($event){
     let obj={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.permissionService.BusinessId,
       'PermissionId':$event.node.data.Id
      }
      this.InputPermissionId=$event.node.data.Id
@@ -143,7 +143,7 @@ FolderPath:any;
     let Inputobject={
       "PermissionId":this.InputPermissionId,
       "Status":'Confirmed',
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.permissionService.BusinessId,
       "PermissionDate":this.PermissionDate,
       "PermissionExpiredDate":this.permissionExpiredDate,
       "FileDetails":{
@@ -163,7 +163,7 @@ FolderPath:any;
       }
       let obj={
         'PermissionId':this.InputPermissionId,
-        "CompanyId":localStorage.getItem('businessId'),
+        "CompanyId":this.permissionService.BusinessId,
        }
        this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
          console.log(data);

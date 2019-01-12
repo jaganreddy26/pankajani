@@ -26,13 +26,6 @@ const routes: Routes = [
     { path: 'AmendProposal', component: AmendproposalComponent},
     { path: 'ApproveProposal', component: ApproveproposalComponent},
     { path: 'ConfirmProposal', component: ConformproposalComponent},
-  
-
-
-
-
-
-
 ];
 
 @NgModule({

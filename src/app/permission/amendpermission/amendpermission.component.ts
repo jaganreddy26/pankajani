@@ -140,7 +140,7 @@ deletInputObj:any={};
 
     let obj={
      'PermissionId':$event.node.data.Id,
-     'CompanyId':localStorage.getItem('businessId')
+     'CompanyId':this.permissionService.BusinessId
     }
     this.Permissionid=$event.node.data.Id;
 
@@ -200,7 +200,7 @@ deletInputObj:any={};
    }
    add(){
     let object={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.permissionService.BusinessId,
       'PermissionId':this.Permissionid,
       'TransporterId':this.selectedTransporter,
       'TransporterAmount':this.transporterRate,
@@ -244,7 +244,7 @@ deletInputObj:any={};
         ///Refresh the Data After Adding new Transporter to Permissiob Id
         let obj={
           'PermissionId':this.Permissionid,
-          'CompanyId':localStorage.getItem('businessId')
+          'CompanyId':this.permissionService.BusinessId
          }
          this.Permissionid=this.Permissionid;
      
@@ -277,7 +277,7 @@ deletInputObj:any={};
 
   getInputObject(){
     let obj={
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.permissionService.BusinessId,
       "PermissionId":this.permissionId,
       "TransporterId":this.transporterId,
       "LoadingContId":this.loadingconId,
@@ -290,7 +290,7 @@ deletInputObj:any={};
   deleteRecords(items,template2){
     this.modalRef = this.modalService.show(template2);
     let obj={
-        "CompanyId":localStorage.getItem('businessId'),
+        "CompanyId":this.permissionService.BusinessId,
         "PermissionId":this.Permissionid,
         "TransporterId":items.TransporterId,
         "LoadingContId":items.LoadingContId,
@@ -313,7 +313,7 @@ deletInputObj:any={};
        this.modalRef.hide();
        let obj={
         'PermissionId':this.Permissionid,
-        'CompanyId':localStorage.getItem('businessId')
+        'CompanyId':this.permissionService.BusinessId
        }
       // this.Permissionid=this.Permissionid;
    
@@ -335,7 +335,7 @@ deletInputObj:any={};
      this.modalRef.hide();
      let obj={
       'PermissionId':this.Permissionid,
-          'CompanyId':localStorage.getItem('businessId')
+          'CompanyId':this.permissionService.BusinessId
      }
     // this.Permissionid=this.Permissionid;
  

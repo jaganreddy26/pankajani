@@ -109,7 +109,7 @@ export class ApprovepermissionComponent implements OnInit {
   onActivate($event){
     let obj={
       'PermissionId':$event.node.data.Id,
-       "CompanyId":localStorage.getItem('businessId')
+       "CompanyId":this.permissionService.BusinessId
      }
      this.InputPermissionId=$event.node.data.Id
      this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
@@ -125,7 +125,7 @@ export class ApprovepermissionComponent implements OnInit {
     // let array:any=[];
     // this.PermissionDetails.forEach(element=>{
     //   array.push({
-    //               "CompanyId":localStorage.getItem('businessId'),
+    //               "CompanyId":this.permissionService.BusinessId,
     //               "PermissionId":element.PermissionId,
     //               "TransporterId":element.TransporterId,
     //               "LoadingContId":element.LoadingContId,
@@ -135,7 +135,7 @@ export class ApprovepermissionComponent implements OnInit {
     // })
       //  console.log(array);
     let object= {
-      "CompanyId":localStorage.getItem('businessId'),
+      "CompanyId":this.permissionService.BusinessId,
       "PermissionId":this.InputPermissionId,
       "Status":'Approved'
     }
@@ -144,9 +144,7 @@ export class ApprovepermissionComponent implements OnInit {
     console.log(data);
     if(data=='Success'){
       this.alertService.alert(AlertType.Success,"Approved Sucessfully " )
-      }else{
-        this.alertService.alert(AlertType.Error,"Something went wrong");
-      }
+      //Refreshing the data
       let obj={
         'PermissionId':this.InputPermissionId
        }
@@ -157,6 +155,22 @@ export class ApprovepermissionComponent implements OnInit {
          this.PermissionStatus=data.PermissionData[0].PermissionStatus;
          console.log(this.PermissionStatus)
        })
+      }else{
+        this.alertService.alert(AlertType.Error,"Something went wrong");
+        
+         //Refreshing the data
+      let obj={
+        'PermissionId':this.InputPermissionId
+       }
+       this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
+         console.log(data);
+         this.ubtDetails=data.ubt;
+         this.PermissionDetails=data.PermissionData;
+         this.PermissionStatus=data.PermissionData[0].PermissionStatus;
+         console.log(this.PermissionStatus)
+       })
+      }
+      
   })
 
   }
