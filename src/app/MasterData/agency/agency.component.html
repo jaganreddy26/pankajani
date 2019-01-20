@@ -74,19 +74,19 @@ color: #fff;">Save</button>
   >
 </mat-form-field>
 <mat-form-field fxFlex="10">
-  <mat-select
-      placeholder="Status"
-      [(ngModel)]="value"
-      (ngModelChange)="onchangeStatus($event)"
-  
-  >
-      <mat-option
-          *ngFor="let item of Status"
-          value="{{item.Id}}"
-      >
-          {{item.Id}}
-      </mat-option>
-  </mat-select>
+    <mat-select
+    placeholder="Status"
+    [(ngModel)]="value"
+    (ngModelChange)="onchangeStatus($event)"
+
+>
+    <mat-option
+        *ngFor="let item of Status"
+        value="{{item.Name}}"
+    >
+        {{item.Name}}
+    </mat-option>
+</mat-select>
 </mat-form-field>
 </div>
 <div class="panel-body padding"   fxLayout="row wrap"
@@ -103,8 +103,8 @@ color: #fff;">Save</button>
             <th>Phone</th>
             <th>Mobile</th>
             <th>AlternateMobile</th>
+            <!-- <th>Status</th> -->
             <th>Status</th>
-            <th>StatusDescription</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -123,7 +123,7 @@ color: #fff;">Save</button>
         <td>{{items.Phone}}</td>
         <td>{{items.Mobile}}</td>
         <td>{{items.AlternateMobile}}</td>
-        <td>{{items.Status}}</td>
+        <!-- <td>{{items.Status}}</td> -->
         <td>{{items.StatusDescription}}</td>
         <td>
             <button

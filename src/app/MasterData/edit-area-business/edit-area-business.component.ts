@@ -46,21 +46,25 @@ this.masterService.updateAreaOfBusinessDetails(UpdatedDataInput).subscribe((data
   console.log(data);
   if(data !== 'null'){
 
-    this.alertService.alert(AlertType.Success, data)
+    this.alertService.alert(AlertType.Success, data);
+    this.Onclose();
   }else{
     this.alertService.alert(AlertType.Error,"Something went wrong");
+    this.Onclose();
   }
 })
-this.Onclose();
+
   }
   Onclose(){
     this.close.emit();
   }
   onchangeStatus($event){
-    if($event==true)
+    if($event=='Active')
     this.AreaBusinessDetails.Status=1;
 
   else
     this.AreaBusinessDetails.Status=0;
+    console.log(this.AreaBusinessDetails.Status);
   }
+  
 }

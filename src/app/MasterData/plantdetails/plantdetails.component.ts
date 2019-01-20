@@ -92,12 +92,12 @@ this.GetALLPlantDetails();
   }
   onchangeStatus($event) {
     //console.log($event);
-    if ($event == 'true') {
+    if ($event == 'Active') {
       this.plant.Status = 1;
     }
     else {
       this.plant.Status = 0;
     }
-    //  console.log(this.ActiveStatus);
+      console.log(this.plant.Status);
   }
 }

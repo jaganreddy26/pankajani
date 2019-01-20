@@ -29,9 +29,9 @@
       >
           <mat-option
               *ngFor="let item of status"
-              value="{{item.Id}}"
+              value="{{item.Name}}"
           >
-              {{item.Id}}
+              {{item.Name}}
           </mat-option>
       </mat-select>
   </mat-form-field>
@@ -53,7 +53,7 @@
         <tr style="color:#6f6f6f;background-color:#f0f0f0">
             <th>CompanyId</th>
             <th>Name</th>
-            <th>StatusDescription</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>

@@ -63,7 +63,7 @@ export class CategoryeditComponent implements OnInit {
   }
   onchangeStatus($event){
  
-    if ($event == 'true') {
+    if ($event == 'Active') {
       this.categoryDetails.Status = 1;
     }
     else {

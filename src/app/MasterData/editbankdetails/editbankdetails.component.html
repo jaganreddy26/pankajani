@@ -42,19 +42,20 @@
                </mat-form-field>
         
                <mat-form-field  class="padding-left">
-                    <mat-select
-                    placeholder="Status"
-                    [(ngModel)]="bankDetails.StatusDescription"
+                  
+            <mat-select
+            placeholder="Status"
+            [(ngModel)]="bankDetails.StatusDescription"
                     (ngModelChange)="onchangeStatus($event)"
-                    fxFlex="33.3" class="padding-left"
-                >
-                    <mat-option
-                        *ngFor="let item of Status"
-                        [value]="item.Id"
-                    >
-                        {{item.Id}}
-                    </mat-option>
-            </mat-select>
+        
+        >
+            <mat-option
+                *ngFor="let item of Status"
+                value="{{item.Name}}"
+            >
+                {{item.Name}}
+            </mat-option>
+        </mat-select>
             </mat-form-field>
                <mat-radio-group>
                     <span style="font-weight:400">Default Account:</span>

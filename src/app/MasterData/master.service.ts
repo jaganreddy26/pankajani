@@ -11,7 +11,12 @@ export class MasterService {
   //url
   private url: string = '';
   constructor(private http: HttpClient) { }
-  
+
+  // GetActiveBusiness:
+  GetActiveBusiness(){
+    this.url = this.host+'/api/MasterDataApi/GetActiveBusiness';
+       return this.http.get(this.url)
+  }
   getCompanyId(data:any){
     this.url = this.host+'/api/UbtApi/GetCustomers';
     return this.http.post(this.url,data)

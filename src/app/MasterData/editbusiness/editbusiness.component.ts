@@ -46,22 +46,26 @@ export class EditbusinessComponent implements OnInit {
       if(data !== 'null'){
 
         this.alertService.alert(AlertType.Success, data)
+        this.Onclose();
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
+        this.Onclose();
       }
     })
-    this.Onclose();
+
    
   }
   Onclose(){
     this.close.emit();
   }
   onchangeStatus($event){
-    if($event==true)
-    this.businessDetails.ActiveStatus=1;
-
-  else
-    this.businessDetails.ActiveStatus=0;
+     if($event=='Active'){
+      this.businessDetails.ActiveStatus=1;
+    }
+    else{
+      this.businessDetails.ActiveStatus=0;
+    }
+    console.log(this.businessDetails.ActiveStatus);
   }
 
 }

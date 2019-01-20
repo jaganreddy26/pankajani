@@ -63,10 +63,12 @@ let inputobject={
        if(data !== 'null'){
 
         this.alertService.alert(AlertType.Success, data)
+        this.Onclose();
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
+        this.Onclose();
       }
-      this.Onclose();
+  
       })
  
    

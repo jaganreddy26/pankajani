@@ -123,14 +123,13 @@ export class BankdetailsComponent implements OnInit {
     //console.log(this.CompanyIdSelected);
   }
   onchangeStatus($event) {
-    //console.log($event);
-    if ($event == 'true') {
-      this.ActiveStatus = 1;
+      if($event=='Active'){
+      this.ActiveStatus=1;
     }
-    else {
-      this.ActiveStatus = 0;
+    else{
+      this.ActiveStatus=0;
     }
-    //  console.log(this.ActiveStatus);
+    console.log(this.ActiveStatus);
   }
   delete(item) {
     let index = this.addedbankDetails.indexOf(item);

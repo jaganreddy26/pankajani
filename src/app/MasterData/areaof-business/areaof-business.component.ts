@@ -93,11 +93,12 @@ this.InputId = object;
 
   onchangeStatus($event){
     //console.log($event);
-    if($event=='true'){
+    if($event=='Active'){
       this.ActiveStatus=1;
     }
     else{
       this.ActiveStatus=0;
     }
+    console.log(this.ActiveStatus);
   }
 }

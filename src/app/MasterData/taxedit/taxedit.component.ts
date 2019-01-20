@@ -40,23 +40,27 @@ this.masterService.UpdateTAXGoodsDetails(this.taxDetails).subscribe((data:any)=>
   // console.log(data);
   if(data !== 'null'){
 
-    this.alertService.alert(AlertType.Success, data)
+    this.alertService.alert(AlertType.Success, data);
+    this.Onclose();
   }else{
     this.alertService.alert(AlertType.Error,"Something went wrong");
+    this.Onclose();
   }
 })
-this.Onclose();
+
 }
 Onclose(){
   this.close.emit();
 }
 
 onchangeStatus($event){
-  if($event==true)
+  if($event=='Active')
   this.taxDetails.Status=1;
 
 else
   this.taxDetails.Status=0;
+
+  console.log(this.taxDetails.Status)
 }
 
 }

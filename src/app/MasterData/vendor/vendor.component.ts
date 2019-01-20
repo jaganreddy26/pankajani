@@ -104,12 +104,12 @@ export class VendorComponent implements OnInit {
   }
   onchangeStatus($event) {
 
-    if ($event == 'true') {
+    if ($event == 'Active') {
       this.vendor.Status = 1;
     }
     else {
       this.vendor.Status = 0;
     }
-
+    console.log(this.vendor.Status);
   }
 }

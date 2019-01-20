@@ -23,19 +23,19 @@
   <!-- <div fxFlex="20"> -->
 
   <mat-form-field fxFlex="10">
-      <mat-select
-          placeholder="Status"
-          [(ngModel)]="value"
-          (ngModelChange)="onchangeStatus($event)"
-      
-      >
-          <mat-option
-              *ngFor="let item of status"
-              value="{{item.Id}}"
-          >
-              {{item.Id}}
-          </mat-option>
-      </mat-select>
+    <mat-select
+    placeholder="Status"
+    [(ngModel)]="value"
+    (ngModelChange)="onchangeStatus($event)"
+
+>
+    <mat-option
+        *ngFor="let item of status"
+        value="{{item.Name}}"
+    >
+        {{item.Name}}
+    </mat-option>
+</mat-select>
   </mat-form-field>
   <!-- </div> -->
   <button
@@ -57,7 +57,7 @@
            <th>CompanyId</th>   
             <th>Id </th>
             <th>Name</th>
-            <th>StatusDescription</th>
+            <th>Status</th>
            <th>Action</th>
         </tr>
     </thead>

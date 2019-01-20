@@ -60,12 +60,13 @@ export class PaymentreasonComponent implements OnInit {
     })
   }
   onchangeStatus($event){
-    if($event=='true'){
+    if($event=='Active'){
       this.ActiveStatus=1;
     }
     else{
       this.ActiveStatus=0;
     }
+    console.log(this.ActiveStatus);
   }
   //////////////
   openModalEdit(item,template){

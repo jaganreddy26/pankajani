@@ -39,22 +39,25 @@ updateRecords(){
     console.log(data);
     if(data !== 'null'){
 
-      this.alertService.alert(AlertType.Success, data)
+      this.alertService.alert(AlertType.Success, data);
+      this.Onclose();
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.Onclose();
     }
   })
-  this.Onclose();
+
 }
 Onclose(){
   this.close.emit();
 }
 onchangeStatus($event){
-  if($event==true)
+  if($event=='Active')
   this.vendorDetails.Status=1;
 
 else
   this.vendorDetails.Status=0;
+  console.log(this.vendorDetails.Status)
 }
 
 

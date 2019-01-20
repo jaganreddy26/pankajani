@@ -158,7 +158,8 @@ export class ViewubtComponent implements OnInit {
         "CategoryId":$event.node.data.Id
        }
        console.log(object);
-          this.ubtService.getIndividualUBTCategoryDetails(object).subscribe((data: any) => {
+                          
+          this.ubtService.getIndividualUbtCategory(object).subscribe((data: any) => {
             if(data.length != 0){
               this.editDetails = true;
               this.udtData = data;

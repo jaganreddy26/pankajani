@@ -53,12 +53,14 @@ updateRecords(){
     console.log(data);
     if(data !== 'null'){
 
-      this.alertService.alert(AlertType.Success, data)
+      this.alertService.alert(AlertType.Success, data);
+      this.Onclose();
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.Onclose();
     }
     })
-  this.Onclose();
+ 
   
 }
 Onclose(){
@@ -70,10 +72,18 @@ changeDeafaultAc($event){
   console.log(this.DeafaultAc)
    }
    onchangeStatus($event){
-    if($event==true)
-    this.bankDetails.Status=1;
+  //   if($event==true)
+  //   this.bankDetails.Status=1;
 
-  else
-    this.bankDetails.Status=0;
+  // else
+  //   this.bankDetails.Status=0;
+
+    if($event=='Active'){
+      this.bankDetails.Status=1;
+    }
+    else{
+      this.bankDetails.Status=0;
+    }
+    console.log(this.bankDetails.Status);
    }
 }

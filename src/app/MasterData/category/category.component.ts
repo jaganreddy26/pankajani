@@ -93,11 +93,12 @@ onchangeCustomerId($event){
   this.category.CustomerId=$event;
 }
 onchangeStatus($event) {
-  if ($event == 'true') {
+  if ($event == 'Active') {
     this.category.Status = 1;
   }
   else {
     this.category.Status = 0;
   }
+  console.log(this.category.Status);
 }
 }

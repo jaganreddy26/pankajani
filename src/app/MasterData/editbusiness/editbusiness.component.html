@@ -19,15 +19,15 @@
   <mat-form-field  class="padding-left">
     <mat-select
     placeholder="Status"
-    [(ngModel)]="businessDetails.StatusDescription"
+    [(ngModel)]="value"
     (ngModelChange)="onchangeStatus($event)"
-    fxFlex="33.3" class="padding-left"
+
 >
     <mat-option
         *ngFor="let item of Status"
-        [value]="item.Id"
+        value="{{item.Name}}"
     >
-        {{item.Id}}
+        {{item.Name}}
     </mat-option>
 </mat-select>
 </mat-form-field>

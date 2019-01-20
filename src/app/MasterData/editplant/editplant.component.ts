@@ -43,21 +43,24 @@ updateRecords(){
     if(data !== 'null'){
 
       this.alertService.alert(AlertType.Success, data)
+      this.Onclose();
     }else{
       this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.Onclose();
     }
   })
-  this.Onclose();
 }
 Onclose(){
   this.close.emit();
 }
 
 onchangeStatus($event){
-  if($event==true)
-  this.plantDetails.Status=1;
-
-else
-  this.plantDetails.Status=0;
+if ($event == 'Active') {
+  this.plantDetails.Status = 1;
+}
+else {
+  this.plantDetails.Status = 0;
+}
+  console.log(this.plantDetails.Status);
 }
 }

@@ -27,12 +27,12 @@ InputId:any;
   ngOnInit() {
   }
 getBusinessId(){
-  let object={
-    'Id':0
-  }
-  this.masterService.getBusiness_Ids(object).subscribe((data:any)=>{
-   // console.log(data);
-    this.BusinessIDs=data;
+  // let object={
+  //   'Id':0
+  // }
+  this.masterService.GetActiveBusiness().subscribe((data:any)=>{
+//console.log(data);
+   this.BusinessIDs=data;
   })
 }
 getStatus(){
@@ -107,11 +107,12 @@ Save(){
 
 
 onchangeBusinessID($event){
+  console.log($event);
   this.addcompanyDetail.BusinessId=$event;
 }
 onchangeStatus($event){
 
-  if($event==true)
+  if($event=='Active')
     this.addcompanyDetail.Status=1;
 
   else

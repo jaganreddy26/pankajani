@@ -45,7 +45,7 @@
           <input matInput placeholder="Phone"  [(ngModel)]="agencyDetail.Phone" >
         </mat-form-field>
         <mat-form-field  class="padding-left">
-          <mat-select
+          <!-- <mat-select
           placeholder="Status"
           [(ngModel)]="value"
           (ngModelChange)="onchangeStatus($event)"
@@ -57,7 +57,20 @@
           >
               {{item.Id}}
           </mat-option>
-  </mat-select>
+  </mat-select> -->
+  <mat-select
+  placeholder="Status"
+  [(ngModel)]="value"
+  (ngModelChange)="onchangeStatus($event)"
+
+>
+  <mat-option
+      *ngFor="let item of Status"
+      value="{{item.Name}}"
+  >
+      {{item.Name}}
+  </mat-option>
+</mat-select>
   </mat-form-field>
 </div>
 </mat-dialog-content>

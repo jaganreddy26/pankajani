@@ -22,7 +22,7 @@ class="card padding"
         *ngFor="let item of BusinessIDs"
         [value]="item.Id"
     >
-        {{item.Id}}
+        {{item.Name}}
     </mat-option>
 </mat-select>
 </mat-form-field>
@@ -119,9 +119,9 @@ class="card padding"
         >
             <mat-option
                 *ngFor="let item of status"
-                [value]="item.Id"
+                [value]="item.Name"
             >
-                {{item.Id}}
+                {{item.Name}}
             </mat-option>
 </mat-select>
 </mat-form-field>
@@ -139,8 +139,8 @@ class="card padding"
           <th>Address1</th>
           <th>Address2 </th>
           <th>Address3</th>
-          <th>Status </th>
-          <th>StatusDescription</th>
+          <!-- <th>Status </th> -->
+          <th>Status</th>
           <th>Action</th>
         
       </tr>
@@ -157,7 +157,7 @@ class="card padding"
       <td>{{items.Address1}}</td>
       <td>{{items.Address2}} </td>
       <td>{{items.Address3}}</td>
-      <td>{{items.Status}} </td>
+      <!-- <td>{{items.Status}} </td> -->
       <td>{{items.StatusDescription}}</td>
       <td>
         <button

@@ -48,11 +48,13 @@ export class EditCancelReasonComponent implements OnInit {
         console.log(data);
         if(data !== 'null'){
 
-          this.alertService.alert(AlertType.Success, data)
+          this.alertService.alert(AlertType.Success, data);
+          this.Onclose();
         }else{
           this.alertService.alert(AlertType.Error,"Something went wrong");
+          this.Onclose();
         }
-        this.Onclose();
+      
       })
      
   }
@@ -64,11 +66,12 @@ export class EditCancelReasonComponent implements OnInit {
 
 
   onchangeStatus($event){
-    if($event==true)
+    if($event=='Active')
     this.ActiveStatus=1;
 
   else
     this.ActiveStatus=0;
+    console.log(this.ActiveStatus);
   }
 
 }

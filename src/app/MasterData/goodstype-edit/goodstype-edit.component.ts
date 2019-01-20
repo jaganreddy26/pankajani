@@ -51,10 +51,12 @@ export class GoodstypeEditComponent implements OnInit {
     this.close.emit();
   }
   onchangeStatus($event){
-    if($event==true)
+    if($event=='Active')
     this.goodsTypeDetails.Status=1;
 
   else
     this.goodsTypeDetails.Status=0;
+    console.log(this.goodsTypeDetails.Status);
   }
+
 }

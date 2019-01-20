@@ -45,7 +45,8 @@ export class EditpaymentreasonComponent implements OnInit {
 
      if(data !== 'null'){
 
-           this.alertService.alert(AlertType.Success, data)
+           this.alertService.alert(AlertType.Success, data);
+           this.Onclose();
         }
         else
         {
@@ -60,10 +61,11 @@ export class EditpaymentreasonComponent implements OnInit {
           this.close.emit();
         }
   onchangeStatus($event){
-    if($event==true)
+    if($event=='Active')
     this.ActiveStatus=1;
 
   else
     this.ActiveStatus=0;
+    console.log(this.ActiveStatus);
   }
 }

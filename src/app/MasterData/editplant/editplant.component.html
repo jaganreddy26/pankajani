@@ -64,18 +64,18 @@
                </mat-form-field>
                <mat-form-field  class="padding-left">
                 <mat-select
-                placeholder="Status"
-                [(ngModel)]="value"
-                (ngModelChange)="onchangeStatus($event)"
-                fxFlex="33.3" class="padding-left"
-            >
-                <mat-option
-                    *ngFor="let item of Status"
-                    [value]="item.Id"
-                >
-                    {{item.Id}}
-                </mat-option>
-        </mat-select>
+    placeholder="Status"
+    [(ngModel)]="value"
+    (ngModelChange)="onchangeStatus($event)"
+
+>
+    <mat-option
+        *ngFor="let item of Status"
+        value="{{item.Name}}"
+    >
+        {{item.Name}}
+    </mat-option>
+</mat-select>
         </mat-form-field>
  </div>
 </mat-dialog-content>

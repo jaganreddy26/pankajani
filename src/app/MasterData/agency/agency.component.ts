@@ -86,13 +86,12 @@ export class AgencyComponent implements OnInit {
     this.agency.CustomerId=$event;
   }
   onchangeStatus($event) {
-    //console.log($event);
-    if ($event == 'true') {
-      this.agency.Status = 1;
+     if($event=='Active'){
+      this.agency.Status=1;
     }
-    else {
-      this.agency.Status = 0;
+    else{
+      this.agency.Status=0;
     }
-    //  console.log(this.ActiveStatus);
+    console.log(this.agency.Status);
   }
 }
