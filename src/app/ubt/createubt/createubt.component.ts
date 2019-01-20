@@ -40,7 +40,7 @@ addedUbtDetails:any=[];
 
   getCustomer(){
     let object={
-      "BusinessId":localStorage.getItem('businessId'),
+      "BusinessId":this.ubtService.BusinessId,
     }
     this.ubtService.getCustomer(object).subscribe((data:any)=>{
   // console.log(data);
