@@ -133,6 +133,7 @@ export class ViewubtComponent implements OnInit {
   //   })
   // }
   onActivate($event){   
+    console.log($event);
     console.log($event.node.data)
     let obj ={
       'UbtId': $event.node.data.Id,
@@ -144,9 +145,9 @@ export class ViewubtComponent implements OnInit {
         this.udtData = data;
         console.log(this.udtData)
       }
-      // else{
-      //   this.editDetails = false;
-      // }
+      else{
+        this.editDetails = false;
+      }
     }
   )
 
