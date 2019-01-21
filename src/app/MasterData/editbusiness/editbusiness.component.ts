@@ -12,6 +12,7 @@ export class EditbusinessComponent implements OnInit {
   @Output() close:EventEmitter <any> = new EventEmitter();
   inputBusinessid:any;
   ////////////
+  value:any;
   businessDetails:any={}
   Status:any=[];
   constructor(private masterService:MasterService,private alertService :AlertService) { }
