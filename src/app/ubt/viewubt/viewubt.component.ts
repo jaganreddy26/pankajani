@@ -145,9 +145,9 @@ export class ViewubtComponent implements OnInit {
         this.udtData = data;
         console.log(this.udtData)
       }
-      else{
-        this.editDetails = false;
-      }
+      // else{
+      //   this.editDetails = false;
+      // }
     }
   )
 

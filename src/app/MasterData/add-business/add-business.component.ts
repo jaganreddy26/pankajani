@@ -53,7 +53,7 @@ value:any;
       "Name":this.Name,
       "ActiveStatus":this.ActiveStatus
     }
-    //console.log(obj);
+    console.log(obj);
   this.masterService.SaveBusiness(obj).subscribe((data:any)=>{
     console.log(data);
     
@@ -62,6 +62,7 @@ value:any;
   this.Businessid="";
   this.Name="";
   this.ActiveStatus="";
+  this.value="";
 
   }
   openModalEdit(items,template){

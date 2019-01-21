@@ -13,7 +13,8 @@ import { MatDialog } from "@angular/material";
 })
 export class AddCompanyComponent implements OnInit {
   modalRef: BsModalRef;
-addcompanyDetail:addCompany=new addCompany();
+  value:any;
+  addcompanyDetail:addCompany=new addCompany();
 BusinessIDs:any=[];
 status:any=[];
 addedCompanyDetails:any=[];
@@ -42,7 +43,7 @@ getStatus(){
   })
 }
 Save(){
- // console.log(this.addcompanyDetail);
+  //console.log(this.addcompanyDetail);
   this.masterService.saveComapnyDetails(this.addcompanyDetail).subscribe((data:any)=>{
    // console.log(data);
     if(data !== 'null'){
@@ -68,6 +69,7 @@ Save(){
   this.addcompanyDetail.PAN="";
   this.addcompanyDetail.TAN_NO="";
   this.addcompanyDetail.Status="";
+  this.value="";
 }
   //GetCompanyDetails
   getAddedCompanyDetails(){

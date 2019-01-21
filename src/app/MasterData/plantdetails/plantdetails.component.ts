@@ -50,7 +50,7 @@ value:any;
     this.plant.GSTIN="";
     this.plant.PAN="";
     this.plant.TAN_NO="";
-
+    this.value="";
 this.GetALLPlantDetails();
   }
 
