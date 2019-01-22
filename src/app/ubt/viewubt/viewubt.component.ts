@@ -94,7 +94,7 @@ export class ViewubtComponent implements OnInit {
 
   })
   // this.StatusName="";
-  // this.value="";
+  //// this.value="";
 
   }
 
