@@ -93,8 +93,8 @@ export class ViewubtComponent implements OnInit {
       this.nodes = parent;
 
   })
-  this.StatusName="";
-  this.value="";
+  // this.StatusName="";
+  // this.value="";
 
   }
 
@@ -121,17 +121,17 @@ export class ViewubtComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
-  // edit(item) {
-  //   this.editDetails = true;
-  //   var id = item.UbtId
-  //   console.log(id)
-  //   let ubtId = { 'UbtId': id }
+  edit(item) {
+    this.editDetails = true;
+    var id = item.UbtId
+    console.log(id)
+    let ubtId = { 'UbtId': id }
 
-  //   this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
-  //    this.udtData = data;
-  //    console.log(this.udtData)
-  //   })
-  // }
+    this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
+     this.udtData = data;
+     console.log(this.udtData)
+    })
+  }
   onActivate($event){   
     console.log($event);
     console.log($event.node.data)
