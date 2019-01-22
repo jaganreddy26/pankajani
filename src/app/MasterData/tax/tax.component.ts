@@ -58,6 +58,7 @@ this.tax.SGST="";
 this.tax.Status="";
 this.tax.TCS="";
 this.tax.TDS="";
+this.value=""
 this.getGoodsDetails();
 }
 //get all Added GoodsDetails

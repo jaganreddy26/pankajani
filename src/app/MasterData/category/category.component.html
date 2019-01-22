@@ -24,7 +24,7 @@ color: #fff;"
     >
         <mat-select
             placeholder="CustomerId"
-            [(ngModel)]="value"
+            [(ngModel)]="category.CustomerId"
             (ngModelChange)="onchangeCustomerId($event)"
         >
             <mat-option
@@ -41,7 +41,7 @@ color: #fff;"
     >
         <mat-select
             placeholder="GoodsType"
-            [(ngModel)]="value"
+            [(ngModel)]="category.GoodsType"
             (ngModelChange)="onchangeGoodsType($event)"
             class="padding-left"
         >

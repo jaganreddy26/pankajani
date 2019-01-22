@@ -10,7 +10,7 @@ color: #fff;">Save</button>
     <mat-form-field fxFlex="33.3" class="padding-left">
         <mat-select
             placeholder="GoodsId"
-            [(ngModel)]="value"
+            [(ngModel)]="tax.GoodsId"
             (ngModelChange)="onchangeGoodsType($event)"
             fxFlex="33.3" class="padding-left"
         >
@@ -18,7 +18,7 @@ color: #fff;">Save</button>
                 *ngFor="let item of goodsID"
                 [value]="item.Id"
             >
-                {{item.Id}}
+                {{item.Name}}
             </mat-option>
         </mat-select>
       </mat-form-field>

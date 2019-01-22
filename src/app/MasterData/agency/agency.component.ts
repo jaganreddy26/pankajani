@@ -66,6 +66,7 @@ export class AgencyComponent implements OnInit {
    this.agency.AgencyName="";
    this.agency.Status="";
    this.agency.Phone="";
+   this.value="";
   }
 
   getAllAgencyDetails(){

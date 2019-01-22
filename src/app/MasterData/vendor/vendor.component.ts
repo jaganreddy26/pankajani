@@ -70,6 +70,7 @@ export class VendorComponent implements OnInit {
     
     this.vendor.Status="";
     this.vendor.TAN_NO="";
+    this.value="";
   }
 
   //Get VENDOR DETAILS

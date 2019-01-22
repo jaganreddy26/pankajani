@@ -31,6 +31,7 @@ value:any;
     this.InputId = items.CategoryId;
   }
   save(){
+    //console.log(this.category);
 this.masterService.saveCategoryDetails(this.category).subscribe((data:any)=>{
   //console.log(data);
   if (data !== 'null') {
@@ -47,7 +48,7 @@ this.category.GoodsType="";
 this.category.CustomerId="";
 this.category.CategoryName="";
 this.category.Status="";
-
+this.value="";
   }
   GetAllCategoryDetails(){
     let object={

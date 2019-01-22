@@ -121,7 +121,7 @@ export class ApproveproposalComponent implements OnInit {
      this.ProposalsDetailsByID=data;
     this.UbtId=data[0].UbtId;
     this.CustomerName=data[0].CustomerName;
-    this.GoodsType=data[0].GoodsType;
+    this.GoodsType=data[0].GoodsTypeName;
     this.ProposalId=data[0].ProposalId;
     this.ProposalIdStatus=data[0].Status;
       })
