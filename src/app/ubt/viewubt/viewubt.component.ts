@@ -33,6 +33,9 @@ export class ViewubtComponent implements OnInit {
     hasChildrenField: 'nodes',
     
   }
+  //ProposalID DATA
+  ProposalsDetailsByID:any=[];
+  showProposalData:any;
   constructor(private ubtService: UbtService) {
     this.getCustomer();
   }
@@ -121,17 +124,17 @@ export class ViewubtComponent implements OnInit {
     var todate = this.ToDate.getFullYear() + '-' + (this.ToDate.getMonth() + 1) + '-' + this.ToDate.getDate();
     this.ToDate = todate;
   }
-  edit(item) {
-    this.editDetails = true;
-    var id = item.UbtId
-    console.log(id)
-    let ubtId = { 'UbtId': id }
+  // edit(item) {
+  //   this.editDetails = true;
+  //   var id = item.UbtId
+  //   console.log(id)
+  //   let ubtId = { 'UbtId': id }
 
-    this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
-     this.udtData = data;
-     console.log(this.udtData)
-    })
-  }
+  //   this.ubtService.getIndividualUbt(ubtId).subscribe((data: any) => {
+  //    this.udtData = data;
+  //    console.log(this.udtData)
+  //   })
+  // }
   onActivate($event){   
     console.log($event);
     console.log($event.node.data)
@@ -139,10 +142,13 @@ export class ViewubtComponent implements OnInit {
       'UbtId': $event.node.data.Id,
     }
     console.log(obj);
+    // this.editDetails = false;
     this.ubtService.getIndividualUbt(obj).subscribe((data:any)=>{
       if(data.length != 0){
         this.editDetails = true;
+       
         this.udtData = data;
+        this.showProposalData = 0;
         console.log(this.udtData)
       }
       // else{
@@ -159,16 +165,32 @@ export class ViewubtComponent implements OnInit {
         "CategoryId":$event.node.data.Id
        }
        console.log(object);
-                          
+      //  this.editDetails = false;                
           this.ubtService.getIndividualUbtCategory(object).subscribe((data: any) => {
             if(data.length != 0){
-              this.editDetails = true;
+          this.editDetails = true;
+         
               this.udtData = data;
+              this.showProposalData = 0;
               console.log(this.udtData)
             }
          
           
           })
+
+          ///Based on POID Get Data
+          let ProposalId ={
+            'ProposalId': $event.node.data.Id,
+          }
+         // console.log(ProposalId);
+         this.ubtService.getProposalsDetailsByProposalId(ProposalId).subscribe((data:any)=>{
+          //  console.log(data);
+          if(data.length != 0){
+            this.editDetails = true;
+            this.ProposalsDetailsByID=data;
+            this.showProposalData = 1;
+              }
+         })
 
 }
 }

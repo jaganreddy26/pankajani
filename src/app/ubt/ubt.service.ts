@@ -109,4 +109,13 @@ export class UbtService {
     this.url=this.host+'/api/UbtApi/ConfirmBidding';
     return this.http.post(this.url,data);
   }
+  
+
+
+  // ProposalID Based DATA API //
+  getProposalsDetailsByProposalId(data){
+    this.url=this.host+'/api/UbtApi/GetProposalsDetails';
+    return this.http.post(this.url,data);
+  }
+
 }
