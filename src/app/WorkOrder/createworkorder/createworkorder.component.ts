@@ -37,6 +37,8 @@ export class CreateworkorderComponent implements OnInit {
 ubtDetails:any={};
 woData:any=[];
 PermissionStatus:any;
+//
+WOID:any;
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -118,6 +120,7 @@ PermissionStatus:any;
       this.ubtDetails=data.Ubt;
       this.woData=data.WOData;
       this.PermissionStatus=data.WOData[0].PermissionStatus;
+      this.WOID=data.WO.WOId;
     })
   }
   save(){

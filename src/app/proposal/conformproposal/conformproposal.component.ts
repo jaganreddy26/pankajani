@@ -157,7 +157,7 @@ _handleReaderLoaded(readerEvt) {
      this.ProposalsDetailsByID=data;
     this.UbtId=data[0].UbtId;
     this.CustomerName=data[0].CustomerName;
-    this.GoodsType=data[0].GoodsType;
+    this.GoodsType=data[0].GoodsTypeName;
     this.ProposalId=data[0].ProposalId;
     this.ProposalIdStatus=data[0].Status;
     this.ProposalIdFolderPath=data[0].FolderPath;
@@ -197,7 +197,7 @@ _handleReaderLoaded(readerEvt) {
          this.ProposalsDetailsByID=data;
         this.UbtId=data[0].UbtId;
         this.CustomerName=data[0].CustomerName;
-        this.GoodsType=data[0].GoodsType;
+        this.GoodsType=data[0].GoodsTypeName;
         this.ProposalId=data[0].ProposalId;
         this.ProposalIdStatus=data[0].Status;
         this.ProposalIdFolderPath=data[0].FolderPath;

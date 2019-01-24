@@ -155,12 +155,12 @@ class="card"
       </tr>
       </tbody>
   </table>
-</div>
-<div align="left" class="padding-right" *ngIf="ConfirmBiddingType == null">
+</div>                                         
+<div align="left" class="padding-right" *ngIf='ConfirmBiddingType =="No"'>
     <input type="file" id="filePicker" (change)="handleFileSelect($event)">
    
 </div>
-<div align="right" *ngIf="ConfirmBiddingType == null">
+<div align="right" *ngIf='ConfirmBiddingType =="No"'>
     <button mat-raised-button (click)="send()"  color="primary">Save</button>
 </div>
 </div>

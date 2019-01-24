@@ -99,8 +99,8 @@
             <span>{{ubtDetails.AgencyName}}</span>
         </div>
         <div class="padding-left">
-            <span style="font-weight:400">Goods Type :</span>
-            <span>{{ubtDetails.GoodsType}}</span>
+            <span style="font-weight:400">Goods Name :</span>
+            <span>{{ubtDetails.GoodsTypeName}}</span>
         </div>
         <div class="padding-left">
             <span style="font-weight:400">Category Name :</span>
@@ -191,7 +191,7 @@
 </div>
 <div
 align="left"
-class="padding-right"
+class="padding-right" *ngIf="WOID == null"
 >
 <button
 mat-raised-button

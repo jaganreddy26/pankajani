@@ -134,8 +134,8 @@ this.getedit();
     this.ubtService.getViewUbtDetails(object).subscribe((data: any) => {
       this.ids = data;
     })
-    this.StatusName="";
-    this.value="";
+    // this.StatusName="";
+    // this.value="";
   }
 
   edit(item) {
@@ -152,8 +152,8 @@ this.getedit();
     this.customerIDStatic={
       'CustomerId':data[0].CustomerId
     }
-    this.CustomerId=data[0].CustomerId;
-    this.AgencyId=data[0].AgencyId
+    this.CustomerId=data[0].CategoryName;
+    this.AgencyName=data[0].AgencyName
     //console.log(this.customerIDStatic);
       // data.forEach(element => {
       //   this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
@@ -351,7 +351,7 @@ this.edit(this.individualUbtDetailsInput);
           'CustomerId':data[0].CustomerId
         }
         this.CustomerId=data[0].CustomerId;
-        this.AgencyId=data[0].AgencyId
+        this.AgencyName=data[0].AgencyName
               // data.forEach(element => {
               //   this.udtData.push({'CustomerId':element.CustomerId,'AgencyId':element.AgencyId, 'GoodsType': element.GoodsType, 'CategoryId': element.CategoryId,'CategoryName': element.CategoryName, 'Quantity': element.Quantity, 'BasePrice':element.BasePrice, 'MaxMargin':element.MaxMargin});
               //   this.agencyIdSelected = element.AgencyId;

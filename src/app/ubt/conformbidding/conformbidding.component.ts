@@ -133,9 +133,10 @@ _handleReaderLoaded(readerEvt) {
      this.udtData=data;
     this.FilePath=data[0].FilePath;
     this.ConfirmBiddingType=data[0].ConfirmBidding;
+    console.log(this.ConfirmBiddingType);
     })
-    this.StatusName="";
-    this.value="";
+    // this.StatusName="";
+    // this.value="";
   }
   onchange($event) {
     this.Id = $event;
@@ -197,6 +198,7 @@ _handleReaderLoaded(readerEvt) {
        this.udtData=data;
       this.FilePath=data[0].FilePath;
       this.ConfirmBiddingType=data[0].ConfirmBidding;
+      console.log(this.ConfirmBiddingType)
       })
    })
 
