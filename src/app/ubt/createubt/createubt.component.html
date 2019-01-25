@@ -126,11 +126,61 @@
             [attr.data-index]="i" 
         >
             <td>{{i + 1}}</td>
-            <td>{{items.GoodsType}}</td>
-            <td>{{items.CategoryId}}</td>
-            <td>{{items.Quantity}}</td>
-            <td>{{items.BasePrice}}</td>
-            <td>{{items.MaxMargin}}</td>
+            <td>
+                    <mat-form-field>
+                            <mat-select
+                                placeholder="Goods Type"
+                                [(ngModel)]="items.GoodsType"
+                            >
+                                <mat-option
+                                    *ngFor="let item of goodsType"
+                                    [value]="item.GoodsTypeId"
+                                >
+                                    {{item.GoodsTypeName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+            </td>
+            <td>
+                    <mat-form-field >
+                            <mat-select
+                                placeholder="Category"
+                                [(ngModel)]="items.CategoryId"
+                            
+                            >
+                                <mat-option
+                                    *ngFor="let item of CategoryNameList"
+                                    [value]="item.CategoryId"
+                                >
+                                    {{item.CategoryName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+            </td>
+            <td>
+                    <mat-form-field>
+                            <input placeholder="Quantity"
+                                matInput
+                                [(ngModel)]="items.Quantity"
+                            >
+                        </mat-form-field>
+            </td>
+            <td>
+                    <mat-form-field>
+                            <input placeholder="BasePrice"
+                                matInput
+                                [(ngModel)]="items.BasePrice"
+                            >
+                        </mat-form-field>
+            </td>
+            <td>
+                    <mat-form-field>
+                            <input placeholder="MaxMargin"
+                                matInput
+                                [(ngModel)]="items.MaxMargin"
+                            >
+                        </mat-form-field>
+            </td>
             <td>
                 <button
                     class="btn btn"
