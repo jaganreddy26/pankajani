@@ -78,6 +78,12 @@
 </mat-select>
         </mat-form-field>
  </div>
+ <div class="example-container">
+    <div  class="padding-right" fxFlex="10" >
+        <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+       
+    </div>
+ </div>
 </mat-dialog-content>
   <mat-dialog-actions align="end">
         <button mat-button style="color:#fff !important" (click)="updateRecords()">Update</button>

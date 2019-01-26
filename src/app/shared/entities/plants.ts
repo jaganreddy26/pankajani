@@ -1,3 +1,4 @@
+
 export class Plants {
     PlantName:string;
     Email :any;
@@ -13,4 +14,11 @@ export class Plants {
     TAN_NO:any;
     CompanyId:any;
     Status:any;
+    FileDetails:any=new FileDetails();
+}
+export class FileDetails {
+    FilePath:any;
+    EncryptedFile: any;
+    FileExtn: any;
+    UploadedFileName: any
 }

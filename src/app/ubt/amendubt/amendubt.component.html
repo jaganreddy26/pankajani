@@ -131,7 +131,7 @@
     >
         <div class="padding-left">
             <span style="font-weight:400">CustomerName : </span>
-            <span style="background-color: bisque"> {{CustomerId}}</span>
+            <span style="background-color: bisque"> {{CategoryName}}</span>
         </div>
 
         <div class="padding-left">
@@ -232,12 +232,68 @@
                 [attr.data-index]="i"
                  >
                 <td>{{i + 1}}</td>
-                <td>{{items.GoodsType}}</td>
+                <!-- <td>{{items.GoodsType}}</td>
               
                 <td>{{items.CategoryId}}</td>
                 <td>{{items.Quantity}}</td>
                 <td>{{items.BasePrice}}</td>
-                <td>{{items.MaxMargin}}</td>
+                <td>{{items.MaxMargin}}</td> -->
+                <td>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="Goods Type"
+                            [(ngModel)]="items.GoodsType"
+                            (ngModelChange)="onchangeGoodsType($event)"
+                        >
+                            <mat-option
+                                *ngFor="let item of goodsTypenew"
+                                [value]="item.GoodsTypeId"
+                            >
+                                {{item.GoodsTypeName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <mat-select
+                            placeholder="Category"
+                            [(ngModel)]="items.CategoryId"
+                            (ngModelChange)="onchangeCategoryName($event)"
+                        >
+                            <mat-option
+                                *ngFor="let item of CategoryNameListnew"
+                                [value]="item.CategoryId"
+                            >
+                                {{item.CategoryName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="items.Quantity"
+                        >
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="items.BasePrice"
+                        >
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            [(ngModel)]="items.MaxMargin"
+                        >
+                    </mat-form-field>
+                </td>
                 <td>
                     <button
                         class="btn btn"
@@ -322,8 +378,8 @@
                
             >
                 <div class="padding-left">
-                    <span style="font-weight:400">CategoryId : </span>
-                    <span style="background-color: bisque">{{individualUbtCategory.CategoryId}}</span>
+                    <span style="font-weight:400">CategoryName : </span>
+                    <span style="background-color: bisque">{{individualUbtCategory.CategoryName}}</span>
                 </div>
 
                 <div class="padding-left">
@@ -331,8 +387,8 @@
                     <span style="background-color: bisque">{{individualUbtCategory.UbtId}}</span>
                 </div>
                 <div class="padding-left">
-                    <span style="font-weight:400">GoodsType : </span>
-                    <span style="background-color: bisque">{{individualUbtCategory.GoodsType}}</span>
+                    <span style="font-weight:400">GoodsTypeName : </span>
+                    <span style="background-color: bisque">{{individualUbtCategory.GoodsTypeName}}</span>
                 </div>
             </div>
             </div>

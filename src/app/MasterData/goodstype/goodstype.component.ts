@@ -44,6 +44,7 @@ export class GoodstypeComponent implements OnInit {
      })
       this.Name="";
       this.ActiveStatus="";
+      this.value="";
     }
     GetAllGoodsTypeDetils(){
       let object={

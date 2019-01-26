@@ -191,7 +191,7 @@ console.log(inputobject);
     //console.log(data);
     if(data=='Success'){
 
-      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ this.CreatedPoId);
+      this.alertService.alert(AlertType.Success,"POID Created Successfuly with Id :"+ data);
       //Refreshing the data
       let obj={
         "ProposalId": this.inputProposalId

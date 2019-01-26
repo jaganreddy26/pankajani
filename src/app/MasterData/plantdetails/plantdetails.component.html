@@ -16,7 +16,7 @@ color: #fff;">Save</button>
   class="card padding"
   
 >
-<mat-form-field fxFlex="33.3" class="padding-left">
+<!-- <mat-form-field fxFlex="33.3" class="padding-left">
   <mat-select
       placeholder="BusinessId"
       [(ngModel)]="plant.CompanyId"
@@ -30,7 +30,7 @@ color: #fff;">Save</button>
           {{item.BusinessName}}
       </mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field> -->
 <mat-form-field fxFlex="33.3" class="padding-left">
   <input
       placeholder="Plant Name"
@@ -130,6 +130,10 @@ color: #fff;">Save</button>
     </mat-option>
 </mat-select>
 </mat-form-field>
+<div align="left" class="padding-right" fxFlex="10" style="padding-left: 366px;">
+    <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+   
+</div>
 </div>
 <div class="panel-body padding"   fxLayout="row wrap"
     fxLayoutAlign="center center">

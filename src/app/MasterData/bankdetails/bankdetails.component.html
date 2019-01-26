@@ -19,13 +19,13 @@ color: #fff;">Save</button>
 >
 <mat-form-field fxFlex="33.3" class="padding-left">
   <mat-select
-      placeholder="CompanyId"
+      placeholder="CustomerName"
       [(ngModel)]="CompanyIdSelected"
-      (ngModelChange)="onchangeCompanyId($event)"
+      (ngModelChange)="onchangeCustomer($event)"
       fxFlex="33.3" class="padding-left"
   >
       <mat-option
-          *ngFor="let item of CompanyIds"
+          *ngFor="let item of CustomerIDs"
           [value]="item.CustomerId"
       >
           {{item.CustomerName}}
@@ -153,7 +153,7 @@ color: #fff;">Save</button>
     <thead>
         <tr style="color:#6f6f6f;background-color:#f0f0f0">
           
-            <th>CompanyId </th>
+            <!-- <th>CompanyId </th> -->
             <th>BankName</th>
             <th>BranchName</th>
             <th>Location</th>
@@ -172,7 +172,7 @@ color: #fff;">Save</button>
         [attr.data-index]="i"
          >
      
-        <td>{{items.CompanyId}}</td>
+        <!-- <td>{{items.CompanyId}}</td> -->
         <td>{{items.BankName}}</td>
         <td>{{items.BranchName}}</td>
         <td>{{items.Location}}</td>

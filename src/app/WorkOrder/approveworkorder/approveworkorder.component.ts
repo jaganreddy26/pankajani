@@ -199,7 +199,7 @@ FolderPath:any;
     //console.log(evt);
     var File=evt.target.value;
    // console.log(File);
-     let subStringData=File.substr(12,27);
+     let subStringData=File.substr(12);
     //console.log(X);
     var FileName = subStringData.split('.')[0];
     var FileType =subStringData.split('.')[1];

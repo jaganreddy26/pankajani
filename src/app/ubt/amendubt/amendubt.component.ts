@@ -51,6 +51,7 @@ export class AmendubtComponent implements OnInit {
   AgencyId:any;
   customerNameStatic:any;
   AgencyName:any;
+  CategoryName:any;
   //below are variables are to send send the input details in object formate(to get "getIndividualUbtCategory")
   ubtidinput:any;
   goodsTypeinput:any;
@@ -152,7 +153,8 @@ this.getedit();
     this.customerIDStatic={
       'CustomerId':data[0].CustomerId
     }
-    this.CustomerId=data[0].CategoryName;
+    this.CategoryName=data[0].CategoryName;
+    this.CustomerId=data[0].CustomerId;
     this.AgencyName=data[0].AgencyName
     //console.log(this.customerIDStatic);
       // data.forEach(element => {
@@ -249,7 +251,7 @@ console.log(data);
       'BasePrice':this.BasePrice,
       'MaxMargin':this.MaxMargin
    }
-//console.log(object);
+console.log(object);
    this.addedNewCategoryToUbtId.push(object);
    this.goodsTypeSelected ="";
    this.selectedCategoryId ="";

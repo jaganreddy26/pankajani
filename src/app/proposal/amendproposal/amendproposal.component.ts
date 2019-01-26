@@ -257,7 +257,7 @@ this.proposalService.addProposalByProposalId(this.addedNewProposalsToProposalId)
   if(data=='Success'){
     this.alertService.alert(AlertType.Success,"New Proposal is Added for this ProposalId :"+" "+this.ProposalIdStatic )
     }else{
-      this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.alertService.alert(AlertType.Error,"Cannot insert duplicate Values" );
     }
 })
 let obj ={

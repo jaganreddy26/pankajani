@@ -63,12 +63,13 @@ FileType:any;
     //console.log(evt);
     var File=evt.target.value;
    // console.log(File);
-     let subStringData=File.substr(12,27);
+     let subStringData=File.substr(12);
+     console.log(subStringData);
     //console.log(X);
     var FileName = subStringData.split('.')[0];
     var FileType =subStringData.split('.')[1];
-    //console.log(filename);
-   // console.log(FileType);
+    console.log(FileName);
+    console.log(FileType);
    this.FileName=FileName;
    this.FileType=FileType;
    var files = evt.target.files;
@@ -83,6 +84,7 @@ FileType:any;
 _handleReaderLoaded(readerEvt) {
    var binaryString = readerEvt.target.result;
           this.base64textString= btoa(binaryString);
+          console.log(this.base64textString);
   }
 
 

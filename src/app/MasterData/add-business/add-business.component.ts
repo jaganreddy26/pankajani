@@ -3,6 +3,8 @@ import {MasterService} from '../master.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { MatDialog } from "@angular/material";
+import { AlertService } from '../../shared/alerts/_services/alert.service';
+import { AlertType } from '../../shared/alerts/_models/alert';
 @Component({
   selector: 'app-add-business',
   templateUrl: './add-business.component.html',
@@ -23,7 +25,7 @@ ActiveStatus:any;
 addedBusinesses:any=[]
 InputId:any;
 value:any;
-  constructor(private masterService:MasterService,private modalService: BsModalService,private dialog: MatDialog) {
+  constructor(private masterService:MasterService,private modalService: BsModalService,private dialog: MatDialog,private alertService :AlertService) {
     
     this.GetBusinessid();
     this.GetStatus();
@@ -55,9 +57,15 @@ value:any;
     }
     console.log(obj);
   this.masterService.SaveBusiness(obj).subscribe((data:any)=>{
-    console.log(data);
-    
-  this.GetBusiness();
+    if(data !== 'null'){
+
+      this.alertService.alert(AlertType.Success, data)
+      this.GetBusiness();
+    }else{
+      this.alertService.alert(AlertType.Error,"Something went wrong");
+      this.GetBusiness();
+    }
+  
   })
   this.Businessid="";
   this.Name="";

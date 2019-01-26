@@ -39,6 +39,7 @@ woData:any=[];
 PermissionStatus:any;
 //
 WOID:any;
+InputObject:any={};
   constructor(private workOrderService:WorkorderService,private alertService :AlertService) {
     this.getCustomer();
    }
@@ -113,6 +114,7 @@ WOID:any;
       'PermissionId':$event.node.data.Id,
       'CompanyId':localStorage.getItem('businessId')
     }
+    this.InputObject=object;
    // console.log(object);
     //this.inputpermissionId=$event.node.data.Id;
     this.workOrderService.getWoSelection(object).subscribe((data:any)=>{
@@ -145,8 +147,22 @@ WOID:any;
        if(data !== 'null'){
 
         this.alertService.alert(AlertType.Success,"Work Order Id Created Successfuly with Id :"+ data)
+        this.workOrderService.getWoSelection(this.InputObject).subscribe((data:any)=>{
+          console.log(data);
+          this.ubtDetails=data.Ubt;
+          this.woData=data.WOData;
+          this.PermissionStatus=data.WOData[0].PermissionStatus;
+          this.WOID=data.WO.WOId;
+        })
       }else{
         this.alertService.alert(AlertType.Error,"Something went wrong");
+        this.workOrderService.getWoSelection(this.InputObject).subscribe((data:any)=>{
+          console.log(data);
+          this.ubtDetails=data.Ubt;
+          this.woData=data.WOData;
+          this.PermissionStatus=data.WOData[0].PermissionStatus;
+          this.WOID=data.WO.WOId;
+        })
       }
      })
   }

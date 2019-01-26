@@ -44,15 +44,18 @@ this.masterService.saveAreaOfBusinessDetails(obj).subscribe((data:any)=>{
 
   if(data !== 'null'){
 
-    this.alertService.alert(AlertType.Success, data)
+    this.alertService.alert(AlertType.Success, data);
+    this.GetAllAreaBusinessDetails();
   }else{
     this.alertService.alert(AlertType.Error,"Something went wrong");
+    this.GetAllAreaBusinessDetails();
   }
-  this.GetAllAreaBusinessDetails();
+ 
 })
 
 this.Name="";
 this.ActiveStatus="";
+this.value="";
   }
   GetAllAreaBusinessDetails(){
     let obj={

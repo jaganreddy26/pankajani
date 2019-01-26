@@ -12,7 +12,8 @@ import { MatDialog } from "@angular/material";
   styleUrls: ['./bankdetails.component.css']
 })
 export class BankdetailsComponent implements OnInit {
-  CompanyIdSelected: any;
+  CompanyIdSelected:any;
+  CustomerIdSelected:any;
   BankName: any;
   BranchName: any;
   Location: any;
@@ -20,7 +21,7 @@ export class BankdetailsComponent implements OnInit {
   IFSCcode: any;
   AccountHolderName: any;
   DeafaultAc: any;
-  CompanyIds: any = [];
+  CustomerIDs: any = [];
   Status: any = [];
   ActiveStatus: any;
   addedbankDetails: any = [];
@@ -43,7 +44,8 @@ export class BankdetailsComponent implements OnInit {
   add() {
     let object = {
       "AcNo": this.AccountNumber,
-      "CompanyId": this.CompanyIdSelected,
+      "CompanyId":this.masterService.BusinessId,
+      "CustomerId": this.CustomerIdSelected,
       "BankName": this.BankName,
       "BranchName": this.BranchName,
       "Location": this.Location,
@@ -55,7 +57,7 @@ export class BankdetailsComponent implements OnInit {
     console.log(object);
     this.addedbankDetails.push(object);
     this.AccountNumber = "";
-    this.CompanyIdSelected = "";
+    this.CustomerIdSelected = "";
     this.BankName = "";
     this.BranchName = "";
     this.Location = "";
@@ -63,6 +65,8 @@ export class BankdetailsComponent implements OnInit {
     this.AccountHolderName = "";
     this.DeafaultAc = "";
     this.ActiveStatus = "";
+    this.CompanyIdSelected="";
+    this.value="";
   }
   save() {
     this.masterService.saveBankDetails(this.addedbankDetails).subscribe((data: any) => {
@@ -89,6 +93,7 @@ export class BankdetailsComponent implements OnInit {
   //To Get All Bank Details
   getBankDetails() {
     let obj = {
+      "CompanyId":this.masterService.BusinessId,
       "AcNo": "0"
     }
     this.masterService.getAllBankDetails(obj).subscribe((data: any) => {
@@ -100,7 +105,7 @@ export class BankdetailsComponent implements OnInit {
   getCustomerId(data: any) {
     this.masterService.getCompanyId(data).subscribe((data: any) => {
       //console.log(data);
-      this.CompanyIds = data;
+      this.CustomerIDs = data;
     })
   }
   GetStatus() {
@@ -118,8 +123,8 @@ export class BankdetailsComponent implements OnInit {
     this.DeafaultAc = $event.value;
 
   }
-  onchangeCompanyId($event) {
-    this.CompanyIdSelected = $event;
+  onchangeCustomer($event) {
+    this.CustomerIdSelected = $event;
     //console.log(this.CompanyIdSelected);
   }
   onchangeStatus($event) {

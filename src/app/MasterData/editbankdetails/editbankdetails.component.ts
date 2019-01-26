@@ -23,6 +23,7 @@ export class EditbankdetailsComponent implements OnInit {
       this.inputAccountNumber=this.Inputdata;
    //console.log(this.inputAccountNumber);
    let obj={
+    "CompanyId":this.masterService.BusinessId,
     "AcNo":this.inputAccountNumber
    }
    this.masterService.getBankDetailsbyACCNO(obj).subscribe((data:any)=>{

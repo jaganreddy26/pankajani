@@ -77,7 +77,7 @@ let inputobject={
     this.close.emit();
   }
   onchangeStatus($event){
-    if($event==true)
+    if($event == 'Active')
     this.companyDetails.Status=1;
 
   else

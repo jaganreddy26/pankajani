@@ -94,7 +94,7 @@ addedUbtDetails:any=[];
 
   save(){
 //console.log(this.addedUbtDetails);
-// var data1=this.addedUbtDetails;
+var data1=this.addedUbtDetails;
 
 
 
@@ -107,6 +107,7 @@ if(data){
   }
 });
 this.addedUbtDetails=[];
+this.customerIdSelected="";
  }
 
   add(){
@@ -130,7 +131,7 @@ console.log(object);
     this.MaxMargin ="";
     this.agencyIdSelected="";
     this.selectedCategoryId="";
-    this.customerIdSelected="";
+    // this.customerIdSelected="";
  
 
   }
