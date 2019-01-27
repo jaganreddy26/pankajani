@@ -33,7 +33,7 @@ export class AgencyComponent implements OnInit {
 
   GetCustomers(){
     let obj ={
-      "BusinessId":"0"
+      "BusinessId": this.masterService.BusinessId
     }
     this.masterService.getCustomers(obj).subscribe((data:any)=>{
       // console.log(data);

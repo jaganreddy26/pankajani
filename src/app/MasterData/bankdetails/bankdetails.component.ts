@@ -31,7 +31,7 @@ export class BankdetailsComponent implements OnInit {
   value: any;
   businessId:any;
   constructor(private masterService: MasterService, private alertService: AlertService, private modalService: BsModalService, private dialog: MatDialog) {
-    let object = { "BusinessId": 0 }
+    let object = { "BusinessId": this.masterService.BusinessId }
     this.getCustomerId(object);
     this.GetStatus();
     this.getBankDetails();

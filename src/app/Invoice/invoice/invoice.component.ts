@@ -57,7 +57,7 @@ this.GetPermissionIDs();
     this.invoiceservice.GetInvoiceData(object).subscribe((data:any)=>{
       //console.log(data);
       this.BankDetails=data.BankDetails;
-      this.ACcountNumber=data.BankDetails[0].AcNo;
+      //this.ACcountNumber=data.BankDetails[0].AcNo;
       this.InvoicePath=data.InvoicePath;
       this.PermissionData = data.PermissionData;
       this.CustomerDetails=data.PlantDetails;
@@ -89,7 +89,7 @@ this.GetPermissionIDs();
     this.invoiceservice.SaveAInvoice(object).subscribe((data:any)=>{
       console.log(data);
       if(data){
-        this.alertService.alert(AlertType.Success,"UBT Created Successfuly with id :"+ data)
+        this.alertService.alert(AlertType.Success,"Invoice Created Successfuly with id :"+ data)
         }else{
           this.alertService.alert(AlertType.Error,"Something went wrong");
         }

@@ -146,8 +146,10 @@ export class ApprovepermissionComponent implements OnInit {
       this.alertService.alert(AlertType.Success,"Approved Sucessfully " )
       //Refreshing the data
       let obj={
-        'PermissionId':this.InputPermissionId
+        'PermissionId':this.InputPermissionId, 
+        "CompanyId":this.permissionService.BusinessId
        }
+       debugger;
        this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
          console.log(data);
          this.ubtDetails=data.ubt;
@@ -160,7 +162,8 @@ export class ApprovepermissionComponent implements OnInit {
         
          //Refreshing the data
       let obj={
-        'PermissionId':this.InputPermissionId
+        'PermissionId':this.InputPermissionId,
+        "CompanyId":this.permissionService.BusinessId
        }
        this.permissionService.getPermissionDetailsByPermissionId(obj).subscribe((data:any)=>{
          console.log(data);
